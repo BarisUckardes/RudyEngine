@@ -18,11 +18,14 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\EditorLauncher\EntryPoint.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{f5563ec6-fb29-4e96-9c02-ba14fa4a6195}</ProjectGuid>
-    <RootNamespace>Rudy</RootNamespace>
+    <ProjectGuid>{f68e89ed-09e9-4b78-8ca9-8e49374197f3}</ProjectGuid>
+    <RootNamespace>EditorLauncher</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -40,13 +43,13 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -114,9 +117,8 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);RUDY_BUILD;RUDY_WINDOWS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\PC\source\repos\RudyEngine\Rudy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,9 +131,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);RUDY_BUILD;RUDY_WINDOWS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\PC\source\repos\RudyEngine\Rudy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,36 +141,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="src\Rudy\Events\EventDispatcher.h" />
-    <ClInclude Include="src\Rudy\Events\Keyboard\KeyboardKeyReleasedEvent.h" />
-    <ClInclude Include="src\Rudy\Events\Keyboard\KeyboardKeyDownEvent.h" />
-    <ClInclude Include="src\Rudy\Events\Keyboard\KeyboardKeyEvent.h" />
-    <ClInclude Include="src\Rudy\Events\Event.h" />
-    <ClInclude Include="src\Rudy\Events\EventType.h" />
-    <ClInclude Include="src\Rudy\Windowing\Window.h" />
-    <ClInclude Include="src\Rudy\Windowing\WindowCreateParameters.h" />
-    <ClInclude Include="src\Rudy\Application\Application.h" />
-    <ClInclude Include="src\Rudy\Core\Symbols.h" />
-    <ClInclude Include="src\Rudy\Mathematics\Vector2f.h" />
-    <ClInclude Include="src\Rudy\Mathematics\Vector2i.h" />
-    <ClInclude Include="src\Rudy\Memory\String.h" />
-    <ClInclude Include="src\Rudy\Events\Window\WindowResizedEvent.h" />
-    <ClInclude Include="src\Rudy\Events\Window\WindowClosedEvent.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\Rudy\Events\Keyboard\KeyboardKeyReleasedEvent.cpp" />
-    <ClCompile Include="src\Rudy\Events\Keyboard\KeyboardKeyDownEvent.cpp" />
-    <ClCompile Include="src\Rudy\Events\Keyboard\KeyboardKeyEvent.cpp" />
-    <ClCompile Include="src\Rudy\Events\Event.cpp" />
-    <ClCompile Include="src\Rudy\Windowing\Window.cpp" />
-    <ClCompile Include="src\Rudy\Application\Application.cpp" />
-    <ClCompile Include="src\Rudy\Mathematics\Vector2f.cpp" />
-    <ClCompile Include="src\Rudy\Mathematics\Vector2i.cpp" />
-    <ClCompile Include="src\Rudy\Memory\String.cpp" />
-    <ClCompile Include="src\Rudy\Events\Window\WindowResizedEvent.cpp" />
-    <ClCompile Include="src\Rudy\Events\Window\WindowClosedEvent.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

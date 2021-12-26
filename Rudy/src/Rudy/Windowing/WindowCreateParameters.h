@@ -6,11 +6,11 @@ namespace Rudy
 	/// <summary>
 	/// Contains required parameters for window creation
 	/// </summary>
-	struct PlatformWindowCreateParameters
+	struct WindowCreateParameters
 	{
 	public:
-		PlatformWindowCreateParameters(const String& title,const Vector2i& offset,const Vector2i& size) : Title(title),Offset(offset),Size(size) {}
-		~PlatformWindowCreateParameters() = default;
+		WindowCreateParameters(const String& title,const Vector2i& offset,const Vector2i& size) : Title(title),Offset(offset),Size(size) {}
+		~WindowCreateParameters() = default;
 
 		/// <summary>
 		/// The title of the window
