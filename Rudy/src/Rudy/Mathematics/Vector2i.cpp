@@ -53,13 +53,13 @@ namespace Rudy
 	}
 	void Vector2i::operator+=(const Vector2i& other)
 	{
-		this->X += other.X;
-		this->Y += other.Y;
+		X += other.X;
+		Y += other.Y;
 	}
 	void Vector2i::operator-=(const Vector2i& other)
 	{
-		this->X -= other.X;
-		this->Y -= other.Y;
+		X -= other.X;
+		Y -= other.Y;
 	}
 	void Vector2i::operator*=(const Vector2i& other)
 	{
@@ -78,18 +78,18 @@ namespace Rudy
 	}
 	void Vector2i::operator-=(const int other)
 	{
-		this->X -= other;
-		this->Y -= other;
+		X -= other;
+		Y -= other;
 	}
 	void Vector2i::operator*=(const int other)
 	{
-		this->X *= other;
-		this->Y *= other;
+		X *= other;
+		Y *= other;
 	}
 	void Vector2i::operator/=(const int other)
 	{
-		this->X /= other;
-		this->Y /= other;
+		X /= other;
+		Y /= other;
 	}
 	//Vector2i Vector2i::operator+(const Vector2i& a, const Vector2i& b)
 	//{

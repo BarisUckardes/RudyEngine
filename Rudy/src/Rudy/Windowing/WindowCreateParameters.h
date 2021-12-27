@@ -6,7 +6,7 @@ namespace Rudy
 	/// <summary>
 	/// Contains required parameters for window creation
 	/// </summary>
-	struct WindowCreateParameters
+	struct RUDY_API WindowCreateParameters
 	{
 	public:
 		WindowCreateParameters(const String& title,const Vector2i& offset,const Vector2i& size) : Title(title),Offset(offset),Size(size) {}

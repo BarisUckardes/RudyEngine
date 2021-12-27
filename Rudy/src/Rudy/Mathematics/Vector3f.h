@@ -5,13 +5,13 @@ namespace Rudy
 	/// <summary>
 	/// Basic floating Vector2 structure
 	/// </summary>
-	struct RUDY_API Vector2f
+	struct RUDY_API Vector3f
 	{
 	public:
-		Vector2f(float x, float y);
-		Vector2f(float value);
-		Vector2f();
-		~Vector2f() = default;
+		Vector3f(float x, float y,float z);
+		Vector3f(float value);
+		Vector3f();
+		~Vector3f() = default;
 
 		/// <summary>
 		/// Returns the magnitude of this vector
@@ -23,7 +23,7 @@ namespace Rudy
 		/// Returns the normalized version of this vector
 		/// </summary>
 		/// <returns></returns>
-		FORCEINLINE Vector2f GetNormalized() const;
+		FORCEINLINE Vector3f GetNormalized() const;
 
 		/// <summary>
 		/// Normalizes this vector
@@ -40,24 +40,29 @@ namespace Rudy
 		/// </summary>
 		float Y;
 
+		/// <summary>
+		/// The depth axis component
+		/// </summary>
+		float Z;
+
 		/*
 		* Operators
 		*/
-		void operator=(const Vector2f& other);
+		void operator=(const Vector3f& other);
 		void operator=(const float other);
-		void operator+=(const Vector2f& other);
-		void operator-=(const Vector2f& other);
-		void operator*=(const Vector2f& other);
-		void operator/=(const Vector2f& other);
+		void operator+=(const Vector3f& other);
+		void operator-=(const Vector3f& other);
+		void operator*=(const Vector3f& other);
+		void operator/=(const Vector3f& other);
 		void operator+=(const float other);
 		void operator-=(const float other);
 		void operator*=(const float other);
 		void operator/=(const float other);
-		//Vector2f operator+(const Vector2f& b);
-		//Vector2f operator-(const Vector2f& b);
-		//Vector2f operator/(const Vector2f& b);
-		//Vector2f operator*(const Vector2f& b);
-		//bool operator==(const Vector2f& b);
-		//bool operator!=(const Vector2f& b);
+		//Vector3f operator+(const Vector3f& b);
+		//Vector3f operator-(const Vector3f& b);
+		//Vector3f operator/(const Vector3f& b);
+		//Vector3f operator*(const Vector3f& b);
+		//bool operator==(const Vector3f& b);
+		//bool operator!=(const Vector3f& b);
 	};
 }

@@ -1,6 +1,13 @@
 #pragma once
 #include <stdio.h>
+#include <Rudy/Application/Application.h>
+#include "Application/EditorApplication.h"
+#include <Rudy/Platform/OS/Windows/WindowsWindow.h>
+#include <Rudy/Events/Keyboard/KeyboardKeyDownEvent.h>
 int main(int argumentCount, char** arguments)
 {
+	//Rudy::String abc("RANDOM STR");
+	EditorLauncher::EditorApplication* app = new EditorLauncher::EditorApplication("Random title name",100,100,1280,720);
+
 	return 0;
 }
