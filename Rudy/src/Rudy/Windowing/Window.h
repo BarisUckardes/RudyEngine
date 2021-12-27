@@ -12,6 +12,9 @@ namespace Rudy
 	/// </summary>
 	class RUDY_API Window
 	{
+	protected:
+		using WindowEventCallback = std::function<void(Event&)>;
+
 	public:
 		/// <summary>
 		/// Creates platform/os agnostic window
@@ -62,19 +65,35 @@ namespace Rudy
 		/// Registers a function callback for this window to call when an event fired
 		/// </summary>
 		/// <param name="callbackFunction"></param>
-		void RegisterCallBack(Delegate<void, Event&>* functionPtr);
+		void RegisterCallBack(Delegate<void, Event*>* functionPtr);
 
 		/// <summary>
 		/// Removes a event callback from the registry
 		/// </summary>
 		/// <param name="callBackFunction"></param>
-		void RemoveCallBack(Delegate<void, Event&>* functionPtr);
+		void RemoveCallBack(Delegate<void, Event*>* functionPtr);
+
+		/// <summary>
+		/// Records buffered events and broadcasts them to the application
+		/// </summary>
+		virtual void PollBufferedEvents() = 0;
 	protected:
 		/// <summary>
 		/// Called when received an event
 		/// </summary>
-		void OnEmitPlatformEvent(Event& event);
+		void OnBroadcastEvent(Event* event);
 
+		/// <summary>
+		/// Sets this window's alive state
+		/// </summary>
+		/// <param name="state"></param>
+		void SetAliveState(bool state);
+
+		/// <summary>
+		/// Returns the window event delegate of this window
+		/// </summary>
+		/// <returns></returns>
+		Delegate<void, Event*>* GetWindowEventDelegate() const;
 		virtual ~Window() = 0;
 	private:
 		/// <summary>
@@ -94,7 +113,8 @@ namespace Rudy
 		/// <param name="newOffset"></param>
 		void OnWindowOffsetChanged(const Vector2i& newOffset);
 	private:
-		Array<Delegate<void, Event&>*> m_Callbacks;
+		Array<Delegate<void, Event*>*> m_Callbacks;
+		Delegate<void, Event*>* m_WindowEventCallback;
 		String m_Title;
 		unsigned int m_Width;
 		unsigned int m_Height;

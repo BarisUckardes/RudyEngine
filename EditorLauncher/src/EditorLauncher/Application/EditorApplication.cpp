@@ -19,19 +19,4 @@ namespace EditorLauncher
 	{
 
 	}
-
-	void EditorApplication::Run()
-	{
-
-	}
-
-	void EditorApplication::Shuwdown()
-	{
-
-	}
-
-	void EditorApplication::OnEventReceived(Rudy::Event& event)
-	{
-		printf("Editor application received this event: [%s]", *event.GetAsString());
-	}
 }

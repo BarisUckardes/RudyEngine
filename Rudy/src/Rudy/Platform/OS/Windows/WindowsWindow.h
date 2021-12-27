@@ -1,6 +1,8 @@
 #pragma once
 #include <Rudy/Windowing/Window.h>
 #include <Rudy/Mathematics/Vector2i.h>
+
+struct GLFWwindow;
 namespace Rudy
 {
 	class RUDY_API WindowsWindow : public Window
@@ -8,6 +10,22 @@ namespace Rudy
 	public:
 		WindowsWindow(const String& title,const unsigned int offsetX,const unsigned int offsetY,const unsigned int sizeX,const unsigned int sizeY);
 		virtual ~WindowsWindow() override;
+
+		// Inherited via Window
+		virtual void PollBufferedEvents() override;
+
+	private:
+		struct GLFWWindowData
+		{
+			String Title;
+			unsigned int Width, Height;
+			bool VSync;
+			Delegate<void,Event*>* EventCallback;
+
+		};
+	private:
+		GLFWwindow* m_NativeWindow;
+		GLFWWindowData m_NativeWindowData;
 	};
 
 

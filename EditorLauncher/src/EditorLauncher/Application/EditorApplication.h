@@ -12,10 +12,6 @@ namespace EditorLauncher
 		EditorApplication() = default;
 		virtual ~EditorApplication() override;
 
-		virtual void Run() override;
-		virtual void Shuwdown() override;
-
-		virtual void OnEventReceived(Rudy::Event& event) override;
 	};
 
 

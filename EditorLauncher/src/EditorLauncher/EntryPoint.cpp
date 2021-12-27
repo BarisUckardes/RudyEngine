@@ -6,8 +6,17 @@
 #include <Rudy/Events/Keyboard/KeyboardKeyDownEvent.h>
 int main(int argumentCount, char** arguments)
 {
-	//Rudy::String abc("RANDOM STR");
-	EditorLauncher::EditorApplication* app = new EditorLauncher::EditorApplication("Random title name",100,100,1280,720);
+	/*
+	* Create editor application
+	*/
+	EditorLauncher::EditorApplication* application = new EditorLauncher::EditorApplication("Random title name",100,100,1280,720);
+
+	/*
+	* Run application
+	*/
+	application->Run();
+
+
 
 	return 0;
 }

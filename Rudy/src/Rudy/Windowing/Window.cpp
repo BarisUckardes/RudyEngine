@@ -9,7 +9,10 @@ namespace Rudy
 
 	Window::Window(const String& title, const unsigned int offsetX, const unsigned int offsetY, unsigned int sizeX, unsigned int sizeY)
 	{
-		
+		/*
+		* Create window event callback delegate
+		*/
+		m_WindowEventCallback = new Delegate<void, Event*>(RUDY_BIND_EVENT(this, Window::OnBroadcastEvent));
 	}
 
 	unsigned int Window::GetWidth() const
@@ -37,22 +40,23 @@ namespace Rudy
 		return m_OffsetY;
 	}
 
-	void Window::RegisterCallBack(Delegate<void, Event&>* functionPtr)
+	bool Window::IsAlive() const
+	{
+		return m_WindowAlive;
+	}
+
+	void Window::RegisterCallBack(Delegate<void, Event*>* functionPtr)
 	{
 		m_Callbacks.Add(functionPtr);
 	}
 
-	void Window::RemoveCallBack(Delegate<void, Event&>* functionPtr)
+	void Window::RemoveCallBack(Delegate<void, Event*>* functionPtr)
 	{
 		m_Callbacks.Remove(functionPtr);
 	}
 
-	void Window::OnEmitPlatformEvent(Event& event)
+	void Window::OnBroadcastEvent(Event* event)
 	{
-		/*
-		* Catch window events
-		*/
-
 		/*
 		* Iterate each registered callbacks and fire them
 		*/
@@ -60,6 +64,16 @@ namespace Rudy
 		{
 			m_Callbacks[i]->Invoke(event);
 		}
+	}
+
+	void Window::SetAliveState(bool state)
+	{
+		m_WindowAlive = state;
+	}
+
+	Delegate<void, Event*>* Window::GetWindowEventDelegate() const
+	{
+		return m_WindowEventCallback;
 	}
 
 	Window::~Window()
@@ -73,6 +87,7 @@ namespace Rudy
 		}
 		m_Callbacks.Clear();
 	}
+
 	void Window::OnWindowResizeEvent(const Vector2i& newSize)
 	{
 		m_Width = newSize.X;

@@ -18,6 +18,7 @@ namespace Rudy
 			m_FunctionPtr = function;
 		}
 		Delegate() = delete;
+
 		~Delegate()
 		{
 

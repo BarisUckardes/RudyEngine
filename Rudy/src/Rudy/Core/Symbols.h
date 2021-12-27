@@ -8,6 +8,7 @@
 #define RUDY_EXPORT __declspec(dllexport)
 
 #if RUDY_WINDOWS
+#define RUDY_DEBUG_BREAK __debugbreak();
 #endif // RUDY_WINDOWS FOR PLATFORM DECLARATIONS
 #define FORCEINLINE __forceinline
 

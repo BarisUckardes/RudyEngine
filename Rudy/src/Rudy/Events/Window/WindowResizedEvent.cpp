@@ -1,5 +1,6 @@
 #include "WindowResizedEvent.h"
-
+#include <stdio.h>
+#include <iostream>
 namespace Rudy
 {
     WindowResizedEvent::WindowResizedEvent(const Vector2i& size)
