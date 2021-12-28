@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <Rudy/Events/Delegate.h>
 #include <Rudy/Application/ApplicationModule.h>
+#include <Rudy/Graphics/Device/GraphicsDevice.h>
 namespace Rudy
 {
 	Window* Application::GetWindow() const
@@ -15,10 +16,6 @@ namespace Rudy
 		* Create state
 		*/
 		bool hasExitRequest = false;
-
-		/*
-		* Initialize session
-		*/
 
 		/*
 		* Attach pending modules
@@ -63,6 +60,11 @@ namespace Rudy
 			{
 				m_Modules[i]->OnUpdate();
 			}
+
+			/*
+			* Swap buffers
+			*/
+			m_Window->GetGraphicsDevice()->Swapbuffers();
 
 			/*
 			* Validate window

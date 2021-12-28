@@ -160,6 +160,19 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Texture\OpenGLTextureFormatConversions.h" />
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Texture\OpenGLTexture2D.h" />
+    <ClInclude Include="src\Rudy\Graphics\Texture\TextureDataType.h" />
+    <ClInclude Include="src\Rudy\Graphics\Texture\TextureFormat.h" />
+    <ClInclude Include="src\Rudy\Graphics\Texture\TextureInternalFormat.h" />
+    <ClInclude Include="src\Rudy\Graphics\Texture\TextureMagFilter.h" />
+    <ClInclude Include="src\Rudy\Graphics\Texture\TextureWrapMode.h" />
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\CommandBuffer.h" />
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Buffer\OpenGLIndexBuffer.h" />
+    <ClInclude Include="src\Rudy\Graphics\Device\GraphicsDeviceObject.h" />
+    <ClInclude Include="src\Rudy\Graphics\Buffer\IndexBuffer.h" />
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Device\OpenGLGraphicsDevice.h" />
+    <ClInclude Include="src\Rudy\Graphics\Device\GraphicsDevice.h" />
     <ClInclude Include="src\Rudy\Events\Mouse\MousePositionChangedEvent.h" />
     <ClInclude Include="src\Rudy\Events\Mouse\MouseButtonUpEvent.h" />
     <ClInclude Include="src\Rudy\Events\Mouse\MouseScrolledEvent.h" />
@@ -192,8 +205,19 @@
     <ClInclude Include="src\Rudy\Mathematics\Vector3i.h" />
     <ClInclude Include="src\Rudy\Platform\OS\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Rudy\Events\Window\WindowOffsetEvent.h" />
+    <ClInclude Include="src\Rudy\Graphics\Texture\Texture.h" />
+    <ClInclude Include="src\Rudy\Graphics\Texture\TextureMinFilter.h" />
+    <ClInclude Include="src\Rudy\Graphics\Texture\Texture2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Texture\OpenGLTextureFormatConversions.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Texture\OpenGLTexture2D.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\CommandBuffer.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Buffer\OpenGLIndexBuffer.cpp" />
+    <ClCompile Include="src\Rudy\Graphics\Device\GraphicsDeviceObject.cpp" />
+    <ClCompile Include="src\Rudy\Graphics\Buffer\IndexBuffer.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Device\OpenGLGraphicsDevice.cpp" />
+    <ClCompile Include="src\Rudy\Graphics\Device\GraphicsDevice.cpp" />
     <ClCompile Include="src\Rudy\Events\Mouse\MousePositionChangedEvent.cpp" />
     <ClCompile Include="src\Rudy\Events\Mouse\MouseButtonUpEvent.cpp" />
     <ClCompile Include="src\Rudy\Events\Mouse\MouseScrolledEvent.cpp" />
@@ -216,6 +240,8 @@
     <ClCompile Include="src\Rudy\Mathematics\Vector3i.cpp" />
     <ClCompile Include="src\Rudy\Platform\OS\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Rudy\Events\Window\WindowOffsetEvent.cpp" />
+    <ClCompile Include="src\Rudy\Graphics\Texture\Texture.cpp" />
+    <ClCompile Include="src\Rudy\Graphics\Texture\Texture2D.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

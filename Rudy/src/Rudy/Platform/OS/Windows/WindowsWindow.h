@@ -11,9 +11,8 @@ namespace Rudy
 		WindowsWindow(const String& title,const unsigned int offsetX,const unsigned int offsetY,const unsigned int sizeX,const unsigned int sizeY);
 		virtual ~WindowsWindow() override;
 
-		// Inherited via Window
 		virtual void PollBufferedEvents() override;
-
+		virtual void* GetNativePtr() const override;
 	private:
 		struct GLFWWindowData
 		{

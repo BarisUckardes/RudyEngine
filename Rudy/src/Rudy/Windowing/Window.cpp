@@ -45,6 +45,11 @@ namespace Rudy
 		return m_WindowAlive;
 	}
 
+	GraphicsDevice* Window::GetGraphicsDevice() const
+	{
+		return m_GraphicsDevice;
+	}
+
 	void Window::RegisterCallBack(Delegate<void, Event*>* functionPtr)
 	{
 		m_Callbacks.Add(functionPtr);
@@ -69,6 +74,11 @@ namespace Rudy
 	void Window::SetAliveState(bool state)
 	{
 		m_WindowAlive = state;
+	}
+
+	void Window::SetGraphicsDevice(GraphicsDevice* device)
+	{
+		m_GraphicsDevice = device;
 	}
 
 	Delegate<void, Event*>* Window::GetWindowEventDelegate() const

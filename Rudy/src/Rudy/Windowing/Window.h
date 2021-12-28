@@ -7,6 +7,7 @@
 #include <Rudy/Events/Delegate.h>
 namespace Rudy
 {
+	class GraphicsDevice;
 	/// <summary>
 	/// Base class for all platform windows to implement
 	/// </summary>
@@ -62,6 +63,12 @@ namespace Rudy
 		FORCEINLINE bool IsAlive() const;
 
 		/// <summary>
+		/// Returns the assinged graphics device for this window
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE GraphicsDevice* GetGraphicsDevice() const;
+
+		/// <summary>
 		/// Registers a function callback for this window to call when an event fired
 		/// </summary>
 		/// <param name="callbackFunction"></param>
@@ -77,6 +84,12 @@ namespace Rudy
 		/// Records buffered events and broadcasts them to the application
 		/// </summary>
 		virtual void PollBufferedEvents() = 0;
+
+		/// <summary>
+		/// Returns the native pointer for this window
+		/// </summary>
+		/// <returns></returns>
+		virtual void* GetNativePtr() const = 0;
 	protected:
 		/// <summary>
 		/// Called when received an event
@@ -88,6 +101,12 @@ namespace Rudy
 		/// </summary>
 		/// <param name="state"></param>
 		void SetAliveState(bool state);
+
+		/// <summary>
+		/// Sets the graphics device for this window
+		/// </summary>
+		/// <param name="device"></param>
+		void SetGraphicsDevice(GraphicsDevice* device);
 
 		/// <summary>
 		/// Returns the window event delegate of this window
@@ -114,6 +133,7 @@ namespace Rudy
 		void OnWindowOffsetChanged(const Vector2i& newOffset);
 	private:
 		Array<Delegate<void, Event*>*> m_Callbacks;
+		GraphicsDevice* m_GraphicsDevice;
 		Delegate<void, Event*>* m_WindowEventCallback;
 		String m_Title;
 		unsigned int m_Width;

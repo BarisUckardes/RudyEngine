@@ -8,6 +8,7 @@
 #include <Rudy/Events/Mouse/MouseButtonUpEvent.h>
 #include <Rudy/Events/Mouse/MousePositionChangedEvent.h>
 #include <Rudy/Events/Mouse/MouseScrolledEvent.h>
+#include <Rudy/Graphics/Device/GraphicsDevice.h>
 namespace Rudy
 {
 
@@ -180,6 +181,12 @@ namespace Rudy
 		m_NativeWindowData.EventCallback = GetWindowEventDelegate();
 
 		/*
+		* Create graphics device for windows
+		*/
+		GraphicsDevice* device = GraphicsDevice::Create(this, Rudy::GraphicsAPIType::OpenGL);
+		SetGraphicsDevice(device);
+		
+		/*
 		* Set alive
 		*/
 		SetAliveState(true);
@@ -193,5 +200,9 @@ namespace Rudy
 	void WindowsWindow::PollBufferedEvents()
 	{
 		glfwPollEvents();
+	}
+	void* WindowsWindow::GetNativePtr() const
+	{
+		return m_NativeWindow;
 	}
 }
