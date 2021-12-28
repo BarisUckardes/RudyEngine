@@ -25,6 +25,10 @@ namespace Rudy
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB8, GL_UNSIGNED_BYTE, nullptr);
 
 		/*
+		* Set texture parameters
+		*/
+
+		/*
 		* Unbind texture
 		*/
 		glBindTexture(GL_TEXTURE_2D, 0);
@@ -47,6 +51,16 @@ namespace Rudy
 		/*
 		* Set texture data
 		*/
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, GetWidth(), GetHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
+		/*
+		* Set texture parameters
+		*/
+
+		/*
+		* Unbind texture
+		*/
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 }

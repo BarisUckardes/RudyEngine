@@ -19,6 +19,7 @@ namespace Rudy
 
 	Texture::Texture(GraphicsDevice* device) : GraphicsDeviceObject(device)
 	{
+
 	}
 	void Texture::SetTextureFormat(TextureFormat format)
 	{

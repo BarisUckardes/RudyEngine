@@ -50,13 +50,6 @@ namespace Rudy
 		/// </summary>
 		/// <returns></returns>
 		FORCEINLINE bool HasMipmaps() const;
-
-		/// <summary>
-		/// Returns the native handle specific for graphics api
-		/// </summary>
-		/// <returns></returns>
-		virtual void* GetNativeHandle() const = 0;
-
 	protected:
 		Texture(GraphicsDevice* device);
 		virtual ~Texture() = default;

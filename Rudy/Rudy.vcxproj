@@ -160,6 +160,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Buffer\OpenGLVertexDataTypeConversions.h" />
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Buffer\OpenGLVertexBuffer.h" />
+    <ClInclude Include="src\Rudy\Graphics\Buffer\VertexLayoutDataType.h" />
     <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Texture\OpenGLTextureFormatConversions.h" />
     <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Texture\OpenGLTexture2D.h" />
     <ClInclude Include="src\Rudy\Graphics\Texture\TextureDataType.h" />
@@ -208,8 +211,13 @@
     <ClInclude Include="src\Rudy\Graphics\Texture\Texture.h" />
     <ClInclude Include="src\Rudy\Graphics\Texture\TextureMinFilter.h" />
     <ClInclude Include="src\Rudy\Graphics\Texture\Texture2D.h" />
+    <ClInclude Include="src\Rudy\Graphics\Buffer\VertexLayoutElement.h" />
+    <ClInclude Include="src\Rudy\Graphics\Buffer\VertexLayout.h" />
+    <ClInclude Include="src\Rudy\Graphics\Buffer\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Buffer\OpenGLVertexDataTypeConversions.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Buffer\OpenGLVertexBuffer.cpp" />
     <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Texture\OpenGLTextureFormatConversions.cpp" />
     <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Texture\OpenGLTexture2D.cpp" />
     <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\CommandBuffer.cpp" />
@@ -242,6 +250,9 @@
     <ClCompile Include="src\Rudy\Events\Window\WindowOffsetEvent.cpp" />
     <ClCompile Include="src\Rudy\Graphics\Texture\Texture.cpp" />
     <ClCompile Include="src\Rudy\Graphics\Texture\Texture2D.cpp" />
+    <ClCompile Include="src\Rudy\Graphics\Buffer\VertexLayoutElement.cpp" />
+    <ClCompile Include="src\Rudy\Graphics\Buffer\VertexLayout.cpp" />
+    <ClCompile Include="src\Rudy\Graphics\Buffer\VertexBuffer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
