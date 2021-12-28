@@ -99,12 +99,13 @@ namespace Rudy
 		/*
 		* Register event
 		*/
-		m_ApplicationWindowEventDelegate = new Delegate<void,Event*>(RUDY_BIND_EVENT(this, Application::OnEventReceived));
+		m_ApplicationWindowEventDelegate = new Delegate<void,Event*>(RUDY_BIND_EVENT(Application::OnEventReceived));
 		m_Window->RegisterCallBack(m_ApplicationWindowEventDelegate);
 
 	}
 	void Application::OnEventReceived(Event* event)
 	{
+		printf("Editor application received: %s\n", *event->GetAsString());
 		m_BufferedEvents.Add(event);
 	}
 }

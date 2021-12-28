@@ -12,7 +12,7 @@ namespace Rudy
 		/*
 		* Create window event callback delegate
 		*/
-		m_WindowEventCallback = new Delegate<void, Event*>(RUDY_BIND_EVENT(this, Window::OnBroadcastEvent));
+		m_WindowEventCallback = new Delegate<void, Event*>(RUDY_BIND_EVENT(Window::OnBroadcastEvent));
 	}
 
 	unsigned int Window::GetWidth() const

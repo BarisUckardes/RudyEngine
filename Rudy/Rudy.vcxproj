@@ -119,7 +119,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);RUDY_BUILD;RUDY_WINDOWS;RUDY_OS_WINDOWS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);RUDY_BUILD;RUDY_WINDOWS;RUDY_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>src;$(SolutionDir)Vendor\GLAD\include;$(SolutionDir)Vendor\GLFW\include</AdditionalIncludeDirectories>
       <LanguageStandard>Default</LanguageStandard>
@@ -141,7 +141,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);RUDY_BUILD;RUDY_WINDOWS;RUDY_OS_WINDOWS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);RUDY_BUILD;RUDY_WINDOWS;RUDY_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>src;$(SolutionDir)Vendor\GLAD\include;$(SolutionDir)Vendor\GLFW\include</AdditionalIncludeDirectories>
       <LanguageStandard>Default</LanguageStandard>
@@ -160,6 +160,11 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\Events\Mouse\MousePositionChangedEvent.h" />
+    <ClInclude Include="src\Rudy\Events\Mouse\MouseButtonUpEvent.h" />
+    <ClInclude Include="src\Rudy\Events\Mouse\MouseScrolledEvent.h" />
+    <ClInclude Include="src\Rudy\Events\Mouse\MouseButtonDownEvent.h" />
+    <ClInclude Include="src\Rudy\Events\Mouse\MouseButtonEvent.h" />
     <ClInclude Include="src\Rudy\Application\ApplicationModule.h" />
     <ClInclude Include="src\Rudy\Core\Assertion.h" />
     <ClInclude Include="src\Rudy\Events\Delegate.h" />
@@ -186,8 +191,14 @@
     <ClInclude Include="src\Rudy\Mathematics\Vector3f.h" />
     <ClInclude Include="src\Rudy\Mathematics\Vector3i.h" />
     <ClInclude Include="src\Rudy\Platform\OS\Windows\WindowsWindow.h" />
+    <ClInclude Include="src\Rudy\Events\Window\WindowOffsetEvent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rudy\Events\Mouse\MousePositionChangedEvent.cpp" />
+    <ClCompile Include="src\Rudy\Events\Mouse\MouseButtonUpEvent.cpp" />
+    <ClCompile Include="src\Rudy\Events\Mouse\MouseScrolledEvent.cpp" />
+    <ClCompile Include="src\Rudy\Events\Mouse\MouseButtonDownEvent.cpp" />
+    <ClCompile Include="src\Rudy\Events\Mouse\MouseButtonEvent.cpp" />
     <ClCompile Include="src\Rudy\Application\ApplicationModule.cpp" />
     <ClCompile Include="src\Rudy\Events\Delegate.cpp" />
     <ClCompile Include="src\Rudy\Events\Keyboard\KeyboardKeyReleasedEvent.cpp" />
@@ -204,6 +215,7 @@
     <ClCompile Include="src\Rudy\Mathematics\Vector3f.cpp" />
     <ClCompile Include="src\Rudy\Mathematics\Vector3i.cpp" />
     <ClCompile Include="src\Rudy\Platform\OS\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="src\Rudy\Events\Window\WindowOffsetEvent.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

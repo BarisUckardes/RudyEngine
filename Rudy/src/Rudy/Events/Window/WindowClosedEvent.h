@@ -3,7 +3,7 @@
 
 namespace Rudy
 {
-	class RUDY_API WindowClosedEvent : Event
+	class RUDY_API WindowClosedEvent : public Event
 	{
 	public:
 		WindowClosedEvent() = default;

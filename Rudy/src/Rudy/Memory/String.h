@@ -9,6 +9,34 @@ namespace Rudy
 	class RUDY_API String
 	{
 	public:
+		/// <summary>
+		/// Returns a string representation of the float variable
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns></returns>
+		static String GetFromFloat(float value);
+
+		/// <summary>
+		/// Returns an string represetntation of the integer variable
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns></returns>
+		static String GetFromInteger(int value);
+
+		/// <summary>
+		/// Returns a float from the string
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns></returns>
+		static float ToFloat(const String& value);
+
+		/// <summary>
+		/// Returns an integer from the string
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns></returns>
+		static int ToInteger(const String& value);
+
 		String();
 		String(const String& other);
 		String(const char* other);

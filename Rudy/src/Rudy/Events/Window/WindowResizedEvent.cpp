@@ -17,6 +17,6 @@ namespace Rudy
     }
     String WindowResizedEvent::GetAsString() const
     {
-        return "Window resized event";
+        return "Window resized event" ;
     }
 }

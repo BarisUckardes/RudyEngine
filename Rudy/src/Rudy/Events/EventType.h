@@ -31,6 +31,31 @@ namespace Rudy
 		/// <summary>
 		/// Represents the window close event
 		/// </summary>
-		WindowClosed = 4
+		WindowClosed = 4,
+
+		/// <summary>
+		/// Represents the window position change event
+		/// </summary>
+		WindowOffsetChanged = 5,
+
+		/// <summary>
+		/// Represents a mouse button down event
+		/// </summary>
+		MouseButtonDown = 6,
+
+		/// <summary>
+		/// Represents a mouse button up event
+		/// </summary>
+		MouseButtonUp = 7,
+
+		/// <summary>
+		/// Represents a mouse scrolled event
+		/// </summary>
+		MouseScrolled = 8,
+
+		/// <summary>
+		/// Represetns a mouse position changed event
+		/// </summary>
+		MousePositionChanged = 9
 	};
 }

@@ -1,5 +1,7 @@
 #include "String.h"
-
+#include <stdio.h>
+#include <string>
+#include <sstream>
 namespace Rudy
 {
 	unsigned int GetCharPointerSize(const char* target)
@@ -8,6 +10,40 @@ namespace Rudy
 		while (target[size] != '\0')
 			size++;
 		return size;
+	}
+
+	String String::GetFromFloat(float value)
+	{
+		char* chars = new char[16];
+
+		sprintf(chars, "%f", value);
+
+		return chars;
+	}
+
+	String String::GetFromInteger(int value)
+	{
+		char* chars = new char[16];
+
+		sprintf(chars, "%d", value);
+
+		return chars;
+	}
+
+	float String::ToFloat(const String& value)
+	{
+		float output = -1.0f;
+		std::stringstream stream(*value);
+		stream >> output;
+		return output;
+	}
+
+	int String::ToInteger(const String& value)
+	{
+		int output = -1;
+		std::stringstream stream(*value);
+		stream >> output;
+		return output;
 	}
 
 	String::String()

@@ -2,6 +2,12 @@
 #include <GLFW/glfw3.h>
 #include <Rudy/Core/Assertion.h>
 #include <Rudy/Events/Window/WindowResizedEvent.h>
+#include <Rudy/Events/Window/WindowOffsetEvent.h>
+#include <Rudy/Events/Window/WindowClosedEvent.h>
+#include <Rudy/Events/Mouse/MouseButtonDownEvent.h>
+#include <Rudy/Events/Mouse/MouseButtonUpEvent.h>
+#include <Rudy/Events/Mouse/MousePositionChangedEvent.h>
+#include <Rudy/Events/Mouse/MouseScrolledEvent.h>
 namespace Rudy
 {
 
@@ -55,7 +61,7 @@ namespace Rudy
 		* Set window offset callback
 		*/
 		glfwSetWindowPosCallback(m_NativeWindow,
-			[](GLFWwindow* window, int offsetX, int offsety)
+			[](GLFWwindow* window, int offsetX, int offsetY)
 			{
 				/*
 				* Get user pointer data
@@ -65,11 +71,106 @@ namespace Rudy
 				/*
 				* Generate window offset event
 				*/
+				WindowOffsetEvent* event = new WindowOffsetEvent(Vector2i(offsetX, offsetY));
 
 				/*
 				* Broad cast event
 				*/
-				printf("Window moved\n");
+				data.EventCallback->Invoke(event);
+			}
+			);
+
+		/*
+		* Set window close callback
+		*/
+		glfwSetWindowCloseCallback(m_NativeWindow,
+			[](GLFWwindow* window)
+			{
+				/*
+				* Get set pointer data
+				*/
+				GLFWWindowData& data = *(GLFWWindowData*)glfwGetWindowUserPointer(window);
+
+				/*
+				* Generate window closed event
+				*/
+				WindowClosedEvent* event = new WindowClosedEvent();
+
+				/*
+				* Broadcast event
+				*/
+				data.EventCallback->Invoke(event);
+			});
+
+		/*
+		* Set mouse button callback
+		*/
+		glfwSetMouseButtonCallback(m_NativeWindow,
+			[](GLFWwindow* window, int button, int action, int mods)
+			{
+				GLFWWindowData& data = *(GLFWWindowData*)glfwGetWindowUserPointer(window);
+
+				switch (action)
+				{
+					case GLFW_PRESS:
+					{
+						MouseButtonDownEvent* event = new MouseButtonDownEvent(button);
+						data.EventCallback->Invoke(event);
+						break;
+					}
+					case GLFW_RELEASE:
+					{
+						MouseButtonUpEvent* event = new MouseButtonUpEvent(button);
+						data.EventCallback->Invoke(event);
+						break;
+					}
+				}
+			}
+			);
+
+		/*
+		* Set mouse cursor position change callback
+		*/
+		glfwSetCursorPosCallback(m_NativeWindow,
+			[](GLFWwindow* window, double x, double y)
+			{
+				/*
+				* Get window data
+				*/
+				GLFWWindowData& data = *(GLFWWindowData*)glfwGetWindowUserPointer(window);
+
+				/*
+				* Generate event data
+				*/
+				MousePositionChangedEvent* event = new MousePositionChangedEvent(Vector2i((int)x, (int)y));
+
+				/*
+				* Broadcast event
+				*/
+				data.EventCallback->Invoke(event);
+			}
+			);
+
+		/*
+		* Set mouse wheel scroll callback
+		*/
+		glfwSetScrollCallback(m_NativeWindow,
+			[](GLFWwindow* window, double x,double y)
+			{
+				/*
+				* Get window data
+				*/
+				GLFWWindowData& data = *(GLFWWindowData*)glfwGetWindowUserPointer(window);
+
+				/*
+				* Generate scroll event
+				*/
+				MouseScrolledEvent* event = new MouseScrolledEvent(Vector2f((float)x,(float)y));
+
+				/*
+				* Broadcast event
+				*/
+				data.EventCallback->Invoke(event);
 			}
 			);
 
