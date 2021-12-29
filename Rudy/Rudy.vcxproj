@@ -160,6 +160,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\OpenGLCommandBuffer.h" />
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\OpenGLRenderCommands.h" />
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Framebuffer\OpenGLFramebuffer2D.h" />
     <ClInclude Include="src\Rudy\Graphics\Framebuffer\Framebuffer.h" />
     <ClInclude Include="src\Rudy\Graphics\Framebuffer\FramebufferAttachment.h" />
     <ClInclude Include="src\Rudy\Graphics\Framebuffer\FramebufferAttachmentCreateParameters.h" />
@@ -239,6 +242,8 @@
     <ClInclude Include="src\Rudy\Graphics\Buffer\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\OpenGLCommandBuffer.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Framebuffer\OpenGLFramebuffer2D.cpp" />
     <ClCompile Include="src\Rudy\Graphics\Framebuffer\Framebuffer.cpp" />
     <ClCompile Include="src\Rudy\Graphics\Framebuffer\FramebufferAttachment.cpp" />
     <ClCompile Include="src\Rudy\Graphics\Framebuffer\FramebufferAttachmentCreateParameters.cpp" />

@@ -15,7 +15,7 @@ namespace Rudy
 		/// Returns the attachment list of this framebuffer
 		/// </summary>
 		/// <returns></returns>
-		FORCEINLINE Array<FramebufferAttachment> GetAttachments() const;
+		FORCEINLINE Array<FramebufferAttachment*> GetAttachments() const;
 
 		/// <summary>
 		/// Returns the depth texture of this framebuffer
@@ -33,20 +33,21 @@ namespace Rudy
 		/// Creates new framebuffer 
 		/// </summary>
 		/// <param name="createParameters"></param>
-		void Create(const Array<FramebufferAttachmentCreateParameters>& createParameters);
-
-		virtual ~Framebuffer() = default;
+		void Create(unsigned int width,unsigned int height,const Array<FramebufferAttachmentCreateParameters>& createParameters,bool createDetphTexture);
 	protected:
 		Framebuffer(GraphicsDevice* device);
 
+		FORCEINLINE GraphicsDevice* GetOwnerGraphicsDevice() const;
 		/// <summary>
 		/// User implemetation
 		/// </summary>
 		/// <param name="createParameters"></param>
-		virtual void CreateCore(const Array<FramebufferAttachmentCreateParameters>& createParameters) = 0;
+		virtual void CreateCore(unsigned int width, unsigned int height,const Array<FramebufferAttachmentCreateParameters>& createParameters,Array<FramebufferAttachment*>& attachments,Texture2D* depthTexture,bool createDepthTexture) = 0;
 	private:
+		virtual ~Framebuffer() = default;
 		Array<FramebufferAttachment*> m_Attachments;
 		Texture2D* m_DepthTexture;
+		bool m_HasDepthTexture;
 	};
 
 }

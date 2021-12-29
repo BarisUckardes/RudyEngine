@@ -11,7 +11,7 @@ namespace Rudy
 	/// <summary>
 	/// Platform diagnostic texture class
 	/// </summary>
-	class RUDY_API Texture : GraphicsDeviceObject
+	class RUDY_API Texture : public GraphicsDeviceObject
 	{
 	public:
 
