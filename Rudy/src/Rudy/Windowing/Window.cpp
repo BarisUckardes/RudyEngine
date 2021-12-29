@@ -1,5 +1,5 @@
 #include "Window.h"
-#include <Rudy/Platform/OS/Windows/WindowsWindow.h>
+#include <Rudy/Platform/OS/Windows/Window/WindowsWindow.h>
 namespace Rudy
 {
 	Window* Window::Create(const String& title, const unsigned int offsetX, const unsigned int offsetY, unsigned int sizeX, unsigned int sizeY)

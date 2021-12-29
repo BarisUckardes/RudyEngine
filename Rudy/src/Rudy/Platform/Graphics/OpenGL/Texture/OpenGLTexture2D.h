@@ -3,6 +3,9 @@
 
 namespace Rudy
 {
+	/// <summary>
+	/// OpenGL implementation of a texture2D
+	/// </summary>
 	class RUDY_API OpenGLTexture2D : public Texture2D
 	{
 	public:

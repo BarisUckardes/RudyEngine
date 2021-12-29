@@ -8,8 +8,10 @@ namespace Rudy
 	/// </summary>
 	enum class RUDY_API TextureWrapMode
 	{
-		WrapT = 0,
-		WrapS = 1,
-		WrapR = 2
+		Clamp = 0,
+		ClampToEdge= 1,
+		ClampToBorder = 2,
+		Repeat = 3,
+		Mirror = 4
 	};
 }

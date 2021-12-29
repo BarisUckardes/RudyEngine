@@ -75,7 +75,7 @@
     <ClInclude Include="src\Rudy\Events\Delegate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rudy\Platform\OS\Windows\WindowsWindow.h">
+    <ClInclude Include="src\Rudy\Platform\OS\Windows\Window\WindowsWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Rudy\Platform\OS\PlatformOSType.h">
@@ -126,7 +126,7 @@
     <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Buffer\OpenGLIndexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\CommandBuffer.h">
+    <ClInclude Include="src\Rudy\Graphics\Command\CommandBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Rudy\Graphics\Texture\Texture.h">
@@ -177,6 +177,75 @@
     <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Buffer\OpenGLVertexDataTypeConversions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Rudy\Graphics\Command\RenderCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Texture\OpenGLTextureInternalFormatConversions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Texture\OpenGLTextureDataTypeConversions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Texture\OpenGLTextureMinFilterConversions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Texture\OpenGLTextureMagFilterConversions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Texture\OpenGLTextureWrapModeConversions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Graphics\Shader\ShaderStage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Graphics\Shader\ShaderParameterType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Graphics\Shader\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Graphics\Shader\ShaderProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Shader\OpenGLShaderStageConversions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Shader\OpenGLShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Shader\OpenGLShaderProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Graphics\Pipeline\BlendEquation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Graphics\Pipeline\BlendFunction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Graphics\Pipeline\CullFace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Graphics\Pipeline\DepthFunction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Graphics\Pipeline\FrontFace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Graphics\Pipeline\PipelineState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Graphics\Pipeline\SurfaceShadeMode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Graphics\Framebuffer\FramebufferAttachmentCreateParameters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Graphics\Framebuffer\FramebufferAttachment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Graphics\Framebuffer\Framebuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Rudy\Mathematics\Vector2f.cpp">
@@ -221,7 +290,7 @@
     <ClCompile Include="src\Rudy\Events\Delegate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rudy\Platform\OS\Windows\WindowsWindow.cpp">
+    <ClCompile Include="src\Rudy\Platform\OS\Windows\Window\WindowsWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rudy\Application\ApplicationModule.cpp">
@@ -260,7 +329,7 @@
     <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Buffer\OpenGLIndexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\CommandBuffer.cpp">
+    <ClCompile Include="src\Rudy\Graphics\Command\CommandBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rudy\Graphics\Texture\Texture.cpp">
@@ -288,6 +357,48 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Buffer\OpenGLVertexDataTypeConversions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Texture\OpenGLTextureInternalFormatConversions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Texture\OpenGLTextureDataTypeConversions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Texture\OpenGLTextureMinFilterConversions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Texture\OpenGLTextureMagFilterConversions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Texture\OpenGLTextureWrapModeConversions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Graphics\Shader\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Graphics\Shader\ShaderProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Shader\OpenGLShaderStageConversions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Shader\OpenGLShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Shader\OpenGLShaderProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Graphics\Pipeline\PipelineState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Graphics\Framebuffer\FramebufferAttachmentCreateParameters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Graphics\Framebuffer\FramebufferAttachment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Graphics\Framebuffer\Framebuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -21,7 +21,8 @@ namespace Rudy
 		/// <returns></returns>
 		FORCEINLINE unsigned int GetHeight() const;
 
-		FORCEINLINE 
+		virtual ~Texture2D() = default;
+
 		/// <summary>
 		/// Updates the texture with data given
 		/// </summary>
@@ -30,7 +31,6 @@ namespace Rudy
 		virtual void SetTextureData(unsigned char* data, unsigned int size) = 0;
 	protected:
 		Texture2D(GraphicsDevice* device);
-		virtual ~Texture2D() = default;
 
 		/// <summary>
 		/// Sets the width

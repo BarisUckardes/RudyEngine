@@ -57,7 +57,7 @@ namespace Rudy
                     OpenGLVertexDataTypeConversions::GetOpenGLDataType(elements[i].DataType),
                     elements[i].IsNormalized,
                     (int)vertexLayout.GetStride(),
-                    (void*)elements[i].Offset);
+                    (const void*)elements[i].Offset);
                 vertexLayoutIndex++;
                 break;
             case VertexLayoutDataType::Mat3:
@@ -72,7 +72,7 @@ namespace Rudy
                         OpenGLVertexDataTypeConversions::GetOpenGLDataType(elements[i].DataType),
                         elements[i].IsNormalized,
                         (int)vertexLayout.GetStride(),
-                        (void*)(elements[i].Offset + sizeof(float) * count * i));
+                        (const void*)(elements[i].Offset + sizeof(float) * count * i));
                 }
                 vertexLayoutIndex++;
 			}
