@@ -62,8 +62,8 @@ namespace Rudy
 		/// <param name="shaders"></param>
 		void LinkProgram(Array<Shader*>& shaders);
 	protected:
-		ShaderProgram(GraphicsDevice* device);
-		virtual ~ShaderProgram();
+		ShaderProgram();
+		~ShaderProgram();
 
 		/// <summary>
 		/// User defined link program implementation

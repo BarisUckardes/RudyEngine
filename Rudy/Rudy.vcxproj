@@ -122,7 +122,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);RUDY_BUILD;RUDY_WINDOWS;RUDY_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>src;$(SolutionDir)Vendor\GLAD\include;$(SolutionDir)Vendor\GLFW\include</AdditionalIncludeDirectories>
-      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
     <Link>
@@ -144,7 +144,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);RUDY_BUILD;RUDY_WINDOWS;RUDY_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>src;$(SolutionDir)Vendor\GLAD\include;$(SolutionDir)Vendor\GLFW\include</AdditionalIncludeDirectories>
-      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
     <Link>
@@ -160,6 +160,17 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\Resolver\Custom Resolvers\DefaultLogicResolver.h" />
+    <ClInclude Include="src\Rudy\Resolver\Resolvers\LogicResolver.h" />
+    <ClInclude Include="src\Rudy\Application\Modules\GameInputModule.h" />
+    <ClInclude Include="src\Rudy\Resolver\IWorldResolver.h" />
+    <ClInclude Include="src\Rudy\Application\ApplicationSession.h" />
+    <ClInclude Include="src\Rudy\Component\Built-in\Spatial.h" />
+    <ClInclude Include="src\Rudy\Component\Component.h" />
+    <ClInclude Include="src\Rudy\Reflection\Type\ReflectionType.h" />
+    <ClInclude Include="src\Rudy\Reflection\Object\ReflectableObject.h" />
+    <ClInclude Include="src\Rudy\Entity\Entity.h" />
+    <ClInclude Include="src\Rudy\Object\RudyObject.h" />
     <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\OpenGLCommandBuffer.h" />
     <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\OpenGLRenderCommands.h" />
     <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Framebuffer\OpenGLFramebuffer2D.h" />
@@ -219,6 +230,7 @@
     <ClInclude Include="src\Rudy\Events\EventType.h" />
     <ClInclude Include="src\Rudy\Memory\Array.h" />
     <ClInclude Include="src\Rudy\Platform\Graphics\GraphicsAPIType.h" />
+    <ClInclude Include="src\Rudy\Platform\Graphics\SupportedGraphicsApiDetection.h" />
     <ClInclude Include="src\Rudy\Platform\OS\PlatformOSDetection.h" />
     <ClInclude Include="src\Rudy\Platform\OS\PlatformOSType.h" />
     <ClInclude Include="src\Rudy\Windowing\Window.h" />
@@ -240,8 +252,23 @@
     <ClInclude Include="src\Rudy\Graphics\Buffer\VertexLayoutElement.h" />
     <ClInclude Include="src\Rudy\Graphics\Buffer\VertexLayout.h" />
     <ClInclude Include="src\Rudy\Graphics\Buffer\VertexBuffer.h" />
+    <ClInclude Include="src\Rudy\World\World.h" />
+    <ClInclude Include="src\Rudy\World\WorldView.h" />
+    <ClInclude Include="src\Rudy\World\Views\WorldLogicView.h" />
+    <ClInclude Include="src\Rudy\Application\Modules\TestModule.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rudy\Resolver\Custom Resolvers\DefaultLogicResolver.cpp" />
+    <ClCompile Include="src\Rudy\Resolver\Resolvers\LogicResolver.cpp" />
+    <ClCompile Include="src\Rudy\Application\Modules\GameInputModule.cpp" />
+    <ClCompile Include="src\Rudy\Resolver\IWorldResolver.cpp" />
+    <ClCompile Include="src\Rudy\Application\ApplicationSession.cpp" />
+    <ClCompile Include="src\Rudy\Component\Built-in\Spatial.cpp" />
+    <ClCompile Include="src\Rudy\Component\Component.cpp" />
+    <ClCompile Include="src\Rudy\Reflection\Type\ReflectionType.cpp" />
+    <ClCompile Include="src\Rudy\Reflection\Object\ReflectableObject.cpp" />
+    <ClCompile Include="src\Rudy\Entity\Entity.cpp" />
+    <ClCompile Include="src\Rudy\Object\RudyObject.cpp" />
     <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\OpenGLCommandBuffer.cpp" />
     <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Framebuffer\OpenGLFramebuffer2D.cpp" />
     <ClCompile Include="src\Rudy\Graphics\Framebuffer\Framebuffer.cpp" />
@@ -295,6 +322,10 @@
     <ClCompile Include="src\Rudy\Graphics\Buffer\VertexLayoutElement.cpp" />
     <ClCompile Include="src\Rudy\Graphics\Buffer\VertexLayout.cpp" />
     <ClCompile Include="src\Rudy\Graphics\Buffer\VertexBuffer.cpp" />
+    <ClCompile Include="src\Rudy\World\World.cpp" />
+    <ClCompile Include="src\Rudy\World\WorldView.cpp" />
+    <ClCompile Include="src\Rudy\World\Views\WorldLogicView.cpp" />
+    <ClCompile Include="src\Rudy\Application\Modules\TestModule.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

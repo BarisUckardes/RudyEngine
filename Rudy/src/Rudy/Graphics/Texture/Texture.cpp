@@ -17,10 +17,6 @@ namespace Rudy
 		return m_DataType;
 	}
 
-	Texture::Texture(GraphicsDevice* device) : GraphicsDeviceObject(device)
-	{
-
-	}
 	void Texture::SetTextureFormat(TextureFormat format)
 	{
 		m_Format = format;

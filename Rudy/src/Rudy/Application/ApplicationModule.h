@@ -4,15 +4,16 @@
 
 namespace Rudy
 {
+	class ApplicationSession;
 	/// <summary>
 	/// Fundemental element of the application
 	/// </summary>
 	class RUDY_API ApplicationModule
 	{
+		friend class Application;
 	public:
 		ApplicationModule() = default;
 		virtual ~ApplicationModule() = default;
-
 
 		/// <summary>
 		/// Called when module attached to application
@@ -33,6 +34,15 @@ namespace Rudy
 		/// Called when an event broadcasted from the application
 		/// </summary>
 		/// <param name="event"></param>
-		virtual void OnReceiveApplicationEvent(Event& event) = 0;
+		virtual void OnReceiveApplicationEvent(Event* event) = 0;
+	protected:
+		FORCEINLINE ApplicationSession* GetOwnerSession() const;
+	private:
+		/// <summary>
+		/// Sets the owner session for this application module
+		/// </summary>
+		/// <param name="session"></param>
+		void SetOwnerSession(ApplicationSession* session);
+		ApplicationSession* m_OwnerSession;
 	};
 }

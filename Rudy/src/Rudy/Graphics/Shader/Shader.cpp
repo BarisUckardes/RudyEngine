@@ -50,10 +50,6 @@ namespace Rudy
 	{
 		m_CompileListeners.Remove(delegate);
 	}
-	Shader::Shader(GraphicsDevice* device) : GraphicsDeviceObject(device)
-	{
-
-	}
 	Shader::~Shader()
 	{
 

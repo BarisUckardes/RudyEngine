@@ -9,8 +9,8 @@ namespace Rudy
 	class RUDY_API OpenGLIndexBuffer : public IndexBuffer
 	{
 	public:
-		OpenGLIndexBuffer(GraphicsDevice* ownerDevice);
-		virtual ~OpenGLIndexBuffer() override;
+		OpenGLIndexBuffer() = default;
+		~OpenGLIndexBuffer() = default;
 
 		virtual void* GetNativeHandle() const override;
 	protected:

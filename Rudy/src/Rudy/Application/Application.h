@@ -9,6 +9,7 @@ namespace Rudy
 {
 	class Window;
 	class ApplicationModule;
+	class ApplicationSession;
 	/// <summary>
 	/// Base class for appllcations
 	/// </summary>
@@ -24,18 +25,20 @@ namespace Rudy
 		/// <returns></returns>
 		Window* GetWindow() const;
 
+		
+	protected:
 		/// <summary>
 		/// Registers anew module to the application
 		/// </summary>
 		/// <typeparam name="TModule"></typeparam>
-		template<typename TModule,typename ...TParameters>
+		template<typename TModule, typename ...TParameters>
 		void RegisterModule(TParameters... parameters);
 
 		/// <summary>
 		/// Run loop of the application
 		/// </summary>
 		void Run();
-	protected:
+
 		/// <summary>
 		/// Sets a window for this application
 		/// </summary>
@@ -52,6 +55,7 @@ namespace Rudy
 		Array<ApplicationModule*> m_Modules;
 		Array<Event*> m_BufferedEvents;
 		Delegate<void, Event*>* m_ApplicationWindowEventDelegate;
+		ApplicationSession* m_Session;
 		Window* m_Window;
 	};
 
@@ -61,7 +65,7 @@ namespace Rudy
 		/*
 		* Create new module
 		*/
-		TModule newModule = new TModule(parameters...);
+		TModule* newModule = new TModule(parameters...);
 
 		/*
 		* Register to the pending list

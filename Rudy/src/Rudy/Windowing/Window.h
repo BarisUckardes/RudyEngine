@@ -22,7 +22,9 @@ namespace Rudy
 		/// </summary>
 		/// <param name="createParameters"></param>
 		/// <returns></returns>
-		static Window* Create(const String& title,const unsigned int offsetX,const unsigned int offsetY,unsigned int sizeX,unsigned int sizeY);
+		static Window* Create(const String& title,
+			const unsigned int offsetX,const unsigned int offsetY,
+			unsigned int sizeX,unsigned int sizeY);
 
 		Window(const String& title, const unsigned int offsetX, const unsigned int offsetY, unsigned int sizeX, unsigned int sizeY);
 

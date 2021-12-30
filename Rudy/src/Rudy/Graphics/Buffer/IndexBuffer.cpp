@@ -20,7 +20,7 @@ namespace Rudy
         return m_ElementCount;
     }
 
-    IndexBuffer::IndexBuffer(GraphicsDevice* device) : GraphicsDeviceObject(device)
+    IndexBuffer::IndexBuffer()
     {
         m_ElementCount = 0;
     }

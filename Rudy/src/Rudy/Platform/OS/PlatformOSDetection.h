@@ -3,7 +3,7 @@
 
 namespace Rudy
 {
-	PlatformOSType GetCurrentPlatform()
+	PlatformOSType RUDY_API GetCurrentPlatform()
 	{
 		#ifdef RUDY_OS_WINDOWS
 				return PlatformOSType::Windows;

@@ -164,7 +164,7 @@ namespace Rudy
 		/// </summary>
 		virtual void DrawInstanced() = 0;
 	protected:
-		CommandBuffer(GraphicsDevice* device);
+		CommandBuffer() = default;
 		virtual ~CommandBuffer() = default;
 	};
 }

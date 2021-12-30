@@ -51,9 +51,8 @@ namespace Rudy
 		/// <returns></returns>
 		FORCEINLINE bool HasMipmaps() const;
 	protected:
-		Texture(GraphicsDevice* device);
-		virtual ~Texture() = default;
-
+		Texture() = default;
+		~Texture() = default;
 		/// <summary>
 		/// Sets the texture format of this texture
 		/// </summary>

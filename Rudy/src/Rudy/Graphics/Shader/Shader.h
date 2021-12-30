@@ -55,8 +55,8 @@ namespace Rudy
 		/// <param name="delegate"></param>
 		void RemoveCompileListener(Delegate<void, void*>* delegate);
 	protected:
-		Shader(GraphicsDevice* device);
-		virtual ~Shader();
+		Shader() = default;
+		~Shader();
 		
 		/// <summary>
 		/// User implementation of compile method

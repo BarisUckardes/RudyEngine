@@ -10,12 +10,12 @@ namespace Rudy
 	{
 		return m_VertexCount;
 	}
-	void VertexBuffer::SetData(const unsigned char* dataPtr, const unsigned int elementSize, const unsigned int elementCount, const VertexLayout& vertexLayout)
+	void VertexBuffer::SetData(const unsigned char* dataPtr, const unsigned int elementSize, const unsigned int elementCount)
 	{
 		/*
 		* Call user defined implementation
 		*/
-		SetDataCore(dataPtr, elementSize, elementCount, vertexLayout);
+		SetDataCore(dataPtr, elementSize, elementCount);
 
 		/*
 		* Set vertex layout and element count
@@ -23,7 +23,7 @@ namespace Rudy
 		m_VertexLayout = m_VertexLayout;
 		m_VertexCount = elementCount;
 	}
-	VertexBuffer::VertexBuffer(GraphicsDevice* device) : GraphicsDeviceObject(device)
+	VertexBuffer::VertexBuffer()
 	{
 
 	}

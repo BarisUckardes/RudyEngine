@@ -27,7 +27,7 @@ namespace Rudy
 		/// <returns></returns>
 		FORCEINLINE virtual void* GetNativeHandle() const = 0;
 	protected:
-		IndexBuffer(GraphicsDevice* device);
+		IndexBuffer();
 		virtual ~IndexBuffer() = default;
 		/// <summary>
 		/// User implementation of the SetData method

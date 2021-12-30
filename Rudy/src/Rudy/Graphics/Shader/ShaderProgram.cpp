@@ -71,7 +71,7 @@ namespace Rudy
         m_LastErrorMessage = errorMessage;
         m_Linked = isLinked;
     }
-    ShaderProgram::ShaderProgram(GraphicsDevice* device) : GraphicsDeviceObject(device)
+    ShaderProgram::ShaderProgram()
     {
         /*
         * Create new listener

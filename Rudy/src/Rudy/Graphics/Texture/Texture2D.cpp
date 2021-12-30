@@ -10,11 +10,6 @@ namespace Rudy
 	{
 		return m_Height;
 	}
-	Texture2D::Texture2D(GraphicsDevice* device) : Texture(device)
-	{
-		m_Width = 0;
-		m_Height = 0;
-	}
 	void Texture2D::SetWidth(unsigned int width)
 	{
 		m_Width = width;

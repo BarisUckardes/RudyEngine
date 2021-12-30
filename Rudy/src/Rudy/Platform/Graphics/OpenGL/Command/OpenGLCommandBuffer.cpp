@@ -2,15 +2,6 @@
 #include <Rudy/Graphics/Command/RenderCommand.h>
 namespace Rudy
 {
-    OpenGLCommandBuffer::OpenGLCommandBuffer(GraphicsDevice* device) : CommandBuffer(device)
-    {
-
-    }
-    OpenGLCommandBuffer::~OpenGLCommandBuffer()
-    {
-
-    }
-
     void* OpenGLCommandBuffer::GetNativeHandle() const
     {
         return nullptr;

@@ -10,8 +10,13 @@ namespace EditorLauncher
 	public:
 		EditorApplication(const Rudy::String& title, unsigned int offsetX, unsigned int offsetY, unsigned int sizeX, unsigned int sizeY);
 		EditorApplication() = default;
-		virtual ~EditorApplication() override;
 
+		/// <summary>
+		/// Runs the editor
+		/// </summary>
+		void RunEditor();
+
+		virtual ~EditorApplication() override;
 	};
 
 

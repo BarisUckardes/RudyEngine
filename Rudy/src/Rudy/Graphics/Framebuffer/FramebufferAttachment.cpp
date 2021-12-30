@@ -16,7 +16,7 @@ namespace Rudy
     }
     FramebufferAttachment::~FramebufferAttachment()
     {
-        delete m_Texture;
+        //delete m_Texture;
         m_Texture = nullptr;
     }
     Texture2D* FramebufferAttachment::GetTexture() const

@@ -21,17 +21,34 @@ namespace Rudy
 		/// <returns></returns>
 		FORCEINLINE unsigned int GetHeight() const;
 
-		virtual ~Texture2D() = default;
-
 		/// <summary>
 		/// Updates the texture with data given
 		/// </summary>
 		/// <param name="data"></param>
 		/// <param name="size"></param>
 		virtual void SetTextureData(unsigned char* data, unsigned int size) = 0;
-	protected:
-		Texture2D(GraphicsDevice* device);
 
+		/// <summary>
+		/// Graphics api implementations of a texture2D
+		/// </summary>
+		/// <param name="width"></param>
+		/// <param name="height"></param>
+		/// <param name="format"></param>
+		/// <param name="internalFormat"></param>
+		/// <param name="dataType"></param>
+		/// <param name="minFilter"></param>
+		/// <param name="magFilter"></param>
+		/// <param name="wrapModeS"></param>
+		/// <param name="wrapModeT"></param>
+		/// <param name="createMipmaps"></param>
+		virtual void Initialize(unsigned int width, unsigned int height,
+			TextureFormat format, TextureInternalFormat internalFormat, TextureDataType dataType,
+			TextureMinFilter minFilter, TextureMagFilter magFilter,
+			TextureWrapMode wrapModeS, TextureWrapMode wrapModeT,
+			bool createMipmaps) = 0;
+	protected:
+		Texture2D() = default;
+		~Texture2D() = default;
 		/// <summary>
 		/// Sets the width
 		/// </summary>

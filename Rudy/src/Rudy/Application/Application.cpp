@@ -4,6 +4,7 @@
 #include <Rudy/Events/Delegate.h>
 #include <Rudy/Application/ApplicationModule.h>
 #include <Rudy/Graphics/Device/GraphicsDevice.h>
+#include <Rudy/Application/ApplicationSession.h>
 namespace Rudy
 {
 	Window* Application::GetWindow() const
@@ -18,6 +19,11 @@ namespace Rudy
 		bool hasExitRequest = false;
 
 		/*
+		* Create application session
+		*/
+		m_Session = new ApplicationSession();
+
+		/*
 		* Attach pending modules
 		*/
 		for (int i = 0; i < m_PendingModules.GetCursor(); i++)
@@ -26,6 +32,11 @@ namespace Rudy
 			* Get the module
 			*/
 			ApplicationModule* module = m_PendingModules[i];
+
+			/*
+			* Set session
+			*/
+			module->SetOwnerSession(m_Session);
 
 			/*
 			* Attach the module
@@ -107,7 +118,20 @@ namespace Rudy
 	}
 	void Application::OnEventReceived(Event* event)
 	{
-		printf("Editor application received: %s\n", *event->GetAsString());
+		for (int i = m_Modules.GetCursor() - 1; i >= 0; i--)
+		{
+			/*
+			* Broadcast the event to the module
+			*/
+			m_Modules[i]->OnReceiveApplicationEvent(event);
+
+			/*
+			* Validate handled
+			*/
+			if (event->IsHandled())
+				break;
+			
+		}
 		m_BufferedEvents.Add(event);
 	}
 }

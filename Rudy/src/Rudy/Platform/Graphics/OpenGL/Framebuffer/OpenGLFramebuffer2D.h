@@ -6,10 +6,8 @@ namespace Rudy
 	class RUDY_API OpenGLFramebuffer2D : Framebuffer
 	{
 	public:
-		OpenGLFramebuffer2D(GraphicsDevice* device);
-		virtual ~OpenGLFramebuffer2D() override;
-
-
+		OpenGLFramebuffer2D() = default;
+		~OpenGLFramebuffer2D() = default;
 
 		virtual void* GetNativeHandle() const override;
 	protected:

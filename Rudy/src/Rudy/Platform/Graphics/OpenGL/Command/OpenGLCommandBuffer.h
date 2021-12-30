@@ -9,8 +9,8 @@ namespace Rudy
 	class RUDY_API OpenGLCommandBuffer : public CommandBuffer
 	{
 	public:
-		OpenGLCommandBuffer(GraphicsDevice* device);
-		virtual ~OpenGLCommandBuffer() override;
+		OpenGLCommandBuffer() = default;
+		~OpenGLCommandBuffer() = default;
 
 		virtual void* GetNativeHandle() const override;
 		virtual void StartRecording() override;

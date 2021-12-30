@@ -1,8 +1,11 @@
 #include "Window.h"
 #include <Rudy/Platform/OS/Windows/Window/WindowsWindow.h>
+#include <Rudy/Platform/Graphics/GraphicsAPIType.h>
 namespace Rudy
 {
-	Window* Window::Create(const String& title, const unsigned int offsetX, const unsigned int offsetY, unsigned int sizeX, unsigned int sizeY)
+	Window* Window::Create(const String& title,
+		const unsigned int offsetX, const unsigned int offsetY,
+		unsigned int sizeX, unsigned int sizeY)
 	{
 		return new WindowsWindow(title,offsetX,offsetY,sizeX,sizeY);
 	}

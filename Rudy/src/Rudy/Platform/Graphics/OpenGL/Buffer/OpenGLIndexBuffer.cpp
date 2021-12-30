@@ -2,18 +2,6 @@
 #include <GLAD/glad.h>
 namespace Rudy
 {
-    OpenGLIndexBuffer::OpenGLIndexBuffer(GraphicsDevice* ownerDevice) : IndexBuffer(ownerDevice)
-    {
-
-    }
-
-    OpenGLIndexBuffer::~OpenGLIndexBuffer()
-    {
-        /*
-        * Delete index buffer
-        */
-    }
-
     void* OpenGLIndexBuffer::GetNativeHandle() const
     {
         return (void*)&m_IndexBufferID;
@@ -21,10 +9,6 @@ namespace Rudy
 
     void OpenGLIndexBuffer::SetDataCore(unsigned char* dataPtr, unsigned int count, unsigned int sizePerElement)
     {
-        /*
-        * Delete former index buffer state
-        */
-
         /*
         * Generate new handle and bind it
         */
@@ -40,6 +24,5 @@ namespace Rudy
         * Unbind
         */
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
-
     }
 }

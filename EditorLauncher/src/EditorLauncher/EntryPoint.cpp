@@ -14,7 +14,7 @@ int main(int argumentCount, char** arguments)
 	/*
 	* Run application
 	*/
-	application->Run();
+	application->RunEditor();
 
 
 

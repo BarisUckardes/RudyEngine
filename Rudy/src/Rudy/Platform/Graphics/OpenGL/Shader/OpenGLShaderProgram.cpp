@@ -3,14 +3,6 @@
 #include <Rudy/Platform/Graphics/OpenGL/Shader/OpenGLShaderProgram.h>
 namespace Rudy
 {
-	OpenGLShaderProgram::OpenGLShaderProgram(GraphicsDevice* device) : ShaderProgram(device)
-	{
-
-	}
-	OpenGLShaderProgram::~OpenGLShaderProgram()
-	{
-
-	}
 	void* OpenGLShaderProgram::GetNativeHandle() const
 	{
 		return (void*)&m_ProgramID;

@@ -15,6 +15,7 @@ namespace Rudy
 	class VertexBuffer;
 	class CommandBuffer;
 	class Texture2D;
+	class GraphicsDeviceObject;
 
 	/// <summary>
 	/// Graphics api-agnostic graphics device class
@@ -29,7 +30,29 @@ namespace Rudy
 		/// <returns></returns>
 		static GraphicsDevice* Create(Window* window,GraphicsAPIType preferredAPIType);
 
-		GraphicsDevice(Window* targetWindow);
+		/// <summary>
+		/// Returns whether this graphics device targets a window or just a headless graphics device
+		/// </summary>
+		/// <returns></returns>
+		bool HasTargetWindow() const;
+
+		/// <summary>
+		/// Returns the target window.(if has one)
+		/// </summary>
+		/// <returns></returns>
+		Window* GetTargetWindow() const;
+
+		/// <summary>
+		/// Returns the api type for this graphics device
+		/// </summary>
+		/// <returns></returns>
+		GraphicsAPIType GetApiType() const;
+
+		/// <summary>
+		/// Initializes this graphics device
+		/// </summary>
+		/// <param name="window"></param>
+		void Initialize(Window* window);
 
 		/// <summary>
 		/// Creates a command buffer using this device
@@ -53,35 +76,14 @@ namespace Rudy
 		/// Creates a texture2D
 		/// </summary>
 		/// <returns></returns>
-		virtual Texture2D* CreateTexture2D(unsigned int width, unsigned int height,
-			TextureFormat format, TextureInternalFormat internalFormat, TextureDataType dataType,
-			TextureMinFilter minFilter, TextureMagFilter magFilter,
-			TextureWrapMode wrapModeS, TextureWrapMode wrapModeT,
-			bool createMipmaps) = 0;
+		virtual Texture2D* CreateTexture2D() = 0;
 
 		/// <summary>
 		/// Swaps the render buffers of the window
 		/// </summary>
 		virtual void Swapbuffers() = 0;
-
-		/// <summary>
-		/// Returns whether this graphics device targets a window or just a headless graphics device
-		/// </summary>
-		/// <returns></returns>
-		bool HasTargetWindow() const;
-
-		/// <summary>
-		/// Returns the target window.(if has one)
-		/// </summary>
-		/// <returns></returns>
-		Window* GetTargetWindow() const;
-
-		/// <summary>
-		/// Returns the api type for this graphics device
-		/// </summary>
-		/// <returns></returns>
-		GraphicsAPIType GetApiType() const;
 	protected:
+		GraphicsDevice() = default;
 		~GraphicsDevice();
 
 		/// <summary>
@@ -89,6 +91,17 @@ namespace Rudy
 		/// </summary>
 		/// <param name="apiType"></param>
 		void SetApiType(GraphicsAPIType apiType);
+
+		/// <summary>
+		/// Sets a target device object for a graphicsDeviceObject 
+		/// </summary>
+		/// <param name="deviceObject"></param>
+		void SetDeviceObjectTargetDevice(GraphicsDeviceObject* deviceObject);
+
+		/// <summary>
+		/// Graphics api implementation of the initialization
+		/// </summary>
+		virtual void InitializeCore() = 0;
 	private:
 		GraphicsAPIType m_APIType;
 		Window* m_TargetWindow;

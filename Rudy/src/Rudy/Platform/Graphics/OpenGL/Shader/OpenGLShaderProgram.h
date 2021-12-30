@@ -9,8 +9,8 @@ namespace Rudy
 	class RUDY_API OpenGLShaderProgram : public ShaderProgram
 	{
 	public:
-		OpenGLShaderProgram(GraphicsDevice* device);
-		virtual ~OpenGLShaderProgram() override;
+		OpenGLShaderProgram() = default;
+		~OpenGLShaderProgram() = default;
 
 
 		virtual void* GetNativeHandle() const override;

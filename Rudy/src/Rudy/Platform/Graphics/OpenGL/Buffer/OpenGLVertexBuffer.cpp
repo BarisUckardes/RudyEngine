@@ -3,46 +3,57 @@
 #include <GLAD/glad.h>
 namespace Rudy
 {
-	OpenGLVertexBuffer::OpenGLVertexBuffer(GraphicsDevice* device) : VertexBuffer(device)
-	{
-
-	}
-	OpenGLVertexBuffer::~OpenGLVertexBuffer()
-	{
-	}
 	void* OpenGLVertexBuffer::GetNativeHandle() const
 	{
 		return nullptr;
 	}
-	void OpenGLVertexBuffer::SetDataCore(const unsigned char* dataPtr, const unsigned int elementSize, const unsigned int elementCount, const VertexLayout& vertexLayout)
+	void OpenGLVertexBuffer::SetDataCore(const unsigned char* dataPtr, const unsigned int elementSize, const unsigned int elementCount)
 	{
-		unsigned int vertexArrayID = 0;
-		unsigned int vertexBufferID = 0;
-
 		/*
 		* Create and bind vertex array
 		*/
-		glGenVertexArrays(1, &vertexArrayID);
-		glBindVertexArray(vertexArrayID);
+		glBindVertexArray(m_Handles[0]);
 
 		/*
 		* Create and bind vertex buffer
 		*/
-		glGenBuffers(1, &vertexBufferID);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
+		glBindBuffer(GL_ARRAY_BUFFER, m_Handles[1]);
 
 		/*
 		* Set buffer data
 		*/
 		glBufferData(GL_ARRAY_BUFFER, elementSize * elementCount, dataPtr, GL_STATIC_DRAW);
 
-		/*
-		* Create vertex array layout
-		*/
-		unsigned int vertexLayoutIndex = 0;
-		Array<VertexLayoutElement> elements = vertexLayout.GetElements();
-		for (int i = 0; i < elements.GetCursor(); i++)
-		{
+        /*
+        * Unbind
+        */
+        glBindVertexArray(0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+    void OpenGLVertexBuffer::Initialize(const VertexLayout& vertexLayout)
+    {
+        unsigned int vertexArrayID = 0;
+        unsigned int vertexBufferID = 0;
+
+        /*
+         * Create and bind vertex array
+         */
+        glGenVertexArrays(1, &vertexArrayID);
+        glBindVertexArray(vertexArrayID);
+
+        /*
+        * Create and bind vertex buffer
+        */
+        glGenBuffers(1, &vertexBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
+
+        /*
+        * Create vertex array layout
+        */
+        unsigned int vertexLayoutIndex = 0;
+        Array<VertexLayoutElement> elements = vertexLayout.GetElements();
+        for (int i = 0; i < elements.GetCursor(); i++)
+        {
             switch (elements[i].DataType)
             {
             case VertexLayoutDataType::None:
@@ -62,7 +73,7 @@ namespace Rudy
                 break;
             case VertexLayoutDataType::Mat3:
             case VertexLayoutDataType::Mat4:
-			{
+            {
                 unsigned int count = elements[i].GetComponentCount();
                 for (int p = 0; p < count; p++)
                 {
@@ -75,8 +86,8 @@ namespace Rudy
                         (const void*)(elements[i].Offset + sizeof(float) * count * i));
                 }
                 vertexLayoutIndex++;
-			}
-                break;
+            }
+            break;
             case VertexLayoutDataType::Int:
                 break;
             case VertexLayoutDataType::Int2:
@@ -90,6 +101,12 @@ namespace Rudy
             default:
                 break;
             }
-		}
-	}
+        }
+
+        /*
+        * Set handles
+        */
+        m_Handles[0] = vertexArrayID;
+        m_Handles[1] = vertexBufferID;
+    }
 }

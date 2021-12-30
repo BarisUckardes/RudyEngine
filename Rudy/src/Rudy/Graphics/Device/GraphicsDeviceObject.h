@@ -10,10 +10,8 @@ namespace Rudy
 	/// </summary>
 	class RUDY_API GraphicsDeviceObject
 	{
+		friend class GraphicsDevice;
 	public:
-		GraphicsDeviceObject(GraphicsDevice* device);
-		virtual ~GraphicsDeviceObject();
-
 		/// <summary>
 		/// Returns the native handle specific for graphics api
 		/// </summary>
@@ -26,7 +24,10 @@ namespace Rudy
 		/// <returns></returns>
 		FORCEINLINE GraphicsDevice* GetOwnerGraphicsDevice() const;
 
+		GraphicsDeviceObject() = default;
+		~GraphicsDeviceObject();
 	private:
+		void SetGraphicsDevice(GraphicsDevice* device);
 		GraphicsDevice* m_OwnerDevice;
 	};
 }

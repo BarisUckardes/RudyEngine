@@ -34,11 +34,6 @@ namespace Rudy
         m_HasDepthTexture = createDetphTexture;
     }
 
-    Framebuffer::Framebuffer(GraphicsDevice* device) : GraphicsDeviceObject(device)
-    {
-
-    }
-
     GraphicsDevice* Framebuffer::GetOwnerGraphicsDevice() const
     {
         return GetOwnerGraphicsDevice();

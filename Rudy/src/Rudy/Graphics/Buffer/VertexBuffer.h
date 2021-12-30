@@ -7,7 +7,7 @@ namespace Rudy
 	/// <summary>
 	/// Graphics api agnostic vertex buffer wrapper
 	/// </summary>
-	class RUDY_API VertexBuffer : GraphicsDeviceObject
+	class RUDY_API VertexBuffer : public GraphicsDeviceObject
 	{
 	public:
 		/// <summary>
@@ -29,9 +29,15 @@ namespace Rudy
 		/// <param name="elementSize"></param>
 		/// <param name="elementCount"></param>
 		/// <param name="vertexLayout"></param>
-		void SetData(const unsigned char* dataPtr, const unsigned int elementSize, const unsigned int elementCount, const VertexLayout& vertexLayout);
+		void SetData(const unsigned char* dataPtr, const unsigned int elementSize, const unsigned int elementCount);
+
+		/// <summary>
+		/// Initializes this vertex buffer with the target vertex layout
+		/// </summary>
+		/// <param name="vertexLayout"></param>
+		virtual void Initialize(const VertexLayout& vertexLayout) = 0;
 	protected:
-		VertexBuffer(GraphicsDevice* device);
+		VertexBuffer();
 		~VertexBuffer() = default;
 		
 		/// <summary>
@@ -47,7 +53,7 @@ namespace Rudy
 		/// <param name="elementSize"></param>
 		/// <param name="elementCount"></param>
 		/// <param name="vertexLayout"></param>
-		virtual void SetDataCore(const unsigned char* dataPtr, const unsigned int elementSize, const unsigned int elementCount, const VertexLayout& vertexLayout) = 0;
+		virtual void SetDataCore(const unsigned char* dataPtr, const unsigned int elementSize, const unsigned int elementCount) = 0;
 	private:
 		VertexLayout m_VertexLayout;
 		unsigned int m_VertexCount;

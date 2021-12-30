@@ -3,9 +3,16 @@
 #include <GLAD/glad.h>
 #include <GLFW/glfw3.h>
 #include <Rudy/Platform/Graphics/OpenGL/Buffer/OpenGLIndexBuffer.h>
+#include <Rudy/Platform/Graphics/OpenGL/Buffer/OpenGLVertexBuffer.h>
+#include <Rudy/Platform/Graphics/OpenGL/Texture/OpenGLTexture2D.h>
+#include <Rudy/Platform/Graphics/OpenGL/Command/OpenGLCommandBuffer.h>
 namespace Rudy
 {
-	OpenGLGraphicsDevice::OpenGLGraphicsDevice(Window* targetWindow) : GraphicsDevice(targetWindow)
+	OpenGLGraphicsDevice::OpenGLGraphicsDevice()
+	{
+
+	}
+	void OpenGLGraphicsDevice::InitializeCore()
 	{
 		/*
 		* Create opengl context out of the glfw context
@@ -33,23 +40,59 @@ namespace Rudy
 	}
 	IndexBuffer* OpenGLGraphicsDevice::CreateIndexBuffer()
 	{
-		return new OpenGLIndexBuffer(this);
+		/*
+		* Create new OpenGL index buffer
+		*/
+		OpenGLIndexBuffer* buffer = new OpenGLIndexBuffer();
+
+		/*
+		* Set device object
+		*/
+		SetDeviceObjectTargetDevice(buffer);
+
+		return buffer;
 	}
 	VertexBuffer* OpenGLGraphicsDevice::CreateVertexBuffer()
 	{
-		return nullptr;
+		/*
+		* Create OpenGL vertex buffer
+		*/
+		OpenGLVertexBuffer* vertexBuffer = new OpenGLVertexBuffer();
+
+		/*
+		* Set target device for this device object
+		*/
+		SetDeviceObjectTargetDevice(vertexBuffer);
+
+		return vertexBuffer;
 	}
 	CommandBuffer* OpenGLGraphicsDevice::CreateCommandBuffer()
 	{
-		return nullptr;
-	}
-	Texture2D* OpenGLGraphicsDevice::CreateTexture2D(unsigned int width, unsigned int height,
-		TextureFormat format, TextureInternalFormat internalFormat, TextureDataType dataType,
-		TextureMinFilter minFilter, TextureMagFilter magFilter,
-		TextureWrapMode wrapModeS, TextureWrapMode wrapModeT,
-		bool createMipmaps)
-	{
+		/*
+		* Create OpenGL command buffer
+		*/
+		OpenGLCommandBuffer* commandBuffer = new OpenGLCommandBuffer();
+		
+		/*
+		* Set target device for this device object
+		*/
+		SetDeviceObjectTargetDevice(commandBuffer);
 
-		return nullptr;
+		return commandBuffer;
 	}
+	Texture2D* OpenGLGraphicsDevice::CreateTexture2D()
+	{
+		/*
+		* Create OpenGL texture2D
+		*/
+		OpenGLTexture2D* texture = new OpenGLTexture2D();
+
+		/*
+		* Set target device for this device object
+		*/
+		SetDeviceObjectTargetDevice(texture);
+
+		return texture;
+	}
+
 }

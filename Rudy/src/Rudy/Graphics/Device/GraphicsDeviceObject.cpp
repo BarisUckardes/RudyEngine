@@ -2,13 +2,13 @@
 
 namespace Rudy
 {
-	GraphicsDeviceObject::GraphicsDeviceObject(GraphicsDevice* device)
-	{
-		m_OwnerDevice = device;
-	}
 	GraphicsDeviceObject::~GraphicsDeviceObject()
 	{
 		m_OwnerDevice = nullptr;
+	}
+	void GraphicsDeviceObject::SetGraphicsDevice(GraphicsDevice* device)
+	{
+		m_OwnerDevice = device;
 	}
 	GraphicsDevice* GraphicsDeviceObject::GetOwnerGraphicsDevice() const
 	{

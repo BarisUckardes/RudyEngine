@@ -35,16 +35,21 @@ namespace Rudy
 		/// <param name="createParameters"></param>
 		void Create(unsigned int width,unsigned int height,const Array<FramebufferAttachmentCreateParameters>& createParameters,bool createDetphTexture);
 	protected:
-		Framebuffer(GraphicsDevice* device);
+		Framebuffer() = default;
 
+		/// <summary>
+		/// Returns the graphics device
+		/// </summary>
+		/// <returns></returns>
 		FORCEINLINE GraphicsDevice* GetOwnerGraphicsDevice() const;
+
 		/// <summary>
 		/// User implemetation
 		/// </summary>
 		/// <param name="createParameters"></param>
 		virtual void CreateCore(unsigned int width, unsigned int height,const Array<FramebufferAttachmentCreateParameters>& createParameters,Array<FramebufferAttachment*>& attachments,Texture2D* depthTexture,bool createDepthTexture) = 0;
 	private:
-		virtual ~Framebuffer() = default;
+		~Framebuffer() = default;
 		Array<FramebufferAttachment*> m_Attachments;
 		Texture2D* m_DepthTexture;
 		bool m_HasDepthTexture;

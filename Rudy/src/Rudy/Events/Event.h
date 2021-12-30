@@ -20,6 +20,11 @@ namespace Rudy
 		FORCEINLINE bool IsHandled() const;
 
 		/// <summary>
+		/// Marks this event handled, so other modules cant consume it
+		/// </summary>
+		void MarkHandled();
+
+		/// <summary>
 		/// Returns the event type of this event
 		/// </summary>
 		/// <returns></returns>

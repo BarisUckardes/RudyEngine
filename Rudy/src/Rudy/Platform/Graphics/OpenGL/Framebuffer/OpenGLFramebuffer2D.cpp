@@ -35,10 +35,15 @@ namespace Rudy
 			/*
 			* Create texture2D
 			*/
-			Texture2D* texture = GetOwnerGraphicsDevice()->CreateTexture2D(width, height,
+			Texture2D* texture = GetOwnerGraphicsDevice()->CreateTexture2D();
+
+			/*
+			* Initialize texture
+			*/
+			texture->Initialize(width, height,
 				createParameter.Format, createParameter.InternalFormat, createParameter.DataType,
 				TextureMinFilter::Nearest, TextureMagFilter::Nearest,
-				TextureWrapMode::Repeat, TextureWrapMode::Repeat,false);
+				TextureWrapMode::Repeat, TextureWrapMode::Repeat, false);
 
 			/*
 			* Get texture OpenGL id
@@ -76,8 +81,13 @@ namespace Rudy
 			/*
 			* Create texture
 			*/
-			Texture2D* depthTexture = GetOwnerGraphicsDevice()->CreateTexture2D(width, height,
-				TextureFormat::DepthComponent, TextureInternalFormat::DepthComponent32f,TextureDataType::Float,
+			Texture2D* depthTexture = GetOwnerGraphicsDevice()->CreateTexture2D();
+
+			/*
+			* Initialize depth texture
+			*/
+			depthTexture->Initialize(width, height,
+				TextureFormat::DepthComponent, TextureInternalFormat::DepthComponent32f, TextureDataType::Float,
 				TextureMinFilter::Nearest, TextureMagFilter::Nearest,
 				TextureWrapMode::Repeat, TextureWrapMode::Repeat, false);
 

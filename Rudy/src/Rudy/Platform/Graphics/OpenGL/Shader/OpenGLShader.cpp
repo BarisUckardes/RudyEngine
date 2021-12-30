@@ -3,14 +3,6 @@
 #include <Rudy/Platform/Graphics/OpenGL/Shader/OpenGLShaderStageConversions.h>
 namespace Rudy
 {
-	OpenGLShader::OpenGLShader(GraphicsDevice* device) : Shader(device)
-	{
-
-	}
-	OpenGLShader::~OpenGLShader()
-	{
-
-	}
 	void* OpenGLShader::GetNativeHandle() const
 	{
 		return (void*)&m_ShaderID;

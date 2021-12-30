@@ -9,8 +9,8 @@ namespace Rudy
 	class RUDY_API OpenGLShader : public Shader
 	{
 	public:
-		OpenGLShader(GraphicsDevice* device);
-		virtual ~OpenGLShader() override;
+		OpenGLShader() = default;
+		~OpenGLShader() = default;
 
 		// Inherited via Shader
 		virtual void* GetNativeHandle() const override;
