@@ -13,7 +13,7 @@ namespace Rudy
 		friend class Application;
 	public:
 		ApplicationModule() = default;
-		virtual ~ApplicationModule() = default;
+		~ApplicationModule() = default;
 
 		/// <summary>
 		/// Called when module attached to application

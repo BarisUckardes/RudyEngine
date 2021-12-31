@@ -8,15 +8,14 @@ namespace Rudy
 	/// <summary>
 	/// Core rudy object for all engine objects
 	/// </summary>
-	class RUDY_API RudyObject : public ReflectableObject
+	class RUDY_API RudyObject
 	{
-		GENERATE_REFLECTABLE_OBJECT(RudyObject);
 	public:
 		/// <summary>
 		/// Returns the name of this rudy object
 		/// </summary>
 		/// <returns></returns>
-		FORCEINLINE String GetName() const;
+		String GetName() const;
 
 		/// <summary>
 		/// Returns whether this rudy object is destroyed or not
@@ -34,6 +33,12 @@ namespace Rudy
 		/// Destroys the rudy object
 		/// </summary>
 		void Destroy();
+
+		/// <summary>
+		/// Returns the unique type id for this rudy object
+		/// </summary>
+		/// <returns></returns>
+		virtual RudyType GetType() const { return 0; }
 	protected:
 		RudyObject();
 		~RudyObject() = default;
@@ -43,7 +48,7 @@ namespace Rudy
 		/// </summary>
 		virtual void DestroyCore() = 0;
 	private:
-		String m_Name;
+		String m_Name = "Rudy Object";
 		bool m_Destroyed;
 	};
 }

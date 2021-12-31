@@ -53,13 +53,14 @@ namespace Rudy
 			/*
 			* Remove from the register pending components;
 			*/
-			m_RegisterPendingComponents.Remove(component);
+			m_RemovePendingComponents.Remove(component);
 
 			/*
 			* Call detach method
 			*/
 			component->OnDetach();
 		}
+		m_RemovePendingComponents.Clear();
 
 		/*
 		* Register pending components
@@ -81,5 +82,6 @@ namespace Rudy
 			*/
 			component->OnAttach();
 		}
+		m_RegisterPendingComponents.Clear();
 	}
 }

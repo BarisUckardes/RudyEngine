@@ -6,8 +6,17 @@
 #include <Rudy/World/Views/WorldLogicView.h>
 #include <stdio.h>
 #include <Rudy/Resolver/Custom Resolvers/DefaultLogicResolver.h>
+#include <Rudy/World/Views/WorldGraphicsView.h>
+#include <Rudy/Resolver/Custom Resolvers/DeferredGraphicsResolver.h>
+#include <Rudy/Buit-in/Deferred/DeferredRenderable.h>
+#include <Rudy/Component/Built-in/PerspectiveObserver.h>
 namespace Rudy
 {
+	class abc
+	{
+	public:
+		String str;
+	};
 	void TestModule::OnAttach()
 	{
 		/*
@@ -18,22 +27,38 @@ namespace Rudy
 		/*
 		* Create logic view
 		*/
-		WorldLogicView* view = world->RegisterView<WorldLogicView>();
+		WorldLogicView* logicView = world->RegisterView<WorldLogicView>();
 
 		/*
 		* Register default logic resolver
 		*/
-		view->RegisterResolver<DefaultLogicResolver>();
+		logicView->RegisterResolver<DefaultLogicResolver>();
 
 		/*
-		* Create entity
+		* Create graphics view
 		*/
-		Entity* entity = world->CreateEntity();
-		entity->SetName("MAH NAME");
-		Spatial* spatial = entity->GetComponent<Spatial>();
-		spatial->SetPosition(Vector3f(500, 5, 5));
-		Vector3f pos = entity->GetSpatial()->GetPosition();
+		WorldGraphicsView* graphicsView = world->RegisterView<WorldGraphicsView>();
+
+		/*
+		* Register deferred renderer
+		*/
+		graphicsView->RegisterResolver<DeferredGraphicsResolver>();
+
+		/*
+		* Create  observer entity
+		*/
+		Entity* observerEntity = world->CreateEntity();
+		observerEntity->SetName("Observer entity");
+		PerspectiveObserver* perspectiveObserver = observerEntity->CreateComponent<PerspectiveObserver>();
+		perspectiveObserver->SetName("PERS OBS");
 		
+		/*
+		* Create deferred renderable entity
+		*/
+		Entity* defferredRenderableEntity = world->CreateEntity();
+		defferredRenderableEntity->SetName("Deferred renderable entity");
+		DeferredRenderable* renderable = defferredRenderableEntity->CreateComponent<DeferredRenderable>();
+		renderable->SetName("#1 deferred renderable");
 	}
 
 	void TestModule::OnUpdate()

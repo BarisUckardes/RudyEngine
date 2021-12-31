@@ -3,7 +3,14 @@
 namespace Rudy
 {
 
-
+	ApplicationSession::ApplicationSession(GraphicsDevice* defaultDevice)
+	{
+		m_DefaultDevice = defaultDevice;
+	}
+	Array<World*> ApplicationSession::GetWorlds() const
+	{
+		return m_Worlds;
+	}
 	World* ApplicationSession::CreateWorld()
 	{
 		/*
@@ -43,6 +50,11 @@ namespace Rudy
 			return;
 		}
 
+	}
+
+	GraphicsDevice* ApplicationSession::GetDefaultGraphicsDevice() const
+	{
+		return m_DefaultDevice;
 	}
 
 	void ApplicationSession::DestroyCore()

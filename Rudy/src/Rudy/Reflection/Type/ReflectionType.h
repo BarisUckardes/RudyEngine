@@ -4,6 +4,9 @@
 
 namespace Rudy
 {
+	/// <summary>
+	/// A reflection type
+	/// </summary>
 	class RUDY_API ReflectionType
 	{
 	public:

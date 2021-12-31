@@ -1,4 +1,5 @@
 #include "Spatial.h"
+#include <stdio.h>
 namespace Rudy
 {
 	Spatial::Spatial(const Vector3f& position, const Vector3f& rotation, const Vector3f& scale)

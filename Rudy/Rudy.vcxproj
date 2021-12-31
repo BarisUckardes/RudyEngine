@@ -122,7 +122,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);RUDY_BUILD;RUDY_WINDOWS;RUDY_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>src;$(SolutionDir)Vendor\GLAD\include;$(SolutionDir)Vendor\GLFW\include</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>Default</LanguageStandard>
       <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
     <Link>
@@ -144,8 +144,9 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);RUDY_BUILD;RUDY_WINDOWS;RUDY_OS_WINDOWS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>src;$(SolutionDir)Vendor\GLAD\include;$(SolutionDir)Vendor\GLFW\include</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>Default</LanguageStandard>
       <LanguageStandard_C>Default</LanguageStandard_C>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -160,6 +161,18 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\Application\Modules\GraphicsModule.h" />
+    <ClInclude Include="src\Rudy\Buit-in\Deferred\DeferredRenderable.h" />
+    <ClInclude Include="src\Rudy\Component\Built-in\PerspectiveObserver.h" />
+    <ClInclude Include="src\Rudy\Resolver\Custom Resolvers\DeferredGraphicsResolver.h" />
+    <ClInclude Include="src\Rudy\Resolver\Resolvers\GraphicsResolver.h" />
+    <ClInclude Include="src\Rudy\World\Register Informations\GraphicsObjectRegisterInfo.h" />
+    <ClInclude Include="src\Rudy\Mathematics\ColorRgba.h" />
+    <ClInclude Include="src\Rudy\Mathematics\Math.h" />
+    <ClInclude Include="src\Rudy\Mathematics\Matrix4x4.h" />
+    <ClInclude Include="src\Rudy\Mathematics\Matrix3x3.h" />
+    <ClInclude Include="src\Rudy\Graphics\Components\ObserverComponent.h" />
+    <ClInclude Include="src\Rudy\Application\Modules\GameLogicModule.h" />
     <ClInclude Include="src\Rudy\Resolver\Custom Resolvers\DefaultLogicResolver.h" />
     <ClInclude Include="src\Rudy\Resolver\Resolvers\LogicResolver.h" />
     <ClInclude Include="src\Rudy\Application\Modules\GameInputModule.h" />
@@ -256,8 +269,21 @@
     <ClInclude Include="src\Rudy\World\WorldView.h" />
     <ClInclude Include="src\Rudy\World\Views\WorldLogicView.h" />
     <ClInclude Include="src\Rudy\Application\Modules\TestModule.h" />
+    <ClInclude Include="src\Rudy\World\Views\WorldGraphicsView.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rudy\Application\Modules\GraphicsModule.cpp" />
+    <ClCompile Include="src\Rudy\Buit-in\Deferred\DeferredRenderable.cpp" />
+    <ClCompile Include="src\Rudy\Component\Built-in\PerspectiveObserver.cpp" />
+    <ClCompile Include="src\Rudy\Resolver\Custom Resolvers\DeferredGraphicsResolver.cpp" />
+    <ClCompile Include="src\Rudy\Resolver\Resolvers\GraphicsResolver.cpp" />
+    <ClCompile Include="src\Rudy\World\Register Informations\GraphicsObjectRegisterInfo.cpp" />
+    <ClCompile Include="src\Rudy\Mathematics\ColorRgba.cpp" />
+    <ClCompile Include="src\Rudy\Mathematics\Math.cpp" />
+    <ClCompile Include="src\Rudy\Mathematics\Matrix4x4.cpp" />
+    <ClCompile Include="src\Rudy\Mathematics\Matrix3x3.cpp" />
+    <ClCompile Include="src\Rudy\Graphics\Components\ObserverComponent.cpp" />
+    <ClCompile Include="src\Rudy\Application\Modules\GameLogicModule.cpp" />
     <ClCompile Include="src\Rudy\Resolver\Custom Resolvers\DefaultLogicResolver.cpp" />
     <ClCompile Include="src\Rudy\Resolver\Resolvers\LogicResolver.cpp" />
     <ClCompile Include="src\Rudy\Application\Modules\GameInputModule.cpp" />
@@ -326,6 +352,7 @@
     <ClCompile Include="src\Rudy\World\WorldView.cpp" />
     <ClCompile Include="src\Rudy\World\Views\WorldLogicView.cpp" />
     <ClCompile Include="src\Rudy\Application\Modules\TestModule.cpp" />
+    <ClCompile Include="src\Rudy\World\Views\WorldGraphicsView.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

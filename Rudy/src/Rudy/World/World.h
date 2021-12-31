@@ -6,7 +6,7 @@ namespace Rudy
 {
 	class Entity;
 	class ApplicationSession;
-
+	class GraphicsDevice;
 	/// <summary>
 	/// Represents a collection entities and setups
 	/// </summary>
@@ -50,11 +50,18 @@ namespace Rudy
 		/// </summary>
 		/// <returns></returns>
 		FORCEINLINE Entity* CreateEntity();
+
+		/// <summary>
+		/// Returns the defualt graphics device for application session
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE GraphicsDevice* GetDefaultGraphicsDevice() const;
 	protected:
 		virtual void DestroyCore() override;
 	private:
 		World(ApplicationSession* targetSession);
 		~World() = default;
+
 
 		Array<WorldView*> m_Views;
 		Array<Entity*> m_Entities;
@@ -67,6 +74,7 @@ namespace Rudy
 		* Create new view
 		*/
 		TView* view = new TView(parameters...);
+		view->SetOwnerWorld(this);
 
 		/*
 		* Register view

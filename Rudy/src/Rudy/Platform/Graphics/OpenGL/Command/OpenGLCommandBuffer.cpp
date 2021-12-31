@@ -1,5 +1,6 @@
 #include "OpenGLCommandBuffer.h"
 #include <Rudy/Graphics/Command/RenderCommand.h>
+#include <GLAD/glad.h>
 namespace Rudy
 {
     void* OpenGLCommandBuffer::GetNativeHandle() const
@@ -98,7 +99,8 @@ namespace Rudy
     }
     void OpenGLCommandBuffer::ClearColor()
     {
-
+        glClearColor(0.5f, 0.2f, 0.7f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
     }
     void OpenGLCommandBuffer::ClearDepth(float depth)
     {

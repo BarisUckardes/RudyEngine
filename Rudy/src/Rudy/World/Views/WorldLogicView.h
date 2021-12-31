@@ -5,11 +5,13 @@ namespace Rudy
 {
 	class Component;
 	class LogicResolver;
+
 	/// <summary>
-	/// Handles the logic aspect of the world
+	/// Handles the logic aspect of a world
 	/// </summary>
 	class RUDY_API WorldLogicView : public WorldView
 	{
+		GENERATE_REFLECTABLE_OBJECT(WorldLogicView);
 	public:
 		WorldLogicView() = default;
 		~WorldLogicView() = default;

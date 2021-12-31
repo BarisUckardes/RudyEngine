@@ -303,6 +303,45 @@
     <ClInclude Include="src\Rudy\Application\Modules\TestModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Rudy\Application\Modules\GameLogicModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Graphics\Components\ObserverComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Mathematics\Matrix3x3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Mathematics\Matrix4x4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Mathematics\Math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Mathematics\ColorRgba.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\World\Register Informations\GraphicsObjectRegisterInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\World\Views\WorldGraphicsView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Resolver\Resolvers\GraphicsResolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Resolver\Custom Resolvers\DeferredGraphicsResolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Component\Built-in\PerspectiveObserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Buit-in\Deferred\DeferredRenderable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Application\Modules\GraphicsModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Rudy\Mathematics\Vector2f.cpp">
@@ -507,6 +546,45 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rudy\Application\Modules\TestModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Application\Modules\GameLogicModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Graphics\Components\ObserverComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Mathematics\Matrix3x3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Mathematics\Matrix4x4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Mathematics\Math.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Mathematics\ColorRgba.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\World\Register Informations\GraphicsObjectRegisterInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\World\Views\WorldGraphicsView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Resolver\Resolvers\GraphicsResolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Resolver\Custom Resolvers\DeferredGraphicsResolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Component\Built-in\PerspectiveObserver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Buit-in\Deferred\DeferredRenderable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Application\Modules\GraphicsModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

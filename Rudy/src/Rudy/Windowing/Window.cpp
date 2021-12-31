@@ -53,12 +53,12 @@ namespace Rudy
 		return m_GraphicsDevice;
 	}
 
-	void Window::RegisterCallBack(Delegate<void, Event*>* functionPtr)
+	void Window::RegisterCallBack(Delegate<void, Event*> functionPtr)
 	{
 		m_Callbacks.Add(functionPtr);
 	}
 
-	void Window::RemoveCallBack(Delegate<void, Event*>* functionPtr)
+	void Window::RemoveCallBack(Delegate<void, Event*> functionPtr)
 	{
 		m_Callbacks.Remove(functionPtr);
 	}
@@ -70,7 +70,7 @@ namespace Rudy
 		*/
 		for (int i = 0; i < m_Callbacks.GetCursor(); i++)
 		{
-			m_Callbacks[i]->Invoke(event);
+			m_Callbacks[i].Invoke(event);
 		}
 	}
 

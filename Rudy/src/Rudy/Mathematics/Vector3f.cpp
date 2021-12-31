@@ -3,6 +3,17 @@
 
 namespace Rudy
 {
+	float Vector3f::DotPruduct(const Vector3f& a, const Vector3f& b)
+	{
+		return a.X * b.X + a.Y * b.Y + a.Z * b.Z;
+	}
+	Vector3f Vector3f::CrossProduct(const Vector3f& a, const Vector3f& b)
+	{
+		return Vector3f(
+			a.Y * b.Z - a.Z * b.Y,
+			a.Z * b.X - a.X * b.Z,
+			a.X * b.Y - a.Y * b.X);
+	}
 	Vector3f::Vector3f(float x, float y,float z)
 	{
 		X = x;

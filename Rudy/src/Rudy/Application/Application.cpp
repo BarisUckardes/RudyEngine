@@ -7,6 +7,18 @@
 #include <Rudy/Application/ApplicationSession.h>
 namespace Rudy
 {
+	Application::Application(const WindowCreateParameters& createParameters)
+	{
+		/*
+		* Create new window
+		*/
+		Rudy::Window* newWindow = Rudy::Window::Create(createParameters.Title, createParameters.Offset.X, createParameters.Offset.Y, createParameters.Size.X, createParameters.Size.Y);
+
+		/*
+		* Set assing this window to the application
+		*/
+		SubmitWindow(newWindow);
+	}
 	Window* Application::GetWindow() const
 	{
 		return m_Window;
@@ -21,7 +33,7 @@ namespace Rudy
 		/*
 		* Create application session
 		*/
-		m_Session = new ApplicationSession();
+		m_Session = new ApplicationSession(m_Window->GetGraphicsDevice());
 
 		/*
 		* Attach pending modules
@@ -112,7 +124,7 @@ namespace Rudy
 		/*
 		* Register event
 		*/
-		m_ApplicationWindowEventDelegate = new Delegate<void,Event*>(RUDY_BIND_EVENT(Application::OnEventReceived));
+		m_ApplicationWindowEventDelegate = Delegate<void,Event*>(RUDY_BIND_EVENT(Application::OnEventReceived));
 		m_Window->RegisterCallBack(m_ApplicationWindowEventDelegate);
 
 	}

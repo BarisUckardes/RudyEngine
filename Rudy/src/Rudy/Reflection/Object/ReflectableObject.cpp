@@ -2,8 +2,8 @@
 
 namespace Rudy
 {
-	ReflectionType* ReflectableObject::GetType() const
+	/*ReflectionType* ReflectableObject::GetType() const
 	{
 		return nullptr;
-	}
+	}*/
 }

@@ -16,7 +16,7 @@ namespace Rudy
 	class RUDY_API Application
 	{
 	public:
-		//Application(const WindowCreateParameters& createParameters);
+		Application(const WindowCreateParameters& createParameters);
 		virtual ~Application() = default;
 
 		/// <summary>
@@ -54,7 +54,7 @@ namespace Rudy
 		Array<ApplicationModule*> m_PendingModules;
 		Array<ApplicationModule*> m_Modules;
 		Array<Event*> m_BufferedEvents;
-		Delegate<void, Event*>* m_ApplicationWindowEventDelegate;
+		Delegate<void, Event*> m_ApplicationWindowEventDelegate;
 		ApplicationSession* m_Session;
 		Window* m_Window;
 	};

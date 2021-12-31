@@ -74,13 +74,13 @@ namespace Rudy
 		/// Registers a function callback for this window to call when an event fired
 		/// </summary>
 		/// <param name="callbackFunction"></param>
-		void RegisterCallBack(Delegate<void, Event*>* functionPtr);
+		void RegisterCallBack(Delegate<void, Event*> functionPtr);
 
 		/// <summary>
 		/// Removes a event callback from the registry
 		/// </summary>
 		/// <param name="callBackFunction"></param>
-		void RemoveCallBack(Delegate<void, Event*>* functionPtr);
+		void RemoveCallBack(Delegate<void, Event*> functionPtr);
 
 		/// <summary>
 		/// Records buffered events and broadcasts them to the application
@@ -134,7 +134,7 @@ namespace Rudy
 		/// <param name="newOffset"></param>
 		void OnWindowOffsetChanged(const Vector2i& newOffset);
 	private:
-		Array<Delegate<void, Event*>*> m_Callbacks;
+		Array<Delegate<void, Event*>> m_Callbacks;
 		GraphicsDevice* m_GraphicsDevice;
 		Delegate<void, Event*>* m_WindowEventCallback;
 		String m_Title;

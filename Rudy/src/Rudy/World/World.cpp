@@ -11,6 +11,7 @@ namespace Rudy
 		*/
 		m_OwnerSession = targetSession;
 	}
+
 	Array<WorldView*> World::GetViews() const
 	{
 		return m_Views;
@@ -47,6 +48,10 @@ namespace Rudy
 		entity->m_Components.Add((Component*)spatial);
 
 		return entity;
+	}
+	GraphicsDevice* World::GetDefaultGraphicsDevice() const
+	{
+		return m_OwnerSession->GetDefaultGraphicsDevice();
 	}
 	void World::DestroyCore()
 	{

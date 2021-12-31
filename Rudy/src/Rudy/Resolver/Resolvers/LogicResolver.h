@@ -4,6 +4,7 @@
 namespace Rudy
 {
 	class Component;
+
 	/// <summary>
 	/// Base resolver class for all logic resolvers
 	/// </summary>

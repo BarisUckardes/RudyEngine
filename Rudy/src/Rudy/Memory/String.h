@@ -1,6 +1,6 @@
 #pragma once
 #include <Rudy/Core/Symbols.h>
-
+#include <Rudy/Memory/Array.h>
 namespace Rudy
 {
 	/// <summary>
@@ -40,6 +40,9 @@ namespace Rudy
 		String();
 		String(const String& other);
 		String(const char* other);
+		String(unsigned int size);
+		String(const char* target, unsigned int size);
+		
 		~String();
 
 		/// <summary>
@@ -53,6 +56,33 @@ namespace Rudy
 		/// </summary>
 		/// <returns></returns>
 		char* GetSource() const;
+
+		/// <summary>
+		/// Finds the starting index of the target string
+		/// </summary>
+		int FindIndex(const String& targetString, unsigned int startIndex) const;
+
+		/// <summary>
+		/// Splits the string by the target char and returns the splitted fragments
+		/// </summary>
+		/// <param name="index"></param>
+		/// <returns></returns>
+		Array<String> SplitByChar(char targetChar) const;
+
+		/// <summary>
+		/// Returns the target chars index
+		/// </summary>
+		int FindIndex(char targetChar) const;
+
+		/// <summary>
+		/// Returns a subset
+		/// </summary>
+		String GetSubset(unsigned int start, unsigned  int length) const;
+
+	    /// <summary>
+	    /// Clears the memory of the string
+	    /// </summary>
+	    void Clear();
 
 		/*
 		* Operators

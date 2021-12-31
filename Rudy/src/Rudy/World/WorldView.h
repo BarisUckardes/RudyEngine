@@ -58,6 +58,7 @@ namespace Rudy
 		* Create resolver
 		*/
 		TResolver* resolver = new TResolver(parameters...);
+		resolver->SetOwnerWorld(m_OwnerWorld);
 
 		/*
 		* Register this resolver
