@@ -5,6 +5,7 @@ namespace Rudy
 {
 
 	class Entity;
+	class Spatial;
 	/// <summary>
 	/// Base component class for all entity components
 	/// </summary>
@@ -17,6 +18,12 @@ namespace Rudy
 		/// </summary>
 		/// <returns></returns>
 		FORCEINLINE Entity* GetOwnerEntity() const;
+
+		/// <summary>
+		/// Returns the spatial component for this component's entity
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE Spatial* GetSpatial() const;
 
 		/// <summary>
 		/// Returns whether this component should thick or not

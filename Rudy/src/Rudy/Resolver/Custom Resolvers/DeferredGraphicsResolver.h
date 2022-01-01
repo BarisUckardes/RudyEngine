@@ -3,6 +3,7 @@
 
 namespace Rudy
 {
+	class DeferredRenderable;
 	/// <summary>
 	/// Deferred renderer
 	/// </summary>
@@ -18,5 +19,7 @@ namespace Rudy
 	private:
 		void OnDeferredRenderableRegistered(Component* renderable);
 		void OnDeferredRenderableRemoved(Component* renderable);
+		
+		Array<DeferredRenderable*> m_Renderables;
 	};
 }

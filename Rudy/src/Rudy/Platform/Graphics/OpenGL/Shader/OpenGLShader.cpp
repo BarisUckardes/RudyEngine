@@ -3,6 +3,9 @@
 #include <Rudy/Platform/Graphics/OpenGL/Shader/OpenGLShaderStageConversions.h>
 namespace Rudy
 {
+	OpenGLShader::OpenGLShader(ShaderStage stage) : Shader(stage)
+	{
+	}
 	void* OpenGLShader::GetNativeHandle() const
 	{
 		return (void*)&m_ShaderID;

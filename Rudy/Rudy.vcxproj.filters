@@ -342,6 +342,36 @@
     <ClInclude Include="src\Rudy\Application\Modules\GraphicsModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLClearColorRC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Graphics\Buffer\ConstantBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Buffer\OpenGLConstantBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetShaderProgramRC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetVertexBufferRC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetIndexBufferRC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetViewportRC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLClearDepthRC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLDrawIndexedRC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetFramebufferRC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Rudy\Mathematics\Vector2f.cpp">
@@ -585,6 +615,36 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rudy\Application\Modules\GraphicsModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLClearColorRC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Graphics\Buffer\ConstantBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Buffer\OpenGLConstantBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetShaderProgramRC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetVertexBufferRC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetIndexBufferRC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetViewportRC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLClearDepthRC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLDrawIndexedRC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetFramebufferRC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

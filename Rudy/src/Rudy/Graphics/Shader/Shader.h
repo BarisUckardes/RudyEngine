@@ -55,7 +55,7 @@ namespace Rudy
 		/// <param name="delegate"></param>
 		void RemoveCompileListener(Delegate<void, void*>* delegate);
 	protected:
-		Shader() = default;
+		Shader(ShaderStage stage);
 		~Shader();
 		
 		/// <summary>

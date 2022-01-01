@@ -17,6 +17,9 @@ namespace Rudy
 		virtual IndexBuffer* CreateIndexBuffer() override;
 		virtual VertexBuffer* CreateVertexBuffer() override;
 		virtual Texture2D* CreateTexture2D() override;
+		virtual Shader* CreateShader(ShaderStage stage) override;
+		virtual ShaderProgram* CreateShaderProgram() override;
+		virtual ConstantBuffer* CreateConstantBuffer(const String& bufferName,unsigned int bufferSize) override;
 		virtual CommandBuffer* CreateCommandBuffer() override;
 	protected:
 		virtual void InitializeCore() override;;

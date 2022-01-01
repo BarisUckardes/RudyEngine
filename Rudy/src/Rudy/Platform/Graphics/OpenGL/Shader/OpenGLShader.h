@@ -9,7 +9,7 @@ namespace Rudy
 	class RUDY_API OpenGLShader : public Shader
 	{
 	public:
-		OpenGLShader() = default;
+		OpenGLShader(ShaderStage stage);
 		~OpenGLShader() = default;
 
 		// Inherited via Shader

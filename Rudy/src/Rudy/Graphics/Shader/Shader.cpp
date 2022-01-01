@@ -50,6 +50,10 @@ namespace Rudy
 	{
 		m_CompileListeners.Remove(delegate);
 	}
+	Shader::Shader(ShaderStage stage)
+	{
+		m_Stage = stage;
+	}
 	Shader::~Shader()
 	{
 

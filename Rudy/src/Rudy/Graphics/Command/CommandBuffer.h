@@ -9,12 +9,14 @@ namespace Rudy
 	class ShaderProgram;
 	class VertexBuffer;
 	class IndexBuffer;
-	class Framebuffer2D;
+	class ConstantBuffer;
+	class Framebuffer;
 	class Texture2D;
 	struct PipelineState;
 	struct Vector2i;
 	struct Vector2f;
 	struct Vector3f;
+	struct ColorRgba;
 
 	/// <summary>
 	/// A device object which records render commands
@@ -66,87 +68,23 @@ namespace Rudy
 		/// Sets a framebuffer2D
 		/// </summary>
 		/// <param name="framebuffer"></param>
-		virtual void SetFramebuffer2D(const Framebuffer2D* framebuffer) = 0;
+		virtual void SetFramebuffer(const Framebuffer* framebuffer) = 0;
 
 		/// <summary>
 		/// Sets the rendering rect aka viewport
 		/// </summary>
-		virtual void SetViewport(const Vector2i& size) = 0;
+		virtual void SetViewport(const Vector2i& offset,const Vector2i& size) = 0;
 
 		/// <summary>
-		/// Sets a flaot parameter for the shader program
+		/// Sets a constant buffer for the current program
 		/// </summary>
-		/// <param name="value"></param>
-		virtual void SetProgramParameterFloat(float value) = 0;
-
-		/// <summary>
-		/// Sets a float array parameter for the shader program
-		/// </summary>
-		/// <param name="values"></param>
-		virtual void SetProgramParameterFloatArray(const Array<float>& values) = 0;
-
-		/// <summary>
-		/// Sets an integer parameter for the shader program
-		/// </summary>
-		/// <param name="value"></param>
-		virtual void SetProgramParameterInteger(int value) = 0;
-
-		/// <summary>
-		/// Sets a integer array parameters for the shader program
-		/// </summary>
-		/// <param name="values"></param>
-		virtual void SetProgramParameterIntegerArray(const Array<int>& values) = 0;
-
-		/// <summary>
-		/// Sets a vector2 parameter for the shader program
-		/// </summary>
-		/// <param name="value"></param>
-		virtual void SetProgramParameterVector2(const Vector2f& value) = 0;
-
-		/// <summary>
-		/// Sets a vector2 array parameter for the shader program
-		/// </summary>
-		/// <param name="values"></param>
-		virtual void SetProgramParameterVector2Array(const Array<Vector2f>& values) = 0;
-
-		/// <summary>
-		/// Sets a vector3 parameter for the shader program
-		/// </summary>
-		/// <param name="value"></param>
-		virtual void SetProgramParameterVector3(const Vector3f& value) = 0;
-
-		/// <summary>
-		/// Sets a vector3 array parameter for the shader program
-		/// </summary>
-		/// <param name="values"></param>
-		virtual void SetProgramParameterVector3Array(const Array<Vector3f>& values) = 0;
-
-		/// <summary>
-		/// Sets a vector4 parameter for the shader program
-		/// </summary>
-		virtual void SetProgramParameterVector4() = 0;
-
-		/// <summary>
-		/// Sets a vector4 array parameter for the shader program
-		/// </summary>
-		virtual void SetProgramParameterVector4Array() = 0;
-
-		/// <summary>
-		/// Sets a texture2D parameter for the shader program
-		/// </summary>
-		/// <param name="value"></param>
-		virtual void SetProgramParameterTexture2D(const Texture2D* value) = 0;
-
-		/// <summary>
-		/// Sets a texture2D array parameter for the shader program
-		/// </summary>
-		/// <param name="values"></param>
-		virtual void SetProgramParameterTexture2DArray(const Array<Texture2D*>& values) = 0;
+		/// <param name="buffer"></param>
+		virtual void SetConstantBuffer(const ConstantBuffer* buffer) = 0;
 		
 		/// <summary>
 		/// Clears the color of the current framebuffer
 		/// </summary>
-		virtual void ClearColor() = 0;
+		virtual void ClearColor(const ColorRgba& color) = 0;
 
 		/// <summary>
 		/// Clears the depth value of the current framebuffer
@@ -157,7 +95,7 @@ namespace Rudy
 		/// <summary>
 		/// Issues an indexed draw call
 		/// </summary>
-		virtual void DrawIndexed() = 0;
+		virtual void DrawIndexed(unsigned int count) = 0;
 
 		/// <summary>
 		/// Issues an instanced draw call

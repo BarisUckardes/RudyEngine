@@ -10,7 +10,7 @@ namespace Rudy
 	{
 	public:
 		OpenGLCommandBuffer() = default;
-		~OpenGLCommandBuffer() = default;
+		~OpenGLCommandBuffer();
 
 		virtual void* GetNativeHandle() const override;
 		virtual void StartRecording() override;
@@ -20,27 +20,17 @@ namespace Rudy
 		virtual void SetVertexBuffer(const VertexBuffer* vertexBuffer) override;
 		virtual void SetIndexBuffer(const IndexBuffer* indexBuffer) override;
 		virtual void SetPipelineState(const PipelineState& pipelineState) override;
-		virtual void SetFramebuffer2D(const Framebuffer2D* framebuffer) override;
-		virtual void SetViewport(const Vector2i& size) override;
-		virtual void SetProgramParameterFloat(float value) override;
-		virtual void SetProgramParameterFloatArray(const Array<float>& values) override;
-		virtual void SetProgramParameterInteger(int value) override;
-		virtual void SetProgramParameterIntegerArray(const Array<int>& values) override;
-		virtual void SetProgramParameterVector2(const Vector2f& value) override;
-		virtual void SetProgramParameterVector2Array(const Array<Vector2f>& values) override;
-		virtual void SetProgramParameterVector3(const Vector3f& value) override;
-		virtual void SetProgramParameterVector3Array(const Array<Vector3f>& values) override;
-		virtual void SetProgramParameterVector4() override;
-		virtual void SetProgramParameterVector4Array() override;
-		virtual void SetProgramParameterTexture2D(const Texture2D* value) override;
-		virtual void SetProgramParameterTexture2DArray(const Array<Texture2D*>& values) override;
-		virtual void ClearColor() override;
+		virtual void SetFramebuffer(const Framebuffer* framebuffer) override;
+		virtual void SetViewport(const Vector2i& offset,const Vector2i& size) override;
+		virtual void SetConstantBuffer(const ConstantBuffer* buffer) override;
+		virtual void ClearColor(const ColorRgba& color) override;
 		virtual void ClearDepth(float depth) override;
-		virtual void DrawIndexed() override;
+		virtual void DrawIndexed(unsigned int count) override;
 		virtual void DrawInstanced() override;
 
 	private:
 		Array<RenderCommand*> m_Commands;
+		const ShaderProgram* m_LastBindShaderProgram;
 		unsigned int m_CurrentTextureSlot;
 		bool m_Recording;
 	};

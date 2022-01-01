@@ -7,16 +7,19 @@
 #include <Rudy/Graphics/Texture/TextureMagFilter.h>
 #include <Rudy/Graphics/Texture/TextureMinFilter.h>
 #include <Rudy/Graphics/Texture/TextureWrapMode.h>
-
+#include <Rudy/Graphics/Shader/Shader.h>
 namespace Rudy
 {
 	class Window;
 	class IndexBuffer;
 	class VertexBuffer;
 	class CommandBuffer;
+	class ConstantBuffer;
 	class Texture2D;
+	class Shader;
+	class ShaderProgram;
 	class GraphicsDeviceObject;
-
+	class String;
 	/// <summary>
 	/// Graphics api-agnostic graphics device class
 	/// </summary>
@@ -73,10 +76,30 @@ namespace Rudy
 		virtual VertexBuffer* CreateVertexBuffer() = 0;
 
 		/// <summary>
+		/// Creates a constant buffer
+		/// </summary>
+		/// <returns></returns>
+		virtual ConstantBuffer* CreateConstantBuffer(const String& bufferName, unsigned int bufferSize) = 0;
+
+		/// <summary>
 		/// Creates a texture2D
 		/// </summary>
 		/// <returns></returns>
 		virtual Texture2D* CreateTexture2D() = 0;
+
+		/// <summary>
+		/// Creates a shader
+		/// </summary>
+		/// <param name="stage"></param>
+		/// <returns></returns>
+		virtual Shader* CreateShader(ShaderStage stage) = 0;
+
+		/// <summary>
+		/// Creates a shader program
+		/// </summary>
+		/// <param name="shaders"></param>
+		/// <returns></returns>
+		virtual ShaderProgram* CreateShaderProgram() = 0;
 
 		/// <summary>
 		/// Swaps the render buffers of the window

@@ -161,6 +161,16 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetFramebufferRC.h" />
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLDrawIndexedRC.h" />
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLClearDepthRC.h" />
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetViewportRC.h" />
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetIndexBufferRC.h" />
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetVertexBufferRC.h" />
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetShaderProgramRC.h" />
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Buffer\OpenGLConstantBuffer.h" />
+    <ClInclude Include="src\Rudy\Graphics\Buffer\ConstantBuffer.h" />
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLClearColorRC.h" />
     <ClInclude Include="src\Rudy\Application\Modules\GraphicsModule.h" />
     <ClInclude Include="src\Rudy\Buit-in\Deferred\DeferredRenderable.h" />
     <ClInclude Include="src\Rudy\Component\Built-in\PerspectiveObserver.h" />
@@ -272,6 +282,16 @@
     <ClInclude Include="src\Rudy\World\Views\WorldGraphicsView.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetFramebufferRC.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLDrawIndexedRC.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLClearDepthRC.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetViewportRC.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetIndexBufferRC.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetVertexBufferRC.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetShaderProgramRC.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Buffer\OpenGLConstantBuffer.cpp" />
+    <ClCompile Include="src\Rudy\Graphics\Buffer\ConstantBuffer.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLClearColorRC.cpp" />
     <ClCompile Include="src\Rudy\Application\Modules\GraphicsModule.cpp" />
     <ClCompile Include="src\Rudy\Buit-in\Deferred\DeferredRenderable.cpp" />
     <ClCompile Include="src\Rudy\Component\Built-in\PerspectiveObserver.cpp" />

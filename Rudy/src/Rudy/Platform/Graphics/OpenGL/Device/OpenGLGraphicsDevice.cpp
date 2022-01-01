@@ -6,6 +6,9 @@
 #include <Rudy/Platform/Graphics/OpenGL/Buffer/OpenGLVertexBuffer.h>
 #include <Rudy/Platform/Graphics/OpenGL/Texture/OpenGLTexture2D.h>
 #include <Rudy/Platform/Graphics/OpenGL/Command/OpenGLCommandBuffer.h>
+#include <Rudy/Platform/Graphics/OpenGL/Buffer/OpenGLConstantBuffer.h>
+#include <Rudy/Platform/Graphics/OpenGL/Shader/OpenGLShader.h>
+#include <Rudy/Platform/Graphics/OpenGL/Shader/OpenGLShaderProgram.h>
 namespace Rudy
 {
 	OpenGLGraphicsDevice::OpenGLGraphicsDevice()
@@ -66,6 +69,21 @@ namespace Rudy
 
 		return vertexBuffer;
 	}
+	ConstantBuffer* OpenGLGraphicsDevice::CreateConstantBuffer(const String& bufferName, unsigned int bufferSize)
+	{
+		/*
+		* Create OpenGL constant buffer
+		*/
+		OpenGLConstantBuffer* constantBuffer = new OpenGLConstantBuffer(bufferName,bufferSize);
+		constantBuffer->Initialize();
+
+		/*
+		* Set target device for this device object
+		*/
+		SetDeviceObjectTargetDevice(constantBuffer);
+
+		return constantBuffer;
+	}
 	CommandBuffer* OpenGLGraphicsDevice::CreateCommandBuffer()
 	{
 		/*
@@ -93,6 +111,36 @@ namespace Rudy
 		SetDeviceObjectTargetDevice(texture);
 
 		return texture;
+	}
+
+	Shader* OpenGLGraphicsDevice::CreateShader(ShaderStage stage)
+	{
+		/*
+		* Create OpenGL shader
+		*/
+		OpenGLShader* shader = new OpenGLShader(stage);
+
+		/*
+		* Set target device for this device object
+		*/
+		SetDeviceObjectTargetDevice(shader);
+
+		return shader;
+	}
+
+	ShaderProgram* OpenGLGraphicsDevice::CreateShaderProgram()
+	{
+		/*
+		* Create OpenGL shader
+		*/
+		OpenGLShaderProgram* shaderProgram = new OpenGLShaderProgram();
+
+		/*
+		* Set target device for this device object
+		*/
+		SetDeviceObjectTargetDevice(shaderProgram);
+
+		return shaderProgram;
 	}
 
 }

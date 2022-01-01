@@ -57,12 +57,12 @@ namespace Rudy
 
 			delete[] errorLog;
 			linkState = false;
-			errorMessage = errorLog;
+			//errorMessage = errorLog;
 		}
 		else
 		{
 			linkState = true;
-			errorMessage = "";
+			//errorMessage = "";
 		}
 
 	}
