@@ -25,4 +25,8 @@ namespace Rudy
         */
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
     }
+    void OpenGLIndexBuffer::FreeDeviceObjectCore()
+    {
+        glDeleteBuffers(1, &m_IndexBufferID);
+    }
 }

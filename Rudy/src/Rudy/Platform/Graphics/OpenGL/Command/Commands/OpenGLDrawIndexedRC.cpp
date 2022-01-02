@@ -9,6 +9,6 @@ namespace Rudy
 
 	void OpenGLDrawIndexedRC::Execute()
 	{
-		glDrawElements(GL_TRIANGLES, m_Count, GL_UNSIGNED_INT, nullptr);
+		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 	}
 }

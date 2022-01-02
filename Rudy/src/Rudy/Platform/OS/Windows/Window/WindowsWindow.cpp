@@ -15,6 +15,7 @@ namespace Rudy
 	Rudy::WindowsWindow::WindowsWindow(const String& title, const unsigned int offsetX, const unsigned int offsetY, const unsigned int sizeX, const unsigned int sizeY)
 		: Window(title,offsetX, offsetY,sizeX, sizeY)
 	{
+		
 		/*
 		* Initialize glfw
 		*/
@@ -24,6 +25,11 @@ namespace Rudy
 		* Validate glfw initialization
 		*/
 		RUDY_ASSERT(glfwInitState == 1);
+
+		/*
+		* Set it as debug context
+		*/
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
 		/*
 		* Create glfw window

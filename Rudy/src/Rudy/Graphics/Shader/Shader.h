@@ -13,6 +13,9 @@ namespace Rudy
 	class RUDY_API Shader : public GraphicsDeviceObject
 	{
 	public:
+		Shader(ShaderStage stage);
+		virtual ~Shader() = 0;
+
 		/// <summary>
 		/// Returns the stage of this shader
 		/// </summary>
@@ -55,9 +58,6 @@ namespace Rudy
 		/// <param name="delegate"></param>
 		void RemoveCompileListener(Delegate<void, void*>* delegate);
 	protected:
-		Shader(ShaderStage stage);
-		~Shader();
-		
 		/// <summary>
 		/// User implementation of compile method
 		/// </summary>

@@ -119,4 +119,9 @@ namespace Rudy
 
 	}
 
+	void OpenGLFramebuffer2D::FreeDeviceObjectCore()
+	{
+		glDeleteFramebuffers(1, &m_FramebufferID);
+	}
+
 }

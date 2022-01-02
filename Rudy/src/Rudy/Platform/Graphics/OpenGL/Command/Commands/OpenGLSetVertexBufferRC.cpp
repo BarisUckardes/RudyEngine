@@ -10,6 +10,6 @@ namespace Rudy
 	void OpenGLSetVertexBufferRC::Execute()
 	{
 		glBindVertexArray(m_VertexArrayID);
-		glBindBuffer(GL_ARRAY_BUFFER,m_VertexArrayID);
+		glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
 	}
 }

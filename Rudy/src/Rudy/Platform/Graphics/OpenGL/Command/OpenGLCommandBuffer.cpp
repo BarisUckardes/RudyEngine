@@ -16,14 +16,6 @@
 #include <Rudy/Platform/Graphics/OpenGL/Command/Commands/OpenGLDrawIndexedRC.h>
 namespace Rudy
 {
-    OpenGLCommandBuffer::~OpenGLCommandBuffer()
-    {
-        for (int i = 0; i < m_Commands.GetCursor(); i++)
-        {
-            delete m_Commands[i];
-        }
-        m_Commands.Clear();
-    }
     void* OpenGLCommandBuffer::GetNativeHandle() const
     {
         return nullptr;
@@ -160,5 +152,13 @@ namespace Rudy
     void OpenGLCommandBuffer::DrawInstanced()
     {
 
+    }
+    void OpenGLCommandBuffer::FreeDeviceObjectCore()
+    {
+        for (int i = 0; i < m_Commands.GetCursor(); i++)
+        {
+            delete m_Commands[i];
+        }
+        m_Commands.Clear();
     }
 }

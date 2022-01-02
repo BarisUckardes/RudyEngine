@@ -2,6 +2,10 @@
 
 namespace Rudy
 {
+    Framebuffer::~Framebuffer()
+    {
+
+    }
     Array<FramebufferAttachment*> Framebuffer::GetAttachments() const
     {
         return m_Attachments;

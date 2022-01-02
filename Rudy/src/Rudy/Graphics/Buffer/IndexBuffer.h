@@ -7,6 +7,9 @@ namespace Rudy
 	class RUDY_API IndexBuffer : public GraphicsDeviceObject
 	{
 	public:
+		IndexBuffer();
+		virtual ~IndexBuffer() = 0;
+
 		/// <summary>
 		/// Sets the index buffer data
 		/// </summary>
@@ -26,9 +29,7 @@ namespace Rudy
 		/// </summary>
 		/// <returns></returns>
 		FORCEINLINE virtual void* GetNativeHandle() const = 0;
-	protected:
-		IndexBuffer();
-		virtual ~IndexBuffer() = default;
+
 		/// <summary>
 		/// User implementation of the SetData method
 		/// </summary>

@@ -1,5 +1,6 @@
 #include "OpenGLClearDepthRC.h"
 #include <GLAD/glad.h>
+#include <stdio.h>
 namespace Rudy
 {
 	OpenGLClearDepthRC::OpenGLClearDepthRC(float value)

@@ -24,6 +24,8 @@ namespace Rudy
 	class RUDY_API CommandBuffer : public GraphicsDeviceObject
 	{
 	public:
+		CommandBuffer() = default;
+		virtual ~CommandBuffer() = 0;
 
 		/// <summary>
 		/// Starts the recording of the commands
@@ -101,8 +103,5 @@ namespace Rudy
 		/// Issues an instanced draw call
 		/// </summary>
 		virtual void DrawInstanced() = 0;
-	protected:
-		CommandBuffer() = default;
-		virtual ~CommandBuffer() = default;
 	};
 }

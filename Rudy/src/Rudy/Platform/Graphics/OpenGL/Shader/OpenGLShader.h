@@ -15,6 +15,8 @@ namespace Rudy
 		// Inherited via Shader
 		virtual void* GetNativeHandle() const override;
 		virtual void CompileCore(const String& source, bool& isCompiled, String& errorMessage) override;
+	protected:
+		virtual void FreeDeviceObjectCore() override;
 	private:
 		unsigned int m_ShaderID;
 	};

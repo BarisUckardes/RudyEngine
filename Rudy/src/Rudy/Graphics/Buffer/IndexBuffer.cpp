@@ -2,6 +2,10 @@
 
 namespace Rudy
 {
+    IndexBuffer::~IndexBuffer()
+    {
+
+    }
     void IndexBuffer::SetData(unsigned char* dataPtr, unsigned int count, unsigned int sizePerElement)
     {
         /*

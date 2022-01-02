@@ -4,6 +4,8 @@
 #include <Rudy/Graphics/Device/GraphicsDevice.h>
 #include <Rudy/Graphics/Command/CommandBuffer.h>
 #include <Rudy/Mathematics/ColorRgba.h>
+#include <Rudy/Graphics/Buffer/VertexBuffer.h>
+#include <Rudy/Graphics/Texture/Texture.h>
 namespace Rudy
 {
     void DeferredGraphicsResolver::Resolve()
@@ -28,22 +30,30 @@ namespace Rudy
             /*
             * Set vertex buffer
             */
+            commandBuffer->SetVertexBuffer(renderable->m_VertexBuffer);
 
             /*
             * Set index buffer
             */
+            commandBuffer->SetIndexBuffer(renderable->m_IndexBuffer);
 
             /*
             * Set program
             */
+            commandBuffer->SetShaderProgram(renderable->m_Program);
 
             /*
             * Issue draw call
             */
+            commandBuffer->DrawIndexed(renderable->m_VertexBuffer->GetVertexCount());
         }
 
         commandBuffer->FinalizeRecording();
         commandBuffer->Execute();
+
+        commandBuffer->FreeDeviceObject();
+
+        delete commandBuffer;
     }
     void DeferredGraphicsResolver::OnRegisterObserver(ObserverComponent* observer)
     {

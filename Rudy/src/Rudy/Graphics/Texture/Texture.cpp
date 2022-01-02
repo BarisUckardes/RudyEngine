@@ -2,6 +2,10 @@
 
 namespace Rudy
 {
+	Texture::~Texture()
+	{
+
+	}
 	TextureFormat Texture::GetTextureFormat() const
 	{
 		return m_Format;

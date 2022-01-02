@@ -36,6 +36,14 @@ namespace Rudy
 		* Set this graphics device's api type
 		*/
 		SetApiType(GraphicsAPIType::OpenGL);
+
+		glDebugMessageCallback(
+			[](GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
+			{
+				if(severity == GL_DEBUG_SEVERITY_HIGH)
+					printf("OPENGL ERROR: %s\n", message);
+			}
+			, nullptr);
 	}
 	void OpenGLGraphicsDevice::Swapbuffers()
 	{

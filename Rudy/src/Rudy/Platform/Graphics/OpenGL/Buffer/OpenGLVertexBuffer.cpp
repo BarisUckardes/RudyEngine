@@ -1,11 +1,12 @@
 #include "OpenGLVertexBuffer.h"
 #include <Rudy/Platform/Graphics/OpenGL/Buffer/OpenGLVertexDataTypeConversions.h>
 #include <GLAD/glad.h>
+#include <stdio.h>
 namespace Rudy
 {
 	void* OpenGLVertexBuffer::GetNativeHandle() const
 	{
-		return nullptr;
+		return (void*)&m_Handles;
 	}
 	void OpenGLVertexBuffer::SetDataCore(const unsigned char* dataPtr, const unsigned int elementSize, const unsigned int elementCount)
 	{
@@ -23,6 +24,7 @@ namespace Rudy
 		* Set buffer data
 		*/
 		glBufferData(GL_ARRAY_BUFFER, elementSize * elementCount, dataPtr, GL_STATIC_DRAW);
+        printf("%d bytes vertex buffer\n", elementSize * elementCount);
 
         /*
         * Unbind
@@ -30,6 +32,10 @@ namespace Rudy
         glBindVertexArray(0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
+    void OpenGLVertexBuffer::FreeDeviceObjectCore()
+    {
+        glDeleteBuffers(2, (unsigned int*)&m_Handles);
+    }
     void OpenGLVertexBuffer::Initialize(const VertexLayout& vertexLayout)
     {
         unsigned int vertexArrayID = 0;
@@ -66,10 +72,11 @@ namespace Rudy
                 glVertexAttribPointer((int)vertexLayoutIndex,
                     (int)elements[i].GetComponentCount(),
                     OpenGLVertexDataTypeConversions::GetOpenGLDataType(elements[i].DataType),
-                    elements[i].IsNormalized,
+                    elements[i].IsNormalized ? GL_TRUE : GL_FALSE,
                     (int)vertexLayout.GetStride(),
                     (const void*)elements[i].Offset);
                 vertexLayoutIndex++;
+                printf("1 FLOATS %d components\n", elements[i].GetComponentCount());
                 break;
             case VertexLayoutDataType::Mat3:
             case VertexLayoutDataType::Mat4:
@@ -81,11 +88,12 @@ namespace Rudy
                     glVertexAttribPointer((int)vertexLayoutIndex,
                         (int)elements[i].GetComponentCount(),
                         OpenGLVertexDataTypeConversions::GetOpenGLDataType(elements[i].DataType),
-                        elements[i].IsNormalized,
+                        elements[i].IsNormalized ? GL_TRUE : GL_FALSE,
                         (int)vertexLayout.GetStride(),
                         (const void*)(elements[i].Offset + sizeof(float) * count * i));
                 }
                 vertexLayoutIndex++;
+                
             }
             break;
             case VertexLayoutDataType::Int:
@@ -102,6 +110,7 @@ namespace Rudy
                 break;
             }
         }
+
 
         /*
         * Set handles

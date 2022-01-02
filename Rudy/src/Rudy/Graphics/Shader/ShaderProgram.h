@@ -14,6 +14,9 @@ namespace Rudy
 	class RUDY_API ShaderProgram : public GraphicsDeviceObject
 	{
 	public:
+		ShaderProgram();
+		virtual ~ShaderProgram() = 0;
+
 		/// <summary>
 		/// Returns all the shader this program linked into
 		/// </summary>
@@ -62,9 +65,6 @@ namespace Rudy
 		/// <param name="shaders"></param>
 		void LinkProgram(Array<Shader*>& shaders);
 	protected:
-		ShaderProgram();
-		~ShaderProgram();
-
 		/// <summary>
 		/// User defined link program implementation
 		/// </summary>

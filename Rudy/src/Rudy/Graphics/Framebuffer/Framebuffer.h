@@ -11,6 +11,9 @@ namespace Rudy
 	class RUDY_API Framebuffer : public GraphicsDeviceObject
 	{
 	public:
+		Framebuffer() = default;
+		virtual ~Framebuffer() = 0;
+
 		/// <summary>
 		/// Returns the attachment list of this framebuffer
 		/// </summary>
@@ -35,8 +38,6 @@ namespace Rudy
 		/// <param name="createParameters"></param>
 		void Create(unsigned int width,unsigned int height,const Array<FramebufferAttachmentCreateParameters>& createParameters,bool createDetphTexture);
 	protected:
-		Framebuffer() = default;
-
 		/// <summary>
 		/// Returns the graphics device
 		/// </summary>
@@ -49,7 +50,7 @@ namespace Rudy
 		/// <param name="createParameters"></param>
 		virtual void CreateCore(unsigned int width, unsigned int height,const Array<FramebufferAttachmentCreateParameters>& createParameters,Array<FramebufferAttachment*>& attachments,Texture2D* depthTexture,bool createDepthTexture) = 0;
 	private:
-		~Framebuffer() = default;
+		
 		Array<FramebufferAttachment*> m_Attachments;
 		Texture2D* m_DepthTexture;
 		bool m_HasDepthTexture;

@@ -10,6 +10,8 @@ namespace Rudy
 	class RUDY_API VertexBuffer : public GraphicsDeviceObject
 	{
 	public:
+		VertexBuffer();
+		virtual ~VertexBuffer() = 0;
 		/// <summary>
 		/// Returns the vertex layout of this vertex buffer
 		/// </summary>
@@ -37,9 +39,6 @@ namespace Rudy
 		/// <param name="vertexLayout"></param>
 		virtual void Initialize(const VertexLayout& vertexLayout) = 0;
 	protected:
-		VertexBuffer();
-		~VertexBuffer() = default;
-		
 		/// <summary>
 		/// Returns the owner graphics device
 		/// </summary>

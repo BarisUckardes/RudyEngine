@@ -46,4 +46,8 @@ namespace Rudy
         */
         glBindBuffer(GL_UNIFORM_BUFFER, m_BufferID);
     }
+    void OpenGLConstantBuffer::FreeDeviceObjectCore()
+    {
+        glDeleteBuffers(1, &m_BufferID);
+    }
 }

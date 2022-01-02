@@ -26,6 +26,9 @@ namespace Rudy
 	class RUDY_API GraphicsDevice
 	{
 	public:
+		GraphicsDevice() = default;
+		~GraphicsDevice();
+
 		/// <summary>
 		/// Creates platform-agnostic graphics device implementation
 		/// </summary>
@@ -106,9 +109,6 @@ namespace Rudy
 		/// </summary>
 		virtual void Swapbuffers() = 0;
 	protected:
-		GraphicsDevice() = default;
-		~GraphicsDevice();
-
 		/// <summary>
 		/// Sets the api type for this device
 		/// </summary>

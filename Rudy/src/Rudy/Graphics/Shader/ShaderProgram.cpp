@@ -2,6 +2,11 @@
 #include <Rudy/Graphics/Shader/Shader.h>
 namespace Rudy
 {
+    ShaderProgram::~ShaderProgram()
+    {
+        delete m_ShaderCompileListener;
+        m_ShaderCompileListener = nullptr;
+    }
     Array<Shader*> ShaderProgram::GetShaders() const
     {
         return m_Shaders;
@@ -77,11 +82,6 @@ namespace Rudy
         * Create new listener
         */
         m_ShaderCompileListener = new Delegate<void,void*>(RUDY_BIND_EVENT(ShaderProgram::OnSubShaderCompiled));
-    }
-    ShaderProgram::~ShaderProgram()
-    {
-        delete m_ShaderCompileListener;
-        m_ShaderCompileListener = nullptr;
     }
     void ShaderProgram::OnSubShaderCompiled(void*)
     {

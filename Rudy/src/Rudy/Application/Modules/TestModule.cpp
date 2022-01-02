@@ -18,7 +18,18 @@
 #include <Rudy/Mathematics/Vector2f.h>
 namespace Rudy
 {
-
+	struct VertexData
+	{
+		VertexData() = default;
+		VertexData(float x, float y, float r, float g, float b, float a)
+		{
+			Position = Vector2f(x, y);
+			Color = ColorRgba(r, g, b, a);
+		}
+		~VertexData() = default;
+		Vector2f Position;
+		ColorRgba Color;
+	};
 	void TestModule::OnAttach()
 	{
 		/*
@@ -69,17 +80,18 @@ namespace Rudy
 
 		Array<VertexLayoutElement> vertexLayoutElements;
 		vertexLayoutElements.Add(VertexLayoutElement(VertexLayoutDataType::Float2, "aPosition"));
+		vertexLayoutElements.Add(VertexLayoutElement(VertexLayoutDataType::Float4, "aColor"));
 
 		VertexLayout vertexLayout(vertexLayoutElements);
 
 		vertexBuffer->Initialize(vertexLayout);
 
-		Array<Vector2f> vertexes;
-		vertexes.Add(Vector2f(-0.5f, -0.5f));
-		vertexes.Add(Vector2f(0.5f, -0.5f));
-		vertexes.Add(Vector2f(0.0f, 0.5f));
+		Array<VertexData> vertexes;
+		vertexes.Add(VertexData(-0.5f, -0.5f,1.0f,0.0f,0.0f,1.0f));
+		vertexes.Add(VertexData(0.5f, -0.5f,0.0f,1.0f,0.0f,1.0f));
+		vertexes.Add(VertexData(0.0f, 0.5f,0.0f,0.0f,1.0f,1.0f));
 
-		vertexBuffer->SetData((unsigned char*)vertexes.GetData(), sizeof(Vector2f), vertexes.GetCursor());
+		vertexBuffer->SetData((unsigned char*)vertexes.GetData(), sizeof(VertexData), vertexes.GetCursor());
 
 		/*
 		* Create index buffer
@@ -96,10 +108,31 @@ namespace Rudy
 		/*
 		* Create shaders
 		*/
+		String vertexSource;
+		String fragmentSource;
 		Shader* vertexShader = GetOwnerSession()->GetDefaultGraphicsDevice()->CreateShader(ShaderStage::Vertex);
 		Shader* fragmenShader = GetOwnerSession()->GetDefaultGraphicsDevice()->CreateShader(ShaderStage::Fragment);
-		vertexShader->Compile("yasag");
-		fragmenShader->Compile("yayay");
+		vertexShader->Compile(
+		"#version 450 core\n"
+		"layout(location = 0) in vec2 aPosition;\n"
+		"layout(location = 1) in vec4 aColor;\n"
+		"out vec4 f_Color;\n"
+		"void main()\n"
+		
+		"{\n"
+			"gl_Position = vec4(aPosition.x, aPosition.y, 0.0, 1.0);\n"
+			"f_Color = aColor;\n"
+		"}\n");
+
+		fragmenShader->Compile(
+		"#version 450 core\n"
+		"out vec4 FragColor;\n"
+		"in vec4 f_Color;\n"
+		"void main()\n"
+		"{\n"
+			"FragColor = f_Color;\n"
+		"}\n"
+		);
 
 		/*
 		* Create shader program

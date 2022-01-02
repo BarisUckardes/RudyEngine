@@ -20,6 +20,8 @@ namespace Rudy
 			TextureMinFilter minFilter, TextureMagFilter magFilter,
 			TextureWrapMode wrapModeS, TextureWrapMode wrapModeT,
 			bool createMipmaps) override;
+	protected:
+		virtual void FreeDeviceObjectCore() override;
 	private:
 		unsigned int m_TextureID;
 	};

@@ -2,6 +2,10 @@
 
 namespace Rudy
 {
+	VertexBuffer::~VertexBuffer()
+	{
+
+	}
 	VertexLayout VertexBuffer::GetVertexLayout() const
 	{
 		return m_VertexLayout;

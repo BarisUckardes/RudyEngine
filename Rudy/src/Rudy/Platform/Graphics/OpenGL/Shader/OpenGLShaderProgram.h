@@ -15,7 +15,8 @@ namespace Rudy
 
 		virtual void* GetNativeHandle() const override;
 		virtual void LinkProgramCore(Array<Shader*>& shaders, bool& linkState, String& errorMessage) override;
-
+	protected:
+		virtual void FreeDeviceObjectCore() override;
 	private:
 		unsigned int m_ProgramID;
 	};

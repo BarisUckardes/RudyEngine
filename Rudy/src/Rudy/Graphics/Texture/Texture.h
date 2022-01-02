@@ -14,6 +14,8 @@ namespace Rudy
 	class RUDY_API Texture : public GraphicsDeviceObject
 	{
 	public:
+		Texture() = default;
+		virtual ~Texture() = 0;
 
 		/// <summary>
 		/// Returns the format of this texture
@@ -50,9 +52,7 @@ namespace Rudy
 		/// </summary>
 		/// <returns></returns>
 		FORCEINLINE bool HasMipmaps() const;
-	protected:
-		Texture() = default;
-		~Texture() = default;
+
 		/// <summary>
 		/// Sets the texture format of this texture
 		/// </summary>
@@ -89,6 +89,7 @@ namespace Rudy
 		/// <param name="state"></param>
 		void SetMipmapState(bool state);
 	private:
+		
 		TextureFormat m_Format;
 		TextureInternalFormat m_InternalFormat;
 		TextureDataType m_DataType;

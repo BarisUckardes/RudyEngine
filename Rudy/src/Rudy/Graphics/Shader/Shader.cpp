@@ -2,6 +2,10 @@
 
 namespace Rudy
 {
+	Shader::~Shader()
+	{
+
+	}
 	void Shader::Compile(const String& source)
 	{
 		/*
@@ -53,9 +57,5 @@ namespace Rudy
 	Shader::Shader(ShaderStage stage)
 	{
 		m_Stage = stage;
-	}
-	Shader::~Shader()
-	{
-
 	}
 }

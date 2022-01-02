@@ -9,6 +9,8 @@ namespace Rudy
 	class RUDY_API ConstantBuffer : public GraphicsDeviceObject
 	{
 	public:
+		ConstantBuffer(const String& name, unsigned int size);
+		virtual ~ConstantBuffer() = 0;
 		/// <summary>
 		/// Returns the buffer name
 		/// </summary>
@@ -26,9 +28,6 @@ namespace Rudy
 		/// </summary>
 		/// <param name="dataPtr"></param>
 		virtual void SetBufferData(void* dataPtr) = 0;
-	protected:
-		ConstantBuffer(const String& name, unsigned int size);
-		~ConstantBuffer() = default;
 
 		/// <summary>
 		/// Graphics api implementation of the buffer intialization

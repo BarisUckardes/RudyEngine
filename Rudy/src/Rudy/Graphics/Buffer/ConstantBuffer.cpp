@@ -2,6 +2,10 @@
 
 namespace Rudy
 {
+	ConstantBuffer::~ConstantBuffer()
+	{
+
+	}
 	String ConstantBuffer::GetBufferName() const
 	{
 		return m_BufferName;

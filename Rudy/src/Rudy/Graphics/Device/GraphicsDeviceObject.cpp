@@ -10,6 +10,18 @@ namespace Rudy
 	{
 		m_OwnerDevice = device;
 	}
+	void GraphicsDeviceObject::FreeDeviceObject()
+	{
+		/*
+		* Deference the owner device(no longer a device related object)
+		*/
+		m_OwnerDevice = nullptr;
+
+		/*
+		* Call free device object implementation
+		*/
+		FreeDeviceObjectCore();
+	}
 	GraphicsDevice* GraphicsDeviceObject::GetOwnerGraphicsDevice() const
 	{
 		return m_OwnerDevice;
