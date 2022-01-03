@@ -4,6 +4,7 @@
 namespace Rudy
 {
 	class DeferredRenderable;
+	class ImGuiRenderer;
 	/// <summary>
 	/// Deferred renderer
 	/// </summary>
@@ -21,5 +22,6 @@ namespace Rudy
 		void OnDeferredRenderableRemoved(Component* renderable);
 		
 		Array<DeferredRenderable*> m_Renderables;
+		ImGuiRenderer* m_Imgui;
 	};
 }

@@ -1,6 +1,7 @@
 #include "Window.h"
 #include <Rudy/Platform/OS/Windows/Window/WindowsWindow.h>
 #include <Rudy/Platform/Graphics/GraphicsAPIType.h>
+#include <Rudy/Events/Window/WindowResizedEvent.h>
 namespace Rudy
 {
 	Window* Window::Create(const String& title,
@@ -16,6 +17,14 @@ namespace Rudy
 		* Create window event callback delegate
 		*/
 		m_WindowEventCallback = new Delegate<void, Event*>(RUDY_BIND_EVENT(Window::OnBroadcastEvent));
+
+		/*
+		* Set window propertie
+		*/
+		m_OffsetX = offsetX;
+		m_OffsetY = offsetY;
+		m_Width = sizeX;
+		m_Height = sizeY;
 	}
 
 	unsigned int Window::GetWidth() const
@@ -65,6 +74,13 @@ namespace Rudy
 
 	void Window::OnBroadcastEvent(Event* event)
 	{
+		/*
+		* Collect window property events
+		*/
+		if (event->GetEventType() == EventType::WindowResized)
+		{
+			OnWindowResizeEvent(((WindowResizedEvent*)event)->GetSize());
+		}
 		/*
 		* Iterate each registered callbacks and fire them
 		*/

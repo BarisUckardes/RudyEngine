@@ -6,6 +6,9 @@
 #include <Rudy/Mathematics/ColorRgba.h>
 #include <Rudy/Graphics/Buffer/VertexBuffer.h>
 #include <Rudy/Graphics/Texture/Texture.h>
+#include <Rudy/ImGui/ImGuiRenderer.h>
+#include <IMGUI/imgui.h>
+#include <Rudy/Windowing/Window.h>
 namespace Rudy
 {
     void DeferredGraphicsResolver::Resolve()
@@ -54,6 +57,15 @@ namespace Rudy
         commandBuffer->FreeDeviceObject();
 
         delete commandBuffer;
+        /*
+         * imgui test
+         */
+        m_Imgui->Begin();
+        ImGui::ShowDemoWindow();
+        ImGui::Begin("YOHO");
+        ImGui::End();
+        m_Imgui->End();
+      
     }
     void DeferredGraphicsResolver::OnRegisterObserver(ObserverComponent* observer)
     {
@@ -79,6 +91,7 @@ namespace Rudy
     }
     void DeferredGraphicsResolver::OnDeferredRenderableRegistered(Component* renderable)
     {
+        m_Imgui = new ImGuiRenderer(Vector2i(GetDefaultGraphicsDevice()->GetTargetWindow()->GetWidth(), GetDefaultGraphicsDevice()->GetTargetWindow()->GetHeight()), GetDefaultGraphicsDevice()->GetApiType());
         m_Renderables.Add((DeferredRenderable*)renderable);
     }
     void DeferredGraphicsResolver::OnDeferredRenderableRemoved(Component* renderable)

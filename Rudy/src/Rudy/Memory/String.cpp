@@ -581,9 +581,6 @@ namespace Rudy
 		return false;
 	}
 
-
-	
-	
 	String String::GetFromFloat(float value)
 	{
 		char* chars = new char[MAX_INT_DIGITS];
@@ -601,4 +598,5 @@ namespace Rudy
 		return value;
 	}
 
+	
 }

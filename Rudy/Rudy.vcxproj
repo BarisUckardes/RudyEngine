@@ -161,6 +161,15 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\ImGui\ImGuiRenderer.h" />
+    <ClInclude Include="src\Rudy\Events\Keyboard\KeyboardCharEvent.h" />
+    <ClInclude Include="src\Rudy\ImGui\ImGuiGraphicsAPIImplementation.h" />
+    <ClInclude Include="src\Rudy\Input\Keys.h" />
+    <ClInclude Include="src\Rudy\Memory\Guid.h" />
+    <ClInclude Include="src\Rudy\Platform\Utility\PlatformError.h" />
+    <ClInclude Include="src\Rudy\Platform\Utility\PlatformFile.h" />
+    <ClInclude Include="src\Rudy\Platform\Utility\PlatformDirectory.h" />
+    <ClInclude Include="src\Rudy\Platform\Utility\PlatformPaths.h" />
     <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetFramebufferRC.h" />
     <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLDrawIndexedRC.h" />
     <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLClearDepthRC.h" />
@@ -280,8 +289,23 @@
     <ClInclude Include="src\Rudy\World\Views\WorldLogicView.h" />
     <ClInclude Include="src\Rudy\Application\Modules\TestModule.h" />
     <ClInclude Include="src\Rudy\World\Views\WorldGraphicsView.h" />
+    <ClInclude Include="src\Rudy\Platform\OS\Windows\Utility\WindowsPaths.h" />
+    <ClInclude Include="src\Rudy\Platform\OS\Windows\Utility\WindowsDirectory.h" />
+    <ClInclude Include="src\Rudy\Platform\OS\Windows\Utility\WindowsFile.h" />
+    <ClInclude Include="src\Rudy\Platform\OS\Windows\Utility\WindowsError.h" />
+    <ClInclude Include="src\Rudy\Platform\OS\Windows\Memory\WindowsGuid.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rudy\ImGui\ImGuiRenderer.cpp" />
+    <ClCompile Include="src\Rudy\Events\Keyboard\KeyboardCharEvent.cpp" />
+    <ClCompile Include="src\Rudy\ImGui\ImGuiGraphicsAPIImplementation.cpp" />
+    <ClCompile Include="src\Rudy\Memory\Guid.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Graphics\SupportedGraphicsApiDetection.cpp" />
+    <ClCompile Include="src\Rudy\Platform\OS\PlatformOSDetection.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Utility\PlatformError.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Utility\PlatformFile.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Utility\PlatformDirectory.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Utility\PlatformPaths.cpp" />
     <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLSetFramebufferRC.cpp" />
     <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLDrawIndexedRC.cpp" />
     <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\Commands\OpenGLClearDepthRC.cpp" />
@@ -373,6 +397,11 @@
     <ClCompile Include="src\Rudy\World\Views\WorldLogicView.cpp" />
     <ClCompile Include="src\Rudy\Application\Modules\TestModule.cpp" />
     <ClCompile Include="src\Rudy\World\Views\WorldGraphicsView.cpp" />
+    <ClCompile Include="src\Rudy\Platform\OS\Windows\Utility\WindowsPaths.cpp" />
+    <ClCompile Include="src\Rudy\Platform\OS\Windows\Utility\WindowsDirectory.cpp" />
+    <ClCompile Include="src\Rudy\Platform\OS\Windows\Utility\WindowsFile.cpp" />
+    <ClCompile Include="src\Rudy\Platform\OS\Windows\Utility\WindowsError.cpp" />
+    <ClCompile Include="src\Rudy\Platform\OS\Windows\Memory\WindowsGuid.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -24,38 +24,43 @@ namespace Rudy
 		KeyboardKeyUp = 2,
 
 		/// <summary>
+		/// The event type is a keyboard text char input
+		/// </summary>
+		KeyboardChar = 4,
+
+		/// <summary>
 		/// Represents the window resize event
 		/// </summary>
-		WindowResized = 3,
+		WindowResized = 5,
 
 		/// <summary>
 		/// Represents the window close event
 		/// </summary>
-		WindowClosed = 4,
+		WindowClosed = 6,
 
 		/// <summary>
 		/// Represents the window position change event
 		/// </summary>
-		WindowOffsetChanged = 5,
+		WindowOffsetChanged = 7,
 
 		/// <summary>
 		/// Represents a mouse button down event
 		/// </summary>
-		MouseButtonDown = 6,
+		MouseButtonDown = 8,
 
 		/// <summary>
 		/// Represents a mouse button up event
 		/// </summary>
-		MouseButtonUp = 7,
+		MouseButtonUp = 9,
 
 		/// <summary>
 		/// Represents a mouse scrolled event
 		/// </summary>
-		MouseScrolled = 8,
+		MouseScrolled = 10,
 
 		/// <summary>
 		/// Represetns a mouse position changed event
 		/// </summary>
-		MousePositionChanged = 9
+		MousePositionChanged = 11
 	};
 }

@@ -6,7 +6,7 @@ namespace Rudy
 	/// <summary>
 	/// Event class for keyboard key down
 	/// </summary>
-	class RUDY_API KeyboardKeyDownEvent : KeyboardKeyEvent
+	class RUDY_API KeyboardKeyDownEvent : public KeyboardKeyEvent
 	{
 	public:
 		KeyboardKeyDownEvent(unsigned int downKey);

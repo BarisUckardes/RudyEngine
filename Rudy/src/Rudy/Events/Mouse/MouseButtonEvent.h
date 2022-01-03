@@ -8,15 +8,15 @@ namespace Rudy
 	/// </summary>
 	class RUDY_API MouseButtonEvent : public Event
 	{
-	protected:
-		MouseButtonEvent(int button);
-		~MouseButtonEvent() = default;
-		
+	public:
 		/// <summary>
 		/// Returns the button id
 		/// </summary>
 		/// <returns></returns>
 		FORCEINLINE int GetButton() const;
+	protected:
+		MouseButtonEvent(int button);
+		~MouseButtonEvent() = default;
 	private:
 		int m_Button;
 	};

@@ -97,7 +97,9 @@ namespace Rudy
 	private:
 		char* m_Source;
 		unsigned int m_Cursor;
-		
 	};
 
+	RUDY_API String operator+(const String& target0, const String& target1);
+	RUDY_API bool operator==(const String& target0, const String& target1);
+	RUDY_API bool operator!=(const String& target0, const String& target1);
 }
