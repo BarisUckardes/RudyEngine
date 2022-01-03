@@ -15,16 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Vendor\IMGUI\include\IMGUI\imgui_impl_opengl3_loader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Vendor\IMGUI\include\IMGUI\imgui_impl_osx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Vendor\IMGUI\include\IMGUI\imgui_impl_win32.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Vendor\IMGUI\include\IMGUI\imgui_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Vendor\IMGUI\include\IMGUI\ImGuizmo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Vendor\IMGUI\include\IMGUI\ImSequencer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Vendor\IMGUI\include\IMGUI\imstb_rectpack.h">
@@ -36,7 +33,22 @@
     <ClInclude Include="..\Vendor\IMGUI\include\IMGUI\imstb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Vendor\IMGUI\include\IMGUI\ImZoomSlider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Vendor\IMGUI\include\IMGUI\.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Vendor\IMGUI\include\IMGUI\GraphEditor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\Vendor\IMGUI\include\IMGUI\imconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Vendor\IMGUI\include\IMGUI\ImCurveEdit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Vendor\IMGUI\include\IMGUI\ImGradient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Vendor\IMGUI\include\IMGUI\imgui.h">
@@ -60,19 +72,30 @@
     <ClInclude Include="..\Vendor\IMGUI\include\IMGUI\imgui_impl_opengl3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Vendor\IMGUI\include\IMGUI\imgui_impl_opengl3_loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Vendor\IMGUI\include\IMGUI\imgui_impl_osx.mm" />
-    <None Include="..\Vendor\IMGUI\include\IMGUI\imgui_impl_metal.mm" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\Vendor\IMGUI\include\IMGUI\imgui_impl_win32.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Vendor\IMGUI\include\IMGUI\imgui_tables.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Vendor\IMGUI\include\IMGUI\imgui_widgets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Vendor\IMGUI\include\IMGUI\ImGuizmo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Vendor\IMGUI\include\IMGUI\ImSequencer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Vendor\IMGUI\include\IMGUI\GraphEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Vendor\IMGUI\include\IMGUI\ImCurveEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Vendor\IMGUI\include\IMGUI\ImGradient.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Vendor\IMGUI\include\IMGUI\imgui.cpp">
@@ -102,5 +125,9 @@
     <ClCompile Include="..\Vendor\IMGUI\include\IMGUI\imgui_impl_opengl3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Vendor\IMGUI\include\IMGUI\imgui_impl_metal.mm" />
+    <None Include="..\Vendor\IMGUI\include\IMGUI\imgui_impl_osx.mm" />
   </ItemGroup>
 </Project>
