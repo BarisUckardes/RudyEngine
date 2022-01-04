@@ -21,6 +21,7 @@ namespace Rudy
 
 
         commandBuffer->StartRecording();
+        commandBuffer->SetViewport(Vector2i(0, 0), defaultDevice->GetTargetWindow()->GetSize());
         commandBuffer->ClearColor(ColorRgba(0.5f,0.3f,0.7f,1.0f));
         
         for (int i = 0; i < m_Renderables.GetCursor(); i++)

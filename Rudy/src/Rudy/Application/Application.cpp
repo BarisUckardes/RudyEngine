@@ -29,6 +29,7 @@ namespace Rudy
 		* Create state
 		*/
 		bool hasExitRequest = false;
+		String exitMessage = "Undefined exit message";
 
 		/*
 		* Create application session
@@ -92,8 +93,12 @@ namespace Rudy
 			/*
 			* Validate window
 			*/
-			if (!m_Window->IsAlive())
+			if (!m_Window->HasCloseRequest())
+			{
 				hasExitRequest = true;
+				exitMessage = "Window closed";
+			}
+				
 
 			/*
 			* Validate session
@@ -112,6 +117,7 @@ namespace Rudy
 		/*
 		* Delete session
 		*/
+		printf("Exit message: %s\n", *exitMessage);
 
 	}
 	void Application::SubmitWindow(Window* window)

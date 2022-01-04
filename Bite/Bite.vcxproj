@@ -156,16 +156,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Bite\GUI\Menu Item\MenuItemLayout.h" />
+    <ClInclude Include="src\Bite\GUI\Menu Item\MenuItemGeneration.h" />
     <ClInclude Include="src\Bite\GUI\Menu Item\MenuItemTree.h" />
-    <ClInclude Include="src\Bite\GUI\Module\Custom Modules\MainMenuBarGUIModule.h" />
+    <ClInclude Include="src\Bite\GUI\Module\MainMenu\MainMenuBarGUIModule.h" />
     <ClInclude Include="src\Bite\Editor\Session\EditorSession.h" />
+    <ClInclude Include="src\Bite\GUI\Module\MainMenu\Templates\MainMenuItemTemplates.h" />
     <ClInclude Include="src\Bite\GUI\Module\GUIModule.h" />
     <ClInclude Include="src\Bite\Core\Symbols.h" />
     <ClInclude Include="src\Bite\Module\BiteModule.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Bite\GUI\Menu Item\MenuItemLayout.cpp" />
+    <ClCompile Include="src\Bite\GUI\Menu Item\MenuItemGeneration.cpp" />
     <ClCompile Include="src\Bite\GUI\Menu Item\MenuItemTree.cpp" />
-    <ClCompile Include="src\Bite\GUI\Module\Custom Modules\MainMenuBarGUIModule.cpp" />
+    <ClCompile Include="src\Bite\GUI\Module\MainMenu\MainMenuBarGUIModule.cpp" />
     <ClCompile Include="src\Bite\Editor\Session\EditorSession.cpp" />
     <ClCompile Include="src\Bite\GUI\Module\GUIModule.cpp" />
     <ClCompile Include="src\Bite\Module\BiteModule.cpp" />

@@ -2,6 +2,7 @@
 #include <Rudy/Core/Symbols.h>
 namespace Rudy
 {
+	class String;
 	class RUDY_API ImGuiRenderCommands
 	{
 	public:
@@ -19,6 +20,26 @@ namespace Rudy
 		/// Finalizes the rendering of the main menu bar
 		/// </summary>
 		static void FinalizeMainMenuBar();
+
+		/// <summary>
+		/// Begins the rendering of a menu
+		/// </summary>
+		/// <param name="name"></param>
+		/// <returns></returns>
+		static bool BeginMenu(const String& name);
+
+		/// <summary>
+		/// Finalizes the rendering of a menu
+		/// </summary>
+		static void FinalizeMenu();
+
+		/// <summary>
+		/// Begins the rendering of a menu item
+		/// </summary>
+		/// <param name="name"></param>
+		/// <returns></returns>
+		static bool CreateMenuItem(const String& name);
+
 	};
 
 

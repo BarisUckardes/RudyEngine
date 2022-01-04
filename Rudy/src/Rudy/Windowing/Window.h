@@ -41,12 +41,6 @@ namespace Rudy
 		FORCEINLINE Vector2i GetOffset() const;
 
 		/// <summary>
-		/// Returns whether this window is closes
-		/// </summary>
-		/// <returns></returns>
-		FORCEINLINE bool IsAlive() const;
-
-		/// <summary>
 		/// Returns the assinged graphics device for this window
 		/// </summary>
 		/// <returns></returns>
@@ -65,6 +59,12 @@ namespace Rudy
 		void RemoveCallBack(Delegate<void, Event*> functionPtr);
 
 		/// <summary>
+		/// returns whether this window should close
+		/// </summary>
+		/// <returns></returns>
+		virtual bool HasCloseRequest() const = 0;
+
+		/// <summary>
 		/// Records buffered events and broadcasts them to the application
 		/// </summary>
 		virtual void PollBufferedEvents() = 0;
@@ -79,12 +79,6 @@ namespace Rudy
 		/// Called when received an event
 		/// </summary>
 		void OnBroadcastEvent(Event* event);
-
-		/// <summary>
-		/// Sets this window's alive state
-		/// </summary>
-		/// <param name="state"></param>
-		void SetAliveState(bool state);
 
 		/// <summary>
 		/// Sets the graphics device for this window
@@ -122,7 +116,6 @@ namespace Rudy
 		String m_Title;
 		Vector2i m_Size;
 		Vector2i m_Offset;
-		bool m_WindowAlive;
 	};
 
 }

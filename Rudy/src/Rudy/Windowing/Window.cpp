@@ -37,10 +37,7 @@ namespace Rudy
 
 	
 
-	bool Window::IsAlive() const
-	{
-		return m_WindowAlive;
-	}
+	
 
 	GraphicsDevice* Window::GetGraphicsDevice() const
 	{
@@ -77,10 +74,7 @@ namespace Rudy
 		delete event;
 	}
 
-	void Window::SetAliveState(bool state)
-	{
-		m_WindowAlive = state;
-	}
+
 
 	void Window::SetGraphicsDevice(GraphicsDevice* device)
 	{
@@ -110,7 +104,7 @@ namespace Rudy
 	}
 	void Window::OnWindowClosedEvent()
 	{
-		m_WindowAlive = false;
+
 	}
 	void Window::OnWindowOffsetChanged(const Vector2i& newOffset)
 	{

@@ -44,6 +44,8 @@ namespace Rudy
 		*/
 		glfwSetWindowUserPointer(m_NativeWindow, &m_NativeWindowData);
 
+
+		
 		/*
 		* Set window size callback
 		*/
@@ -242,16 +244,16 @@ namespace Rudy
 		*/
 		GraphicsDevice* device = GraphicsDevice::Create(this, Rudy::GraphicsAPIType::OpenGL);
 		SetGraphicsDevice(device);
-		
-		/*
-		* Set alive
-		*/
-		SetAliveState(true);
 	}
 
 	WindowsWindow::~WindowsWindow()
 	{
-		SetAliveState(false);
+
+	}
+
+	bool WindowsWindow::HasCloseRequest() const
+	{
+		return glfwWindowShouldClose(m_NativeWindow) == GLFW_FALSE;
 	}
 
 	void WindowsWindow::PollBufferedEvents()

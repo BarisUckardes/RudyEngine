@@ -3,6 +3,7 @@
 
 namespace Bite
 {
+	class MenuItemTree;
 	/// <summary>
 	/// Handles the maisd
 	/// </summary>
@@ -16,6 +17,11 @@ namespace Bite
 		virtual void OnAttach() override;
 		virtual void OnUpdate() override;
 		virtual void OnDetach() override;
+	private:
+		void RenderMenuItemTree(const MenuItemTree* tree);
+		void SetupMenuItemTrees();
+
+		MenuItemTree* m_Tree;
 	};
 
 }

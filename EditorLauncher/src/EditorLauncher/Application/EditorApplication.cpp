@@ -6,7 +6,7 @@
 #include <Rudy/Application/Modules/GameLogicModule.h>
 #include <Rudy/Application/Modules/GraphicsModule.h>
 #include <Bite/Module/BiteModule.h>
-#include <Bite/GUI/Module/Custom Modules/MainMenuBarGUIModule.h>
+#include <Bite/GUI/Module/MainMenu/MainMenuBarGUIModule.h>
 namespace EditorLauncher
 {
 	EditorApplication::EditorApplication(const Rudy::String& title, unsigned int offsetX, unsigned int offsetY, unsigned int sizeX, unsigned int sizeY) : Rudy::Application(Rudy::WindowCreateParameters(title,Rudy::Vector2i(offsetX,offsetY),Rudy::Vector2i(sizeX,sizeY)))
