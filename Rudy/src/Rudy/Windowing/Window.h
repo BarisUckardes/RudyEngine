@@ -29,34 +29,16 @@ namespace Rudy
 		Window(const String& title, const unsigned int offsetX, const unsigned int offsetY, unsigned int sizeX, unsigned int sizeY);
 
 		/// <summary>
-		/// Returns the current width of this window
+		/// Returns the size of this window
 		/// </summary>
 		/// <returns></returns>
-		FORCEINLINE unsigned int GetWidth() const;
+		FORCEINLINE Vector2i GetSize() const;
 
 		/// <summary>
-		/// Returns the current height of this window
+		/// Returns the client offset of this window
 		/// </summary>
 		/// <returns></returns>
-		FORCEINLINE unsigned int GetHeight() const;
-
-		/// <summary>
-		/// Returns the window title
-		/// </summary>
-		/// <returns></returns>
-		FORCEINLINE String GetTitle() const;
-
-		/// <summary>
-		/// Returns the window offset X
-		/// </summary>
-		/// <returns></returns>
-		FORCEINLINE unsigned int GetOffsetX() const;
-
-		/// <summary>
-		/// Returns the window offset Y
-		/// </summary>
-		/// <returns></returns>
-		FORCEINLINE unsigned int GetOffsetY() const;
+		FORCEINLINE Vector2i GetOffset() const;
 
 		/// <summary>
 		/// Returns whether this window is closes
@@ -138,10 +120,8 @@ namespace Rudy
 		GraphicsDevice* m_GraphicsDevice;
 		Delegate<void, Event*>* m_WindowEventCallback;
 		String m_Title;
-		unsigned int m_Width;
-		unsigned int m_Height;
-		unsigned int m_OffsetX;
-		unsigned int m_OffsetY;
+		Vector2i m_Size;
+		Vector2i m_Offset;
 		bool m_WindowAlive;
 	};
 

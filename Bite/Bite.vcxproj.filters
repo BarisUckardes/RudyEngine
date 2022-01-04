@@ -18,9 +18,24 @@
     <ClInclude Include="src\Bite\Modules\BiteModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Bite\Core\Symbols.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bite\GUI\Module\GUIModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bite\Editor\Session\EditorSession.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bite\Modules\BiteModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bite\GUI\Module\GUIModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bite\Editor\Session\EditorSession.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

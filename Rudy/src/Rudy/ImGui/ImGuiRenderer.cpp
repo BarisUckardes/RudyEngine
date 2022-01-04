@@ -98,12 +98,12 @@ namespace Rudy
 		ImGuiGraphicsAPIImplementation::RenderDrawDataCore(m_ApiType);
 	}
 
-	void ImGuiRenderer::OnEventReceived(Event& event)
+	void ImGuiRenderer::OnEventReceived(Event* event)
 	{
 		/*
 		* Get event type
 		*/
-		EventType eventType = event.GetEventType();
+		EventType eventType = event->GetEventType();
 
 		/*
 		* Catch event type
@@ -113,73 +113,73 @@ namespace Rudy
 		case Rudy::EventType::Undefined:
 			break;
 		case Rudy::EventType::KeyboardKeyDown:
-			OnKeyDown((KeyboardKeyDownEvent&)event);
+			OnKeyDown((KeyboardKeyDownEvent*)event);
 			break;
 		case Rudy::EventType::KeyboardKeyUp:
-			OnKeyUp((KeyboardKeyReleasedEvent&)event);
+			OnKeyUp((KeyboardKeyReleasedEvent*)event);
 			break;
 		case Rudy::EventType::KeyboardChar:
-			OnKeyChar((KeyboardCharEvent&)event);
+			OnKeyChar((KeyboardCharEvent*)event);
 			break;
 		case Rudy::EventType::WindowResized:
-			OnWindowResized((WindowResizedEvent&)event);
+			OnWindowResized((WindowResizedEvent*)event);
 			break;
 		case Rudy::EventType::WindowClosed:
 			break;
 		case Rudy::EventType::WindowOffsetChanged:
 			break;
 		case Rudy::EventType::MouseButtonDown:
-			OnMouseButtonPressed((MouseButtonDownEvent&)event);
+			OnMouseButtonPressed((MouseButtonDownEvent*)event);
 			break;
 		case Rudy::EventType::MouseButtonUp:
-			OnMouseButtonUp((MouseButtonUpEvent&)event);
+			OnMouseButtonUp((MouseButtonUpEvent*)event);
 			break;
 		case Rudy::EventType::MouseScrolled:
-			OnMouseScrolled((MouseScrolledEvent&)event);
+			OnMouseScrolled((MouseScrolledEvent*)event);
 			break;
 		case Rudy::EventType::MousePositionChanged:
-			OnMouseMoved((MousePositionChangedEvent&)event);
+			OnMouseMoved((MousePositionChangedEvent*)event);
 			break;
 		default:
 			break;
 		}
 	}
 
-	bool ImGuiRenderer::OnMouseButtonPressed(MouseButtonDownEvent& event)
+	bool ImGuiRenderer::OnMouseButtonPressed(MouseButtonDownEvent* event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		io.MouseDown[event.GetButton()] = true;
+		io.MouseDown[event->GetButton()] = true;
 		return false;
 	}
 
-	bool ImGuiRenderer::OnMouseButtonUp(MouseButtonUpEvent& event)
+	bool ImGuiRenderer::OnMouseButtonUp(MouseButtonUpEvent* event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		io.MouseDown[event.GetButton()] = false;
+		io.MouseDown[event->GetButton()] = false;
 		return false;
 	}
 
-	bool ImGuiRenderer::OnMouseMoved(MousePositionChangedEvent& event)
+	bool ImGuiRenderer::OnMouseMoved(MousePositionChangedEvent* event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		const Vector2i& position = event.GetPosition();
+		const Vector2i& position = event->GetPosition();
 		io.MousePos = ImVec2(position.X, position.Y);
 		return false;
 	}
 
-	bool ImGuiRenderer::OnMouseScrolled(MouseScrolledEvent& event)
+	bool ImGuiRenderer::OnMouseScrolled(MouseScrolledEvent* event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		const Vector2f& amount = event.GetAmount();
+		const Vector2f& amount = event->GetAmount();
 		io.MouseWheel += amount.Y;
 		io.MouseWheelH += amount.X;
 		return false;
 	}
 
-	bool ImGuiRenderer::OnKeyDown(KeyboardKeyDownEvent& event)
+	bool ImGuiRenderer::OnKeyDown(KeyboardKeyDownEvent* event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		io.KeysDown[event.GetRelatedKey()] = true;
+		io.KeysDown[event->GetRelatedKey()] = true;
 
 		io.KeyCtrl = io.KeysDown[RUDY_KEY_LEFT_CONTROL] || io.KeysDown[RUDY_KEY_RIGHT_CONTROL];
 		io.KeyShift = io.KeysDown[RUDY_KEY_LEFT_SHIFT] || io.KeysDown[RUDY_KEY_RIGHT_SHIFT];
@@ -188,26 +188,26 @@ namespace Rudy
 		return false;
 	}
 
-	bool ImGuiRenderer::OnKeyUp(KeyboardKeyReleasedEvent& event)
+	bool ImGuiRenderer::OnKeyUp(KeyboardKeyReleasedEvent* event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		io.KeysDown[event.GetRelatedKey()] = false;
+		io.KeysDown[event->GetRelatedKey()] = false;
 		return false;
 	}
 
-	bool ImGuiRenderer::OnKeyChar(KeyboardCharEvent& event)
+	bool ImGuiRenderer::OnKeyChar(KeyboardCharEvent* event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		int keyCode = event.GetRelatedKey();
+		int keyCode = event->GetRelatedKey();
 		if (keyCode > 0 && keyCode < 0x10000)
 			io.AddInputCharacter((unsigned short)keyCode);
 		return false;
 	}
 
-	bool ImGuiRenderer::OnWindowResized(WindowResizedEvent& event)
+	bool ImGuiRenderer::OnWindowResized(WindowResizedEvent* event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		const Vector2i& size = event.GetSize();
+		const Vector2i& size = event->GetSize();
 		io.DisplaySize = ImVec2(size.X,size.Y);
 		io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
 		m_WindowSize = size;

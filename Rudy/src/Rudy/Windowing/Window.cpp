@@ -21,36 +21,21 @@ namespace Rudy
 		/*
 		* Set window propertie
 		*/
-		m_OffsetX = offsetX;
-		m_OffsetY = offsetY;
-		m_Width = sizeX;
-		m_Height = sizeY;
+		m_Size = Vector2i(sizeX, sizeY);
+		m_Offset = Vector2i(offsetX, offsetY);
 	}
 
-	unsigned int Window::GetWidth() const
+	Vector2i Window::GetSize() const
 	{
-		return m_Width;
+		return m_Size;
 	}
 
-	unsigned int Window::GetHeight() const
+	Vector2i Window::GetOffset() const
 	{
-		return m_Height;
+		return m_Offset;
 	}
 
-	String Window::GetTitle() const
-	{
-		return m_Title;
-	}
-
-	unsigned int Window::GetOffsetX() const
-	{
-		return m_OffsetX;
-	}
-
-	unsigned int Window::GetOffsetY() const
-	{
-		return m_OffsetY;
-	}
+	
 
 	bool Window::IsAlive() const
 	{
@@ -81,6 +66,7 @@ namespace Rudy
 		{
 			OnWindowResizeEvent(((WindowResizedEvent*)event)->GetSize());
 		}
+
 		/*
 		* Iterate each registered callbacks and fire them
 		*/
@@ -88,6 +74,7 @@ namespace Rudy
 		{
 			m_Callbacks[i].Invoke(event);
 		}
+		delete event;
 	}
 
 	void Window::SetAliveState(bool state)
@@ -119,8 +106,7 @@ namespace Rudy
 
 	void Window::OnWindowResizeEvent(const Vector2i& newSize)
 	{
-		m_Width = newSize.X;
-		m_Height = newSize.Y;
+		m_Size = newSize;
 	}
 	void Window::OnWindowClosedEvent()
 	{
@@ -128,7 +114,6 @@ namespace Rudy
 	}
 	void Window::OnWindowOffsetChanged(const Vector2i& newOffset)
 	{
-		m_OffsetX = newOffset.X;
-		m_OffsetY = newOffset.Y;
+		m_Offset = newOffset;
 	}
 }

@@ -161,6 +161,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\ImGui\ImGuiRenderCommands.h" />
     <ClInclude Include="src\Rudy\ImGui\ImGuiRenderer.h" />
     <ClInclude Include="src\Rudy\Events\Keyboard\KeyboardCharEvent.h" />
     <ClInclude Include="src\Rudy\ImGui\ImGuiGraphicsAPIImplementation.h" />
@@ -296,6 +297,7 @@
     <ClInclude Include="src\Rudy\Platform\OS\Windows\Memory\WindowsGuid.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rudy\ImGui\ImGuiRenderCommands.cpp" />
     <ClCompile Include="src\Rudy\ImGui\ImGuiRenderer.cpp" />
     <ClCompile Include="src\Rudy\Events\Keyboard\KeyboardCharEvent.cpp" />
     <ClCompile Include="src\Rudy\ImGui\ImGuiGraphicsAPIImplementation.cpp" />

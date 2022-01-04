@@ -5,6 +5,7 @@
 #include <Rudy/Application/Modules/TestModule.h>
 #include <Rudy/Application/Modules/GameLogicModule.h>
 #include <Rudy/Application/Modules/GraphicsModule.h>
+#include <Bite/Modules/BiteModule.h>
 namespace EditorLauncher
 {
 	EditorApplication::EditorApplication(const Rudy::String& title, unsigned int offsetX, unsigned int offsetY, unsigned int sizeX, unsigned int sizeY) : Rudy::Application(Rudy::WindowCreateParameters(title,Rudy::Vector2i(offsetX,offsetY),Rudy::Vector2i(sizeX,sizeY)))
@@ -16,6 +17,7 @@ namespace EditorLauncher
 		RegisterModule<Rudy::TestModule>();
 		RegisterModule<Rudy::GameLogicModule>();
 		RegisterModule<Rudy::GraphicsModule>();
+		RegisterModule<Bite::BiteModule>();
 	}
 
 	void EditorApplication::RunEditor()

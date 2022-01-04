@@ -57,14 +57,7 @@ namespace Rudy
         commandBuffer->FreeDeviceObject();
 
         delete commandBuffer;
-        /*
-         * imgui test
-         */
-        m_Imgui->Begin();
-        ImGui::ShowDemoWindow();
-        ImGui::Begin("YOHO");
-        ImGui::End();
-        m_Imgui->End();
+
       
     }
     void DeferredGraphicsResolver::OnRegisterObserver(ObserverComponent* observer)
@@ -91,7 +84,6 @@ namespace Rudy
     }
     void DeferredGraphicsResolver::OnDeferredRenderableRegistered(Component* renderable)
     {
-        m_Imgui = new ImGuiRenderer(Vector2i(GetDefaultGraphicsDevice()->GetTargetWindow()->GetWidth(), GetDefaultGraphicsDevice()->GetTargetWindow()->GetHeight()), GetDefaultGraphicsDevice()->GetApiType());
         m_Renderables.Add((DeferredRenderable*)renderable);
     }
     void DeferredGraphicsResolver::OnDeferredRenderableRemoved(Component* renderable)

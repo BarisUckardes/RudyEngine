@@ -21,16 +21,16 @@ namespace Rudy
 		void Begin();
 		void End();
 
-		void OnEventReceived(Event& event);
+		void OnEventReceived(Event* event);
 	private:
-		bool OnMouseButtonPressed(MouseButtonDownEvent& event);
-		bool OnMouseButtonUp(MouseButtonUpEvent& event);
-		bool OnMouseMoved(MousePositionChangedEvent& event);
-		bool OnMouseScrolled(MouseScrolledEvent& event);
-		bool OnKeyDown(KeyboardKeyDownEvent& event);
-		bool OnKeyUp(KeyboardKeyReleasedEvent& event);
-		bool OnKeyChar(KeyboardCharEvent& event);
-		bool OnWindowResized(WindowResizedEvent& event);
+		bool OnMouseButtonPressed(MouseButtonDownEvent* event);
+		bool OnMouseButtonUp(MouseButtonUpEvent* event);
+		bool OnMouseMoved(MousePositionChangedEvent* event);
+		bool OnMouseScrolled(MouseScrolledEvent* event);
+		bool OnKeyDown(KeyboardKeyDownEvent* event);
+		bool OnKeyUp(KeyboardKeyReleasedEvent* event);
+		bool OnKeyChar(KeyboardCharEvent* event);
+		bool OnWindowResized(WindowResizedEvent* event);
 	private:
 		GraphicsAPIType m_ApiType;
 		Vector2i m_WindowSize;
