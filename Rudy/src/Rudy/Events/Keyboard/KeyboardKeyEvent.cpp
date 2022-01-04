@@ -6,8 +6,13 @@ namespace Rudy
     {
         return m_RelatedKey;
     }
-    KeyboardKeyEvent::KeyboardKeyEvent(unsigned int relatedKey)
+    unsigned int KeyboardKeyEvent::GetRepeatCount() const
+    {
+        return m_RepeatCount;
+    }
+    KeyboardKeyEvent::KeyboardKeyEvent(unsigned int relatedKey,unsigned int repeatCount)
     {
         m_RelatedKey = relatedKey;
+        m_RepeatCount = repeatCount;
     }
 }

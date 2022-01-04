@@ -1,14 +1,18 @@
-#include "OpenGLFramebuffer2D.h"
+#include "OpenGLFramebuffer.h"
 #include <Rudy/Graphics/Device/GraphicsDevice.h>
 #include <GlAD/glad.h>
 namespace Rudy
 {
-	void* OpenGLFramebuffer2D::GetNativeHandle() const
+	void* OpenGLFramebuffer::GetNativeHandle() const
 	{
 		return (void*)&m_FramebufferID;
 	}
 
-	void OpenGLFramebuffer2D::CreateCore(unsigned int width, unsigned int height,const Array<FramebufferAttachmentCreateParameters>& createParameters, Array<FramebufferAttachment*>& attachments, Texture2D* depthTexture, bool createDepthTexture)
+	void OpenGLFramebuffer::CreateCore(unsigned int width, unsigned int height,
+		const Array<FramebufferAttachmentCreateParameters>& createParameters,
+		Array<FramebufferAttachment*>& attachments,
+		Texture2D* depthTexture,
+		bool createDepthTexture)
 	{
 		/*
 		* Create framebuffer
@@ -119,7 +123,7 @@ namespace Rudy
 
 	}
 
-	void OpenGLFramebuffer2D::FreeDeviceObjectCore()
+	void OpenGLFramebuffer::FreeDeviceObjectCore()
 	{
 		glDeleteFramebuffers(1, &m_FramebufferID);
 	}

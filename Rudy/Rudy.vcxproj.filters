@@ -246,7 +246,7 @@
     <ClInclude Include="src\Rudy\Graphics\Framebuffer\Framebuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Framebuffer\OpenGLFramebuffer2D.h">
+    <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Framebuffer\OpenGLFramebuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Rudy\Platform\Graphics\OpenGL\Command\OpenGLCommandBuffer.h">
@@ -572,7 +572,7 @@
     <ClCompile Include="src\Rudy\Graphics\Framebuffer\Framebuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Framebuffer\OpenGLFramebuffer2D.cpp">
+    <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Framebuffer\OpenGLFramebuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rudy\Platform\Graphics\OpenGL\Command\OpenGLCommandBuffer.cpp">

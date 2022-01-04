@@ -5,6 +5,7 @@
 #include <Rudy/Windowing/WindowCreateParameters.h>
 #include <Rudy/Events/Delegate.h>
 #include <Rudy/Memory/Array.h>
+
 namespace Rudy
 {
 	class Window;
@@ -24,8 +25,6 @@ namespace Rudy
 		/// </summary>
 		/// <returns></returns>
 		Window* GetWindow() const;
-
-		
 	protected:
 		/// <summary>
 		/// Registers anew module to the application

@@ -5,11 +5,18 @@
 #include <Rudy/Application/Modules/TestModule.h>
 #include <Rudy/Application/Modules/GameLogicModule.h>
 #include <Rudy/Application/Modules/GraphicsModule.h>
-#include <Bite/Modules/BiteModule.h>
+#include <Bite/Module/BiteModule.h>
+#include <Bite/GUI/Module/Custom Modules/MainMenuBarGUIModule.h>
 namespace EditorLauncher
 {
 	EditorApplication::EditorApplication(const Rudy::String& title, unsigned int offsetX, unsigned int offsetY, unsigned int sizeX, unsigned int sizeY) : Rudy::Application(Rudy::WindowCreateParameters(title,Rudy::Vector2i(offsetX,offsetY),Rudy::Vector2i(sizeX,sizeY)))
 	{
+		/*
+		* Create gui module list
+		*/
+		Rudy::Array<Bite::GUIModule*> guiModules;
+		guiModules.Add(new Bite::MainMenuBarGUIModule());
+
 		/*
 		* Register editor application modules
 		*/
@@ -17,7 +24,7 @@ namespace EditorLauncher
 		RegisterModule<Rudy::TestModule>();
 		RegisterModule<Rudy::GameLogicModule>();
 		RegisterModule<Rudy::GraphicsModule>();
-		RegisterModule<Bite::BiteModule>();
+		RegisterModule<Bite::BiteModule>(guiModules);
 	}
 
 	void EditorApplication::RunEditor()

@@ -2,7 +2,7 @@
 
 namespace Rudy
 {
-    KeyboardKeyReleasedEvent::KeyboardKeyReleasedEvent(unsigned int releasedKey) : KeyboardKeyEvent(releasedKey)
+    KeyboardKeyReleasedEvent::KeyboardKeyReleasedEvent(unsigned int releasedKey) : KeyboardKeyEvent(releasedKey,0)
     {
 
     }

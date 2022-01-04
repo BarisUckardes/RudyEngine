@@ -8,6 +8,9 @@
 #include <Rudy/Events/Mouse/MouseButtonUpEvent.h>
 #include <Rudy/Events/Mouse/MousePositionChangedEvent.h>
 #include <Rudy/Events/Mouse/MouseScrolledEvent.h>
+#include <Rudy/Events/Keyboard/KeyboardCharEvent.h>
+#include <Rudy/Events/Keyboard/KeyboardKeyDownEvent.h>
+#include <Rudy/Events/Keyboard/KeyboardKeyReleasedEvent.h>
 #include <Rudy/Graphics/Device/GraphicsDevice.h>
 namespace Rudy
 {
@@ -180,6 +183,54 @@ namespace Rudy
 				data.EventCallback->Invoke(event);
 			}
 			);
+
+		/*
+		* Set keyboard keyy callback
+		*/
+		glfwSetKeyCallback(m_NativeWindow,
+			[](GLFWwindow* window, int key, int scanCode, int action, int mods)
+		{
+				/*
+				* Get window data
+				*/
+				GLFWWindowData& data = *(GLFWWindowData*)glfwGetWindowUserPointer(window);
+
+				switch (action)
+				{
+					case GLFW_PRESS:
+					{
+						KeyboardKeyDownEvent* event = new KeyboardKeyDownEvent(key,0);
+						data.EventCallback->Invoke(event);
+						break;
+					}
+					case GLFW_RELEASE:
+					{
+						KeyboardKeyReleasedEvent* event = new KeyboardKeyReleasedEvent(key);
+						data.EventCallback->Invoke(event);
+						break;
+					}
+					case GLFW_REPEAT:
+					{
+						KeyboardKeyDownEvent* event = new KeyboardKeyDownEvent(key, 1);
+						data.EventCallback->Invoke(event);
+						break;
+					}
+				}
+		});
+
+		glfwSetCharCallback(m_NativeWindow, [](GLFWwindow* window, unsigned int keyCode)
+			{
+				/*
+				* Get window data
+				*/
+				GLFWWindowData& data = *(GLFWWindowData*)glfwGetWindowUserPointer(window);
+
+				/*
+				* Create char press event
+				*/
+				KeyboardCharEvent* event = new KeyboardCharEvent(keyCode);
+				data.EventCallback->Invoke(event);
+			});
 
 		/*
 		* Set event callback

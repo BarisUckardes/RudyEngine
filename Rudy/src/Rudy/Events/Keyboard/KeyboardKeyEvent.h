@@ -14,10 +14,17 @@ namespace Rudy
 		/// </summary>
 		/// <returns></returns>
 		FORCEINLINE unsigned int GetRelatedKey() const;
+
+		/// <summary>
+		/// Returns the repeat count for the related key
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE unsigned int GetRepeatCount() const;
 	protected:
-		KeyboardKeyEvent(unsigned int relatedKey);
+		KeyboardKeyEvent(unsigned int relatedKey,unsigned int repeatCount);
 		~KeyboardKeyEvent() = default;
 	private:
 		unsigned int m_RelatedKey;
+		unsigned int m_RepeatCount;
 	};
 }

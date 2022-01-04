@@ -20,6 +20,7 @@ namespace Rudy
 	class ShaderProgram;
 	class GraphicsDeviceObject;
 	class String;
+	class Framebuffer;
 	/// <summary>
 	/// Graphics api-agnostic graphics device class
 	/// </summary>
@@ -103,6 +104,12 @@ namespace Rudy
 		/// <param name="shaders"></param>
 		/// <returns></returns>
 		virtual ShaderProgram* CreateShaderProgram() = 0;
+
+		/// <summary>
+		/// Creates a framebuffer
+		/// </summary>
+		/// <returns></returns>
+		virtual Framebuffer* CreateFramebuffer() = 0;
 
 		/// <summary>
 		/// Swaps the render buffers of the window

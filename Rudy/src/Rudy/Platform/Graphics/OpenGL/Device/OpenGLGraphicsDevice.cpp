@@ -9,6 +9,7 @@
 #include <Rudy/Platform/Graphics/OpenGL/Buffer/OpenGLConstantBuffer.h>
 #include <Rudy/Platform/Graphics/OpenGL/Shader/OpenGLShader.h>
 #include <Rudy/Platform/Graphics/OpenGL/Shader/OpenGLShaderProgram.h>
+#include <Rudy/Platform/Graphics/OpenGL/Framebuffer/OpenGLFramebuffer.h>
 namespace Rudy
 {
 	OpenGLGraphicsDevice::OpenGLGraphicsDevice()
@@ -105,6 +106,20 @@ namespace Rudy
 		SetDeviceObjectTargetDevice(commandBuffer);
 
 		return commandBuffer;
+	}
+	Framebuffer* OpenGLGraphicsDevice::CreateFramebuffer()
+	{
+		/*
+		* Create OpenGL framebuffer
+		*/
+		OpenGLFramebuffer* framebuffer = new OpenGLFramebuffer();
+
+		/*
+		* Set owner device
+		*/
+		SetDeviceObjectTargetDevice(framebuffer);
+
+		return (Framebuffer*)framebuffer;
 	}
 	Texture2D* OpenGLGraphicsDevice::CreateTexture2D()
 	{

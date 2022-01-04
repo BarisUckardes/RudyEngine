@@ -2,6 +2,7 @@
 #include <IMGUI/imgui.h>
 #include <Rudy/Input/Keys.h>
 #include <Rudy/ImGui/ImGuiGraphicsAPIImplementation.h>
+#include <stdio.h>
 namespace Rudy
 {
 	ImGuiRenderer::ImGuiRenderer(const Vector2i& initialWindowSize,GraphicsAPIType apiType)
@@ -28,6 +29,7 @@ namespace Rudy
 		ImGuiIO& io = ImGui::GetIO();
 		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
 		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
+		io.BackendFlags |= ImGuiBackendFlags_PlatformHasViewports;
 
 		/*
 		* Set key mappings
@@ -178,6 +180,7 @@ namespace Rudy
 
 	bool ImGuiRenderer::OnKeyDown(KeyboardKeyDownEvent* event)
 	{
+		printf("Imgui key down...\n");
 		ImGuiIO& io = ImGui::GetIO();
 		io.KeysDown[event->GetRelatedKey()] = true;
 

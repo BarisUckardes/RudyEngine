@@ -2,6 +2,9 @@
 
 namespace Rudy
 {
+	KeyboardCharEvent::KeyboardCharEvent(unsigned int relatedKey) : KeyboardKeyEvent(relatedKey,0)
+	{
+	}
 	EventType KeyboardCharEvent::GetEventType() const
 	{
 		return EventType::KeyboardChar;

@@ -21,6 +21,7 @@ namespace Rudy
 		virtual ShaderProgram* CreateShaderProgram() override;
 		virtual ConstantBuffer* CreateConstantBuffer(const String& bufferName,unsigned int bufferSize) override;
 		virtual CommandBuffer* CreateCommandBuffer() override;
+		virtual Framebuffer* CreateFramebuffer() override;
 	protected:
 		virtual void InitializeCore() override;;
 

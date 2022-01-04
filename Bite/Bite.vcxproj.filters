@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Bite\Modules\BiteModule.h">
+    <ClInclude Include="src\Bite\Module\BiteModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Bite\Core\Symbols.h">
@@ -27,15 +27,27 @@
     <ClInclude Include="src\Bite\Editor\Session\EditorSession.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Bite\GUI\Module\Custom Modules\MainMenuBarGUIModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bite\GUI\Menu Item\MenuItemTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Bite\Modules\BiteModule.cpp">
+    <ClCompile Include="src\Bite\Module\BiteModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Bite\GUI\Module\GUIModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Bite\Editor\Session\EditorSession.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bite\GUI\Module\Custom Modules\MainMenuBarGUIModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bite\GUI\Menu Item\MenuItemTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -9,7 +9,7 @@ namespace Rudy
 	class RUDY_API KeyboardKeyDownEvent : public KeyboardKeyEvent
 	{
 	public:
-		KeyboardKeyDownEvent(unsigned int downKey);
+		KeyboardKeyDownEvent(unsigned int downKey,unsigned int repeatCount);
 		~KeyboardKeyDownEvent() = default;
 
 		virtual EventType GetEventType() const override;

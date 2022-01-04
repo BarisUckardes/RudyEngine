@@ -2,7 +2,8 @@
 
 namespace Rudy
 {
-    KeyboardKeyDownEvent::KeyboardKeyDownEvent(unsigned int downKey) : KeyboardKeyEvent(downKey)
+   
+    KeyboardKeyDownEvent::KeyboardKeyDownEvent(unsigned int downKey, unsigned int repeatCount) : KeyboardKeyEvent(downKey,repeatCount)
     {
     }
     EventType KeyboardKeyDownEvent::GetEventType() const
