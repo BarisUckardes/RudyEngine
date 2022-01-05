@@ -2,13 +2,13 @@
 
 namespace Rudy
 {
-    GraphicsObjectRegisterInfo::GraphicsObjectRegisterInfo(RudyType type, const Delegate<void, Component*>& registerDelegate, const Delegate<void, Component*>& removeDelegate)
+    GraphicsObjectRegisterInfo::GraphicsObjectRegisterInfo(ReflectionType* type, const Delegate<void, Component*>& registerDelegate, const Delegate<void, Component*>& removeDelegate)
     {
         m_TargetType = type;
         m_RegisterDelegate = registerDelegate;
         m_RemoveDelegate = removeDelegate;
     }
-    RudyType GraphicsObjectRegisterInfo::GetTargetType() const
+    ReflectionType* GraphicsObjectRegisterInfo::GetTargetType() const
     {
         return m_TargetType;
     }

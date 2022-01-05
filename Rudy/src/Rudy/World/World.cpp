@@ -2,8 +2,10 @@
 #include <Rudy/Application/ApplicationSession.h>
 #include <Rudy/Entity/Entity.h>
 #include <Rudy/World/WorldView.h>
+#include <Rudy/Reflection/Type/ReflectionType.h>
 namespace Rudy
 {
+	GENERATE_REFLECTABLE_TYPE(World);
 	World::World(ApplicationSession* targetSession)
 	{
 		/*

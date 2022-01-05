@@ -8,7 +8,7 @@ namespace Rudy
 	/// <summary>
 	/// Core rudy object for all engine objects
 	/// </summary>
-	class RUDY_API RudyObject
+	class RUDY_API RudyObject : public ReflectableObject
 	{
 	public:
 		/// <summary>
@@ -33,12 +33,6 @@ namespace Rudy
 		/// Destroys the rudy object
 		/// </summary>
 		void Destroy();
-
-		/// <summary>
-		/// Returns the unique type id for this rudy object
-		/// </summary>
-		/// <returns></returns>
-		virtual RudyType GetType() const { return 0; }
 	protected:
 		RudyObject();
 		~RudyObject() = default;

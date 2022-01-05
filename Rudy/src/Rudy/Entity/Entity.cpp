@@ -2,7 +2,7 @@
 #include <Rudy/Component/Built-in/Spatial.h>
 namespace Rudy
 {
-  
+    GENERATE_REFLECTABLE_TYPE(Entity);
     Array<Component*> Entity::GetComponents() const
     {
         return m_Components;

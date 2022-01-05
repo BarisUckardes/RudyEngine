@@ -1,7 +1,7 @@
 #pragma once
 #include <Rudy/Object/RudyObject.h>
 #include <Rudy/Memory/Array.h>
-
+#include <stdio.h>
 namespace Rudy
 {
 	/// <summary>

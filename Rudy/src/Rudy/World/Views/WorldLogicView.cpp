@@ -1,7 +1,9 @@
 #include "WorldLogicView.h"
 #include <Rudy/Resolver/Resolvers/LogicResolver.h>
+#include <Rudy/Reflection/Type/ReflectionType.h>
 namespace Rudy
 {
+	GENERATE_REFLECTABLE_TYPE(WorldLogicView);
 	Array<Component*> WorldLogicView::GetComponents() const
 	{
 		return m_Components;

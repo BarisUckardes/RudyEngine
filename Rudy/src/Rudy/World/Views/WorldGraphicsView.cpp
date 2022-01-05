@@ -3,6 +3,7 @@
 #include <Rudy/Resolver/Resolvers/GraphicsResolver.h>
 namespace Rudy
 {
+	GENERATE_REFLECTABLE_TYPE(WorldGraphicsView);
 	void WorldGraphicsView::RegisterObserver(ObserverComponent* observer)
 	{
 		/*
@@ -24,7 +25,7 @@ namespace Rudy
 		/*
 		* Get component id
 		*/
-		RudyType componentType = component->GetType();
+		ReflectionType* componentType = component->GetType();
 
 		/*
 		* Iterate each observer
@@ -67,7 +68,7 @@ namespace Rudy
 		/*
 		* Get component id
 		*/
-		RudyType componentType = component->GetType();
+		ReflectionType* componentType = component->GetType();
 
 		/*
 		* Iterate each observer
@@ -120,6 +121,7 @@ namespace Rudy
 		*/
 		GraphicsResolver* graphicsResolver = (GraphicsResolver*)resolver;
 		m_GraphicsResolvers.Add(graphicsResolver);
+		printf("Updated resolver count: %d\n", m_GraphicsResolvers.GetCursor());
 
 		/*
 		* Get graphics object register informations

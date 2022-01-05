@@ -2,8 +2,10 @@
 #include <Rudy/World/Views/WorldGraphicsView.h>
 #include <Rudy/World/World.h>
 #include <Rudy/Entity/Entity.h>
+#include <Rudy/Reflection/Type/ReflectionType.h>
 namespace Rudy
 {
+	GENERATE_REFLECTABLE_TYPE(DeferredRenderable);
 	void DeferredRenderable::OnAttach()
 	{
 		GetOwnerEntity()->GetOwnerWorld()->GetView<WorldGraphicsView>()->RegisterGraphicsObject(this);

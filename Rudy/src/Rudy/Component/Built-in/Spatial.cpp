@@ -2,6 +2,7 @@
 #include <stdio.h>
 namespace Rudy
 {
+	GENERATE_REFLECTABLE_TYPE(Spatial);
 	Spatial::Spatial(const Vector3f& position, const Vector3f& rotation, const Vector3f& scale)
 	{
 		m_Position = position;

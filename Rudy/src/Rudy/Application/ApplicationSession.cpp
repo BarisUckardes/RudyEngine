@@ -2,7 +2,7 @@
 #include <Rudy/World/World.h>
 namespace Rudy
 {
-
+	GENERATE_REFLECTABLE_TYPE(ApplicationSession);
 	ApplicationSession::ApplicationSession(GraphicsDevice* defaultDevice)
 	{
 		m_DefaultDevice = defaultDevice;
