@@ -42,6 +42,21 @@
     <ClInclude Include="src\Bite\GUI\Module\MainMenu\Templates\MainMenuItemTemplates.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Bite\GUI\Module\Window\WindowLayout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bite\GUI\Module\Window\WindowLayoutGeneration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bite\GUI\Module\Window\Templates\WorldObserverGUIWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bite\GUI\Module\Window\GUIWindowManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bite\GUI\Module\Window\WindowGUIModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bite\Module\BiteModule.cpp">
@@ -63,6 +78,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Bite\GUI\Menu Item\MenuItemLayout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bite\GUI\Module\Window\WindowLayout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bite\GUI\Module\Window\WindowLayoutGeneration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bite\GUI\Module\Window\Templates\WorldObserverGUIWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bite\GUI\Module\Window\GUIWindowManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bite\GUI\Module\Window\WindowGUIModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

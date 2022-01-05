@@ -27,4 +27,17 @@ namespace Rudy
 	{
 		return ImGui::MenuItem(*name);
 	}
+	bool ImGuiRenderCommands::BeginWindow(const String& name, bool& isExitRequested)
+	{
+		bool exitRequest = true;
+		bool state = ImGui::Begin(*name, &exitRequest);
+		isExitRequested = !exitRequest;
+		return state;
+	}
+
+	void ImGuiRenderCommands::FinalizeWindow()
+	{
+		ImGui::End();
+	}
+	
 }

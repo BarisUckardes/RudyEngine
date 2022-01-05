@@ -40,6 +40,18 @@ namespace Rudy
 		/// <returns></returns>
 		static bool CreateMenuItem(const String& name);
 
+		/// <summary>
+		/// Begins the rendering of a window
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="isExitRequested"></param>
+		/// <returns></returns>
+		static bool BeginWindow(const String& name, bool& isExitRequested);
+
+		/// <summary>
+		/// Finalizes the rendering of a window
+		/// </summary>
+		static void FinalizeWindow();
 	};
 
 
