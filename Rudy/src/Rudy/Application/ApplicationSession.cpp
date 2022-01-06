@@ -26,6 +26,11 @@ namespace Rudy
 		return world;
 	}
 
+	World* ApplicationSession::LoadViaAsset(const Guid& worldID)
+	{
+		return nullptr;
+	}
+
 	void ApplicationSession::RemoveWorld(World* world)
 	{
 		/*

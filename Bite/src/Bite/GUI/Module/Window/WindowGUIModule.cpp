@@ -85,7 +85,7 @@ namespace Bite
 		*/
 		for (unsigned int i = 0; i < finalizedWindows.GetCursor(); i++)
 		{
-			m_Manager->RemoveWindow();
+			m_Manager->RemoveWindow(finalizedWindows[i]);
 		}
 	}
 	void WindowGUIModule::OnDetach()

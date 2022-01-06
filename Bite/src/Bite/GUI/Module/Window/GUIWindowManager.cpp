@@ -61,9 +61,29 @@ namespace Bite
 		}
 	}
 
-	void GUIWindowManager::RemoveWindow()
+	void GUIWindowManager::RemoveWindow(WindowLayout* layout)
 	{
+		/*
+		* Iterate and validates
+		*/
+		for (int i = 0; i < m_ActiveLayouts.GetCursor(); i++)
+		{
+			/*
+			* Get layout
+			*/
+			WindowLayout* windowLayout = m_ActiveLayouts[i];
 
+			/*
+			* Validate
+			*/
+			if (windowLayout == layout)
+			{
+				windowLayout->OnLayoutFinalize();
+				delete windowLayout;
+				m_ActiveLayouts.RemoveIndex(i);
+				return;
+			}
+		}
 	}
 	Rudy::Array<WindowLayout*> GUIWindowManager::GetLayouts() const
 	{

@@ -6,6 +6,7 @@ namespace Rudy
 {
 	class World;
 	class GraphicsDevice;
+	class Guid;
 	/// <summary>
 	/// Represents a single application session
 	/// </summary>
@@ -25,6 +26,13 @@ namespace Rudy
 		/// </summary>
 		/// <param name="world"></param>
 		World* CreateWorld();
+
+		/// <summary>
+		/// Loads and creates via guid
+		/// </summary>
+		/// <param name="worldID"></param>
+		/// <returns></returns>
+		World* LoadViaAsset(const Guid& worldID);
 
 		/// <summary>
 		/// Removes a world from this session

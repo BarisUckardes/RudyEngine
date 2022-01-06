@@ -14,7 +14,7 @@ namespace Bite
 		
 
 		void RegisterWindow(Rudy::ReflectionType* type);
-		void RemoveWindow();
+		void RemoveWindow(WindowLayout* layout);
 		Rudy::Array<WindowLayout*> GetLayouts() const;
 	private:
 		GUIWindowManager(EditorSession* session);
