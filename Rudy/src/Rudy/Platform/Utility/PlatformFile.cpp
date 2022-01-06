@@ -52,7 +52,7 @@ namespace Rudy
 				break;
 		}
 	}
-	bool PlatformFile::WriteToFileText(const String& path, const String& content)
+	bool PlatformFile::Write(const String& path, const String& content)
 	{
 		PlatformOSType platformType = GetCurrentPlatform();
 		switch (platformType)
@@ -68,7 +68,23 @@ namespace Rudy
 				break;
 		}
 	}
-	bool PlatformFile::WriteToExistingFile(const String& path, const String& content)
+	bool PlatformFile::Write(const String& path, const Array<unsigned char>& content)
+	{
+		PlatformOSType platformType = GetCurrentPlatform();
+		switch (platformType)
+		{
+		case Rudy::PlatformOSType::Undefined:
+			break;
+		case Rudy::PlatformOSType::Windows:
+			return WindowsFile::WriteToFileBytes(path, content);
+			break;
+		case Rudy::PlatformOSType::Linux:
+			break;
+		default:
+			break;
+		}
+	}
+	bool PlatformFile::WriteToExisting(const String& path, const String& content)
 	{
 		PlatformOSType platformType = GetCurrentPlatform();
 		switch (platformType)
@@ -84,7 +100,7 @@ namespace Rudy
 				break;
 		}
 	}
-	bool PlatformFile::ReadFromFile(const String& path, String& contentOut)
+	bool PlatformFile::Read(const String& path, String& contentOut)
 	{
 		PlatformOSType platformType = GetCurrentPlatform();
 		switch (platformType)
@@ -92,7 +108,7 @@ namespace Rudy
 			case Rudy::PlatformOSType::Undefined:
 				break;
 			case Rudy::PlatformOSType::Windows:
-				return WindowsFile::ReadFromFile(path,contentOut);
+				return WindowsFile::ReadText(path,contentOut);
 				break;
 			case Rudy::PlatformOSType::Linux:
 				break;
@@ -100,7 +116,40 @@ namespace Rudy
 				break;
 		}
 	}
-	bool PlatformFile::GetFileLength(const String& path, unsigned int& sizeOut)
+
+	bool PlatformFile::Read(const String& path, Array<unsigned char>& contentOut)
+	{
+		PlatformOSType platformType = GetCurrentPlatform();
+		switch (platformType)
+		{
+		case Rudy::PlatformOSType::Undefined:
+			break;
+		case Rudy::PlatformOSType::Windows:
+			return WindowsFile::ReadBytes(path, contentOut);
+			break;
+		case Rudy::PlatformOSType::Linux:
+			break;
+		default:
+			break;
+		}
+	}
+	bool PlatformFile::Read(const String& path, unsigned long startByte, unsigned long endByte, Array<unsigned char>& contentOut)
+	{
+		PlatformOSType platformType = GetCurrentPlatform();
+		switch (platformType)
+		{
+		case Rudy::PlatformOSType::Undefined:
+			break;
+		case Rudy::PlatformOSType::Windows:
+			return WindowsFile::ReadBytes(path,startByte,endByte, contentOut);
+			break;
+		case Rudy::PlatformOSType::Linux:
+			break;
+		default:
+			break;
+		}
+	}
+	bool PlatformFile::GetFileLength(const String& path, unsigned long& sizeOut)
 	{
 		PlatformOSType platformType = GetCurrentPlatform();
 		switch (platformType)

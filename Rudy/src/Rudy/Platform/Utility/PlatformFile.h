@@ -37,7 +37,15 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <param name="content"></param>
 		/// <returns></returns>
-		static bool WriteToFileText(const String& path, const String& content);
+		static bool Write(const String& path, const String& content);
+
+		/// <summary>
+		/// Creates and writes text to file
+		/// </summary>
+		/// <param name="path"></param>
+		/// <param name="content"></param>
+		/// <returns></returns>
+		static bool Write(const String& path, const Array<unsigned char>& bytes);
 
 		/// <summary>
 		/// Writes to an existing file
@@ -45,7 +53,7 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <param name="content"></param>
 		/// <returns></returns>
-		static bool WriteToExistingFile(const String& path, const String& content);
+		static bool WriteToExisting(const String& path, const String& content);
 
 		/// <summary>
 		/// Reads the file
@@ -53,7 +61,25 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <param name="contentOut"></param>
 		/// <returns></returns>
-		static bool ReadFromFile(const String& path, String& contentOut);
+		static bool Read(const String& path, String& contentOut);
+
+		/// <summary>
+		/// Reads the file
+		/// </summary>
+		/// <param name="path"></param>
+		/// <param name="contentOut"></param>
+		/// <returns></returns>
+		static bool Read(const String& path, Array<unsigned char>& contentOut);
+
+		/// <summary>
+		/// Reads the file
+		/// </summary>
+		/// <param name="path"></param>
+		/// <param name="start"></param>
+		/// <param name="end"></param>
+		/// <param name="contentOut"></param>
+		/// <returns></returns>
+		static bool Read(const String& path, unsigned long start, unsigned long end, Array<unsigned char>& contentOut);
 
 		/// <summary>
 		/// Returns the file size in length
@@ -61,7 +87,7 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <param name="sizeOut"></param>
 		/// <returns></returns>
-		static bool GetFileLength(const String& path, unsigned int& sizeOut);
+		static bool GetFileLength(const String& path, unsigned long& sizeOut);
 
 		/// <summary>
 		/// Returns the file extension

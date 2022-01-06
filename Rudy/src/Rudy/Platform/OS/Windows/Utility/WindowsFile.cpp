@@ -97,6 +97,41 @@ namespace Rudy
 
         return isSuccess;
     }
+
+    bool WindowsFile::WriteToFileBytes(const String& path, const Array<unsigned char>& content)
+    {
+        /*
+        * Create new file
+        */
+        HANDLE fileHandle = CreateFileA(*path, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+
+        /*
+        * Validate file state
+        */
+        if (!fileHandle)
+        {
+            return false;
+        }
+
+        /*
+        * Write to file
+        */
+        unsigned long writtenBytes = 0;
+        bool isSuccess = WriteFile(fileHandle, content.GetData(), content.GetCursor(), &writtenBytes, NULL);
+        printf("Written bytes %d\n", writtenBytes);
+
+        if (!isSuccess)
+        {
+            return false;
+        }
+
+        /*
+        * Close file handle
+        */
+        CloseHandle(fileHandle);
+
+        return isSuccess;
+    }
     bool WindowsFile::WriteToExistingFile(const String& path, const String& content)
     {
         /*
@@ -130,12 +165,12 @@ namespace Rudy
 
         return isSuccess;
     }
-    bool WindowsFile::ReadFromFile(const String& path, String& contentOut)
+    bool WindowsFile::ReadText(const String& path, String& contentOut)
     {
         /*
          * Get file size first
          */
-        unsigned int fileSize = 0;
+        unsigned long fileSize = 0;
         bool isFileValid = GetFileLength(path, fileSize);
 
         if (!isFileValid)
@@ -182,7 +217,131 @@ namespace Rudy
 
         return true;
     }
-    bool WindowsFile::GetFileLength(const String& path, unsigned int& sizeOut)
+    bool WindowsFile::ReadBytes(const String& path, Array<unsigned char>& contentOut)
+    {
+        /*
+         * Get file size first
+         */
+        unsigned long fileSize = 0;
+        bool isFileValid = GetFileLength(path, fileSize);
+        printf("The file which about the be read from has total %d bytes \n", fileSize);
+        if (!isFileValid)
+        {
+            return false;
+        }
+
+        /*
+        * Initialize
+        */
+        HANDLE fileHandle;
+        unsigned long numberOfBytesRead = 0;
+        OVERLAPPED overlapped = { 0 };
+        BYTE* buffer = new BYTE[fileSize];
+
+        /*
+        * Access file for reading
+        */
+        fileHandle = CreateFileA(*path, GENERIC_READ, FILE_SHARE_READ, NULL,
+            OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL | FILE_FLAG_OVERLAPPED, NULL);
+        
+        /*
+        * Validate file
+        */
+        if (!fileHandle)
+        {
+            return false;
+        }
+
+        /*
+        * Read file
+        */
+        bool isSuccess = ReadFile(fileHandle, buffer, fileSize,&numberOfBytesRead,&overlapped);
+
+        /*
+        * Close file Handle
+        */
+        CloseHandle(fileHandle);
+
+        /*
+        * Get bytes read
+        */
+        unsigned long int bytesAcquired = numberOfBytesRead == 0 ? fileSize : numberOfBytesRead;
+       
+        /*
+        * Set escape char
+        */
+        contentOut.Initialize(buffer, bytesAcquired);
+
+        return isSuccess;
+    }
+    bool WindowsFile::ReadBytes(const String& path,unsigned long startByte,unsigned long endByte, Array<unsigned char>& contentOut)
+    {
+        /*
+         * Get file size first
+         */
+        unsigned long totalFileSize = 0;
+        bool isFileValid = GetFileLength(path, totalFileSize);
+        const unsigned long readableBytes = endByte >= totalFileSize ? 0 : endByte - startByte;
+
+        /*
+        * Validate file
+        */
+        if (!isFileValid)
+        {
+            return false;
+        }
+
+        /*
+        * Initialize
+        */
+        HANDLE fileHandle;
+        unsigned long numberOfBytesRead = 0;
+        OVERLAPPED overlapped = { 0 };
+        BYTE* buffer = new BYTE[readableBytes];
+
+        /*
+        * Access file for reading
+        */
+        fileHandle = CreateFileA(*path, GENERIC_READ, FILE_SHARE_READ, NULL,
+            OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL | FILE_FLAG_OVERLAPPED, NULL);
+
+        /*
+        * Validate file
+        */
+        if (!fileHandle)
+        {
+            return false;
+        }
+
+        /*
+        * Set file pointer
+        */
+        SetFilePointer(fileHandle,startByte, 0, FILE_BEGIN);
+
+        /*
+        * Read file
+        */
+        bool isSuccess = ReadFile(fileHandle, buffer, readableBytes, &numberOfBytesRead, &overlapped);
+
+        /*
+        * Close file Handle
+        */
+        CloseHandle(fileHandle);
+
+        /*
+        * Get bytes read
+        */
+        unsigned long int bytesAcquired = numberOfBytesRead == 0 ? readableBytes : numberOfBytesRead;
+
+        printf("Read %d bytes\n", bytesAcquired);
+        /*
+        * Set escape char
+        */
+        contentOut.Initialize(buffer, bytesAcquired);
+
+        return isSuccess;
+    }
+    bool WindowsFile::GetFileLength(const String& path, unsigned long& sizeOut)
     {
         /*
         * Create file view
