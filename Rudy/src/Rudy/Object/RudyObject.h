@@ -2,6 +2,7 @@
 #include <Rudy/Core/Symbols.h>
 #include <Rudy/Memory/String.h>
 #include <Rudy/Memory/Array.h>
+#include <Rudy/Memory/Guid.h>
 #include <Rudy/Reflection/Object/ReflectableObject.h>
 namespace Rudy
 {
@@ -10,6 +11,7 @@ namespace Rudy
 	/// </summary>
 	class RUDY_API RudyObject : public ReflectableObject
 	{
+		friend class Asset;
 	public:
 		/// <summary>
 		/// Returns the name of this rudy object

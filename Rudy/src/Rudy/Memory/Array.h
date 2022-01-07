@@ -26,11 +26,18 @@ namespace Rudy
 		void Reserve(unsigned int capacity);
 
 		/// <summary>
-		/// Initializes this array with a destination source
+		/// Copies the destionation source into this array
 		/// </summary>
 		/// <param name="targetSource"></param>
 		/// <param name="numberOfElements"></param>
-		void Initialize(const TValue* targetSource, unsigned long numberOfElements);
+		void Copy(const TValue* targetSource, unsigned long numberOfElements);
+
+		/// <summary>
+		/// Moves the target source to this array
+		/// </summary>
+		/// <param name="targetSource"></param>
+		/// <param name="numberOfElements"></param>
+		void Move(TValue* targetSource, unsigned long numberOfElements);
 
 		/// <summary>
 		/// Adds a new element to the array
@@ -195,7 +202,7 @@ namespace Rudy
 		if (m_Source == nullptr)
 			return;
 
-		delete[] m_Source;
+		//delete[] m_Source;
 	}
 
 	template<typename TValue>
@@ -222,7 +229,7 @@ namespace Rudy
 		m_Cursor = 0;
 	}
 	template<typename TValue>
-	void Array<TValue>::Initialize(const TValue* targetSource, unsigned long numberOfElements)
+	void Array<TValue>::Copy(const TValue* targetSource, unsigned long numberOfElements)
 	{
 		/*
 		* Delete former source
@@ -241,6 +248,29 @@ namespace Rudy
 		{
 			m_Source[i] = targetSource[i];
 		}
+
+		/*
+		* Set new capacity
+		*/
+		m_Capacity = numberOfElements;
+
+		/*
+		* Reset the cursor
+		*/
+		m_Cursor = numberOfElements;
+	}
+	template<typename TValue>
+	void Array<TValue>::Move(TValue* targetSource, unsigned long numberOfElements)
+	{
+		/*
+		* Delete former source
+		*/
+		ClearMemory();
+
+		/*
+		* Allocate new source
+		*/
+		m_Source = targetSource;
 
 		/*
 		* Set new capacity

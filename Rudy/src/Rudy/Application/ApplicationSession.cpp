@@ -1,11 +1,57 @@
 #include "ApplicationSession.h"
 #include <Rudy/World/World.h>
+#include <Rudy/Asset/AssetPool.h>
+#include <Rudy/Windowing/Window.h>
+#include <Rudy/Platform/Utility/PlatformDirectory.h>
 namespace Rudy
 {
-	GENERATE_REFLECTABLE_TYPE(ApplicationSession);
-	ApplicationSession::ApplicationSession(GraphicsDevice* defaultDevice)
+	ApplicationSession::ApplicationSession(const String& packagesPath,Window* window,GraphicsDevice* defaultDevice)
 	{
+		/*
+		* Set default graphics device
+		*/
 		m_DefaultDevice = defaultDevice;
+		m_Window = window;
+
+		/*
+		* Find packages
+		*/
+		Array<String> packagePaths;
+		PlatformDirectory::GetFilesInDirectoryViaExtension(packagesPath, ".rpackage", packagePaths);
+
+		/*
+		* Create asset pool
+		*/
+		m_AssetPool = new AssetPool(packagePaths);
+	}
+	ApplicationSession::~ApplicationSession()
+	{
+		/*
+		* Delete worlds
+		*/
+		for (int i = 0; i < m_Worlds.GetCursor(); i++)
+		{
+			/*
+			* Get world
+			*/
+			World* world = m_Worlds[i];
+			
+			/*
+			* Destroy world
+			*/
+			world->Destroy();
+
+			/*
+			* Delete heap object
+			*/
+			delete world;
+		}
+		m_Worlds.Clear();
+
+		/*
+		* Delete asset pool
+		*/
+		delete m_AssetPool;
 	}
 	Array<World*> ApplicationSession::GetWorlds() const
 	{
@@ -57,14 +103,13 @@ namespace Rudy
 
 	}
 
+	Window* ApplicationSession::GetSessionWindow() const
+	{
+		return m_Window;
+	}
+
 	GraphicsDevice* ApplicationSession::GetDefaultGraphicsDevice() const
 	{
 		return m_DefaultDevice;
 	}
-
-	void ApplicationSession::DestroyCore()
-	{
-
-	}
-
 }

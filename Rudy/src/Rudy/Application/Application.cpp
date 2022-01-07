@@ -7,8 +7,13 @@
 #include <Rudy/Application/ApplicationSession.h>
 namespace Rudy
 {
-	Application::Application(const WindowCreateParameters& createParameters)
+	Application::Application(const String& executablePath,const WindowCreateParameters& createParameters)
 	{
+		/*
+		* Set properties
+		*/
+		m_ExecutablePath = executablePath;
+
 		/*
 		* Create new window
 		*/
@@ -34,7 +39,7 @@ namespace Rudy
 		/*
 		* Create application session
 		*/
-		m_Session = new ApplicationSession(m_Window->GetGraphicsDevice());
+		m_Session = new ApplicationSession(m_ExecutablePath,m_Window,m_Window->GetGraphicsDevice());
 
 		/*
 		* Attach pending modules
@@ -99,11 +104,9 @@ namespace Rudy
 				exitMessage = "Window closed";
 			}
 				
-
 			/*
 			* Validate session
 			*/
-
 		}
 
 		/*

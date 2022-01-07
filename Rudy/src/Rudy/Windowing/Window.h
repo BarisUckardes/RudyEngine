@@ -13,6 +13,7 @@ namespace Rudy
 	/// </summary>
 	class RUDY_API Window
 	{
+		friend class ApplicationSession;
 	protected:
 		using WindowEventCallback = std::function<void(Event&)>;
 

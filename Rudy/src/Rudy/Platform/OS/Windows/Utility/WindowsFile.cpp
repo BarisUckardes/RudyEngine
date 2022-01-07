@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <Shlwapi.h>
 #include <stdio.h>
+#include <Rudy/Platform/Utility/PlatformError.h>
 
 namespace Rudy
 {
@@ -224,7 +225,7 @@ namespace Rudy
          */
         unsigned long fileSize = 0;
         bool isFileValid = GetFileLength(path, fileSize);
-        printf("The file which about the be read from has total %d bytes \n", fileSize);
+
         if (!isFileValid)
         {
             return false;
@@ -270,7 +271,7 @@ namespace Rudy
         /*
         * Set escape char
         */
-        contentOut.Initialize(buffer, bytesAcquired);
+        contentOut.Move(buffer, bytesAcquired);
 
         return isSuccess;
     }
@@ -281,7 +282,7 @@ namespace Rudy
          */
         unsigned long totalFileSize = 0;
         bool isFileValid = GetFileLength(path, totalFileSize);
-        const unsigned long readableBytes = endByte >= totalFileSize ? 0 : endByte - startByte;
+        const unsigned long readableBytes = endByte > totalFileSize ? 0 : endByte - startByte;
 
         /*
         * Validate file
@@ -316,7 +317,7 @@ namespace Rudy
         /*
         * Set file pointer
         */
-        SetFilePointer(fileHandle,startByte, 0, FILE_BEGIN);
+        SetFilePointer(fileHandle,startByte, NULL, FILE_BEGIN);
 
         /*
         * Read file
@@ -333,11 +334,10 @@ namespace Rudy
         */
         unsigned long int bytesAcquired = numberOfBytesRead == 0 ? readableBytes : numberOfBytesRead;
 
-        printf("Read %d bytes\n", bytesAcquired);
         /*
         * Set escape char
         */
-        contentOut.Initialize(buffer, bytesAcquired);
+        contentOut.Move(buffer, bytesAcquired);
 
         return isSuccess;
     }

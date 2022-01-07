@@ -39,6 +39,6 @@ namespace Rudy
 		unsigned char D[8];
 
 	};
-	static bool operator==(const Guid& a, const Guid& b);
-	static bool operator!=(const Guid& a, const Guid& b);
+	RUDY_API bool operator==(const Guid& a, const Guid& b);
+	RUDY_API bool operator!=(const Guid& a, const Guid& b);
 }

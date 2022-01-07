@@ -9,13 +9,11 @@
 #include <Bite/GUI/Module/MainMenu/MainMenuBarGUIModule.h>
 #include <Bite/GUI/Module/Window/WindowGUIModule.h>
 #include <Rudy/Platform/Utility/PlatformFile.h>
+#include <Rudy/Asset/AssetDefinition.h>
+#include <Rudy/Asset/AssetPackage.h>
 namespace EditorLauncher
 {
-	struct DataPack
-	{
-		unsigned int a, b, c;
-	};
-	EditorApplication::EditorApplication(const Rudy::String& title, unsigned int offsetX, unsigned int offsetY, unsigned int sizeX, unsigned int sizeY) : Rudy::Application(Rudy::WindowCreateParameters(title,Rudy::Vector2i(offsetX,offsetY),Rudy::Vector2i(sizeX,sizeY)))
+	EditorApplication::EditorApplication(const Rudy::String& projectPath,const Rudy::String& title, unsigned int offsetX, unsigned int offsetY, unsigned int sizeX, unsigned int sizeY) : Rudy::Application(projectPath,Rudy::WindowCreateParameters(title,Rudy::Vector2i(offsetX,offsetY),Rudy::Vector2i(sizeX,sizeY)))
 	{
 		/*
 		* Create gui module list
@@ -33,19 +31,30 @@ namespace EditorLauncher
 		RegisterModule<Rudy::GraphicsModule>();
 		RegisterModule<Bite::BiteModule>(guiModules);
 
-		DataPack data = { 399,999,1999 };
-		unsigned char* dataPtr = (unsigned char*)&data;
-		unsigned int size = sizeof(data);
+		/*
+		* Write demo
+		*/
+		const unsigned int defSize = 3;
+		Rudy::Array<unsigned char> defSizeBytes;
+		defSizeBytes.Move((unsigned char*)&defSize, sizeof(defSize));
 
-		Rudy::Array<unsigned char> writtenBytes(dataPtr, size);
+		Rudy::Array<Rudy::AssetDefinition> writeDefinitions;
+		writeDefinitions.Add(Rudy::AssetDefinition(Rudy::AssetType::CubeTexture,Rudy::Guid::Create(),"Ma name",0,5));
+		writeDefinitions.Add(Rudy::AssetDefinition(Rudy::AssetType::Texture2D, Rudy::Guid::Create(), "Ma nam", 79, 51));
+		writeDefinitions.Add(Rudy::AssetDefinition(Rudy::AssetType::Texture3D, Rudy::Guid::Create(), "Ma na", 99, 88));
 
-		Rudy::PlatformFile::Write("C:/Users/PC/Desktop/test/hello.rpackage", writtenBytes);
+		Rudy::Array<unsigned char> defintionBytes;
+		defintionBytes.Move((unsigned char*)writeDefinitions.GetData(), 48 * writeDefinitions.GetCursor());
 
-		Rudy::Array<unsigned char> readBytes;
-		Rudy::PlatformFile::Read("C:/Users/PC/Desktop/test/hello.rpackage", readBytes);
-		DataPack dataRead = *(DataPack*)readBytes.GetData();
-		printf("Data: %d,%d,%d\n", dataRead.a, dataRead.b, dataRead.c);
-		
+		Rudy::Array<unsigned char> writeBytes;
+		writeBytes.Add(defSizeBytes);
+		writeBytes.Add(defintionBytes);
+		Rudy::PlatformFile::Write("C:/Users/PC/Desktop/Test/hello.rpackage", writeBytes);
+
+		/*
+		* Read demo
+		*/
+		Rudy::AssetPackage* package = new Rudy::AssetPackage("C:/Users/PC/Desktop/Test/hello.rpackage");
 	}
 
 	void EditorApplication::RunEditor()

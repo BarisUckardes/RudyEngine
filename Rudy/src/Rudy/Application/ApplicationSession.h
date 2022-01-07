@@ -6,14 +6,15 @@ namespace Rudy
 {
 	class World;
 	class GraphicsDevice;
+	class Window;
 	class Guid;
+	class AssetPool;
 	/// <summary>
 	/// Represents a single application session
 	/// </summary>
-	class RUDY_API ApplicationSession : RudyObject
+	class RUDY_API ApplicationSession
 	{
 		friend class Application;
-		GENERATE_REFLECTABLE_OBJECT(ApplicationSession);
 	public:
 		/// <summary>
 		/// Returns all the worlds this session has
@@ -41,16 +42,24 @@ namespace Rudy
 		void RemoveWorld(World* world);
 
 		/// <summary>
+		/// Returns the session window
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE Window* GetSessionWindow() const;
+
+		/// <summary>
 		/// Returns the default graphics device for this session
 		/// </summary>
 		/// <returns></returns>
 		FORCEINLINE GraphicsDevice* GetDefaultGraphicsDevice() const;
-	protected:
-		virtual void DestroyCore() override;
 	private:
-		ApplicationSession(GraphicsDevice* device);
-		~ApplicationSession() = default;
+		ApplicationSession(const String& packagesPaths,Window* window,GraphicsDevice* defaultGraphicsDevice);
+		~ApplicationSession();
+
 		Array<World*> m_Worlds;
+		AssetPool* m_AssetPool;
+		Window* m_Window;
 		GraphicsDevice* m_DefaultDevice;
+
 	};
 }

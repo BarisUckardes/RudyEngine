@@ -161,6 +161,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\Asset\AssetDefinition.h" />
+    <ClInclude Include="src\Rudy\Asset\AssetPackageHeader.h" />
+    <ClInclude Include="src\Rudy\Asset\Asset.h" />
+    <ClInclude Include="src\Rudy\Asset\AssetPackage.h" />
+    <ClInclude Include="src\Rudy\Asset\AssetPool.h" />
+    <ClInclude Include="src\Rudy\Asset\AssetType.h" />
+    <ClInclude Include="src\Rudy\Asset\Containers\Texture2DContainer.h" />
     <ClInclude Include="src\Rudy\ImGui\ImGuiRenderCommands.h" />
     <ClInclude Include="src\Rudy\ImGui\ImGuiRenderer.h" />
     <ClInclude Include="src\Rudy\Events\Keyboard\KeyboardCharEvent.h" />
@@ -297,6 +304,11 @@
     <ClInclude Include="src\Rudy\Platform\OS\Windows\Memory\WindowsGuid.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rudy\Asset\AssetDefinition.cpp" />
+    <ClCompile Include="src\Rudy\Asset\AssetPackageHeader.cpp" />
+    <ClCompile Include="src\Rudy\Asset\Asset.cpp" />
+    <ClCompile Include="src\Rudy\Asset\AssetPackage.cpp" />
+    <ClCompile Include="src\Rudy\Asset\AssetPool.cpp" />
     <ClCompile Include="src\Rudy\ImGui\ImGuiRenderCommands.cpp" />
     <ClCompile Include="src\Rudy\ImGui\ImGuiRenderer.cpp" />
     <ClCompile Include="src\Rudy\Events\Keyboard\KeyboardCharEvent.cpp" />

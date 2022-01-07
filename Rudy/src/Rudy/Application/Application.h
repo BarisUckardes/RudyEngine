@@ -17,14 +17,20 @@ namespace Rudy
 	class RUDY_API Application
 	{
 	public:
-		Application(const WindowCreateParameters& createParameters);
+		Application(const String& executablePath,const WindowCreateParameters& createParameters);
 		virtual ~Application() = default;
 
 		/// <summary>
 		/// Returns the window
 		/// </summary>
 		/// <returns></returns>
-		Window* GetWindow() const;
+		FORCEINLINE Window* GetWindow() const;
+
+		/// <summary>
+		/// Returns the executable path for this application
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE String GetApplicationExecutablePath() const;
 	protected:
 		/// <summary>
 		/// Registers anew module to the application
@@ -56,6 +62,7 @@ namespace Rudy
 		Delegate<void, Event*> m_ApplicationWindowEventDelegate;
 		ApplicationSession* m_Session;
 		Window* m_Window;
+		String m_ExecutablePath;
 	};
 
 	template<typename TModule,typename ...TParameters>

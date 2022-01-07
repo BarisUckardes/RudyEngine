@@ -37,7 +37,7 @@ namespace Rudy
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	void OpenGLTexture2D::Initialize(unsigned int width, unsigned int height, TextureFormat format, TextureInternalFormat internalFormat, TextureDataType dataType, TextureMinFilter minFilter, TextureMagFilter magFilter, TextureWrapMode wrapModeS, TextureWrapMode wrapModeT, bool createMipmaps)
+	void OpenGLTexture2D::Initialize(unsigned int width, unsigned int height, TextureFormat format, TextureInternalFormat internalFormat, TextureDataType dataType, TextureMinFilter minFilter, TextureMagFilter magFilter, TextureWrapMode wrapModeS, TextureWrapMode wrapModeT, bool generateMipmaps)
 	{
 		/*
 		* Generate texture id
@@ -68,6 +68,12 @@ namespace Rudy
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(wrapModeT));
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, OpenGLTextureMinFilterConversions::GetOpenGLMinFilter(minFilter));
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, OpenGLTextureMagFilterConversions::GetOpenGLMagFilter(magFilter));
+
+		/*
+		* Validate and generate mipmaps
+		*/
+		if(generateMipmaps)
+			glGenerateMipmap(GL_TEXTURE_2D);
 
 		/*
 		* Unbind texture
