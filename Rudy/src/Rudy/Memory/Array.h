@@ -40,6 +40,12 @@ namespace Rudy
 		void Move(TValue* targetSource, unsigned long numberOfElements);
 
 		/// <summary>
+		/// Returns a slice of this array(does not copy the contents)
+		/// </summary>
+		/// <typeparam name="TValue"></typeparam>
+		Array<TValue> GetSlice(unsigned int start, unsigned int end) const;
+
+		/// <summary>
 		/// Adds a new element to the array
 		/// </summary>
 		/// <param name="element"></param>
@@ -268,7 +274,7 @@ namespace Rudy
 		ClearMemory();
 
 		/*
-		* Allocate new source
+		* Set target source
 		*/
 		m_Source = targetSource;
 
@@ -281,6 +287,21 @@ namespace Rudy
 		* Reset the cursor
 		*/
 		m_Cursor = numberOfElements;
+	}
+	template<typename TValue>
+	inline Array<TValue> Array<TValue>::GetSlice(unsigned int start, unsigned int end) const
+	{
+		/*
+		* Create arrays
+		*/
+		Array<TValue> array;
+
+		/*
+		* Move the data
+		*/
+		array.Move((m_Source + start), end - start);
+
+		return array;
 	}
 	template<typename TValue>
 	void Array<TValue>::Add(const TValue& element)

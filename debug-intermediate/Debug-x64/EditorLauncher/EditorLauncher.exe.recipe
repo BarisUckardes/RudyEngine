@@ -2,13 +2,13 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\PC\source\repos\BarisUckardes\RudyEngine\binary\Debug-x64\Rudy\Rudy.dll</FullPath>
+      <FullPath>C:\Users\PC\source\repos\RudyEngine\binary\Debug-x64\Rudy\Rudy.dll</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\Users\PC\source\repos\BarisUckardes\RudyEngine\binary\Debug-x64\Bite\Bite.dll</FullPath>
+      <FullPath>C:\Users\PC\source\repos\RudyEngine\binary\Debug-x64\Bite\Bite.dll</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\Users\PC\source\repos\BarisUckardes\RudyEngine\binary\Debug-x64\EditorLauncher\EditorLauncher.exe</FullPath>
+      <FullPath>C:\Users\PC\source\repos\RudyEngine\binary\Debug-x64\EditorLauncher\EditorLauncher.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

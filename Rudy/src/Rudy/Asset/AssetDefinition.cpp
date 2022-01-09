@@ -1,12 +1,12 @@
 #include "AssetDefinition.h"
-
+#include <string>
 namespace Rudy
 {
 	AssetDefinition::AssetDefinition(AssetType type, const Guid& id, const String& name, unsigned long offset,unsigned long size)
 	{
 		m_Type = type;
 		m_ID = id;
-		//m_Name = name;
+		strcpy(m_Name, *name);
 		m_Offset = offset;
 		m_Size = size;
 	}

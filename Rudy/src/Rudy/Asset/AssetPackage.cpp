@@ -7,7 +7,6 @@ namespace Rudy
 {
 	AssetPackage::AssetPackage(const String& packagePath)
 	{
-		printf("PACKAGE READ START...\n");
 		constexpr unsigned int definitionBytes = 48u;
 		/*
 		* Get total file size
@@ -21,7 +20,6 @@ namespace Rudy
 		Array<unsigned char> definitionCountBytes;
 		PlatformFile::Read(packagePath, 0, 4, definitionCountBytes);
 		const unsigned int definitionCount = *(unsigned int*)definitionCountBytes.GetData();
-		printf("	Found definition count: %d\n", definitionCount);
 
 		/*
 		* Iterate and gather all definitions
@@ -29,7 +27,6 @@ namespace Rudy
 		unsigned int byteStart = 4;
 		while (byteStart < totalFileSize)
 		{
-			printf("		Reading %d-%d\n", byteStart,byteStart+definitionBytes);
 			/*
 			* Get defintion block
 			*/
@@ -39,8 +36,18 @@ namespace Rudy
 			/*
 			* Create definition
 			*/
-			AssetDefinition definition = *(AssetDefinition*)defintionBlockBytes.GetData();
-			printf("		Definition asset type: %d\n", definition.GetType());
+			Array<unsigned char> typeBytes = defintionBlockBytes.GetSlice(0,4);
+			Array<unsigned char> idBytes = defintionBlockBytes.GetSlice(4, 20);
+			Array<unsigned char> nameBytes = defintionBlockBytes.GetSlice(20, 40);
+			Array<unsigned char> offsetBytes = defintionBlockBytes.GetSlice(40, 44);
+			Array<unsigned char> sizeBytes = defintionBlockBytes.GetSlice(44, 48);
+
+			AssetType assetType = *(AssetType*)typeBytes.GetData();
+			String name((char*)nameBytes.GetData(), nameBytes.GetCursor());
+			Guid id = *(Guid*)idBytes.GetData();
+			unsigned long offset = *(unsigned long*)offsetBytes.GetData();
+			unsigned long size = *(unsigned long*)sizeBytes.GetData();
+			AssetDefinition definition(assetType,id,name,offset,size);
 
 			/*
 			* Register definition
@@ -52,7 +59,6 @@ namespace Rudy
 			*/
 			byteStart += definitionBytes;
 		}
-		printf("PACKAGE READ END!\n");
 	}
 	AssetPackage::~AssetPackage()
 	{
