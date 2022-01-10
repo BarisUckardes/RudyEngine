@@ -11,9 +11,15 @@ namespace Rudy
 	class RUDY_API AssetDefinition
 	{
 	public:
-		AssetDefinition(AssetType type,const Guid& id,const String& name,unsigned long offset,unsigned long size);
+		AssetDefinition(const String& sourceAbsolutePath,AssetType type,const Guid& id,const String& name,unsigned long offset,unsigned long size);
 		AssetDefinition() = default;
 		~AssetDefinition() = default;
+
+		/// <summary>
+		/// Returns the source file absolute path
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE String GetSourceAbsolutePath() const;
 
 		/// <summary>
 		/// Returns the asset type
@@ -46,6 +52,7 @@ namespace Rudy
 		FORCEINLINE unsigned long GetSize() const;
 
 	private:
+		String m_SourceAbsolutePath;
 		AssetType m_Type;
 		Guid m_ID;
 		char m_Name[20];

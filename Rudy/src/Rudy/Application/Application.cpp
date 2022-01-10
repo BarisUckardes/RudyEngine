@@ -39,7 +39,7 @@ namespace Rudy
 		/*
 		* Create application session
 		*/
-		m_Session = new ApplicationSession(m_ExecutablePath,m_Window,m_Window->GetGraphicsDevice());
+		m_Session = new ApplicationSession(m_ExecutablePath + "/Packages/", m_Window, m_Window->GetGraphicsDevice());
 
 		/*
 		* Attach pending modules

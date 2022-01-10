@@ -53,7 +53,7 @@ namespace Rudy
 		/// <returns></returns>
 		FORCEINLINE GraphicsDevice* GetDefaultGraphicsDevice() const;
 	private:
-		ApplicationSession(const String& packagesPaths,Window* window,GraphicsDevice* defaultGraphicsDevice);
+		ApplicationSession(const String& packagesPath,Window* window,GraphicsDevice* defaultGraphicsDevice);
 		~ApplicationSession();
 
 		Array<World*> m_Worlds;

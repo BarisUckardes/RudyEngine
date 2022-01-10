@@ -2,13 +2,18 @@
 #include <string>
 namespace Rudy
 {
-	AssetDefinition::AssetDefinition(AssetType type, const Guid& id, const String& name, unsigned long offset,unsigned long size)
+	AssetDefinition::AssetDefinition(const String& sourceFileAbsolutePath,AssetType type, const Guid& id, const String& name, unsigned long offset,unsigned long size)
 	{
+		m_SourceAbsolutePath = sourceFileAbsolutePath;
 		m_Type = type;
 		m_ID = id;
 		strcpy(m_Name, *name);
 		m_Offset = offset;
 		m_Size = size;
+	}
+	String AssetDefinition::GetSourceAbsolutePath() const
+	{
+		return m_SourceAbsolutePath;
 	}
 	AssetType AssetDefinition::GetType() const
 	{

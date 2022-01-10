@@ -1,6 +1,6 @@
 #pragma once
 #include <Rudy/Object/RudyObject.h>
-
+#include <Rudy/Asset/AssetDefinition.h>
 namespace Rudy
 {
 	/// <summary>
@@ -10,7 +10,17 @@ namespace Rudy
 	{
 		friend class AssetPackage;
 	public:
-		Asset(RudyObject* assetObject,const Guid& id);
+		Asset(const AssetDefinition& definition);
+
+		/// <summary>
+		/// Loads the asset if hasnt already
+		/// </summary>
+		void Load();
+
+		/// <summary>
+		/// Unloads the asset if its loaded
+		/// </summary>
+		void Unload();
 
 		/// <summary>
 		/// returns the loaded asset
@@ -23,10 +33,24 @@ namespace Rudy
 		/// </summary>
 		/// <returns></returns>
 		FORCEINLINE Guid GetID() const;
+
+		/// <summary>
+		/// Returns the total size of this asset in bytes
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE unsigned long GetSizeInBytes() const;
+
+		/// <summary>
+		/// Returns whether this asset
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE bool IsLoaded() const;
+
 	private:
 		~Asset();
 		RudyObject* m_LoadedObject;
-		Guid m_ID;
+		AssetDefinition m_Definition;
+		unsigned long m_SizeInBytes;
 	};
 
 

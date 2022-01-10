@@ -47,7 +47,7 @@ namespace Rudy
 			Guid id = *(Guid*)idBytes.GetData();
 			unsigned long offset = *(unsigned long*)offsetBytes.GetData();
 			unsigned long size = *(unsigned long*)sizeBytes.GetData();
-			AssetDefinition definition(assetType,id,name,offset,size);
+			AssetDefinition definition(packagePath,assetType,id,name,offset,size);
 
 			/*
 			* Register definition
@@ -55,10 +55,20 @@ namespace Rudy
 			m_Definitions.Add(definition);
 
 			/*
+			* Register asset
+			*/
+			m_Assets.Add(new Asset(definition));
+
+			/*
 			* Increment byteStart
 			*/
 			byteStart += definitionBytes;
 		}
+	}
+	AssetPackage::AssetPackage()
+	{
+		m_PackageID = Guid::Create();
+		m_PackagePath = "Virtual Path";
 	}
 	AssetPackage::~AssetPackage()
 	{
@@ -71,69 +81,93 @@ namespace Rudy
 		* Clear
 		*/
 		m_Definitions.Clear();
-		m_LoadedAssets.Clear();
+		m_Assets.Clear();
+	}
+	Asset* AssetPackage::RegisterVirtualAsset(const String& path)
+	{
+		/*
+		* Load asset file definition bytes
+		*/
+		Array<unsigned char> defintionBlockBytes;
+		PlatformFile::Read(path, 0, 48u, defintionBlockBytes);
+
+		/*
+		* Slice asset definition bytes
+		*/
+		Array<unsigned char> typeBytes = defintionBlockBytes.GetSlice(0, 4);
+		Array<unsigned char> idBytes = defintionBlockBytes.GetSlice(4, 20);
+		Array<unsigned char> nameBytes = defintionBlockBytes.GetSlice(20, 40);
+		Array<unsigned char> offsetBytes = defintionBlockBytes.GetSlice(40, 44);
+		Array<unsigned char> sizeBytes = defintionBlockBytes.GetSlice(44, 48);
+
+		/*
+		* Create asset definiton
+		*/
+		AssetType assetType = *(AssetType*)typeBytes.GetData();
+		String name((char*)nameBytes.GetData(), nameBytes.GetCursor());
+		Guid id = *(Guid*)idBytes.GetData();
+		unsigned long offset = *(unsigned long*)offsetBytes.GetData();
+		unsigned long size = *(unsigned long*)sizeBytes.GetData();
+		AssetDefinition definition(path,assetType, id, name, offset, size);
+
+		/*
+		* Create asset
+		*/
+		Asset* asset = new Asset(definition);
+
+		/*
+		* Register asset and definition
+		*/
+		m_Assets.Add(asset);
+		m_Definitions.Add(definition);
+
+		return asset;
+	}
+	bool AssetPackage::RemoveVirtualAsset(const Guid& id)
+	{
+		/*
+		* Iterate and validate
+		*/
+		for (int i = 0; i < m_Definitions.GetCursor(); i++)
+		{
+			/*
+			* Get definition
+			*/
+			const AssetDefinition& definition = m_Definitions[i];
+
+			/*
+			* Validate guid
+			*/
+			if (definition.GetID() == id)
+			{
+				m_Assets[i]->Unload();
+				delete m_Assets[i];
+				m_Assets.RemoveIndex(i);
+				m_Definitions.RemoveIndex(i);
+				return true;
+			}
+		}
+		return false;
 	}
 	const Asset* AssetPackage::LoadAsset(const Guid& id)
 	{
 		/*
-		* Iterate and check loaded assets
+		* Iterate and validate
 		*/
-		for (int i = 0; i < m_LoadedAssets.GetCursor(); i++)
+		for (int i = 0; i < m_Definitions.GetCursor(); i++)
 		{
 			/*
-			* Get asset
+			* Get definition
 			*/
-			const Asset* asset = m_LoadedAssets[i];
+			const AssetDefinition& definition = m_Definitions[i];
 
 			/*
-			* Validate
+			* Validate guid
 			*/
-			if (asset->GetID() == id)
+			if (definition.GetID() == id)
 			{
-				return asset;
-			}
-		}
-
-		/*
-		* Iterrate and validate
-		*/
-		for (int i = 0; i <m_Definitions.GetCursor(); i++)
-		{
-			/*
-			* Get asset definition
-			*/
-			const AssetDefinition& defintion = m_Definitions[i];
-
-			/*
-			* Validate
-			*/
-			if (defintion.GetID() == id)
-			{
-				/*
-				* Load
-				*/
-				const unsigned int assetByteOffset = defintion.GetOffset();
-				const unsigned int assetSizeInBytes = defintion.GetSize();
-
-				/*
-				* Read bytes
-				*/
-				Array<unsigned char> bytesRead;
-				PlatformFile::Read(m_PackagePath, assetByteOffset, assetByteOffset + assetSizeInBytes, bytesRead);
-
-				/*
-				* Convert bytes to appropiate asset containers
-				*/
-
-				/*
-				* Create new asset
-				*/
-				Asset* asset = nullptr;
-
-				/*
-				* Register asset
-				*/
-				return asset;
+				m_Assets[i]->Load();
+				return m_Assets[i];
 			}
 		}
 
@@ -144,12 +178,12 @@ namespace Rudy
 		/*
 		* Iterate and validate
 		*/
-		for (int i = 0; i < m_LoadedAssets.GetCursor(); i++)
+		for (int i = 0; i < m_Assets.GetCursor(); i++)
 		{
 			/*
 			* Get asset
 			*/
-			Asset* asset = m_LoadedAssets[i];
+			Asset* asset = m_Assets[i];
 
 			/*
 			* Validate
@@ -157,15 +191,9 @@ namespace Rudy
 			if (asset->GetID() == id)
 			{
 				/*
-				* Delete asset
+				* Unload the asset
 				*/
-				delete asset;
-
-				/*
-				* Remove it from the loaded assets
-				*/
-				m_LoadedAssets.RemoveIndex(i);
-
+				asset->Unload();
 				return;
 			}
 		}
@@ -175,19 +203,18 @@ namespace Rudy
 		/*
 		* Iterate and unload all assets
 		*/
-		for (int i = 0; i < m_LoadedAssets.GetCursor(); i++)
+		for (int i = 0; i < m_Assets.GetCursor(); i++)
 		{
 			/*
 			* Get asset
 			*/
-			Asset* asset = m_LoadedAssets[i];
+			Asset* asset = m_Assets[i];
 
 			/*
-			* Delete asset
+			* Unload the asset
 			*/
-			delete asset;
+			asset->Unload();
 		}
-		m_LoadedAssets.Clear();
 	}
 	AssetDefinition AssetPackage::GetDefiniton(const Guid& id)
 	{
@@ -215,6 +242,54 @@ namespace Rudy
 	Guid AssetPackage::GetPackageID() const
 	{
 		return m_PackageID;
+	}
+	unsigned long AssetPackage::GetTotalAssetSize() const
+	{
+		unsigned long totalSize = 0;
+
+		/*
+		* Iterate and gather total asset size
+		*/
+		for (int i = 0; i < m_Definitions.GetCursor(); i++)
+		{
+			/*
+			* Get asset
+			*/
+			const AssetDefinition& definition = m_Definitions[i];
+
+			/*
+			* Get and increment
+			*/
+			totalSize += definition.GetSize();
+		}
+
+		return totalSize;
+	}
+	unsigned long AssetPackage::GetAllocatedAssetSize() const
+	{
+		unsigned long allocatedSize = 0;
+
+		/*
+		* Iterate and gather total asset size
+		*/
+		for (int i = 0; i < m_Assets.GetCursor(); i++)
+		{
+			/*
+			* Get asset
+			*/
+			Asset* asset = m_Assets[i];
+
+			/*
+			* Get and increment
+			*/
+			allocatedSize += asset->GetSizeInBytes() * (asset->IsLoaded() ? 1.0f : 0.0f);
+		}
+
+		return allocatedSize;
+	}
+	bool AssetPackage::IsVirtual() const
+	{
+		return m_bVirtual;
 	}
 	Array<AssetDefinition> AssetPackage::GetDefinitions() const
 	{
