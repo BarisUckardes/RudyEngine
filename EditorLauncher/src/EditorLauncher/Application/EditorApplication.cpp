@@ -23,38 +23,43 @@ namespace EditorLauncher
 		guiModules.Add(new Bite::WindowGUIModule());
 
 		/*
+		* Create eidtor commands
+		*/
+		Rudy::Array<Bite::EditorCommand*> commands;
+
+		/*
 		* Register editor application modules
 		*/
 		RegisterModule<Rudy::GameInputModule>();
 		RegisterModule<Rudy::TestModule>();
 		RegisterModule<Rudy::GameLogicModule>();
 		RegisterModule<Rudy::GraphicsModule>();
-		RegisterModule<Bite::BiteModule>(guiModules);
+		RegisterModule<Bite::BiteModule>(guiModules, commands);
 
 		/*
 		* Write demo
 		*/
-		const unsigned int defSize = 3;
+	/*	const unsigned int defSize = 3;
 		Rudy::Array<unsigned char> defSizeBytes;
-		defSizeBytes.Move((unsigned char*)&defSize, sizeof(defSize));
+		defSizeBytes.Copy((unsigned char*)&defSize, sizeof(defSize));*/
 
-		Rudy::Array<Rudy::AssetDefinition> writeDefinitions;
-		writeDefinitions.Add(Rudy::AssetDefinition("", Rudy::AssetType::CubeTexture, Rudy::Guid::Create(), "afsdfsd", 0, 5));
-		writeDefinitions.Add(Rudy::AssetDefinition("", Rudy::AssetType::Texture2D, Rudy::Guid::Create(), "bhghr", 79, 51));
-		writeDefinitions.Add(Rudy::AssetDefinition("", Rudy::AssetType::Texture3D, Rudy::Guid::Create(), "ertertc", 99, 88));
+		//Rudy::Array<Rudy::AssetDefinition> writeDefinitions;
+		//writeDefinitions.Add(Rudy::AssetDefinition("", Rudy::AssetType::CubeTexture, Rudy::Guid::Create(), "afsdfsd", 0, 5));
+		//writeDefinitions.Add(Rudy::AssetDefinition("", Rudy::AssetType::Texture2D, Rudy::Guid::Create(), "bhghr", 79, 51));
+		//writeDefinitions.Add(Rudy::AssetDefinition("", Rudy::AssetType::Texture3D, Rudy::Guid::Create(), "ertertc", 99, 88));
 
-		Rudy::Array<unsigned char> defintionBytes;
-		defintionBytes.Move((unsigned char*)writeDefinitions.GetData(), 48 * writeDefinitions.GetCursor());
+		//Rudy::Array<unsigned char> defintionBytes;
+		//defintionBytes.Copy((unsigned char*)writeDefinitions.GetData(), 48 * writeDefinitions.GetCursor());
 
-		Rudy::Array<unsigned char> writeBytes;
-		writeBytes.Add(defSizeBytes);
-		writeBytes.Add(defintionBytes);
-		Rudy::PlatformFile::Write("C:/Users/PC/Desktop/Test/hello.rpackage", writeBytes);
+		//Rudy::Array<unsigned char> writeBytes;
+		//writeBytes.Add(defSizeBytes);
+		//writeBytes.Add(defintionBytes);
+		//Rudy::PlatformFile::Write("C:/Users/PC/Desktop/Test/hello.rpackage", writeBytes);
 
-		/*
-		* Read demo
-		*/
-		Rudy::AssetPackage* package = new Rudy::AssetPackage("C:/Users/PC/Desktop/Test/hello.rpackage");
+		///*
+		//* Read demo
+		//*/
+		//Rudy::AssetPackage* package = new Rudy::AssetPackage("C:/Users/PC/Desktop/Test/hello.rpackage");
 	}
 
 	void EditorApplication::RunEditor()

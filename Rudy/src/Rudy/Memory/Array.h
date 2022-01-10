@@ -26,11 +26,16 @@ namespace Rudy
 		void Reserve(unsigned int capacity);
 
 		/// <summary>
-		/// Copies the destionation source into this array
+		/// Returns a slice of this array(does not copy the contents)
 		/// </summary>
-		/// <param name="targetSource"></param>
-		/// <param name="numberOfElements"></param>
-		void Copy(const TValue* targetSource, unsigned long numberOfElements);
+		/// <typeparam name="TValue"></typeparam>
+		void Copy(const TValue* data, unsigned int count);
+
+		/// <summary>
+		/// Returns a slice of this array(does not copy the contents)
+		/// </summary>
+		/// <typeparam name="TValue"></typeparam>
+		void Copy(const Array<TValue>& data, unsigned int start,unsigned int end);
 
 		/// <summary>
 		/// Moves the target source to this array
@@ -38,12 +43,6 @@ namespace Rudy
 		/// <param name="targetSource"></param>
 		/// <param name="numberOfElements"></param>
 		void Move(TValue* targetSource, unsigned long numberOfElements);
-
-		/// <summary>
-		/// Returns a slice of this array(does not copy the contents)
-		/// </summary>
-		/// <typeparam name="TValue"></typeparam>
-		Array<TValue> GetSlice(unsigned int start, unsigned int end) const;
 
 		/// <summary>
 		/// Adds a new element to the array
@@ -185,7 +184,7 @@ namespace Rudy
 		* Get properties
 		*/
 		m_Cursor = count;
-		m_Capacity = sizeof(TValue) * count;
+		m_Capacity = count;
 
 		/*
 		* Allocate new source
@@ -208,7 +207,7 @@ namespace Rudy
 		if (m_Source == nullptr)
 			return;
 
-		//delete[] m_Source;
+		delete[] m_Source;
 	}
 
 	template<typename TValue>
@@ -235,73 +234,53 @@ namespace Rudy
 		m_Cursor = 0;
 	}
 	template<typename TValue>
-	void Array<TValue>::Copy(const TValue* targetSource, unsigned long numberOfElements)
+	inline void Array<TValue>::Copy(const TValue* data, unsigned int count)
 	{
 		/*
-		* Delete former source
+		* Get properties
 		*/
-		ClearMemory();
+		m_Cursor = count;
+		m_Capacity = count;
 
 		/*
 		* Allocate new source
 		*/
-		m_Source = new TValue[numberOfElements];
+		m_Source = new TValue[m_Capacity];
 
-		/*
-		* Copy the values
-		*/
-		for (unsigned long i = 0; i < numberOfElements; i++)
+		for (unsigned int i = 0; i < m_Cursor; i++)
 		{
-			m_Source[i] = targetSource[i];
+			m_Source[i] = data[i];
 		}
-
-		/*
-		* Set new capacity
-		*/
-		m_Capacity = numberOfElements;
-
-		/*
-		* Reset the cursor
-		*/
-		m_Cursor = numberOfElements;
 	}
 	template<typename TValue>
-	void Array<TValue>::Move(TValue* targetSource, unsigned long numberOfElements)
+	inline void Array<TValue>::Copy(const Array<TValue>& data, unsigned int start,unsigned int end)
 	{
 		/*
-		* Delete former source
+		* Get properties
 		*/
-		ClearMemory();
+		m_Cursor = end - start;
+		m_Capacity = end-start;
 
 		/*
-		* Set target source
+		* Allocate new source
 		*/
+		m_Source = new TValue[m_Capacity];
+
+		for (unsigned int i = 0; i < m_Cursor; i++)
+		{
+			m_Source[i] = data[i];
+		}
+	}
+	template<typename TValue>
+	inline void Array<TValue>::Move(TValue* targetSource, unsigned long numberOfElements)
+	{
+		/*
+		* Set properties
+		*/
+		m_Cursor = numberOfElements;
+		m_Capacity = numberOfElements;
 		m_Source = targetSource;
 
-		/*
-		* Set new capacity
-		*/
-		m_Capacity = numberOfElements;
-
-		/*
-		* Reset the cursor
-		*/
-		m_Cursor = numberOfElements;
-	}
-	template<typename TValue>
-	inline Array<TValue> Array<TValue>::GetSlice(unsigned int start, unsigned int end) const
-	{
-		/*
-		* Create arrays
-		*/
-		Array<TValue> array;
-
-		/*
-		* Move the data
-		*/
-		array.Move((m_Source + start), end - start);
-
-		return array;
 	}
 	template<typename TValue>
 	void Array<TValue>::Add(const TValue& element)

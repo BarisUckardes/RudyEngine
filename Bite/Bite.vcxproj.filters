@@ -57,6 +57,15 @@
     <ClInclude Include="src\Bite\GUI\Module\Window\WindowGUIModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Bite\Editor\Command\EditorCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bite\Editor\Command\Commands\ProjectLoaderEditorCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bite\Project\ProjectFileContent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bite\Module\BiteModule.cpp">
@@ -93,6 +102,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Bite\GUI\Module\Window\WindowGUIModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bite\Editor\Command\EditorCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bite\Editor\Command\Commands\ProjectLoaderEditorCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

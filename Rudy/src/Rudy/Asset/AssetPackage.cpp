@@ -36,11 +36,16 @@ namespace Rudy
 			/*
 			* Create definition
 			*/
-			Array<unsigned char> typeBytes = defintionBlockBytes.GetSlice(0,4);
-			Array<unsigned char> idBytes = defintionBlockBytes.GetSlice(4, 20);
-			Array<unsigned char> nameBytes = defintionBlockBytes.GetSlice(20, 40);
-			Array<unsigned char> offsetBytes = defintionBlockBytes.GetSlice(40, 44);
-			Array<unsigned char> sizeBytes = defintionBlockBytes.GetSlice(44, 48);
+			Array<unsigned char> typeBytes;
+			typeBytes.Copy(defintionBlockBytes, 0,4);
+			Array<unsigned char> idBytes;
+			idBytes.Copy(defintionBlockBytes, 4, 20);
+			Array<unsigned char> nameBytes;
+			nameBytes.Copy(defintionBlockBytes, 20, 40);
+			Array<unsigned char> offsetBytes;
+			offsetBytes.Copy(defintionBlockBytes, 40, 44);
+			Array<unsigned char> sizeBytes;
+			sizeBytes.Copy(defintionBlockBytes, 44, 48);
 
 			AssetType assetType = *(AssetType*)typeBytes.GetData();
 			String name((char*)nameBytes.GetData(), nameBytes.GetCursor());
@@ -94,11 +99,16 @@ namespace Rudy
 		/*
 		* Slice asset definition bytes
 		*/
-		Array<unsigned char> typeBytes = defintionBlockBytes.GetSlice(0, 4);
-		Array<unsigned char> idBytes = defintionBlockBytes.GetSlice(4, 20);
-		Array<unsigned char> nameBytes = defintionBlockBytes.GetSlice(20, 40);
-		Array<unsigned char> offsetBytes = defintionBlockBytes.GetSlice(40, 44);
-		Array<unsigned char> sizeBytes = defintionBlockBytes.GetSlice(44, 48);
+		Array<unsigned char> typeBytes;
+		typeBytes.Copy(defintionBlockBytes, 0, 4);
+		Array<unsigned char> idBytes;
+		idBytes.Copy(defintionBlockBytes, 4, 20);
+		Array<unsigned char> nameBytes;
+		nameBytes.Copy(defintionBlockBytes, 20, 40);
+		Array<unsigned char> offsetBytes;
+		offsetBytes.Copy(defintionBlockBytes, 40, 44);
+		Array<unsigned char> sizeBytes;
+		sizeBytes.Copy(defintionBlockBytes, 44, 48);
 
 		/*
 		* Create asset definiton

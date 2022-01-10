@@ -58,8 +58,6 @@ namespace Rudy
         commandBuffer->FreeDeviceObject();
 
         delete commandBuffer;
-
-      
     }
     void DeferredGraphicsResolver::OnRegisterObserver(ObserverComponent* observer)
     {

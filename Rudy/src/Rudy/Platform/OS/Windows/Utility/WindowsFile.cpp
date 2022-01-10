@@ -236,14 +236,13 @@ namespace Rudy
         */
         HANDLE fileHandle;
         unsigned long numberOfBytesRead = 0;
-        OVERLAPPED overlapped = { 0 };
         BYTE* buffer = new BYTE[fileSize];
 
         /*
         * Access file for reading
         */
         fileHandle = CreateFileA(*path, GENERIC_READ, FILE_SHARE_READ, NULL,
-            OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL | FILE_FLAG_OVERLAPPED, NULL);
+            OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
         
         /*
         * Validate file
@@ -256,7 +255,7 @@ namespace Rudy
         /*
         * Read file
         */
-        bool isSuccess = ReadFile(fileHandle, buffer, fileSize,&numberOfBytesRead,&overlapped);
+        bool isSuccess = ReadFile(fileHandle, buffer, fileSize,&numberOfBytesRead,NULL);
 
         /*
         * Close file Handle

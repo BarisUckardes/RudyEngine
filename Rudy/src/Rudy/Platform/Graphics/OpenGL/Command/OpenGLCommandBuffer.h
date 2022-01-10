@@ -10,7 +10,7 @@ namespace Rudy
 	{
 	public:
 		OpenGLCommandBuffer() = default;
-		~OpenGLCommandBuffer() = default;
+		virtual ~OpenGLCommandBuffer() override;
 
 		virtual void* GetNativeHandle() const override;
 		virtual void StartRecording() override;

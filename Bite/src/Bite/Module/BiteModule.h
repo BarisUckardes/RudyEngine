@@ -11,13 +11,14 @@ namespace Bite
 {
 	class GUIModule;
 	class EditorSession;
+	class EditorCommand;
 	/// <summary>
 	/// Main bite module
 	/// </summary>
 	class BITE_API BiteModule : public Rudy::ApplicationModule
 	{
 	public:
-		BiteModule(const Rudy::Array<GUIModule*>& guiModules);
+		BiteModule(const Rudy::Array<GUIModule*>& guiModules,const Rudy::Array<EditorCommand*>& editorCommands);
 		BiteModule() = default;
 		~BiteModule() = default;
 
@@ -29,6 +30,7 @@ namespace Bite
 	private:
 		Rudy::Array<GUIModule*> m_PendingGUIModules;
 		Rudy::Array<GUIModule*> m_GUIModules;
+		Rudy::Array<EditorCommand*> m_EditorCommands;
 		Rudy::ImGuiRenderer* m_ImGuiRenderer;
 		EditorSession* m_Session;
 	};

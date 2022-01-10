@@ -158,6 +158,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Bite\Editor\Command\Commands\ProjectLoaderEditorCommand.h" />
+    <ClInclude Include="src\Bite\Editor\Command\EditorCommand.h" />
     <ClInclude Include="src\Bite\GUI\Module\Window\GUIWindowManager.h" />
     <ClInclude Include="src\Bite\GUI\Menu Item\MenuItemLayout.h" />
     <ClInclude Include="src\Bite\GUI\Menu Item\MenuItemGeneration.h" />
@@ -172,8 +174,11 @@
     <ClInclude Include="src\Bite\GUI\Module\Window\WindowLayoutGeneration.h" />
     <ClInclude Include="src\Bite\GUI\Module\Window\Templates\WorldObserverGUIWindow.h" />
     <ClInclude Include="src\Bite\GUI\Module\Window\WindowGUIModule.h" />
+    <ClInclude Include="src\Bite\Project\ProjectFileContent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Bite\Editor\Command\Commands\ProjectLoaderEditorCommand.cpp" />
+    <ClCompile Include="src\Bite\Editor\Command\EditorCommand.cpp" />
     <ClCompile Include="src\Bite\GUI\Module\Window\GUIWindowManager.cpp" />
     <ClCompile Include="src\Bite\GUI\Menu Item\MenuItemLayout.cpp" />
     <ClCompile Include="src\Bite\GUI\Menu Item\MenuItemGeneration.cpp" />

@@ -6,11 +6,13 @@
 #include <Rudy/ImGui/ImGuiRenderCommands.h>
 #include <Bite/GUI/Module/GUIModule.h>
 #include <Bite/Editor/Session/EditorSession.h>
+#include <Bite/Editor/Command/EditorCommand.h>
 namespace Bite
 {
-	BiteModule::BiteModule(const Rudy::Array<GUIModule*>& guiModules)
+	BiteModule::BiteModule(const Rudy::Array<GUIModule*>& guiModules,const Rudy::Array<EditorCommand*>& editorCommands)
 	{
 		m_PendingGUIModules = guiModules;
+		m_EditorCommands = editorCommands;
 	}
 	void BiteModule::OnAttach()
 	{
@@ -29,6 +31,27 @@ namespace Bite
 		*/
 		EditorSession* editorSession = new EditorSession(GetOwnerSession());
 		m_Session = editorSession;
+
+		/*
+		* Execute editor commands
+		*/
+		for (int i = 0; i < m_EditorCommands.GetCursor(); i++)
+		{
+			/*
+			* Get editor command
+			*/
+			EditorCommand* editorCommand = m_EditorCommands[i];
+
+			/*
+			* Set owner session
+			*/
+			editorCommand->SetOwnerSession(editorSession);
+
+			/*
+			* Call initialize method
+			*/
+			editorCommand->OnInitialize();
+		}
 
 		/*
 		* Attach gui modules
@@ -89,8 +112,25 @@ namespace Bite
 	}
 	void BiteModule::OnDetach()
 	{
+
 		/*
-		* Attach gui modules
+		* Execute editor commands
+		*/
+		for (int i = 0; i < m_EditorCommands.GetCursor(); i++)
+		{
+			/*
+			* Get editor command
+			*/
+			EditorCommand* editorCommand = m_EditorCommands[i];
+
+			/*
+			* Call initialize method
+			*/
+			editorCommand->OnFinalize();
+		}
+
+		/*
+		* Detach gui modules
 		*/
 		for (int i = 0; i < m_GUIModules.GetCursor(); i++)
 		{
@@ -114,6 +154,8 @@ namespace Bite
 		/*
 		* Delete editor session
 		*/
+		delete m_Session;
+		m_Session = nullptr;
 	}
 	void BiteModule::OnReceiveApplicationEvent(Rudy::Event* event)
 	{

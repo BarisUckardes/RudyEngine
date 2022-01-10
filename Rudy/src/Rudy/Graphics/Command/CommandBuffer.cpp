@@ -3,6 +3,6 @@ namespace Rudy
 {
 	CommandBuffer::~CommandBuffer()
 	{
-
+		
 	}
 }

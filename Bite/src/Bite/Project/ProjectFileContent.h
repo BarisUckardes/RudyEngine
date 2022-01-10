@@ -1,0 +1,29 @@
+#pragma once
+#include <Bite/Core/Symbols.h>
+#include <Rudy/Memory/String.h>
+namespace Bite
+{
+	/// <summary>
+	/// Data volume for project file loading/writing
+	/// </summary>
+	struct BITE_API ProjectFileContent
+	{
+		ProjectFileContent() = default;
+		~ProjectFileContent() = default;
+
+		/// <summary>
+		/// The name of the project.(max 20 chars)
+		/// </summary>
+		char Name[20];
+
+		/// <summary>
+		/// The major version
+		/// </summary>
+		unsigned int VersionMajor;
+
+		/// <summary>
+		/// The minor version
+		/// </summary>
+		unsigned int VersionMinor;
+	};
+}

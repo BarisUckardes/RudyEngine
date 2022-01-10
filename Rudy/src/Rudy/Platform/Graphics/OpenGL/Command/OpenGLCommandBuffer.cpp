@@ -16,6 +16,10 @@
 #include <Rudy/Platform/Graphics/OpenGL/Command/Commands/OpenGLDrawIndexedRC.h>
 namespace Rudy
 {
+    OpenGLCommandBuffer::~OpenGLCommandBuffer()
+    {
+        m_Commands.Clear();
+    }
     void* OpenGLCommandBuffer::GetNativeHandle() const
     {
         return nullptr;
