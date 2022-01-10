@@ -441,6 +441,12 @@
     <ClInclude Include="src\Rudy\Asset\AssetUtilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Rudy\Threading\Job.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Threading\JobPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Rudy\Mathematics\Vector2f.cpp">
@@ -780,6 +786,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rudy\Asset\AssetUtilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Threading\Job.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Threading\JobPool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

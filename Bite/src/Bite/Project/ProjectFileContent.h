@@ -1,6 +1,7 @@
 #pragma once
 #include <Bite/Core/Symbols.h>
 #include <Rudy/Memory/String.h>
+#include <Rudy/Memory/Guid.h>
 namespace Bite
 {
 	/// <summary>
@@ -25,5 +26,15 @@ namespace Bite
 		/// The minor version
 		/// </summary>
 		unsigned int VersionMinor;
+
+		/// <summary>
+		/// The unique id of this project
+		/// </summary>
+		Rudy::Guid ProjectID;
+
+		/// <summary>
+		/// The id of the last world
+		/// </summary>
+		Rudy::Guid WorldID;
 	};
 }

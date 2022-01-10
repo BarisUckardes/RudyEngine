@@ -161,6 +161,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\Threading\JobPool.h" />
+    <ClInclude Include="src\Rudy\Threading\Job.h" />
     <ClInclude Include="src\Rudy\Asset\AssetUtilities.h" />
     <ClInclude Include="src\Rudy\Asset\AssetDefinition.h" />
     <ClInclude Include="src\Rudy\Asset\AssetPackageHeader.h" />
@@ -305,6 +307,8 @@
     <ClInclude Include="src\Rudy\Platform\OS\Windows\Memory\WindowsGuid.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rudy\Threading\JobPool.cpp" />
+    <ClCompile Include="src\Rudy\Threading\Job.cpp" />
     <ClCompile Include="src\Rudy\Asset\AssetUtilities.cpp" />
     <ClCompile Include="src\Rudy\Asset\AssetDefinition.cpp" />
     <ClCompile Include="src\Rudy\Asset\AssetPackageHeader.cpp" />
