@@ -253,7 +253,7 @@ namespace Rudy
 
 	bool WindowsWindow::HasCloseRequest() const
 	{
-		return glfwWindowShouldClose(m_NativeWindow) == GLFW_FALSE;
+		return glfwWindowShouldClose(m_NativeWindow) == GLFW_TRUE;
 	}
 
 	void WindowsWindow::PollBufferedEvents()

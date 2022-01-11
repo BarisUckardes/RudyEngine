@@ -34,6 +34,11 @@ namespace Rudy
 		isExitRequested = !exitRequest;
 		return state;
 	}
+	bool ImGuiRenderCommands::BeginWindow(const String& name)
+	{
+		bool state = ImGui::Begin(*name);
+		return state;
+	}
 
 	void ImGuiRenderCommands::FinalizeWindow()
 	{

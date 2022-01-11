@@ -132,7 +132,8 @@
       <AdditionalDependencies>GLAD.lib;glfw3.lib;IMGUI.lib;STBI.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\Editor\"</Command>
+      <Command>xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\Editor\"
+xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\Slope\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -157,7 +158,8 @@
       <AdditionalDependencies>GLAD.lib;glfw3.lib;IMGUI.lib;STBI.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\Editor\"</Command>
+      <Command>xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\Editor\"
+xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\Slope\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
