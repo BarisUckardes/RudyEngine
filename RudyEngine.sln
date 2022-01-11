@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Rudy", "Rudy\Rudy.vcxproj", "{F5563EC6-FB29-4E96-9C02-BA14FA4A6195}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EditorLauncher", "EditorLauncher\EditorLauncher.vcxproj", "{F68E89ED-09E9-4B78-8CA9-8E49374197F3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Editor", "Editor\Editor.vcxproj", "{F68E89ED-09E9-4B78-8CA9-8E49374197F3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLAD", "GLAD\GLAD.vcxproj", "{C60125C7-C142-4DB8-A072-227F5C5418B5}"
 EndProject

@@ -19,11 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\EditorLauncher\Application\EditorApplication.cpp" />
-    <ClCompile Include="src\EditorLauncher\EntryPoint.cpp" />
+    <ClCompile Include="src\Editor\Application\EditorApplication.cpp" />
+    <ClCompile Include="src\Editor\EntryPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\EditorLauncher\Application\EditorApplication.h" />
+    <ClInclude Include="src\Editor\Application\EditorApplication.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bite\Bite.vcxproj">
@@ -37,8 +37,9 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{f68e89ed-09e9-4b78-8ca9-8e49374197f3}</ProjectGuid>
-    <RootNamespace>EditorLauncher</RootNamespace>
+    <RootNamespace>Editor</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Editor</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

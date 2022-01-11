@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\EditorLauncher\EntryPoint.cpp">
+    <ClCompile Include="src\Editor\EntryPoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\EditorLauncher\Application\EditorApplication.cpp">
+    <ClCompile Include="src\Editor\Application\EditorApplication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\EditorLauncher\Application\EditorApplication.h">
+    <ClInclude Include="src\Editor\Application\EditorApplication.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

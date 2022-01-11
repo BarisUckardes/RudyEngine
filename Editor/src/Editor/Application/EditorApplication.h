@@ -21,6 +21,4 @@ namespace EditorLauncher
 
 		virtual ~EditorApplication() override;
 	};
-
-
 }

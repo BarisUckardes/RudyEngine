@@ -20,7 +20,7 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <returns></returns>
 		Asset* RegisterVirtualAsset(const String& path);
-
+		
 		/// <summary>
 		/// Removes a virtual asset
 		/// </summary>

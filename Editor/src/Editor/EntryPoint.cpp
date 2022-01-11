@@ -26,7 +26,5 @@ int main(int argumentCount, char** arguments)
 	*/
 	application->RunEditor();
 
-
-
 	return 0;
 }
