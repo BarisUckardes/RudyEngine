@@ -104,7 +104,7 @@ namespace Rudy
         /*
         * Create new file
         */
-        HANDLE fileHandle = CreateFileA(*path, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+        HANDLE fileHandle = CreateFileA(*path, GENERIC_WRITE, 0, NULL,CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
         /*
         * Validate file state

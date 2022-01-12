@@ -414,7 +414,7 @@
     <ClInclude Include="src\Rudy\Events\Keyboard\KeyboardCharEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rudy\ImGui\ImGuiRenderCommands.h">
+    <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiRenderCommands.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Rudy\Asset\Asset.h">
@@ -445,6 +445,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Rudy\Threading\JobPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\ImGui\Flags\GUIWindowFlags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiLayoutCommands.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\ImGui\Flags\GUIMouseButtons.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -767,7 +779,7 @@
     <ClCompile Include="src\Rudy\Events\Keyboard\KeyboardCharEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rudy\ImGui\ImGuiRenderCommands.cpp">
+    <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiRenderCommands.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rudy\Asset\Asset.cpp">
@@ -792,6 +804,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rudy\Threading\JobPool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiLayoutCommands.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

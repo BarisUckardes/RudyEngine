@@ -1,6 +1,6 @@
 #include "WindowGUIModule.h"
 #include <Bite/GUI/Module/Window/GUIWindowManager.h>
-#include <Rudy/ImGui/ImGuiRenderCommands.h>
+#include <Rudy/ImGui/Commands/ImGuiRenderCommands.h>
 namespace Bite
 {
 	void WindowGUIModule::OnAttach()

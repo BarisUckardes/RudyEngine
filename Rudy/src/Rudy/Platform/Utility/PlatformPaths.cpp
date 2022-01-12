@@ -106,4 +106,21 @@ namespace Rudy
 		}
 		return String();
 	}
+	String PlatformPaths::GetDocumentsPath()
+	{
+		PlatformOSType platformType = GetCurrentPlatform();
+		switch (platformType)
+		{
+		case Rudy::PlatformOSType::Undefined:
+			break;
+		case Rudy::PlatformOSType::Windows:
+			return WindowsPaths::GetDocumentsPath();
+			break;
+		case Rudy::PlatformOSType::Linux:
+			break;
+		default:
+			break;
+		}
+		return String();
+	}
 }

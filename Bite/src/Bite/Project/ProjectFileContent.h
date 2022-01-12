@@ -31,10 +31,5 @@ namespace Bite
 		/// The unique id of this project
 		/// </summary>
 		Rudy::Guid ProjectID;
-
-		/// <summary>
-		/// The id of the last world
-		/// </summary>
-		Rudy::Guid WorldID;
 	};
 }

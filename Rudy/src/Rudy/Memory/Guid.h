@@ -9,6 +9,12 @@ namespace Rudy
 	{
 	public:
 		/// <summary>
+		/// Returns the zero guid
+		/// </summary>
+		/// <returns></returns>
+		static Guid GetZero();
+
+		/// <summary>
 		/// Creates a new platform agnostic guid
 		/// </summary>
 		/// <returns></returns>

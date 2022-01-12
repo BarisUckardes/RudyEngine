@@ -44,5 +44,11 @@ namespace Rudy
 		/// </summary>
 		/// <returns></returns>
 		static String GetDesktopPath();
+
+		/// <summary>
+		/// Returns the documents path
+		/// </summary>
+		/// <returns></returns>
+		static String GetDocumentsPath();
 	};
 }

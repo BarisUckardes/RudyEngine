@@ -41,6 +41,7 @@ namespace Rudy
 		char* buffer = new char[SPECIAL_FOLDER_PATH_SIZE];
 		SHGetSpecialFolderPathA(NULL, buffer, CSIDL_APPDATA, false);
 		return String(buffer);
+
 	}
 
 	String WindowsPaths::GetAppDataLocalPath()
@@ -62,6 +63,14 @@ namespace Rudy
 		char* buffer = new char[SPECIAL_FOLDER_PATH_SIZE];
 		SHGetSpecialFolderPathA(NULL, buffer, CSIDL_DESKTOP, false);
 		return String(buffer);
+	}
+
+	String WindowsPaths::GetDocumentsPath()
+	{
+		char* buffer = new char[SPECIAL_FOLDER_PATH_SIZE];
+		SHGetSpecialFolderPathA(NULL, buffer, CSIDL_MYDOCUMENTS, false);
+		return String(buffer);
+
 	}
 
 }

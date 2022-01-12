@@ -163,6 +163,10 @@ xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\ImGui\Flags\GUIMouseButtons.h" />
+    <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.h" />
+    <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiLayoutCommands.h" />
+    <ClInclude Include="src\Rudy\ImGui\Flags\GUIWindowFlags.h" />
     <ClInclude Include="src\Rudy\Threading\JobPool.h" />
     <ClInclude Include="src\Rudy\Threading\Job.h" />
     <ClInclude Include="src\Rudy\Asset\AssetUtilities.h" />
@@ -173,7 +177,7 @@ xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\
     <ClInclude Include="src\Rudy\Asset\AssetPool.h" />
     <ClInclude Include="src\Rudy\Asset\AssetType.h" />
     <ClInclude Include="src\Rudy\Asset\Containers\Texture2DContainer.h" />
-    <ClInclude Include="src\Rudy\ImGui\ImGuiRenderCommands.h" />
+    <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiRenderCommands.h" />
     <ClInclude Include="src\Rudy\ImGui\ImGuiRenderer.h" />
     <ClInclude Include="src\Rudy\Events\Keyboard\KeyboardCharEvent.h" />
     <ClInclude Include="src\Rudy\ImGui\ImGuiGraphicsAPIImplementation.h" />
@@ -309,6 +313,8 @@ xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\
     <ClInclude Include="src\Rudy\Platform\OS\Windows\Memory\WindowsGuid.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.cpp" />
+    <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiLayoutCommands.cpp" />
     <ClCompile Include="src\Rudy\Threading\JobPool.cpp" />
     <ClCompile Include="src\Rudy\Threading\Job.cpp" />
     <ClCompile Include="src\Rudy\Asset\AssetUtilities.cpp" />
@@ -317,7 +323,7 @@ xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\
     <ClCompile Include="src\Rudy\Asset\Asset.cpp" />
     <ClCompile Include="src\Rudy\Asset\AssetPackage.cpp" />
     <ClCompile Include="src\Rudy\Asset\AssetPool.cpp" />
-    <ClCompile Include="src\Rudy\ImGui\ImGuiRenderCommands.cpp" />
+    <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiRenderCommands.cpp" />
     <ClCompile Include="src\Rudy\ImGui\ImGuiRenderer.cpp" />
     <ClCompile Include="src\Rudy\Events\Keyboard\KeyboardCharEvent.cpp" />
     <ClCompile Include="src\Rudy\ImGui\ImGuiGraphicsAPIImplementation.cpp" />

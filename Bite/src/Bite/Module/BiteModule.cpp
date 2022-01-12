@@ -3,10 +3,10 @@
 #include <Rudy/Application/ApplicationSession.h>
 #include <Rudy/Graphics/Device/GraphicsDevice.h>
 #include <Rudy/Windowing/Window.h>
-#include <Rudy/ImGui/ImGuiRenderCommands.h>
 #include <Bite/GUI/Module/GUIModule.h>
 #include <Bite/Editor/Session/EditorSession.h>
 #include <Bite/Editor/Command/EditorCommand.h>
+#include <Rudy/ImGui/Commands/ImGuiRenderCommands.h>
 namespace Bite
 {
 	BiteModule::BiteModule(const Rudy::Array<GUIModule*>& guiModules,const Rudy::Array<EditorCommand*>& editorCommands)

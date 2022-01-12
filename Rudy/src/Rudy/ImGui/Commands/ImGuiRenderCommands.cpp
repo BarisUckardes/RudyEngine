@@ -27,22 +27,42 @@ namespace Rudy
 	{
 		return ImGui::MenuItem(*name);
 	}
-	bool ImGuiRenderCommands::BeginWindow(const String& name, bool& isExitRequested)
+	bool ImGuiRenderCommands::BeginWindow(const String& name, bool& isExitRequested, int flags)
 	{
 		bool exitRequest = true;
-		bool state = ImGui::Begin(*name, &exitRequest);
+		bool state = ImGui::Begin(*name, &exitRequest,flags);
 		isExitRequested = !exitRequest;
 		return state;
 	}
-	bool ImGuiRenderCommands::BeginWindow(const String& name)
+	bool ImGuiRenderCommands::BeginWindow(const String& name, int flags)
 	{
-		bool state = ImGui::Begin(*name);
+		bool state = ImGui::Begin(*name,nullptr,flags);
 		return state;
 	}
 
 	void ImGuiRenderCommands::FinalizeWindow()
 	{
 		ImGui::End();
+	}
+
+	bool ImGuiRenderCommands::CreateSelectableItem(const String& name)
+	{
+		return ImGui::Selectable(*name);
+	}
+
+	void ImGuiRenderCommands::CreateText(const String& text)
+	{
+		ImGui::Text(*text);
+	}
+
+	void ImGuiRenderCommands::CreateHorizontalLine()
+	{
+		ImGui::Separator();
+	}
+
+	bool ImGuiRenderCommands::CreateButton(const String& name)
+	{
+		return ImGui::Button(*name);
 	}
 	
 }

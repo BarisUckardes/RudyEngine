@@ -1,8 +1,8 @@
 #include "MainMenuBarGUIModule.h"
-#include <Rudy/ImGui/ImGuiRenderCommands.h>
 #include <Bite/GUI/Menu Item/MenuItemGeneration.h>
 #include <Bite/GUI/Menu Item/MenuItemTree.h>
 #include <Bite/GUI/Module/MainMenu/Templates/MainMenuItemTemplates.h>
+#include <Rudy/ImGui/Commands/ImGuiRenderCommands.h>
 namespace Bite
 {
 	void MainMenuBarGUIModule::OnAttach()
