@@ -8,7 +8,7 @@ namespace EditorLauncher
 	class EditorApplication : public Rudy::Application
 	{
 	public:
-		EditorApplication(const Rudy::String& projectPath,
+		EditorApplication(const Rudy::String& projectFolderPath,
 			const Rudy::String& title,
 			unsigned int offsetX, unsigned int offsetY,
 			unsigned int sizeX, unsigned int sizeY);

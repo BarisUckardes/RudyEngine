@@ -2,6 +2,7 @@
 #include <Rudy/Asset/AssetDefinition.h>
 #include <Rudy/Asset/Asset.h>
 #include <Rudy/Platform/Utility/PlatformFile.h>
+#include <Rudy/Memory/ByteBlock.h>
 #include <stdio.h>
 namespace Rudy
 {
@@ -17,9 +18,9 @@ namespace Rudy
 		/*
 		* Get how many definitions this package has
 		*/
-		Array<unsigned char> definitionCountBytes;
-		PlatformFile::Read(packagePath, 0, 4, definitionCountBytes);
-		const unsigned int definitionCount = *(unsigned int*)definitionCountBytes.GetData();
+		ByteBlock byteBlock;
+		PlatformFile::Read(packagePath, 0, 4, byteBlock);
+		const unsigned int definitionCount = byteBlock.To<unsigned int>();
 
 		/*
 		* Iterate and gather all definitions
@@ -30,28 +31,25 @@ namespace Rudy
 			/*
 			* Get defintion block
 			*/
-			Array<unsigned char> defintionBlockBytes;
-			PlatformFile::Read(packagePath, byteStart, byteStart + definitionBytes, defintionBlockBytes);
+			ByteBlock byteBlock;
+			PlatformFile::Read(packagePath,
+				byteStart, byteStart + definitionBytes,
+				byteBlock);
 
 			/*
 			* Create definition
 			*/
-			Array<unsigned char> typeBytes;
-			typeBytes.Copy(defintionBlockBytes, 0,4);
-			Array<unsigned char> idBytes;
-			idBytes.Copy(defintionBlockBytes, 4, 20);
-			Array<unsigned char> nameBytes;
-			nameBytes.Copy(defintionBlockBytes, 20, 40);
-			Array<unsigned char> offsetBytes;
-			offsetBytes.Copy(defintionBlockBytes, 40, 44);
-			Array<unsigned char> sizeBytes;
-			sizeBytes.Copy(defintionBlockBytes, 44, 48);
+			ByteBlock typeBytes(byteBlock, 0, 4);
+			ByteBlock idBytes(byteBlock, 4, 20);
+			ByteBlock nameBytes(byteBlock, 20, 40);
+			ByteBlock offsetBytes(byteBlock, 40, 44);
+			ByteBlock sizeBytes(byteBlock, 44, 48);
 
-			AssetType assetType = *(AssetType*)typeBytes.GetData();
-			String name((char*)nameBytes.GetData(), nameBytes.GetCursor());
-			Guid id = *(Guid*)idBytes.GetData();
-			unsigned long offset = *(unsigned long*)offsetBytes.GetData();
-			unsigned long size = *(unsigned long*)sizeBytes.GetData();
+			AssetType assetType = typeBytes.To<AssetType>();
+			String name((char*)nameBytes.GetBlock(), nameBytes.GetBlockSize());
+			Guid id = idBytes.To<Guid>();
+			unsigned long offset = offsetBytes.To<unsigned long>();
+			unsigned long size = sizeBytes.To<unsigned long>();
 			AssetDefinition definition(packagePath,assetType,id,name,offset,size);
 
 			/*
@@ -88,37 +86,32 @@ namespace Rudy
 		m_Definitions.Clear();
 		m_Assets.Clear();
 	}
-	Asset* AssetPackage::RegisterVirtualAsset(const String& path)
+	Asset* AssetPackage::RegisterVirtualAsset(const String& packagePath)
 	{
 		/*
 		* Load asset file definition bytes
 		*/
-		Array<unsigned char> defintionBlockBytes;
-		PlatformFile::Read(path, 0, 48u, defintionBlockBytes);
+		ByteBlock defintionBlockBytes;
+		PlatformFile::Read(packagePath, 0, 48u, defintionBlockBytes);
 
 		/*
 		* Slice asset definition bytes
 		*/
-		Array<unsigned char> typeBytes;
-		typeBytes.Copy(defintionBlockBytes, 0, 4);
-		Array<unsigned char> idBytes;
-		idBytes.Copy(defintionBlockBytes, 4, 20);
-		Array<unsigned char> nameBytes;
-		nameBytes.Copy(defintionBlockBytes, 20, 40);
-		Array<unsigned char> offsetBytes;
-		offsetBytes.Copy(defintionBlockBytes, 40, 44);
-		Array<unsigned char> sizeBytes;
-		sizeBytes.Copy(defintionBlockBytes, 44, 48);
+		ByteBlock typeBytes(defintionBlockBytes, 0, 4);
+		ByteBlock idBytes(defintionBlockBytes, 4, 20);
+		ByteBlock nameBytes(defintionBlockBytes, 20, 40);
+		ByteBlock offsetBytes(defintionBlockBytes, 40, 44);
+		ByteBlock sizeBytes(defintionBlockBytes, 44, 48);
 
 		/*
 		* Create asset definiton
 		*/
-		AssetType assetType = *(AssetType*)typeBytes.GetData();
-		String name((char*)nameBytes.GetData(), nameBytes.GetCursor());
-		Guid id = *(Guid*)idBytes.GetData();
-		unsigned long offset = *(unsigned long*)offsetBytes.GetData();
-		unsigned long size = *(unsigned long*)sizeBytes.GetData();
-		AssetDefinition definition(path,assetType, id, name, offset, size);
+		AssetType assetType = typeBytes.To<AssetType>();
+		String name((char*)nameBytes.GetBlock(), nameBytes.GetBlockSize());
+		Guid id = idBytes.To<Guid>();
+		unsigned long offset = offsetBytes.To<unsigned long>();
+		unsigned long size = sizeBytes.To<unsigned long>();
+		AssetDefinition definition(packagePath, assetType, id, name, offset, size);
 
 		/*
 		* Create asset

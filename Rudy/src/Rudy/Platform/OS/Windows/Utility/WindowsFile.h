@@ -2,6 +2,7 @@
 #include <Rudy/Memory/String.h>
 namespace Rudy
 {
+	class ByteBlock;
 	/// <summary>
 	/// Contains platform agnostic file actions
 	/// </summary>
@@ -45,7 +46,15 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <param name="content"></param>
 		/// <returns></returns>
-		static bool WriteToFileBytes(const String& path, const Array<unsigned char>& content);
+		static bool WriteToFileBytes(const String& path, const ByteBlock& byteBlock);
+
+		/// <summary>
+		/// Opens and appends bytes to file
+		/// </summary>
+		/// <param name="path"></param>
+		/// <param name="bytes"></param>
+		/// <returns></returns>
+		static bool WriteToFileAppendBytes(const String& path, const ByteBlock& byteBlock);
 
 		/// <summary>
 		/// Writes to an existing file
@@ -69,7 +78,7 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <param name="contentOut"></param>
 		/// <returns></returns>
-		static bool ReadBytes(const String& path, Array<unsigned char>& contentOut);
+		static bool ReadBytes(const String& path, ByteBlock& byteBlock);
 
 		/// <summary>
 		/// Reads the file
@@ -77,7 +86,9 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <param name="contentOut"></param>
 		/// <returns></returns>
-		static bool ReadBytes(const String& path,unsigned long startByte,unsigned long endByte, Array<unsigned char>& contentOut);
+		static bool ReadBytes(const String& path,
+			unsigned long startByte,unsigned long endByte,
+			ByteBlock& byteBlock);
 
 		/// <summary>
 		/// Returns the file size in length

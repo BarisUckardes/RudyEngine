@@ -68,7 +68,7 @@ namespace Rudy
 				break;
 		}
 	}
-	bool PlatformFile::Write(const String& path, const Array<unsigned char>& content)
+	bool PlatformFile::Write(const String& path, const ByteBlock& byteBlock)
 	{
 		PlatformOSType platformType = GetCurrentPlatform();
 		switch (platformType)
@@ -76,7 +76,23 @@ namespace Rudy
 		case Rudy::PlatformOSType::Undefined:
 			break;
 		case Rudy::PlatformOSType::Windows:
-			return WindowsFile::WriteToFileBytes(path, content);
+			return WindowsFile::WriteToFileBytes(path, byteBlock);
+			break;
+		case Rudy::PlatformOSType::Linux:
+			break;
+		default:
+			break;
+		}
+	}
+	bool PlatformFile::WriteAppend(const String& path, const ByteBlock& byteBlock)
+	{
+		PlatformOSType platformType = GetCurrentPlatform();
+		switch (platformType)
+		{
+		case Rudy::PlatformOSType::Undefined:
+			break;
+		case Rudy::PlatformOSType::Windows:
+			return WindowsFile::WriteToFileAppendBytes(path, byteBlock);
 			break;
 		case Rudy::PlatformOSType::Linux:
 			break;
@@ -117,7 +133,7 @@ namespace Rudy
 		}
 	}
 
-	bool PlatformFile::Read(const String& path, Array<unsigned char>& contentOut)
+	bool PlatformFile::Read(const String& path, ByteBlock& byteBlock)
 	{
 		PlatformOSType platformType = GetCurrentPlatform();
 		switch (platformType)
@@ -125,7 +141,7 @@ namespace Rudy
 		case Rudy::PlatformOSType::Undefined:
 			break;
 		case Rudy::PlatformOSType::Windows:
-			return WindowsFile::ReadBytes(path, contentOut);
+			return WindowsFile::ReadBytes(path, byteBlock);
 			break;
 		case Rudy::PlatformOSType::Linux:
 			break;
@@ -133,7 +149,7 @@ namespace Rudy
 			break;
 		}
 	}
-	bool PlatformFile::Read(const String& path, unsigned long startByte, unsigned long endByte, Array<unsigned char>& contentOut)
+	bool PlatformFile::Read(const String& path, unsigned long startByte, unsigned long endByte, ByteBlock& byteBlock)
 	{
 		PlatformOSType platformType = GetCurrentPlatform();
 		switch (platformType)
@@ -141,7 +157,7 @@ namespace Rudy
 		case Rudy::PlatformOSType::Undefined:
 			break;
 		case Rudy::PlatformOSType::Windows:
-			return WindowsFile::ReadBytes(path,startByte,endByte, contentOut);
+			return WindowsFile::ReadBytes(path,startByte,endByte, byteBlock);
 			break;
 		case Rudy::PlatformOSType::Linux:
 			break;

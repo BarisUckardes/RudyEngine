@@ -89,5 +89,7 @@ Global
 		SolutionGuid = {E62610A0-4DC4-4CF6-8DA1-A3983EF24DCC}
 	EndGlobalSection
 EndGlobal
-<DisableFastUpToDateCheck>True</DisableFastUpToDateCheck>
+<PropertyGroup>
+    <DisableFastUpToDateCheck>True</DisableFastUpToDateCheck>
+</PropertyGroup>
 <RunPostBuildEvent>Always</RunPostBuildEvent> 

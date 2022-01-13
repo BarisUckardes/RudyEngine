@@ -14,4 +14,14 @@ namespace Bite
 	{
 		return m_ApplicationSession;
 	}
+	void EditorSession::SetProject(const Rudy::String& name, unsigned int major, unsigned int minor, const Rudy::Guid& id)
+	{
+		/*
+		* Set project properties
+		*/
+		m_ProjectProperties.Name = name;
+		m_ProjectProperties.MajorVersion = major;
+		m_ProjectProperties.MinorVersion = minor;
+		m_ProjectProperties.ID = id;
+	}
 }

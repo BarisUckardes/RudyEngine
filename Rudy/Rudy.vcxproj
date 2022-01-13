@@ -133,7 +133,8 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\Editor\"
-xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\Slope\"</Command>
+xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\Slope\"
+xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -159,14 +160,20 @@ xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\Editor\"
-xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\Slope\"</Command>
+xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\Slope\"
+xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\Memory\ByteBlock.h" />
+    <ClInclude Include="src\Rudy\Memory\ByteBlockTransferType.h" />
+    <ClInclude Include="src\Rudy\Memory\Memory.h" />
+    <ClInclude Include="src\Rudy\Process\PlatformProcess.h" />
     <ClInclude Include="src\Rudy\ImGui\Flags\GUIMouseButtons.h" />
     <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.h" />
     <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiLayoutCommands.h" />
     <ClInclude Include="src\Rudy\ImGui\Flags\GUIWindowFlags.h" />
+    <ClInclude Include="src\Rudy\Process\PlatformProcessState.h" />
     <ClInclude Include="src\Rudy\Threading\JobPool.h" />
     <ClInclude Include="src\Rudy\Threading\Job.h" />
     <ClInclude Include="src\Rudy\Asset\AssetUtilities.h" />
@@ -311,8 +318,12 @@ xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\
     <ClInclude Include="src\Rudy\Platform\OS\Windows\Utility\WindowsFile.h" />
     <ClInclude Include="src\Rudy\Platform\OS\Windows\Utility\WindowsError.h" />
     <ClInclude Include="src\Rudy\Platform\OS\Windows\Memory\WindowsGuid.h" />
+    <ClInclude Include="src\Rudy\Platform\OS\Windows\Process\WindowsProcess.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rudy\Memory\ByteBlock.cpp" />
+    <ClCompile Include="src\Rudy\Memory\Memory.cpp" />
+    <ClCompile Include="src\Rudy\Process\PlatformProcess.cpp" />
     <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.cpp" />
     <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiLayoutCommands.cpp" />
     <ClCompile Include="src\Rudy\Threading\JobPool.cpp" />
@@ -430,6 +441,7 @@ xcopy /y "$(OutDir)Rudy.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\
     <ClCompile Include="src\Rudy\Platform\OS\Windows\Utility\WindowsFile.cpp" />
     <ClCompile Include="src\Rudy\Platform\OS\Windows\Utility\WindowsError.cpp" />
     <ClCompile Include="src\Rudy\Platform\OS\Windows\Memory\WindowsGuid.cpp" />
+    <ClCompile Include="src\Rudy\Platform\OS\Windows\Process\WindowsProcess.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

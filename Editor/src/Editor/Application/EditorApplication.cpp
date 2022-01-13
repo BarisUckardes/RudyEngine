@@ -8,12 +8,13 @@
 #include <Bite/Module/BiteModule.h>
 #include <Bite/GUI/Module/MainMenu/MainMenuBarGUIModule.h>
 #include <Bite/GUI/Module/Window/WindowGUIModule.h>
+#include <Bite/Editor/Command/Commands/ProjectLoaderEditorCommand.h>
 #include <Rudy/Platform/Utility/PlatformFile.h>
 #include <Rudy/Asset/AssetDefinition.h>
 #include <Rudy/Asset/AssetPackage.h>
 namespace EditorLauncher
 {
-	EditorApplication::EditorApplication(const Rudy::String& projectPath,const Rudy::String& title, unsigned int offsetX, unsigned int offsetY, unsigned int sizeX, unsigned int sizeY) : Rudy::Application(projectPath,Rudy::WindowCreateParameters(title,Rudy::Vector2i(offsetX,offsetY),Rudy::Vector2i(sizeX,sizeY)))
+	EditorApplication::EditorApplication(const Rudy::String& projectFolderPath,const Rudy::String& title, unsigned int offsetX, unsigned int offsetY, unsigned int sizeX, unsigned int sizeY) : Rudy::Application(projectFolderPath,Rudy::WindowCreateParameters(title,Rudy::Vector2i(offsetX,offsetY),Rudy::Vector2i(sizeX,sizeY)))
 	{
 		/*
 		* Create gui module list
@@ -23,9 +24,10 @@ namespace EditorLauncher
 		guiModules.Add(new Bite::WindowGUIModule());
 
 		/*
-		* Create eidtor commands
+		* Create editor commands
 		*/
 		Rudy::Array<Bite::EditorCommand*> commands;
+		commands.Add(new Bite::ProjectLoaderEditorCommand(projectFolderPath));
 
 		/*
 		* Register editor application modules
@@ -35,31 +37,6 @@ namespace EditorLauncher
 		RegisterModule<Rudy::GameLogicModule>();
 		RegisterModule<Rudy::GraphicsModule>();
 		RegisterModule<Bite::BiteModule>(guiModules, commands);
-
-		/*
-		* Write demo
-		*/
-	/*	const unsigned int defSize = 3;
-		Rudy::Array<unsigned char> defSizeBytes;
-		defSizeBytes.Copy((unsigned char*)&defSize, sizeof(defSize));*/
-
-		//Rudy::Array<Rudy::AssetDefinition> writeDefinitions;
-		//writeDefinitions.Add(Rudy::AssetDefinition("", Rudy::AssetType::CubeTexture, Rudy::Guid::Create(), "afsdfsd", 0, 5));
-		//writeDefinitions.Add(Rudy::AssetDefinition("", Rudy::AssetType::Texture2D, Rudy::Guid::Create(), "bhghr", 79, 51));
-		//writeDefinitions.Add(Rudy::AssetDefinition("", Rudy::AssetType::Texture3D, Rudy::Guid::Create(), "ertertc", 99, 88));
-
-		//Rudy::Array<unsigned char> defintionBytes;
-		//defintionBytes.Copy((unsigned char*)writeDefinitions.GetData(), 48 * writeDefinitions.GetCursor());
-
-		//Rudy::Array<unsigned char> writeBytes;
-		//writeBytes.Add(defSizeBytes);
-		//writeBytes.Add(defintionBytes);
-		//Rudy::PlatformFile::Write("C:/Users/PC/Desktop/Test/hello.rpackage", writeBytes);
-
-		///*
-		//* Read demo
-		//*/
-		//Rudy::AssetPackage* package = new Rudy::AssetPackage("C:/Users/PC/Desktop/Test/hello.rpackage");
 	}
 
 	void EditorApplication::RunEditor()

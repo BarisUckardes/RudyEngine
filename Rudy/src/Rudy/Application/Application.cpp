@@ -5,6 +5,7 @@
 #include <Rudy/Application/ApplicationModule.h>
 #include <Rudy/Graphics/Device/GraphicsDevice.h>
 #include <Rudy/Application/ApplicationSession.h>
+#include <Rudy/Platform/Utility/PlatformPaths.h>
 namespace Rudy
 {
 	Application::Application(const String& executablePath,const WindowCreateParameters& createParameters)
@@ -13,6 +14,11 @@ namespace Rudy
 		* Set properties
 		*/
 		m_ExecutablePath = executablePath;
+
+		/*
+		* Set platform execution path
+		*/
+		PlatformPaths::SetExecutionPath(executablePath);
 
 		/*
 		* Create new window
@@ -94,7 +100,7 @@ namespace Rudy
 			* Swap buffers
 			*/
 			m_Window->GetGraphicsDevice()->Swapbuffers();
-
+			 
 			/*
 			* Validate window
 			*/

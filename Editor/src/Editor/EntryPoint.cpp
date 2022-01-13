@@ -10,21 +10,21 @@ int main(int argumentCount, char** arguments)
 	* Get editor executable path
 	*/
 	const Rudy::String executablePath(arguments[0]);
-
+	 
 	/*
 	* Get project path
 	*/
-	const Rudy::String projectPath(arguments[0]);
+	const Rudy::String projectFolderPath(arguments[0]);
 
 	/*
 	* Create editor application
 	*/
-	EditorLauncher::EditorApplication* application = new EditorLauncher::EditorApplication(projectPath,"Random title name",100,100,1280,720);
+	EditorLauncher::EditorApplication* application = new EditorLauncher::EditorApplication(projectFolderPath,"Random title name",100,100,1280,720);
 
 	/*
 	* Run application
 	*/
 	application->RunEditor();
-
+	while(1){}
 	return 0;
 }

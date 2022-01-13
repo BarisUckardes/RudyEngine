@@ -128,7 +128,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(OutDir)Bite.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\Editor\"</Command>
+      <Command>xcopy /y "$(OutDir)Bite.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\Editor\"
+xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -149,7 +150,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(OutDir)Bite.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\Editor\"</Command>
+      <Command>xcopy /y "$(OutDir)Bite.dll" "$(SolutionDir)binary\$(Configuration)-$(Platform)\Editor\"
+xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -175,6 +177,8 @@
     <ClInclude Include="src\Bite\GUI\Module\Window\Templates\WorldObserverGUIWindow.h" />
     <ClInclude Include="src\Bite\GUI\Module\Window\WindowGUIModule.h" />
     <ClInclude Include="src\Bite\Project\ProjectFileContent.h" />
+    <ClInclude Include="src\Bite\Project\ProjectProperties.h" />
+    <ClInclude Include="src\Bite\Project\ProjectVersion.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bite\Editor\Command\Commands\ProjectLoaderEditorCommand.cpp" />

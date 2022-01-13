@@ -4,22 +4,10 @@
 
 namespace Rudy
 {
+	String PlatformPaths::s_ExecutionPath = "Undefined executionPath";
 	String PlatformPaths::GetExecutablePath()
 	{
-		PlatformOSType platformType = GetCurrentPlatform();
-		switch (platformType)
-		{
-			case Rudy::PlatformOSType::Undefined:
-				break;
-			case Rudy::PlatformOSType::Windows:
-				return WindowsPaths::GetExecutablePath();
-				break;
-			case Rudy::PlatformOSType::Linux:
-				break;
-			default:
-				break;
-		}
-		return String();
+		return s_ExecutionPath;
 	}
 	String PlatformPaths::GetDomainPath()
 	{
@@ -122,5 +110,9 @@ namespace Rudy
 			break;
 		}
 		return String();
+	}
+	void PlatformPaths::SetExecutionPath(const String& executionPath)
+	{
+		s_ExecutionPath = executionPath;
 	}
 }

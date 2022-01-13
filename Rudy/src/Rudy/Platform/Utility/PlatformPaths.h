@@ -5,6 +5,7 @@ namespace Rudy
 {
 	class RUDY_API PlatformPaths
 	{
+		friend class Application;
 	public:
 		PlatformPaths() = delete;
 		~PlatformPaths() = delete;
@@ -50,5 +51,8 @@ namespace Rudy
 		/// </summary>
 		/// <returns></returns>
 		static String GetDocumentsPath();
+	private:
+		static void SetExecutionPath(const String& executionPath);
+		static String s_ExecutionPath;
 	};
 }

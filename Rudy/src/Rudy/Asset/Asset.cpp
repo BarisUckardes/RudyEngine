@@ -1,6 +1,6 @@
 #include "Asset.h"
 #include <Rudy/Platform/Utility/PlatformFile.h>
-
+#include <Rudy/Memory/ByteBlock.h>
 namespace Rudy
 {
 	Asset::Asset(const AssetDefinition& definition)
@@ -19,8 +19,10 @@ namespace Rudy
 		/*
 		* Load the asset bytes
 		*/
-		Array<unsigned char> assetBytes;
-		PlatformFile::Read(m_Definition.GetSourceAbsolutePath(), m_Definition.GetOffset(), m_Definition.GetOffset() + m_Definition.GetSize(), assetBytes);
+		ByteBlock byteBlock;
+		PlatformFile::Read(m_Definition.GetSourceAbsolutePath(),
+			m_Definition.GetOffset(), m_Definition.GetOffset() + m_Definition.GetSize(),
+			byteBlock);
 
 		/*
 		* Catch asset type and create asset

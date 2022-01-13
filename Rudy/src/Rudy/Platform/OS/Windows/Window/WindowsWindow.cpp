@@ -112,6 +112,7 @@ namespace Rudy
 				* Broadcast event
 				*/
 				data.EventCallback->Invoke(event);
+				printf("Window close callback\n");
 			});
 
 		/*

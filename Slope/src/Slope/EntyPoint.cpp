@@ -10,6 +10,10 @@
 #include <Rudy/Platform/Utility/PlatformFile.h>
 #include <Rudy/Memory/Guid.h>
 #include <string>
+#include <Rudy/Process/PlatformProcess.h>
+#include <Rudy/Memory/ByteBlock.h>
+
+#define PROJECT_ENTRY_SIZE 100
 void RenderGUI();
 
 struct ProjectFileContent
@@ -34,8 +38,85 @@ struct ProjectFileContent
 	/// </summary>
 	Rudy::Guid ProjectID;
 };
+Rudy::Array<Rudy::String> g_Projects;
+Rudy::String g_SlopeProjectsPath;
 int main(int argumentCount, char** arguments)
 {
+	/*
+	* Get paths
+	*/
+	const Rudy::String appDataPath = Rudy::PlatformPaths::GetAppDataLocalPath();
+	const Rudy::String appDataRudyPath = appDataPath + "/Rudy";
+	const Rudy::String slopePath = appDataRudyPath + "/Slope";
+	const Rudy::String slopeProjectsPath = slopePath + "/Projects.rsettings";
+	g_SlopeProjectsPath = slopeProjectsPath;
+
+	/*
+	* Validate documets rudy path
+	*/
+	if (!Rudy::PlatformDirectory::IsDirectoryExists(appDataRudyPath))
+	{
+		/*
+		* Create rudy folder
+		*/
+		Rudy::PlatformDirectory::CreateDirectory(appDataRudyPath);
+	}
+
+	/*
+	* Validate slope path
+	*/
+	if (!Rudy::PlatformDirectory::IsDirectoryExists(slopePath))
+	{
+		/*
+		* Create slope path
+		*/
+		Rudy::PlatformDirectory::CreateDirectory(slopePath);
+	}
+
+	/*
+	* Validate slope projects file
+	*/
+	if (!Rudy::PlatformFile::IsFileExists(slopeProjectsPath))
+	{
+		/*
+		* Create default slope projects file
+		*/
+		constexpr unsigned int projectCount = 0;
+		Rudy::ByteBlock projectsCountBytes((Rudy::Byte*)&projectCount, sizeof(projectCount));
+
+		/*
+		* Write to file
+		*/
+		Rudy::PlatformFile::Write(slopeProjectsPath, projectsCountBytes);
+	}
+
+	/*
+	* Read projects
+	*/
+	Rudy::ByteBlock projectCountByteBlock;
+	Rudy::PlatformFile::Read(slopeProjectsPath, projectCountByteBlock);
+	const unsigned int projectCount = projectCountByteBlock.To<unsigned int>();
+	printf("%d projects found\n", projectCount);
+	unsigned int projectByteOffset = 4;
+	for (unsigned int i = 0; i < projectCount; i++)
+	{
+		/*
+		* Itereate and read projects
+		*/
+		Rudy::ByteBlock projectByteBlock;
+		Rudy::PlatformFile::Read(slopeProjectsPath,projectByteOffset,projectByteOffset+ PROJECT_ENTRY_SIZE, projectByteBlock);
+
+		/*
+		* Get string
+		*/
+		Rudy::String projectPath((char*)projectByteBlock.GetBlock());
+		printf("Found project: %s\n", *projectPath);
+
+		/*
+		* Increment project byte offset
+		*/
+		projectByteOffset += PROJECT_ENTRY_SIZE;
+	}
 	/*
 	* Create window
 	*/
@@ -136,6 +217,7 @@ void RenderGUI()
 			const Rudy::String projectName = "Test Project";
 
 			const Rudy::String projectPath = Rudy::PlatformPaths::GetDocumentsPath() + "/Rudy Projects/" + projectName +"/";
+
 			/*
 			* Validate rudy projects path
 			*/
@@ -161,17 +243,23 @@ void RenderGUI()
 			projectFileContent.VersionMajor = 48;
 			projectFileContent.VersionMinor = 113;
 
-			Rudy::Array<unsigned char> projectFileContentBytes;
-			projectFileContentBytes.Copy((unsigned char*)&projectFileContent, sizeof(projectFileContent));
-			Rudy::PlatformFile::Write(projectPath + "Project.rproject", projectFileContentBytes);
+			Rudy::ByteBlock projectFileContentByteBlock((Rudy::Byte*) & projectFileContent,sizeof(ProjectFileContent));
+			Rudy::PlatformFile::Write(projectPath + "Project.rproject", projectFileContentByteBlock);
 
 			/*
 			* Write default project settings
 			*/
 			Rudy::Guid zeroGuid;
-			Rudy::Array<unsigned char> worldSettingBytes;
-			worldSettingBytes.Copy((unsigned char*)&zeroGuid, sizeof(Rudy::Guid));
-			Rudy::PlatformFile::Write(projectPath + "Settings/CurrentWorld.rsetting", worldSettingBytes);
+			Rudy::ByteBlock worldSettingByteBlock((Rudy::Byte*)&zeroGuid, sizeof(Rudy::Guid));
+			Rudy::PlatformFile::Write(projectPath + "Settings/CurrentWorld.rsetting", worldSettingByteBlock);
+			
+			/*
+			* Write to projects file
+			*/
+			char projectBuffer[100];
+			strcpy_s(projectBuffer, *projectPath);
+			Rudy::ByteBlock projectEntryByteBlock((Rudy::Byte*)&projectBuffer, sizeof(projectBuffer));
+			Rudy::PlatformFile::WriteAppend(g_SlopeProjectsPath, projectEntryByteBlock);
 		}
 	}
 	Rudy::ImGuiRenderCommands::FinalizeWindow();

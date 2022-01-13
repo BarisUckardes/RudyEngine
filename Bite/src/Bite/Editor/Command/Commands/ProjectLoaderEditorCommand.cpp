@@ -1,6 +1,8 @@
 #include "ProjectLoaderEditorCommand.h"
 #include <Rudy/Platform/Utility/PlatformFile.h>
 #include <Bite/Project/ProjectFileContent.h>
+#include <Bite/Editor/Session/EditorSession.h>
+#include <Rudy/Memory/ByteBlock.h>
 namespace Bite
 {
     ProjectLoaderEditorCommand::ProjectLoaderEditorCommand(const Rudy::String& projectFolder)
@@ -12,25 +14,30 @@ namespace Bite
         /*
         * Load project name-version etc
         */
-        Rudy::Array<unsigned char> projectFileBytes;
-        Rudy::PlatformFile::Read(m_ProjectFolder,projectFileBytes);
+        Rudy::ByteBlock projectFileByteBlock;
+        Rudy::PlatformFile::Read(m_ProjectFolder, projectFileByteBlock);
 
         /*
         * Create project file content
         */
         ProjectFileContent content;
-        content = *(ProjectFileContent*)projectFileBytes.GetData();
+        content = projectFileByteBlock.To<ProjectFileContent>();
 
         /*
         * Set session project file settings
         */
+        GetOwnerSession()->SetProject(content.Name, content.VersionMajor, content.VersionMinor, content.ProjectID);
     }
     void ProjectLoaderEditorCommand::OnFinalize()
     {
         /*
+        * Get last project state
+        */
+
+        /*
         * Save last project state
         */
-        Rudy::Array<unsigned char> projectFileBytes;
-        Rudy::PlatformFile::Write(m_ProjectFolder, projectFileBytes);
+        Rudy::ByteBlock projectFileByteBlock;
+        Rudy::PlatformFile::Write(m_ProjectFolder, projectFileByteBlock);
     }
 }

@@ -3,7 +3,7 @@
 #include <Shlwapi.h>
 #include <stdio.h>
 #include <Rudy/Platform/Utility/PlatformError.h>
-
+#include <Rudy/Memory/ByteBlock.h>
 namespace Rudy
 {
     unsigned long g_TransferredBytes;
@@ -99,7 +99,7 @@ namespace Rudy
         return isSuccess;
     }
 
-    bool WindowsFile::WriteToFileBytes(const String& path, const Array<unsigned char>& content)
+    bool WindowsFile::WriteToFileBytes(const String& path, const ByteBlock& byteBlock)
     {
         /*
         * Create new file
@@ -118,7 +118,7 @@ namespace Rudy
         * Write to file
         */
         unsigned long writtenBytes = 0;
-        bool isSuccess = WriteFile(fileHandle, content.GetData(), content.GetCursor(), &writtenBytes, NULL);
+        bool isSuccess = WriteFile(fileHandle, byteBlock.GetBlock(), byteBlock.GetBlockSize(), &writtenBytes, NULL);
         printf("Written bytes %d\n", writtenBytes);
 
         if (!isSuccess)
@@ -132,6 +132,39 @@ namespace Rudy
         CloseHandle(fileHandle);
 
         return isSuccess;
+    }
+    bool WindowsFile::WriteToFileAppendBytes(const String& path, const ByteBlock& byteBlock)
+    {
+        /*
+        * Create new file
+        */
+        HANDLE fileHandle = CreateFileA(*path, FILE_APPEND_DATA, 0, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+
+        /*
+        * Validate file state
+        */
+        if (!fileHandle)
+        {
+            return false;
+        }
+
+        /*
+        * Write to file
+        */
+        unsigned long writtenBytes = 0;
+        bool isSuccess = WriteFile(fileHandle, byteBlock.GetBlock(), byteBlock.GetBlockSize(), &writtenBytes, NULL);
+        printf("Append bytes %d\n", writtenBytes);
+
+        if (!isSuccess)
+        {
+            return false;
+        }
+
+        /*
+        * Close file handle
+        */
+        CloseHandle(fileHandle);
+        return true;
     }
     bool WindowsFile::WriteToExistingFile(const String& path, const String& content)
     {
@@ -218,7 +251,7 @@ namespace Rudy
 
         return true;
     }
-    bool WindowsFile::ReadBytes(const String& path, Array<unsigned char>& contentOut)
+    bool WindowsFile::ReadBytes(const String& path,ByteBlock& byteBlock)
     {
         /*
          * Get file size first
@@ -236,7 +269,7 @@ namespace Rudy
         */
         HANDLE fileHandle;
         unsigned long numberOfBytesRead = 0;
-        BYTE* buffer = new BYTE[fileSize];
+        Byte* buffer = new Byte[fileSize];
 
         /*
         * Access file for reading
@@ -270,11 +303,18 @@ namespace Rudy
         /*
         * Set escape char
         */
-        contentOut.Move(buffer, bytesAcquired);
+        byteBlock = ByteBlock(buffer,bytesAcquired);
+
+        /*
+        * Delete buffer
+        */
+        delete[] buffer;
 
         return isSuccess;
     }
-    bool WindowsFile::ReadBytes(const String& path,unsigned long startByte,unsigned long endByte, Array<unsigned char>& contentOut)
+    bool WindowsFile::ReadBytes(const String& path,
+        unsigned long startByte,unsigned long endByte,
+        ByteBlock& byteBlock)
     {
         /*
          * Get file size first
@@ -296,7 +336,7 @@ namespace Rudy
         */
         HANDLE fileHandle;
         unsigned long numberOfBytesRead = 0;
-        BYTE* buffer = new BYTE[readableBytes];
+        Byte* buffer = new Byte[readableBytes];
 
         /*
         * Access file for reading
@@ -341,7 +381,12 @@ namespace Rudy
         /*
         * Set escape char
         */
-        contentOut.Move(buffer, bytesAcquired);
+        byteBlock = ByteBlock(buffer, bytesAcquired);
+
+        /*
+        * Delete buffer
+        */
+        delete[] buffer;
 
         return isSuccess;
     }

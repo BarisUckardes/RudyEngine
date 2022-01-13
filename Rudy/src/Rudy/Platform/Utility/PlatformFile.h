@@ -2,6 +2,7 @@
 #include <Rudy/Memory/String.h>
 namespace Rudy
 {
+	class ByteBlock;
 	/// <summary>
 	/// Contains platform agnostic file actions
 	/// </summary>
@@ -45,7 +46,15 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <param name="content"></param>
 		/// <returns></returns>
-		static bool Write(const String& path, const Array<unsigned char>& bytes);
+		static bool Write(const String& path, const ByteBlock& byteBlock);
+
+		/// <summary>
+		/// Opens and appends to binary file
+		/// </summary>
+		/// <param name="path"></param>
+		/// <param name="bytes"></param>
+		/// <returns></returns>
+		static bool WriteAppend(const String& path, const ByteBlock& byteBlock);
 
 		/// <summary>
 		/// Writes to an existing file
@@ -69,7 +78,7 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <param name="contentOut"></param>
 		/// <returns></returns>
-		static bool Read(const String& path, Array<unsigned char>& contentOut);
+		static bool Read(const String& path, ByteBlock& byteBlock);
 
 		/// <summary>
 		/// Reads the file
@@ -79,7 +88,7 @@ namespace Rudy
 		/// <param name="end"></param>
 		/// <param name="contentOut"></param>
 		/// <returns></returns>
-		static bool Read(const String& path, unsigned long start, unsigned long end, Array<unsigned char>& contentOut);
+		static bool Read(const String& path, unsigned long start, unsigned long end, ByteBlock& byteBlock);
 
 		/// <summary>
 		/// Returns the file size in length
