@@ -160,6 +160,9 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Bite\Domain\DomainAssetView.h" />
+    <ClInclude Include="src\Bite\Domain\DomainFolderView.h" />
+    <ClInclude Include="src\Bite\Domain\DomainView.h" />
     <ClInclude Include="src\Bite\Editor\Command\Commands\ProjectLoaderEditorCommand.h" />
     <ClInclude Include="src\Bite\Editor\Command\EditorCommand.h" />
     <ClInclude Include="src\Bite\GUI\Module\Window\GUIWindowManager.h" />
@@ -181,6 +184,9 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     <ClInclude Include="src\Bite\Project\ProjectVersion.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Bite\Domain\DomainAssetView.cpp" />
+    <ClCompile Include="src\Bite\Domain\DomainFolderView.cpp" />
+    <ClCompile Include="src\Bite\Domain\DomainView.cpp" />
     <ClCompile Include="src\Bite\Editor\Command\Commands\ProjectLoaderEditorCommand.cpp" />
     <ClCompile Include="src\Bite\Editor\Command\EditorCommand.cpp" />
     <ClCompile Include="src\Bite\GUI\Module\Window\GUIWindowManager.cpp" />

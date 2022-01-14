@@ -36,6 +36,16 @@ namespace Rudy
 		template<typename TObject>
 		TObject To() const;
 
+		/// <summary>
+		/// Converts this byte block with an offset
+		/// </summary>
+		/// <typeparam name="TObject"></typeparam>
+		/// <param name="start"></param>
+		/// <param name="end"></param>
+		/// <returns></returns>
+		template<typename TObject>
+		TObject To(unsigned long offset);
+
 		Byte operator[](unsigned long index);
 		ByteBlock& operator=(ByteBlock&& block) noexcept;
 	private:
@@ -47,5 +57,10 @@ namespace Rudy
 	inline TObject ByteBlock::To() const
 	{
 		return *(TObject*)m_Block;
+	}
+	template<typename TObject>
+	inline TObject ByteBlock::To(unsigned long offset)
+	{
+		return *(TObject*)(m_Block + offset);
 	}
 }

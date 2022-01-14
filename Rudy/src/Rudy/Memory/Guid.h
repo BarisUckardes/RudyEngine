@@ -9,12 +9,6 @@ namespace Rudy
 	{
 	public:
 		/// <summary>
-		/// Returns the zero guid
-		/// </summary>
-		/// <returns></returns>
-		static Guid GetZero();
-
-		/// <summary>
 		/// Creates a new platform agnostic guid
 		/// </summary>
 		/// <returns></returns>
@@ -26,10 +20,7 @@ namespace Rudy
 		/// <param name="targetString"></param>
 		/// <returns></returns>
 		static bool GetFromString(const String& targetString, Guid& idOut);
-	private:
-		static char* GuidToStrCore(const Guid* id, char* out);
-		static Guid StringToGuidCore(const String& guid);
-	public:
+
 		Guid(unsigned long a, unsigned short b, unsigned short c, unsigned char d[8]);
 		Guid();
 
@@ -43,7 +34,9 @@ namespace Rudy
 		unsigned short B;
 		unsigned short C;
 		unsigned char D[8];
-
+	private:
+		static char* GuidToStrCore(const Guid* id, char* out);
+		static Guid StringToGuidCore(const String& guid);
 	};
 	RUDY_API bool operator==(const Guid& a, const Guid& b);
 	RUDY_API bool operator!=(const Guid& a, const Guid& b);

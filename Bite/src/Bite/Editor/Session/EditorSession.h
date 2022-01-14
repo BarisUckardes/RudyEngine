@@ -10,6 +10,9 @@ namespace Rudy
 }
 namespace Bite
 {
+	/// <summary>
+	/// Represents a session of the editor
+	/// </summary>
 	class BITE_API EditorSession
 	{
 	public:

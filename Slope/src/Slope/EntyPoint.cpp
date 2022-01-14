@@ -14,7 +14,7 @@
 #include <Rudy/Memory/ByteBlock.h>
 
 #define PROJECT_ENTRY_SIZE 100
-void RenderGUI();
+bool RenderGUI();
 
 struct ProjectFileContent
 {
@@ -98,8 +98,10 @@ int main(int argumentCount, char** arguments)
 	Rudy::ByteBlock projectCountByteBlock;
 	Rudy::PlatformFile::Read(slopeProjectsPath,0,4, projectCountByteBlock);
 
+	/*
+	* Iterate projects
+	*/
 	const unsigned int projectCount = projectCountByteBlock.To<unsigned int>();
-	printf("Project count: %d\n", projectCount);
 	unsigned int projectByteOffset = 4;
 	for (unsigned int i = 0; i < projectCount; i++)
 	{
@@ -113,7 +115,6 @@ int main(int argumentCount, char** arguments)
 		* Get string
 		*/
 		Rudy::String projectPath((char*)projectByteBlock.GetBlock());
-		printf("Found project: %s\n", *projectPath);
 
 		/*
 		* Increment project byte offset
@@ -162,7 +163,7 @@ int main(int argumentCount, char** arguments)
 		* Render gui
 		*/
 		renderer->Begin();
-		RenderGUI();
+		exitRequest = RenderGUI();
 		renderer->End();
 
 		/*
@@ -179,7 +180,7 @@ int main(int argumentCount, char** arguments)
 	}
 	return 0;
 }
-void RenderGUI()
+bool RenderGUI()
 {
 	/*
 	* Render window
@@ -202,7 +203,6 @@ void RenderGUI()
 		*/
 		Rudy::ImGuiRenderCommands::CreateText("Projects:");
 		Rudy::ImGuiRenderCommands::CreateHorizontalLine();
-
 
 		/*
 		* Render projects
@@ -227,7 +227,8 @@ void RenderGUI()
 				Rudy::PlatformProcess* platformProcess = Rudy::PlatformProcess::Create(cmdArguments,
 					"C:/Program Files/Rudy/Rudy/Editor.exe");
 				platformProcess->Start();
-
+				Rudy::ImGuiRenderCommands::FinalizeWindow();
+				return true;
 			}
 		}
 		Rudy::ImGuiRenderCommands::CreateHorizontalLine();
@@ -240,7 +241,7 @@ void RenderGUI()
 			/*
 			* Create project name&path
 			*/
-			const Rudy::String projectName = "Test Project";
+			const Rudy::String projectName = "Test_Project";
 			const Rudy::String projectPath = Rudy::PlatformPaths::GetDocumentsPath() + "/Rudy_Projects/" + projectName +"/";
 
 			/*
@@ -251,9 +252,9 @@ void RenderGUI()
 			/*
 			* Validate rudy projects path
 			*/
-			if (!Rudy::PlatformDirectory::IsDirectoryExists(Rudy::PlatformPaths::GetDocumentsPath() + "/Rudy Projects"))
+			if (!Rudy::PlatformDirectory::IsDirectoryExists(Rudy::PlatformPaths::GetDocumentsPath() + "/Rudy_Projects"))
 			{
-				Rudy::PlatformDirectory::CreateDirectory(Rudy::PlatformPaths::GetDocumentsPath() + "/Rudy Projects");
+				Rudy::PlatformDirectory::CreateDirectory(Rudy::PlatformPaths::GetDocumentsPath() + "/Rudy_Projects");
 			}
 
 			/*
@@ -272,7 +273,7 @@ void RenderGUI()
 			projectFileContent.ProjectID = Rudy::Guid::Create();
 			projectFileContent.VersionMajor = 48;
 			projectFileContent.VersionMinor = 113;
-			Rudy::ByteBlock projectFileContentByteBlock((Rudy::Byte*) & projectFileContent,sizeof(ProjectFileContent));
+			Rudy::ByteBlock projectFileContentByteBlock((Rudy::Byte*)&projectFileContent,sizeof(ProjectFileContent));
 			Rudy::PlatformFile::Write(projectPath + "Project.rproject", projectFileContentByteBlock);
 
 			/*
@@ -318,4 +319,5 @@ void RenderGUI()
 		}
 	}
 	Rudy::ImGuiRenderCommands::FinalizeWindow();
+	return false;
 }

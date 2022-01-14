@@ -11,9 +11,12 @@ namespace Rudy
 		WindowsWindow(const String& title,const unsigned int offsetX,const unsigned int offsetY,const unsigned int sizeX,const unsigned int sizeY);
 		virtual ~WindowsWindow() override;
 
+		
 		virtual bool HasCloseRequest() const override;
 		virtual void PollBufferedEvents() override;
 		virtual void* GetNativePtr() const override;
+	protected:
+		virtual void SetTitleCore(const String& title) override;
 	private:
 		struct GLFWWindowData
 		{

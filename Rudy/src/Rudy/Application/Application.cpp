@@ -52,6 +52,7 @@ namespace Rudy
 		*/
 		for (int i = 0; i < m_PendingModules.GetCursor(); i++)
 		{
+
 			/*
 			* Get the module
 			*/
@@ -65,7 +66,9 @@ namespace Rudy
 			/*
 			* Attach the module
 			*/
+			printf("Frame %d:\n",i);
 			module->OnAttach();
+			printf("Frame %d:\n",i);
 
 			/*
 			* Register module to the main loop
@@ -73,6 +76,7 @@ namespace Rudy
 			m_Modules.Add(module);
 		}
 		m_PendingModules.Clear();
+
 
 		/*
 		* Application loop
@@ -113,6 +117,7 @@ namespace Rudy
 			/*
 			* Validate session
 			*/
+			
 		}
 
 		/*

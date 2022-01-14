@@ -3,6 +3,7 @@
 #include <Bite/Project/ProjectFileContent.h>
 #include <Bite/Editor/Session/EditorSession.h>
 #include <Rudy/Memory/ByteBlock.h>
+#include <stdio.h>
 namespace Bite
 {
     ProjectLoaderEditorCommand::ProjectLoaderEditorCommand(const Rudy::String& projectFolder)
@@ -15,7 +16,7 @@ namespace Bite
         * Load project name-version etc
         */
         Rudy::ByteBlock projectFileByteBlock;
-        Rudy::PlatformFile::Read(m_ProjectFolder, projectFileByteBlock);
+        Rudy::PlatformFile::Read(m_ProjectFolder + "/Project.rproject", projectFileByteBlock);
 
         /*
         * Create project file content

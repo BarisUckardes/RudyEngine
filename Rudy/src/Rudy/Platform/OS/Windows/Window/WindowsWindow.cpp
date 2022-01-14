@@ -265,4 +265,8 @@ namespace Rudy
 	{
 		return m_NativeWindow;
 	}
+	void WindowsWindow::SetTitleCore(const String& title)
+	{
+		glfwSetWindowTitle(m_NativeWindow, *title);
+	}
 }

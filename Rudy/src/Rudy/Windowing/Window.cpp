@@ -44,6 +44,19 @@ namespace Rudy
 		return m_GraphicsDevice;
 	}
 
+	void Window::SetTitle(const String& title)
+	{
+		/*
+		* Call set title implementation
+		*/
+		SetTitleCore(title);
+
+		/*
+		* Set title
+		*/
+		m_Title = title;
+	}
+
 	void Window::RegisterCallBack(Delegate<void, Event*> functionPtr)
 	{
 		m_Callbacks.Add(functionPtr);

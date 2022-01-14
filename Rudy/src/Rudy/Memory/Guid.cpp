@@ -3,22 +3,9 @@
 #include <Rudy/Platform/OS/PlatformOSType.h>
 #include <Rudy/Platform/OS/PlatformOSDetection.h>
 #include <Rudy/Platform/OS/Windows/Memory/WindowsGuid.h>
+#include <Rudy/Memory/Memory.h>
 namespace Rudy
 {
-	Guid::Guid()
-	{
-		A = B = C = 0;
-	}
-	Guid::Guid(unsigned long a, unsigned short b, unsigned short c, unsigned char d[8])
-	{
-		A = a;
-		B = b;
-		C = c;
-		for (unsigned char charIndex = 0; charIndex < 8; charIndex++)
-		{
-			D[charIndex] = d[charIndex];
-		}
-	}
 	Guid Guid::Create()
 	{
 		/*
@@ -41,6 +28,19 @@ namespace Rudy
 		default:
 			break;
 		}
+	}
+	Guid::Guid()
+	{
+		A = B = C = 0;
+		D[0] = D[1] = D[2] = D[3] = D[4] = D[5] = D[6] = D[7] = 0;
+
+	}
+	Guid::Guid(unsigned long a, unsigned short b, unsigned short c, unsigned char d[8])
+	{
+		A = a;
+		B = b;
+		C = c;
+		Memory::MemoryCopy(&D, &d, 8);
 	}
 	String Guid::GetAsString() const
 	{

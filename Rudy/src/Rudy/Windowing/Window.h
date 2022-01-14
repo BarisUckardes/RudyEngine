@@ -48,6 +48,12 @@ namespace Rudy
 		FORCEINLINE GraphicsDevice* GetGraphicsDevice() const;
 
 		/// <summary>
+		/// Sets the title of this window
+		/// </summary>
+		/// <param name="title"></param>
+		void SetTitle(const String& title);
+
+		/// <summary>
 		/// Registers a function callback for this window to call when an event fired
 		/// </summary>
 		/// <param name="callbackFunction"></param>
@@ -66,15 +72,15 @@ namespace Rudy
 		virtual bool HasCloseRequest() const = 0;
 
 		/// <summary>
-		/// Records buffered events and broadcasts them to the application
-		/// </summary>
-		virtual void PollBufferedEvents() = 0;
-
-		/// <summary>
 		/// Returns the native pointer for this window
 		/// </summary>
 		/// <returns></returns>
 		virtual void* GetNativePtr() const = 0;
+
+		/// <summary>
+		/// Records buffered events and broadcasts them to the application
+		/// </summary>
+		virtual void PollBufferedEvents() = 0;
 	protected:
 		/// <summary>
 		/// Called when received an event
@@ -86,6 +92,12 @@ namespace Rudy
 		/// </summary>
 		/// <param name="device"></param>
 		void SetGraphicsDevice(GraphicsDevice* device);
+
+		/// <summary>
+		/// Set title implementation
+		/// </summary>
+		/// <param name="title"></param>
+		virtual void SetTitleCore(const String& title) = 0;
 
 		/// <summary>
 		/// Returns the window event delegate of this window
