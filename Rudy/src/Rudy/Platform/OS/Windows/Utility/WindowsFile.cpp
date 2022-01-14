@@ -119,8 +119,6 @@ namespace Rudy
         */
         unsigned long writtenBytes = 0;
         bool isSuccess = WriteFile(fileHandle, byteBlock.GetBlock(), byteBlock.GetBlockSize(), &writtenBytes, NULL);
-        for (int i = 0; i < writtenBytes; i++)
-            printf("Byte Write: %d\n", byteBlock.GetBlock()[i]);
 
         if (!isSuccess)
         {
@@ -154,7 +152,6 @@ namespace Rudy
         */
         unsigned long writtenBytes = 0;
         bool isSuccess = WriteFile(fileHandle, byteBlock.GetBlock(), byteBlock.GetBlockSize(), &writtenBytes, NULL);
-        printf("Append bytes %d\n", writtenBytes);
 
         if (!isSuccess)
         {
@@ -187,7 +184,6 @@ namespace Rudy
         */
         unsigned long writtenBytes = 0;
         bool isSuccess = WriteFile(fileHandle, content.GetSource(), content.GetCursor(), &writtenBytes, NULL);
-        printf("Written bytes %d\n", writtenBytes);
 
         if (!isSuccess)
         {

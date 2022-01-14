@@ -14,7 +14,9 @@ int main(int argumentCount, char** arguments)
 	/*
 	* Get project path
 	*/
-	const Rudy::String projectFolderPath(arguments[0]);
+	const Rudy::String projectFolderPath(arguments[1]);
+
+	printf("Executable path: %s, Project folder path: %s\n", *executablePath, *projectFolderPath);
 
 	/*
 	* Create editor application
@@ -25,6 +27,6 @@ int main(int argumentCount, char** arguments)
 	* Run application
 	*/
 	application->RunEditor();
-	while(1){}
+
 	return 0;
 }

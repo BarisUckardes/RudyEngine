@@ -42,16 +42,6 @@ Rudy::Array<Rudy::String> g_Projects;
 Rudy::String g_SlopeProjectsPath;
 int main(int argumentCount, char** arguments)
 {
-	//{
-	//	unsigned int value = 555;
-	//	Rudy::Byte* acb = (Rudy::Byte*)&value;
-	//	for (int i = 0; i < sizeof(value); i++)
-	//		printf("Actual Source Byte: %d\n", acb[i]);
-	//	Rudy::ByteBlock block(&value, sizeof(value));
-	//	for (int i = 0; i < block.GetBlockSize(); i++)
-	//		printf("Copied byte: %d\n", block.GetBlock()[i]);
-	//}
-
 	/*
 	* Get paths
 	*/
@@ -93,13 +83,9 @@ int main(int argumentCount, char** arguments)
 		*/
 		unsigned int projectCount = 0;
 		Rudy::ByteBlock projectsCountBytes(&projectCount, sizeof(projectCount));
-		Rudy::Byte* b = (Rudy::Byte*)&projectCount;
-		for (int i = 0; i < sizeof(projectCount); i++)
-			printf("Actual source byte: %d\n", b[i]);
-		for (int i = 0; i < projectsCountBytes.GetBlockSize(); i++)
-			printf("Copied byte: %d\n", projectsCountBytes.GetBlock()[i]);
+
 		unsigned int copiedCount = projectsCountBytes.To<unsigned int>();
-		printf("Output value: %d\n", copiedCount);
+
 		/*
 		* Write to file
 		*/
@@ -113,7 +99,7 @@ int main(int argumentCount, char** arguments)
 	Rudy::PlatformFile::Read(slopeProjectsPath,0,4, projectCountByteBlock);
 
 	const unsigned int projectCount = projectCountByteBlock.To<unsigned int>();
-
+	printf("Project count: %d\n", projectCount);
 	unsigned int projectByteOffset = 4;
 	for (unsigned int i = 0; i < projectCount; i++)
 	{
@@ -133,6 +119,7 @@ int main(int argumentCount, char** arguments)
 		* Increment project byte offset
 		*/
 		projectByteOffset += PROJECT_ENTRY_SIZE;
+		g_Projects.Add(projectPath);
 	}
 	/*
 	* Create window
@@ -218,12 +205,31 @@ void RenderGUI()
 
 
 		/*
-		* Render selectable projects
+		* Render projects
 		*/
-		Rudy::ImGuiRenderCommands::CreateSelectableItem("MySelectable");
-		Rudy::ImGuiRenderCommands::CreateSelectableItem("MySelectable2");
-		Rudy::ImGuiRenderCommands::CreateSelectableItem("MySelectable3");
+		for (int i = 0; i < g_Projects.GetCursor(); i++)
+		{
+			/*
+			* Get project path
+			*/
+			const Rudy::String& projectPath = g_Projects[i];
 
+			/*
+			* Render selectable
+			*/
+			if (Rudy::ImGuiRenderCommands::CreateSelectableItem(g_Projects[i]))
+			{
+				/*
+				* Create editor process
+				*/
+				Rudy::Array<Rudy::String> cmdArguments;
+				cmdArguments.Add(projectPath);
+				Rudy::PlatformProcess* platformProcess = Rudy::PlatformProcess::Create(cmdArguments,
+					"C:/Program Files/Rudy/Rudy/Editor.exe");
+				platformProcess->Start();
+
+			}
+		}
 		Rudy::ImGuiRenderCommands::CreateHorizontalLine();
 
 		/*
@@ -231,9 +237,16 @@ void RenderGUI()
 		*/
 		if (Rudy::ImGuiRenderCommands::CreateButton("Create new project"))
 		{
+			/*
+			* Create project name&path
+			*/
 			const Rudy::String projectName = "Test Project";
+			const Rudy::String projectPath = Rudy::PlatformPaths::GetDocumentsPath() + "/Rudy_Projects/" + projectName +"/";
 
-			const Rudy::String projectPath = Rudy::PlatformPaths::GetDocumentsPath() + "/Rudy Projects/" + projectName +"/";
+			/*
+			* Register project to the global projects list
+			*/
+			g_Projects.Add(projectPath);
 
 			/*
 			* Validate rudy projects path
@@ -250,16 +263,15 @@ void RenderGUI()
 			Rudy::PlatformDirectory::CreateDirectory(projectPath + "Domain/");
 			Rudy::PlatformDirectory::CreateDirectory(projectPath + "Code/");
 			Rudy::PlatformDirectory::CreateDirectory(projectPath + "Settings/");
-
+			
 			/*
 			* Write project file
 			*/
 			ProjectFileContent projectFileContent;
-			strcpy_s(projectFileContent.Name, projectName.GetSource());
+			Rudy::Memory::MemoryCopy(projectFileContent.Name, projectName.GetSource(),projectName.GetCursor());
 			projectFileContent.ProjectID = Rudy::Guid::Create();
 			projectFileContent.VersionMajor = 48;
 			projectFileContent.VersionMinor = 113;
-
 			Rudy::ByteBlock projectFileContentByteBlock((Rudy::Byte*) & projectFileContent,sizeof(ProjectFileContent));
 			Rudy::PlatformFile::Write(projectPath + "Project.rproject", projectFileContentByteBlock);
 
@@ -271,12 +283,38 @@ void RenderGUI()
 			Rudy::PlatformFile::Write(projectPath + "Settings/CurrentWorld.rsetting", worldSettingByteBlock);
 			
 			/*
-			* Write to projects file
+			* Read projects file
 			*/
-			char projectBuffer[100];
-			strcpy_s(projectBuffer, *projectPath);
-			Rudy::ByteBlock projectEntryByteBlock((Rudy::Byte*)&projectBuffer, sizeof(projectBuffer));
-			Rudy::PlatformFile::WriteAppend(g_SlopeProjectsPath, projectEntryByteBlock);
+			Rudy::ByteBlock projectFileByteBlock;
+			Rudy::PlatformFile::Read(g_SlopeProjectsPath, projectFileByteBlock);
+
+			/*
+			* Create new file content byte block
+			*/
+			Rudy::Byte* newProjectFileByte = new Rudy::Byte[projectFileByteBlock.GetBlockSize() + 100];
+
+			/*
+			* Copy the old contents
+			*/
+			Rudy::Memory::MemoryCopy(newProjectFileByte, projectFileByteBlock.GetBlock(), projectFileByteBlock.GetBlockSize());
+
+			/*
+			* Alter the project number in the new projects file content
+			*/
+			*newProjectFileByte = g_Projects.GetCursor();
+
+			/*
+			* Append new project path bytes to new projects file content
+			*/
+			Rudy::Memory::MemoryCopy(
+				newProjectFileByte + projectFileByteBlock.GetBlockSize(),
+				projectPath.GetSource(), 100);
+
+			/*
+			* Write new projects file bytes to the disk
+			*/
+			Rudy::PlatformFile::Write(g_SlopeProjectsPath,
+				Rudy::ByteBlock(newProjectFileByte, projectFileByteBlock.GetBlockSize() + 100));
 		}
 	}
 	Rudy::ImGuiRenderCommands::FinalizeWindow();

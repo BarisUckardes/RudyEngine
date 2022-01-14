@@ -104,7 +104,7 @@ namespace Rudy
 			/*
 			* Validate window
 			*/
-			if (!m_Window->HasCloseRequest())
+			if (m_Window->HasCloseRequest())
 			{
 				hasExitRequest = true;
 				exitMessage = "Window closed";
