@@ -42,6 +42,16 @@ Rudy::Array<Rudy::String> g_Projects;
 Rudy::String g_SlopeProjectsPath;
 int main(int argumentCount, char** arguments)
 {
+	//{
+	//	unsigned int value = 555;
+	//	Rudy::Byte* acb = (Rudy::Byte*)&value;
+	//	for (int i = 0; i < sizeof(value); i++)
+	//		printf("Actual Source Byte: %d\n", acb[i]);
+	//	Rudy::ByteBlock block(&value, sizeof(value));
+	//	for (int i = 0; i < block.GetBlockSize(); i++)
+	//		printf("Copied byte: %d\n", block.GetBlock()[i]);
+	//}
+
 	/*
 	* Get paths
 	*/
@@ -81,9 +91,15 @@ int main(int argumentCount, char** arguments)
 		/*
 		* Create default slope projects file
 		*/
-		constexpr unsigned int projectCount = 0;
-		Rudy::ByteBlock projectsCountBytes((Rudy::Byte*)&projectCount, sizeof(projectCount));
-
+		unsigned int projectCount = 0;
+		Rudy::ByteBlock projectsCountBytes(&projectCount, sizeof(projectCount));
+		Rudy::Byte* b = (Rudy::Byte*)&projectCount;
+		for (int i = 0; i < sizeof(projectCount); i++)
+			printf("Actual source byte: %d\n", b[i]);
+		for (int i = 0; i < projectsCountBytes.GetBlockSize(); i++)
+			printf("Copied byte: %d\n", projectsCountBytes.GetBlock()[i]);
+		unsigned int copiedCount = projectsCountBytes.To<unsigned int>();
+		printf("Output value: %d\n", copiedCount);
 		/*
 		* Write to file
 		*/
@@ -94,9 +110,10 @@ int main(int argumentCount, char** arguments)
 	* Read projects
 	*/
 	Rudy::ByteBlock projectCountByteBlock;
-	Rudy::PlatformFile::Read(slopeProjectsPath, projectCountByteBlock);
+	Rudy::PlatformFile::Read(slopeProjectsPath,0,4, projectCountByteBlock);
+
 	const unsigned int projectCount = projectCountByteBlock.To<unsigned int>();
-	printf("%d projects found\n", projectCount);
+
 	unsigned int projectByteOffset = 4;
 	for (unsigned int i = 0; i < projectCount; i++)
 	{

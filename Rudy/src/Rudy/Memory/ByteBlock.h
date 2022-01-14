@@ -10,10 +10,10 @@ namespace Rudy
 	class RUDY_API ByteBlock
 	{
 	public:
-		ByteBlock(const ByteBlock& block, unsigned long startIndex, unsigned long endIndex, ByteBlockTransferType transferType = ByteBlockTransferType::Copy);
-		ByteBlock(Byte* block, unsigned long size,ByteBlockTransferType transferType = ByteBlockTransferType::Copy);
-		ByteBlock(const ByteBlock& block) = delete;
-		ByteBlock() = default;
+		ByteBlock(const ByteBlock& block, unsigned long startIndex, unsigned long endIndex);
+		ByteBlock(void* block, unsigned long size);
+		ByteBlock(const ByteBlock& block);
+		ByteBlock();
 		~ByteBlock();
 
 		/// <summary>
@@ -34,14 +34,17 @@ namespace Rudy
 		/// <typeparam name="TBlock"></typeparam>
 		/// <returns></returns>
 		template<typename TObject>
-		TObject To();
+		TObject To() const;
+
+		Byte operator[](unsigned long index);
+		ByteBlock& operator=(ByteBlock&& block) noexcept;
 	private:
 		Byte* m_Block;
 		ByteBlockTransferType m_TranferType;
 		unsigned long m_BlockSize;
 	};
 	template<typename TObject>
-	inline TObject ByteBlock::To()
+	inline TObject ByteBlock::To() const
 	{
 		return *(TObject*)m_Block;
 	}

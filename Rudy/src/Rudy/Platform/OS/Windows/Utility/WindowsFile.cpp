@@ -119,7 +119,8 @@ namespace Rudy
         */
         unsigned long writtenBytes = 0;
         bool isSuccess = WriteFile(fileHandle, byteBlock.GetBlock(), byteBlock.GetBlockSize(), &writtenBytes, NULL);
-        printf("Written bytes %d\n", writtenBytes);
+        for (int i = 0; i < writtenBytes; i++)
+            printf("Byte Write: %d\n", byteBlock.GetBlock()[i]);
 
         if (!isSuccess)
         {
@@ -289,7 +290,7 @@ namespace Rudy
         * Read file
         */
         bool isSuccess = ReadFile(fileHandle, buffer, fileSize,&numberOfBytesRead,NULL);
-
+        
         /*
         * Close file Handle
         */
@@ -301,7 +302,7 @@ namespace Rudy
         unsigned long int bytesAcquired = numberOfBytesRead == 0 ? fileSize : numberOfBytesRead;
        
         /*
-        * Set escape char
+        * Set byte block
         */
         byteBlock = ByteBlock(buffer,bytesAcquired);
 
@@ -337,7 +338,7 @@ namespace Rudy
         HANDLE fileHandle;
         unsigned long numberOfBytesRead = 0;
         Byte* buffer = new Byte[readableBytes];
-
+        
         /*
         * Access file for reading
         */
@@ -367,6 +368,7 @@ namespace Rudy
         * Read file
         */
         bool isSuccess = ReadFile(fileHandle, buffer, readableBytes, &numberOfBytesRead, NULL);
+        
 
         /*
         * Close file Handle
@@ -379,10 +381,10 @@ namespace Rudy
         unsigned long int bytesAcquired = numberOfBytesRead == 0 ? readableBytes : numberOfBytesRead;
 
         /*
-        * Set escape char
+        * Copy byte block
         */
         byteBlock = ByteBlock(buffer, bytesAcquired);
-
+       
         /*
         * Delete buffer
         */

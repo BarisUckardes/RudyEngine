@@ -20,5 +20,6 @@ namespace Rudy
 		/// <param name="source"></param>
 		/// <param name="byteCount"></param>
 		FORCEINLINE static void MemoryCopy(void* destination, void* source, unsigned long byteCount);
+
 	};
 }
