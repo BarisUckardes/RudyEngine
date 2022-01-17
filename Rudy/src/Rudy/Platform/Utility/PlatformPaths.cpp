@@ -11,20 +11,7 @@ namespace Rudy
 	}
 	String PlatformPaths::GetDomainPath()
 	{
-		PlatformOSType platformType = GetCurrentPlatform();
-		switch (platformType)
-		{
-			case Rudy::PlatformOSType::Undefined:
-				break;
-			case Rudy::PlatformOSType::Windows:
-				return WindowsPaths::GetExecutablePath();
-				break;
-			case Rudy::PlatformOSType::Linux:
-				break;
-			default:
-				break;
-		}
-		return String();
+		return GetExecutablePath() + "/Domain";
 	}
 	String PlatformPaths::GetAppDataPath()
 	{

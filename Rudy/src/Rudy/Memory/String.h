@@ -60,7 +60,27 @@ namespace Rudy
 		/// <summary>
 		/// Finds the starting index of the target string
 		/// </summary>
-		int FindIndex(const String& targetString, unsigned int startIndex) const;
+		int FindIndex(const String& targetString, unsigned int startIndex,unsigned int count = 0) const;
+
+		/// <summary>
+		/// Finds the last of the index from the target string
+		/// </summary>
+		/// <param name="targetStrin"></param>
+		/// <param name="startIndex"></param>
+		/// <returns></returns>
+		int FindLastIndex(const String& targetString, unsigned int startIndex) const;
+
+		/// <summary>
+		/// Returns the target chars index
+		/// </summary>
+		unsigned int FindIndex(char targetChar) const;
+
+		/// <summary>
+		/// Returns the count of the target char
+		/// </summary>
+		/// <param name="targetChar"></param>
+		/// <returns></returns>
+		unsigned int GetCount(char targetChar) const;
 
 		/// <summary>
 		/// Splits the string by the target char and returns the splitted fragments
@@ -69,10 +89,6 @@ namespace Rudy
 		/// <returns></returns>
 		Array<String> SplitByChar(char targetChar) const;
 
-		/// <summary>
-		/// Returns the target chars index
-		/// </summary>
-		int FindIndex(char targetChar) const;
 
 		/// <summary>
 		/// Returns a subset

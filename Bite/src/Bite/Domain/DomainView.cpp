@@ -1,6 +1,7 @@
 #include "DomainView.h"
 #include <Rudy/Platform/Utility/PlatformDirectory.h>
 #include <stdio.h>
+#include <Bite/Domain/DomainFolderView.h>
 namespace Bite
 {
 	DomainView::DomainView(const Rudy::String& domainPath)
@@ -28,23 +29,26 @@ namespace Bite
 		/*
 		* Collect folders
 		*/
+		printf("Domain View Initialization started...\n");
 		Rudy::Array<Rudy::String> folderPaths;
-		if (Rudy::PlatformDirectory::GetFoldersInDirectory(m_DomainPath, folderPaths))
+		if (!Rudy::PlatformDirectory::GetFoldersInDirectory(m_DomainPath + "/", folderPaths))
 		{
-			printf("Loading folder paths failed!\n");
+			printf("	Loading folder paths failed!\n");
 		}
 
 		/*
 		* Collect files
 		*/
 		Rudy::Array<Rudy::String> filePaths;
-		if (Rudy::PlatformDirectory::GetFilesInDirectoryViaExtension(m_DomainPath + "/", ".rasset", filePaths))
+		if (!Rudy::PlatformDirectory::GetFilesInDirectoryViaExtension(m_DomainPath + "/", ".rasset", filePaths))
 		{
-			printf("Loading .rasset files failed\n");
+			printf("	Loading .rasset files failed\n");
 		}
 
 		/*
 		* Create folder view for the root folder
 		*/
+		m_RootFolder = new DomainFolderView(nullptr,m_DomainPath);
+		printf("Domain View Initialization finished.!\n");
 	}
 }

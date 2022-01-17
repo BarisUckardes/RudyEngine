@@ -71,5 +71,12 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <returns></returns>
 		static bool IsDirectoryExists(const String& path);
+
+		/// <summary>
+		/// Extracts and returns folder name from the target path
+		/// </summary>
+		/// <param name="path"></param>
+		/// <returns></returns>
+		static String GetFolderNameFromPath(const String& path);
 	};
 }

@@ -1,6 +1,7 @@
 #include "PlatformDirectory.h"
 #include <Rudy/Platform/OS/PlatformOSDetection.h>
 #include <Rudy/Platform/OS/Windows/Utility/WindowsDirectory.h>
+#include <stdio.h>
 namespace Rudy
 {
 	bool PlatformDirectory::CreateDirectory(const String& path)
@@ -138,5 +139,17 @@ namespace Rudy
 				break;
 		}
 		return false;
+	}
+	String PlatformDirectory::GetFolderNameFromPath(const String& path)
+	{
+		/*
+		* Get last index of a slash
+		*/
+		const unsigned int lastIndex = path.FindLastIndex("/",0);
+
+		/*
+		* Get substring
+		*/
+		return path.GetSubset(lastIndex+1, path.GetCursor() - lastIndex);
 	}
 }

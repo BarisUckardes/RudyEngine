@@ -53,6 +53,14 @@ namespace Rudy
 		/// </summary>
 		/// <returns></returns>
 		Array<AssetPackage*> GetPackages() const;
+
+		/// <summary>
+		/// Tries to load the asset if its not loaded and returns the asset object
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		FORCEINLINE Asset* GetAsset(const Guid& id);
+
 	private:
 		Array<AssetPackage*> m_Packages;
 	};

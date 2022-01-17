@@ -445,5 +445,11 @@ namespace Rudy
         return false;
     }
 
+    String WindowsFile::GetFileNameFromPath(const String& path)
+    {
+        char* result = PathFindFileNameA(*path);
+        return result;
+    }
+
 
 }

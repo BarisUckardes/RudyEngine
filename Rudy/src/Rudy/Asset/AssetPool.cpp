@@ -157,4 +157,31 @@ namespace Rudy
 	{
 		return m_Packages;
 	}
+	Asset* AssetPool::GetAsset(const Guid& id)
+	{
+		/*
+		* Iterate each package
+		*/
+		for (unsigned int packageIndex = 0; packageIndex < m_Packages.GetCursor(); packageIndex++)
+		{
+			/*
+			* Get package
+			*/
+			AssetPackage* package = m_Packages[packageIndex];
+
+			/*
+			* Try get asset
+			*/
+			Asset* asset = package->GetAsset(id);
+
+			/*
+			* Validate
+			*/
+			if (asset == nullptr)
+				continue;
+
+			return asset;
+		}
+		return nullptr;
+	}
 }

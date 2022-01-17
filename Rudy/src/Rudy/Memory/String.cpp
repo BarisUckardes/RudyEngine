@@ -108,8 +108,8 @@ namespace Rudy
 		* Normalize cursor
 		*/
 		unsigned int end = start + length;
-		if (end >= m_Cursor)
-			end = m_Cursor - 1;
+		/*if (end >= m_Cursor)
+			end = m_Cursor - 1;*/
 
 		/*
 		* Create required variables
@@ -138,23 +138,7 @@ namespace Rudy
 
 		return String(subsetSource);
 	}
-	int String::FindIndex(char targetChar) const
-	{
-		/*
-		* Look for char
-		*/
-		for (unsigned int i = 0; i < m_Cursor; i++)
-		{
-			if (m_Source[i] == targetChar)
-			{
-				return i;
-			}
-
-		}
-
-		return -1;
-	}
-
+	
 	char* String::GetSource() const
 	{
 		return m_Source;
@@ -164,6 +148,8 @@ namespace Rudy
 	{
 		return m_Cursor;
 	}
+
+	
 
 	Array<String> String::SplitByChar(char targetChar) const
 	{
@@ -221,7 +207,7 @@ namespace Rudy
 
 		return fragments;
 	}
-	int String::FindIndex(const String& targetString, unsigned int startIndex) const
+	int String::FindIndex(const String& targetString, unsigned int startIndex,unsigned int targetCount) const
 	{
 		/*
 		* Validate remaining chars
@@ -231,6 +217,8 @@ namespace Rudy
 		/*
 		* Look for sequence of chars
 		*/
+		unsigned int foundSoFar = 0;
+		int index = -1;
 		for (unsigned int charIndex = startIndex; charIndex < m_Cursor; charIndex++)
 		{
 			/*
@@ -254,15 +242,96 @@ namespace Rudy
 				/*
 				* Check if its equal
 				*/
-				/*if (subset == targetString)
+				if (subset == targetString && foundSoFar == targetCount)
 				{
-					return charIndex;
-				}*/
+					index = charIndex;
+					foundSoFar++;
+				}
 			}
 		}
 
-		return -1;
+		return index;
 	}
+	unsigned int String::FindIndex(char targetChar) const
+	{
+		/*
+		* Look for char
+		*/
+		for (unsigned int i = 0; i < m_Cursor; i++)
+		{
+			if (m_Source[i] == targetChar)
+			{
+				return i;
+			}
+
+		}
+
+		return 0;
+	}
+
+	unsigned int String::GetCount(char targetChar) const
+	{
+		/*
+		* Look for char
+		*/
+		unsigned int count = 0;
+		for (unsigned int i = 0; i < m_Cursor; i++)
+		{
+			if (m_Source[i] == targetChar)
+			{
+				count++;
+			}
+
+		}
+
+		return count;
+	}
+
+	int String::FindLastIndex(const String& targetString, unsigned int startIndex) const
+	{
+		/*
+		* Validate remaining chars
+		*/
+		const unsigned int searchLength = targetString.GetCursor();
+
+		/*
+		* Look for sequence of chars
+		*/
+		unsigned int lastIndexFound = -1;
+		for (unsigned int charIndex = startIndex; charIndex < m_Cursor; charIndex++)
+		{
+			/*
+			* Validate if first letter is matched
+			*/
+			if (m_Source[charIndex] == targetString[0])
+			{
+				/*
+				* A match found first validate the length
+				*/
+				if (charIndex + targetString.GetCursor() > m_Cursor) // discard
+				{
+					continue;
+				}
+
+				/*
+				* Get subset string
+				*/
+				String subset = GetSubset(charIndex, searchLength);
+
+				/*
+				* Check if its equal
+				*/
+				if (subset == targetString)
+				{
+					lastIndexFound = charIndex;
+				}
+			}
+		}
+
+		return lastIndexFound;
+	}
+
+
 	void String::Clear()
 	{
 		/*

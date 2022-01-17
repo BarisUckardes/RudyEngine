@@ -5,7 +5,7 @@
 #include <Rudy/Memory/Guid.h>
 namespace Bite
 {
-	class DomianAssetView;
+	class DomainAssetView;
 	class DomainFolderView;
 
 	/// <summary>
@@ -27,7 +27,7 @@ namespace Bite
 		/// Returns the files
 		/// </summary>
 		/// <returns></returns>
-		FORCEINLINE Rudy::Array<DomianAssetView*> GetAssets() const;
+		FORCEINLINE Rudy::Array<DomainAssetView*> GetAssets() const;
 
 		/// <summary>
 		/// Returns the root folder of this folder
@@ -54,7 +54,7 @@ namespace Bite
 		FORCEINLINE Rudy::String GetAbsolutePath() const;
 	private:
 		Rudy::Array<DomainFolderView*> m_SubFolders;
-		Rudy::Array<DomianAssetView*> m_Assets;;
+		Rudy::Array<DomainAssetView*> m_Assets;;
 		DomainFolderView* m_ParentFolder;
 		Rudy::Guid m_ID;
 		Rudy::String m_Name;

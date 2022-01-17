@@ -3,9 +3,10 @@
 #include <Rudy/Memory/ByteBlock.h>
 namespace Rudy
 {
-	Asset::Asset(const AssetDefinition& definition)
+	Asset::Asset(const AssetDefinition& definition,AssetPackage* ownerPackage)
 	{
 		m_LoadedObject = nullptr;
+		m_OwnerPackage = ownerPackage;
 		m_Definition = definition;
 	}
 	void Asset::Load()
@@ -83,6 +84,10 @@ namespace Rudy
 	{
 		return m_LoadedObject;
 	}
+	AssetPackage* Asset::GetOwnerPackage() const
+	{
+		return m_OwnerPackage;
+	}
 	unsigned long Asset::GetSizeInBytes() const
 	{
 		return m_Definition.GetSize();
@@ -109,5 +114,6 @@ namespace Rudy
 		delete m_LoadedObject;
 
 		m_LoadedObject = nullptr;
+		m_OwnerPackage = nullptr;
 	}
 }

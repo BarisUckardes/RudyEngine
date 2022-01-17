@@ -4,13 +4,14 @@
 namespace Rudy
 {
 	class String;
+	struct Vector2f;
 	class RUDY_API ImGuiRenderCommands
 	{
 	public:
 		ImGuiRenderCommands() = delete;
 		~ImGuiRenderCommands() = delete;
 
-		static void ShowDemoWindow();
+		//static void ShowDemoWindow();
 
 		/// <summary>
 		/// Begins the rendering of the main menu bar
@@ -86,5 +87,13 @@ namespace Rudy
 		/// <param name="name"></param>
 		/// <returns></returns>
 		static bool CreateButton(const String& name);
+
+		/// <summary>
+		/// Creates and interactable button with a size parameter
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="size"></param>
+		/// <returns></returns>
+		static bool CreateButton(const String& name, const Vector2f& size);
 	};
 }

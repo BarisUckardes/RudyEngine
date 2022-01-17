@@ -33,13 +33,7 @@ namespace Rudy
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		const Asset* LoadAsset(const Guid& id);
-
-		/// <summary>
-		/// Tries to unload and asset
-		/// </summary>
-		/// <param name="id"></param>
-		void UnloadAsset(const Guid& id);
+		FORCEINLINE Asset* GetAsset(const Guid& id);
 
 		/// <summary>
 		/// Unloads the whole package

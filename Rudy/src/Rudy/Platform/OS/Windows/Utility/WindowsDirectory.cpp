@@ -254,4 +254,8 @@ namespace Rudy
 
 		return false;
 	}
+	String WindowsDirectory::GetFolderNameFromPath(const String& path)
+	{
+		return String();
+	}
 }

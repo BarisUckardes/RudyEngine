@@ -33,7 +33,7 @@ namespace Rudy
 		/// </summary>
 		/// <param name="worldID"></param>
 		/// <returns></returns>
-		World* LoadViaAsset(const Guid& worldID);
+		World* LoadWorldViaAsset(const Guid& worldID);
 
 		/// <summary>
 		/// Removes a world from this session
@@ -52,6 +52,12 @@ namespace Rudy
 		/// </summary>
 		/// <returns></returns>
 		FORCEINLINE GraphicsDevice* GetDefaultGraphicsDevice() const;
+
+		/// <summary>
+		/// Returns the asset pool for this application session
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE AssetPool* GetAssetPool() const;
 	private:
 		ApplicationSession(const String& packagesPath,Window* window,GraphicsDevice* defaultGraphicsDevice);
 		~ApplicationSession();
@@ -60,6 +66,5 @@ namespace Rudy
 		AssetPool* m_AssetPool;
 		Window* m_Window;
 		GraphicsDevice* m_DefaultDevice;
-
 	};
 }

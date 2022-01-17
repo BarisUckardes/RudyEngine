@@ -10,6 +10,7 @@ namespace Rudy
 }
 namespace Bite
 {
+	class DomainView;
 	/// <summary>
 	/// Represents a session of the editor
 	/// </summary>
@@ -24,6 +25,12 @@ namespace Bite
 		/// </summary>
 		/// <returns></returns>
 		FORCEINLINE Rudy::ApplicationSession* GetApplictionSession() const;
+
+		/// <summary>
+		/// Returns the domain view of this editor session
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE DomainView* GetDomainView() const;
 
 		/// <summary>
 		/// Returns the project name
@@ -47,6 +54,7 @@ namespace Bite
 		void SetProject(const Rudy::String& name, unsigned int major, unsigned int minor, const Rudy::Guid& id);
 	private:
 		Rudy::ApplicationSession* m_ApplicationSession;
+		DomainView* m_DomainView;
 		ProjectProperties m_ProjectProperties;
 	};
 

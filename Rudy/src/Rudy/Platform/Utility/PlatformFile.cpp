@@ -197,4 +197,20 @@ namespace Rudy
 				break;
 		}
 	}
+	String PlatformFile::GetFileNameFromPath(const String& path)
+	{
+		PlatformOSType platformType = GetCurrentPlatform();
+		switch (platformType)
+		{
+		case Rudy::PlatformOSType::Undefined:
+			break;
+		case Rudy::PlatformOSType::Windows:
+			return WindowsFile::GetFileNameFromPath(path);
+			break;
+		case Rudy::PlatformOSType::Linux:
+			break;
+		default:
+			break;
+		}
+	}
 }

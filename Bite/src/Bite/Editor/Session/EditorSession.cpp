@@ -2,11 +2,20 @@
 #include <stdio.h>
 #include <Rudy/Application/ApplicationSession.h>
 #include <Rudy/Windowing/Window.h>
+#include <Bite/Domain/DomainView.h>
+#include <Rudy/Platform/Utility/PlatformPaths.h>
+#include <Rudy/Platform/Utility/PlatformDirectory.h>
 namespace Bite
 {
 	EditorSession::EditorSession(Rudy::ApplicationSession* applicationSession)
 	{
 		m_ApplicationSession = applicationSession;
+
+		/*
+		* Initialize domain view
+		*/
+		m_DomainView = new DomainView(Rudy::PlatformPaths::GetDomainPath());
+
 	}
 	EditorSession::~EditorSession()
 	{
@@ -15,6 +24,10 @@ namespace Bite
 	Rudy::ApplicationSession* EditorSession::GetApplictionSession() const
 	{
 		return m_ApplicationSession;
+	}
+	DomainView* EditorSession::GetDomainView() const
+	{
+		return m_DomainView;
 	}
 	Rudy::String EditorSession::GetProjectName() const
 	{

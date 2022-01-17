@@ -5,6 +5,10 @@
 #include <Rudy/Platform/Utility/PlatformDirectory.h>
 namespace Rudy
 {
+	AssetPool* ApplicationSession::GetAssetPool() const
+	{
+		return m_AssetPool;
+	}
 	ApplicationSession::ApplicationSession(const String& packagesPath,Window* window,GraphicsDevice* defaultDevice)
 	{
 		/*
@@ -72,7 +76,7 @@ namespace Rudy
 		return world;
 	}
 
-	World* ApplicationSession::LoadViaAsset(const Guid& worldID)
+	World* ApplicationSession::LoadWorldViaAsset(const Guid& worldID)
 	{
 		return nullptr;
 	}

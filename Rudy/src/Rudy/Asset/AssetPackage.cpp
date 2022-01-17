@@ -9,6 +9,7 @@ namespace Rudy
 	AssetPackage::AssetPackage(const String& packagePath)
 	{
 		constexpr unsigned int definitionBytes = 48u;
+
 		/*
 		* Get total file size
 		*/
@@ -60,18 +61,24 @@ namespace Rudy
 			/*
 			* Register asset
 			*/
-			m_Assets.Add(new Asset(definition));
+			m_Assets.Add(new Asset(definition,this));
 
 			/*
 			* Increment byteStart
 			*/
 			byteStart += definitionBytes;
 		}
+
+		/*
+		* Set virtual state
+		*/
+		m_bVirtual = false;
 	}
 	AssetPackage::AssetPackage()
 	{
 		m_PackageID = Guid::Create();
 		m_PackagePath = "Virtual Path";
+		m_bVirtual = true;
 	}
 	AssetPackage::~AssetPackage()
 	{
@@ -116,7 +123,7 @@ namespace Rudy
 		/*
 		* Create asset
 		*/
-		Asset* asset = new Asset(definition);
+		Asset* asset = new Asset(definition,this);
 
 		/*
 		* Register asset and definition
@@ -152,7 +159,7 @@ namespace Rudy
 		}
 		return false;
 	}
-	const Asset* AssetPackage::LoadAsset(const Guid& id)
+	Asset* AssetPackage::GetAsset(const Guid& id)
 	{
 		/*
 		* Iterate and validate
@@ -169,37 +176,11 @@ namespace Rudy
 			*/
 			if (definition.GetID() == id)
 			{
-				m_Assets[i]->Load();
 				return m_Assets[i];
 			}
 		}
 
 		return nullptr;
-	}
-	void AssetPackage::UnloadAsset(const Guid& id)
-	{
-		/*
-		* Iterate and validate
-		*/
-		for (int i = 0; i < m_Assets.GetCursor(); i++)
-		{
-			/*
-			* Get asset
-			*/
-			Asset* asset = m_Assets[i];
-
-			/*
-			* Validate
-			*/
-			if (asset->GetID() == id)
-			{
-				/*
-				* Unload the asset
-				*/
-				asset->Unload();
-				return;
-			}
-		}
 	}
 	void AssetPackage::UnloadPackage()
 	{

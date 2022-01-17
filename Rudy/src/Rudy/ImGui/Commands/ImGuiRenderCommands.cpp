@@ -1,12 +1,13 @@
 #include "ImGuiRenderCommands.h"
 #include <Rudy/Memory/String.h>
 #include <IMGUI/imgui.h>
+#include <Rudy/Mathematics/Vector2f.h>
 namespace Rudy
 {
-	void ImGuiRenderCommands::ShowDemoWindow()
-	{
-		ImGui::ShowDemoWindow();
-	}
+	//void ImGuiRenderCommands::ShowDemoWindow()
+	//{
+	//	ImGui::ShowDemoWindow();
+	//}
 	bool ImGuiRenderCommands::BeginMainMenuBar()
 	{
 		return ImGui::BeginMainMenuBar();
@@ -63,6 +64,11 @@ namespace Rudy
 	bool ImGuiRenderCommands::CreateButton(const String& name)
 	{
 		return ImGui::Button(*name);
+	}
+
+	bool ImGuiRenderCommands::CreateButton(const String& name, const Vector2f& size)
+	{
+		return ImGui::Button(*name,ImVec2(size.X,size.Y));
 	}
 	
 }

@@ -1,5 +1,7 @@
 #include "DomainFolderView.h"
 #include <Rudy/Platform/Utility/PlatformDirectory.h>
+#include <Bite/Domain/DomainAssetView.h>
+#include <stdio.h>
 namespace Bite
 {
 	DomainFolderView::DomainFolderView(DomainFolderView* parentFolder, const Rudy::String& selfPath)
@@ -9,13 +11,14 @@ namespace Bite
 		*/
 		m_ParentFolder = parentFolder;
 		m_AbsolutePath = selfPath;
+		m_Name = Rudy::PlatformDirectory::GetFolderNameFromPath(selfPath);
 		m_ID = Rudy::Guid::Create();
 
 		/*
 		* Gather folders
 		*/
 		Rudy::Array<Rudy::String> folderPaths;
-		Rudy::PlatformDirectory::GetFoldersInDirectory(selfPath, folderPaths);
+		Rudy::PlatformDirectory::GetFoldersInDirectory(m_AbsolutePath + "/", folderPaths);
 		for (int i = 0; i < folderPaths.GetCursor(); i++)
 		{
 			/*
@@ -27,6 +30,7 @@ namespace Bite
 			* Create sub folder view
 			*/
 			DomainFolderView* subFolder = new DomainFolderView(this,folderPath);
+			printf("Found folder: [%s]\n", *subFolder->GetName());
 
 			/*
 			* Register folder view
@@ -38,7 +42,7 @@ namespace Bite
 		* Create file views
 		*/
 		Rudy::Array<Rudy::String> assetPaths;
-		Rudy::PlatformDirectory::GetFilesInDirectoryViaExtension(selfPath, ".rasset",assetPaths);
+		Rudy::PlatformDirectory::GetFilesInDirectoryViaExtension(m_AbsolutePath + "/", ".rasset",assetPaths);
 		for (int i = 0; i < assetPaths.GetCursor(); i++)
 		{
 			/*
@@ -49,7 +53,8 @@ namespace Bite
 			/*
 			* Create file view
 			*/
-			DomianAssetView* assetView = nullptr;
+			DomainAssetView* assetView = nullptr;
+			printf("Found asset: [%s]\n", *assetView->GetAssetName());
 
 			/*
 			* Register asset view
@@ -61,7 +66,7 @@ namespace Bite
 	{
 		return m_SubFolders;
 	}
-	Rudy::Array<DomianAssetView*> DomainFolderView::GetAssets() const
+	Rudy::Array<DomainAssetView*> DomainFolderView::GetAssets() const
 	{
 		return m_Assets;
 	}

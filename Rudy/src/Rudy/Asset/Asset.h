@@ -3,6 +3,7 @@
 #include <Rudy/Asset/AssetDefinition.h>
 namespace Rudy
 {
+	class AssetPackage;
 	/// <summary>
 	/// Represents a single loaded asset
 	/// </summary>
@@ -10,7 +11,7 @@ namespace Rudy
 	{
 		friend class AssetPackage;
 	public:
-		Asset(const AssetDefinition& definition);
+		Asset(const AssetDefinition& definition,AssetPackage* ownerPackage);
 
 		/// <summary>
 		/// Loads the asset if hasnt already
@@ -27,6 +28,12 @@ namespace Rudy
 		/// </summary>
 		/// <returns></returns>
 		FORCEINLINE RudyObject* GetLoadedObject() const;
+
+		/// <summary>
+		/// Returns the owner package of this asset
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE AssetPackage* GetOwnerPackage() const;
 
 		/// <summary>
 		/// Returns the asset id
@@ -49,6 +56,7 @@ namespace Rudy
 	private:
 		~Asset();
 		RudyObject* m_LoadedObject;
+		AssetPackage* m_OwnerPackage;
 		AssetDefinition m_Definition;
 		unsigned long m_SizeInBytes;
 	};

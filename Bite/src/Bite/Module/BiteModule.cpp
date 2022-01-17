@@ -103,7 +103,7 @@ namespace Bite
 			*/
 			guiModule->OnUpdate();
 		}
-		Rudy::ImGuiRenderCommands::ShowDemoWindow();
+		//Rudy::ImGuiRenderCommands::ShowDemoWindow();
 
 		/*
 		* End bite gui modules

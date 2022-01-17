@@ -477,6 +477,9 @@
     <ClInclude Include="src\Rudy\Memory\ByteBlockTransferType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiCommands.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Rudy\Mathematics\Vector2f.cpp">

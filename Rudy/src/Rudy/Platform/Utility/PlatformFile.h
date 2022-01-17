@@ -105,5 +105,12 @@ namespace Rudy
 		/// <param name="extension"></param>
 		/// <returns></returns>
 		static bool GetFileExtension(const String& path, String& extensionOut);
+
+		/// <summary>
+		/// Returns the file name from the path
+		/// </summary>
+		/// <param name="path"></param>
+		/// <returns></returns>
+		static String GetFileNameFromPath(const String& path);
 	};
 }
