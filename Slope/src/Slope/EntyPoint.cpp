@@ -10,7 +10,7 @@
 #include <Rudy/Platform/Utility/PlatformFile.h>
 #include <Rudy/Memory/Guid.h>
 #include <string>
-#include <Rudy/Process/PlatformProcess.h>
+#include <Rudy/Platform/Process/PlatformProcess.h>
 #include <Rudy/Memory/ByteBlock.h>
 
 #define PROJECT_ENTRY_SIZE 100

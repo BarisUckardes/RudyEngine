@@ -441,12 +441,6 @@
     <ClInclude Include="src\Rudy\Asset\AssetUtilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rudy\Threading\Job.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Rudy\Threading\JobPool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Rudy\ImGui\Flags\GUIWindowFlags.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -459,10 +453,10 @@
     <ClInclude Include="src\Rudy\ImGui\Flags\GUIMouseButtons.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rudy\Process\PlatformProcess.h">
+    <ClInclude Include="src\Rudy\Platform\Process\PlatformProcess.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rudy\Process\PlatformProcessState.h">
+    <ClInclude Include="src\Rudy\Platform\Process\PlatformProcessState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Rudy\Platform\OS\Windows\Process\WindowsProcess.h">
@@ -478,6 +472,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiCommands.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Threading\PlatformMutex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\OS\Windows\Threading\WindowsMutex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -821,19 +821,13 @@
     <ClCompile Include="src\Rudy\Asset\AssetUtilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rudy\Threading\Job.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Rudy\Threading\JobPool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiLayoutCommands.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rudy\Process\PlatformProcess.cpp">
+    <ClCompile Include="src\Rudy\Platform\Process\PlatformProcess.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rudy\Platform\OS\Windows\Process\WindowsProcess.cpp">
@@ -843,6 +837,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rudy\Memory\ByteBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Threading\PlatformMutex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\OS\Windows\Threading\WindowsMutex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

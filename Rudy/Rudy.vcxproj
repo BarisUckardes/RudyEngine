@@ -165,18 +165,17 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\Platform\Threading\PlatformMutex.h" />
     <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiCommands.h" />
     <ClInclude Include="src\Rudy\Memory\ByteBlock.h" />
     <ClInclude Include="src\Rudy\Memory\ByteBlockTransferType.h" />
     <ClInclude Include="src\Rudy\Memory\Memory.h" />
-    <ClInclude Include="src\Rudy\Process\PlatformProcess.h" />
+    <ClInclude Include="src\Rudy\Platform\Process\PlatformProcess.h" />
     <ClInclude Include="src\Rudy\ImGui\Flags\GUIMouseButtons.h" />
     <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.h" />
     <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiLayoutCommands.h" />
     <ClInclude Include="src\Rudy\ImGui\Flags\GUIWindowFlags.h" />
-    <ClInclude Include="src\Rudy\Process\PlatformProcessState.h" />
-    <ClInclude Include="src\Rudy\Threading\JobPool.h" />
-    <ClInclude Include="src\Rudy\Threading\Job.h" />
+    <ClInclude Include="src\Rudy\Platform\Process\PlatformProcessState.h" />
     <ClInclude Include="src\Rudy\Asset\AssetUtilities.h" />
     <ClInclude Include="src\Rudy\Asset\AssetDefinition.h" />
     <ClInclude Include="src\Rudy\Asset\AssetPackageHeader.h" />
@@ -320,15 +319,15 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     <ClInclude Include="src\Rudy\Platform\OS\Windows\Utility\WindowsError.h" />
     <ClInclude Include="src\Rudy\Platform\OS\Windows\Memory\WindowsGuid.h" />
     <ClInclude Include="src\Rudy\Platform\OS\Windows\Process\WindowsProcess.h" />
+    <ClInclude Include="src\Rudy\Platform\OS\Windows\Threading\WindowsMutex.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rudy\Platform\Threading\PlatformMutex.cpp" />
     <ClCompile Include="src\Rudy\Memory\ByteBlock.cpp" />
     <ClCompile Include="src\Rudy\Memory\Memory.cpp" />
-    <ClCompile Include="src\Rudy\Process\PlatformProcess.cpp" />
+    <ClCompile Include="src\Rudy\Platform\Process\PlatformProcess.cpp" />
     <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.cpp" />
     <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiLayoutCommands.cpp" />
-    <ClCompile Include="src\Rudy\Threading\JobPool.cpp" />
-    <ClCompile Include="src\Rudy\Threading\Job.cpp" />
     <ClCompile Include="src\Rudy\Asset\AssetUtilities.cpp" />
     <ClCompile Include="src\Rudy\Asset\AssetDefinition.cpp" />
     <ClCompile Include="src\Rudy\Asset\AssetPackageHeader.cpp" />
@@ -443,6 +442,7 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     <ClCompile Include="src\Rudy\Platform\OS\Windows\Utility\WindowsError.cpp" />
     <ClCompile Include="src\Rudy\Platform\OS\Windows\Memory\WindowsGuid.cpp" />
     <ClCompile Include="src\Rudy\Platform\OS\Windows\Process\WindowsProcess.cpp" />
+    <ClCompile Include="src\Rudy\Platform\OS\Windows\Threading\WindowsMutex.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

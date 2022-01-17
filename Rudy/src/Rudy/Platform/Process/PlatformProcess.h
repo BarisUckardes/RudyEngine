@@ -2,7 +2,7 @@
 #include <Rudy/Core/Symbols.h>
 #include <Rudy/Memory/String.h>
 #include <Rudy/Memory/Array.h>
-#include <Rudy/Process/PlatformProcessState.h>
+#include <Rudy/Platform/Process/PlatformProcessState.h>
 namespace Rudy
 {
 	/// <summary>
