@@ -1,6 +1,6 @@
 #pragma once
 #include <Rudy/Core/Symbols.h>
-#include <Rudy/Platform/Graphics/GraphicsAPIType.h>
+#include <Rudy/Platform/Implementation/Graphics/GraphicsAPIType.h>
 #include <Rudy/Graphics/Texture/TextureFormat.h>
 #include <Rudy/Graphics/Texture/TextureInternalFormat.h>
 #include <Rudy/Graphics/Texture/TextureDataType.h>

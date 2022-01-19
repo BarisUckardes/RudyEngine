@@ -1,8 +1,8 @@
 #include "Guid.h"
 #include <stdio.h>
-#include <Rudy/Platform/OS/PlatformOSType.h>
-#include <Rudy/Platform/OS/PlatformOSDetection.h>
-#include <Rudy/Platform/OS/Windows/Memory/WindowsGuid.h>
+#include <Rudy/Platform/Implementation/OS/PlatformOSType.h>
+#include <Rudy/Platform/Implementation/OS/PlatformOSDetection.h>
+#include <Rudy/Platform/Implementation/OS/Windows/Memory/WindowsGuid.h>
 #include <Rudy/Memory/Memory.h>
 namespace Rudy
 {

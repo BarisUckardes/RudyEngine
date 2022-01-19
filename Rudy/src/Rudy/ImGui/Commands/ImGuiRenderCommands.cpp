@@ -28,16 +28,16 @@ namespace Rudy
 	{
 		return ImGui::MenuItem(*name);
 	}
-	bool ImGuiRenderCommands::BeginWindow(const String& name, bool& isExitRequested, int flags)
+	bool ImGuiRenderCommands::BeginWindow(const String& name, bool& isExitRequested, GUIWindowFlags flags)
 	{
 		bool exitRequest = true;
-		bool state = ImGui::Begin(*name, &exitRequest,flags);
+		bool state = ImGui::Begin(*name, &exitRequest,(int)flags);
 		isExitRequested = !exitRequest;
 		return state;
 	}
-	bool ImGuiRenderCommands::BeginWindow(const String& name, int flags)
+	bool ImGuiRenderCommands::BeginWindow(const String& name, GUIWindowFlags flags)
 	{
-		bool state = ImGui::Begin(*name,nullptr,flags);
+		bool state = ImGui::Begin(*name,nullptr,(int)flags);
 		return state;
 	}
 

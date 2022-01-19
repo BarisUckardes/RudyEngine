@@ -1,7 +1,7 @@
 #include "Application.h"
-#include <Rudy/Windowing/Window.h>
+#include <Rudy/Application/Windowing/Window.h>
 #include <stdio.h>
-#include <Rudy/Events/Delegate.h>
+#include <Rudy/Application/Events/Delegate.h>
 #include <Rudy/Application/ApplicationModule.h>
 #include <Rudy/Graphics/Device/GraphicsDevice.h>
 #include <Rudy/Application/ApplicationSession.h>

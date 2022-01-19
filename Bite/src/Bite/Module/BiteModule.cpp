@@ -2,7 +2,7 @@
 #include <Rudy/ImGui/ImGuiRenderer.h>
 #include <Rudy/Application/ApplicationSession.h>
 #include <Rudy/Graphics/Device/GraphicsDevice.h>
-#include <Rudy/Windowing/Window.h>
+#include <Rudy/Application/Windowing/Window.h>
 #include <Bite/GUI/Module/GUIModule.h>
 #include <Bite/Editor/Session/EditorSession.h>
 #include <Bite/Editor/Command/EditorCommand.h>
@@ -24,7 +24,10 @@ namespace Bite
 		/*
 		* Create imgui renderer
 		*/
-		m_ImGuiRenderer = new Rudy::ImGuiRenderer(defaultDevice->GetTargetWindow()->GetSize(), defaultDevice->GetApiType());
+		m_ImGuiRenderer = new Rudy::ImGuiRenderer(
+			defaultDevice->GetTargetWindow()->GetSize(),
+			defaultDevice->GetApiType(),
+			Rudy::GUIBackendFlags::None, Rudy::GUIConfigFlags::DockingEnable);
 
 		/*
 		* Create editor session

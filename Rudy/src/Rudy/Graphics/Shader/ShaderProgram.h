@@ -1,7 +1,7 @@
 #pragma once
 #include <Rudy/Memory/String.h>
 #include <Rudy/Memory/Array.h>
-#include <Rudy/Events/Delegate.h>
+#include <Rudy/Application/Events/Delegate.h>
 #include <Rudy/Graphics/Device/GraphicsDeviceObject.h>
 namespace Rudy
 {

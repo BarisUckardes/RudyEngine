@@ -1,7 +1,7 @@
 #include "DeferredRenderable.h"
 #include <Rudy/World/Views/WorldGraphicsView.h>
 #include <Rudy/World/World.h>
-#include <Rudy/Entity/Entity.h>
+#include <Rudy/World/Entity/Entity.h>
 #include <Rudy/Reflection/Type/ReflectionType.h>
 namespace Rudy
 {

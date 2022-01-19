@@ -1,6 +1,6 @@
 #include "PlatformDirectory.h"
-#include <Rudy/Platform/OS/PlatformOSDetection.h>
-#include <Rudy/Platform/OS/Windows/Utility/WindowsDirectory.h>
+#include <Rudy/Platform/Implementation/OS/PlatformOSDetection.h>
+#include <Rudy/Platform/Implementation/OS/Windows/Utility/WindowsDirectory.h>
 #include <stdio.h>
 namespace Rudy
 {

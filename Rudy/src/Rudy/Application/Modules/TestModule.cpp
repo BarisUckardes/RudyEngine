@@ -1,15 +1,15 @@
 #include "TestModule.h"
 #include <Rudy/World/World.h>
-#include <Rudy/Entity/Entity.h>
-#include <Rudy/Component/Built-in/Spatial.h>
+#include <Rudy/World/Entity/Entity.h>
+#include <Rudy/World/Component/Built-in/Spatial.h>
 #include <Rudy/Application/ApplicationSession.h>
 #include <Rudy/World/Views/WorldLogicView.h>
 #include <stdio.h>
-#include <Rudy/Resolver/Custom Resolvers/DefaultLogicResolver.h>
+#include <Rudy/World/Resolver/Custom Resolvers/DefaultLogicResolver.h>
 #include <Rudy/World/Views/WorldGraphicsView.h>
-#include <Rudy/Resolver/Custom Resolvers/DeferredGraphicsResolver.h>
+#include <Rudy/World/Resolver/Custom Resolvers/DeferredGraphicsResolver.h>
 #include <Rudy/Buit-in/Deferred/DeferredRenderable.h>
-#include <Rudy/Component/Built-in/PerspectiveObserver.h>
+#include <Rudy/World/Component/Built-in/PerspectiveObserver.h>
 #include <Rudy/Graphics/Device/GraphicsDevice.h>
 #include <Rudy/Graphics/Buffer/VertexBuffer.h>
 #include <Rudy/Graphics/Buffer/IndexBuffer.h>

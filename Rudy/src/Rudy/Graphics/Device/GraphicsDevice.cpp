@@ -1,5 +1,5 @@
 #include "GraphicsDevice.h"
-#include <Rudy/Platform/Graphics/OpenGL/Device/OpenGLGraphicsDevice.h>
+#include <Rudy/Platform/Implementation/Graphics/OpenGL/Device/OpenGLGraphicsDevice.h>
 #include <Rudy/Graphics/Device/GraphicsDeviceObject.h>
 namespace Rudy
 {

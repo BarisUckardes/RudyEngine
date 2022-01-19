@@ -6,7 +6,7 @@ namespace Rudy
     /// <summary>
     /// Backend behaviour flags
     /// </summary>
-    enum GUIBackendFlags 
+    enum class RUDY_API GUIBackendFlags 
     {
         None = 0,
         HasGamepad = 1 << 0,   // Backend Platform supports gamepad and currently has one connected.
@@ -19,4 +19,16 @@ namespace Rudy
         HasMouseHoveredViewport = 1 << 11,  // Backend Platform supports setting io.MouseHoveredViewport to the viewport directly under the mouse _IGNORING_ viewports with the ImGuiViewportFlags_NoInputs flag and _REGARDLESS_ of whether another viewport is focused and may be capturing the mouse. This information is _NOT EASY_ to provide correctly with most high-level engines! Don't set this without studying _carefully_ how the backends handle ImGuiViewportFlags_NoInputs!
         RendererHasViewports = 1 << 12   // Backend Renderer supports multiple viewports.
     };
+
+    inline GUIBackendFlags operator | (GUIBackendFlags a, GUIBackendFlags b)
+    {
+        return GUIBackendFlags((int)a | (int)b);
+    }
+
+    inline GUIBackendFlags& operator |= (GUIBackendFlags& a, GUIBackendFlags b)
+    {
+        a = a | b;
+        return a;
+    }
+
 }

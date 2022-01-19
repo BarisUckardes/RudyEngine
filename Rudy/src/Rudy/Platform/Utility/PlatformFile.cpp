@@ -1,6 +1,6 @@
 #include "PlatformFile.h"
-#include <Rudy/Platform/OS/PlatformOSDetection.h>
-#include <Rudy/Platform/OS/Windows/Utility/WindowsFile.h>
+#include <Rudy/Platform/Implementation/OS/PlatformOSDetection.h>
+#include <Rudy/Platform/Implementation/OS/Windows/Utility/WindowsFile.h>
 namespace Rudy
 {
 	bool PlatformFile::IsFileExists(const String& path)

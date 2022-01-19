@@ -1,6 +1,6 @@
 #pragma once
 #include <Rudy/Core/Symbols.h>
-#include <Rudy/Events/Delegate.h>
+#include <Rudy/Application/Events/Delegate.h>
 #include <Rudy/Reflection/Type/ReflectionType.h>
 #include <Rudy/Reflection/Object/ReflectableObject.h>
 namespace Rudy

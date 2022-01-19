@@ -1,6 +1,6 @@
 #include "PlatformError.h"
-#include <Rudy/Platform/OS/PlatformOSDetection.h>
-#include <Rudy/Platform/OS/Windows/Utility/WindowsError.h>
+#include <Rudy/Platform/Implementation/OS/PlatformOSDetection.h>
+#include <Rudy/Platform/Implementation/OS/Windows/Utility/WindowsError.h>
 namespace Rudy
 {
 	String PlatformError::GetLastOSError()

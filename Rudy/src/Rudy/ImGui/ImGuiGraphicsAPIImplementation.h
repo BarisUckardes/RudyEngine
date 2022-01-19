@@ -1,6 +1,6 @@
 #pragma once
 #include <Rudy/Core/Symbols.h>
-#include <Rudy/Platform/Graphics/GraphicsAPIType.h>
+#include <Rudy/Platform/Implementation/Graphics/GraphicsAPIType.h>
 namespace Rudy
 {
 	/// <summary>

@@ -1,12 +1,11 @@
 #pragma once
 #include <Rudy/Core/Symbols.h>
-
 namespace Rudy
 {
 	/// <summary>
 	/// Window behaviour flags
 	/// </summary>
-	enum RUDY_API GUIWindowFlags
+	enum class RUDY_API GUIWindowFlags
 	{
         None = 0,
 
@@ -52,6 +51,18 @@ namespace Rudy
         ChildMenu = 1 << 28,  // Don't use! For internal use by BeginMenu()
         DockNodeHost = 1 << 29   // Don't use! For internal use by Begin()/NewFrame()
 
+
     };
+
+    inline GUIWindowFlags operator | (GUIWindowFlags a, GUIWindowFlags b)
+    {
+        return GUIWindowFlags((int)a | (int)b);
+    }
+
+    inline GUIWindowFlags& operator |= (GUIWindowFlags& a, GUIWindowFlags b)
+    {
+        a = a | b;
+        return a;
+    }
 
 }

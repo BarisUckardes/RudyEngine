@@ -3,7 +3,7 @@
 #include <Rudy/World/World.h>
 #include <Rudy/Application/ApplicationSession.h>
 #include <Rudy/World/Views/WorldLogicView.h>
-#include <Rudy/Resolver/Resolvers/LogicResolver.h>
+#include <Rudy/World/Resolver/Resolvers/LogicResolver.h>
 namespace Rudy
 {
 	void GameLogicModule::OnAttach()

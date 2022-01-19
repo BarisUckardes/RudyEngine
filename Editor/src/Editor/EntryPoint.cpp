@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <Rudy/Application/Application.h>
 #include "Application/EditorApplication.h"
-#include <Rudy/Platform/OS/Windows/Window/WindowsWindow.h>
-#include <Rudy/Events/Keyboard/KeyboardKeyDownEvent.h>
+#include <Rudy/Platform/Implementation/OS/Windows/Window/WindowsWindow.h>
+#include <Rudy/Application/Events/Keyboard/KeyboardKeyDownEvent.h>
 int main(int argumentCount, char** arguments)
 {
 	/*

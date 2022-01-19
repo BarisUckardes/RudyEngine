@@ -1,5 +1,5 @@
 #pragma once
-#include <Rudy/Component/Component.h>
+#include <Rudy/World/Component/Component.h>
 #include <Rudy/Mathematics/ColorRgba.h>
 #include <Rudy/Mathematics/Matrix4x4.h>
 namespace Rudy

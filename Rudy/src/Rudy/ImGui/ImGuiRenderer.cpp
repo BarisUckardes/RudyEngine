@@ -72,7 +72,17 @@ namespace Rudy
 		style->TabRounding = 0.0f;
 		style->WindowRounding = 4.0f;
 	}
-	ImGuiRenderer::ImGuiRenderer(const Vector2i& initialWindowSize,GraphicsAPIType apiType)
+	void SetupBackedFlags(GUIBackendFlags flags)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		io.BackendFlags = (int)flags;
+	}
+	void SetupConfigFlags(GUIConfigFlags flags)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		io.ConfigFlags = (int)flags;
+	}
+	ImGuiRenderer::ImGuiRenderer(const Vector2i& initialWindowSize,GraphicsAPIType apiType, GUIBackendFlags backendFlags, GUIConfigFlags configFlags)
 	{
 		/*
 		* Set api
@@ -130,7 +140,13 @@ namespace Rudy
 		m_WindowSize = initialWindowSize;
 
 		/*
-		* Default
+		* Set backend and config flag
+		*/
+		SetupBackedFlags(backendFlags);
+		SetupConfigFlags(configFlags);
+
+		/*
+		* Enable default theme
 		*/
 		SetupDefaultTheme();
 	}

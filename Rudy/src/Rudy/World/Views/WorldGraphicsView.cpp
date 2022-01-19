@@ -1,6 +1,6 @@
 #include "WorldGraphicsView.h"
 #include <Rudy/Graphics/Components/ObserverComponent.h>
-#include <Rudy/Resolver/Resolvers/GraphicsResolver.h>
+#include <Rudy/World/Resolver/Resolvers/GraphicsResolver.h>
 namespace Rudy
 {
 	GENERATE_REFLECTABLE_TYPE(WorldGraphicsView);

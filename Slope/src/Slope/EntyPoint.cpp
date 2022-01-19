@@ -1,4 +1,4 @@
-#include <Rudy/Windowing/Window.h>
+#include <Rudy/Application/Windowing/Window.h>
 #include <Rudy/Graphics/Device/GraphicsDevice.h>
 #include <Rudy/ImGui/ImGuiRenderer.h>
 #include <Rudy/Graphics/Command/CommandBuffer.h>
@@ -130,7 +130,10 @@ int main(int argumentCount, char** arguments)
 	/*
 	* Create renderer
 	*/
-	Rudy::ImGuiRenderer* renderer = new Rudy::ImGuiRenderer(Rudy::Vector2i(1280, 720), window->GetGraphicsDevice()->GetApiType());
+	Rudy::ImGuiRenderer* renderer = new Rudy::ImGuiRenderer(
+		Rudy::Vector2i(1280, 720),
+		window->GetGraphicsDevice()->GetApiType(),
+		Rudy::GUIBackendFlags::None,Rudy::GUIConfigFlags::DockingEnable);
 
 	/*
 	* Register event delegate

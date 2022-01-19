@@ -48,7 +48,7 @@ namespace Rudy
 		/// <param name="name"></param>
 		/// <param name="isExitRequested"></param>
 		/// <returns></returns>
-		static bool BeginWindow(const String& name, bool& isExitRequested,int flags = GUIWindowFlags::None);
+		static bool BeginWindow(const String& name, bool& isExitRequested, GUIWindowFlags flags = GUIWindowFlags::None);
 
 		/// <summary>
 		/// Begins the rendering of a window
@@ -56,7 +56,7 @@ namespace Rudy
 		/// <param name="name"></param>
 		/// <param name="isExitRequested"></param>
 		/// <returns></returns>
-		static bool BeginWindow(const String& name, int flags = GUIWindowFlags::None);
+		static bool BeginWindow(const String& name, GUIWindowFlags flags = GUIWindowFlags::None);
 
 		/// <summary>
 		/// Finalizes the rendering of a window

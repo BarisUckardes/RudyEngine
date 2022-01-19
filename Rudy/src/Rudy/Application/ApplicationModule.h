@@ -1,6 +1,6 @@
 #pragma once
 #include <Rudy/Core/Symbols.h>
-#include <Rudy/Events/Event.h>
+#include <Rudy/Application/Events/Event.h>
 
 namespace Rudy
 {

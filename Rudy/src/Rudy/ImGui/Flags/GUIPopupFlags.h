@@ -6,7 +6,7 @@ namespace Rudy
     /// <summary>
     /// Popup behaviour flags
     /// </summary>
-    enum GUIPopupFlags
+    enum class RUDY_API GUIPopupFlags
     {
         None = 0,
         MouseButtonLeft = 0,        // For BeginPopupContext*(): open on Left Mouse release. Guaranteed to always be == 0 (same as ImGuiMouseButton_Left)
@@ -20,4 +20,16 @@ namespace Rudy
         AnyPopupLevel = 1 << 8,   // For IsPopupOpen(): search/test at any level of the popup stack (default test in the current level)
         AnyPopup = AnyPopupId | AnyPopupLevel
     };
+
+    inline GUIPopupFlags operator | (GUIPopupFlags a, GUIPopupFlags b)
+    {
+        return GUIPopupFlags((int)a | (int)b);
+    }
+
+    inline GUIPopupFlags& operator |= (GUIPopupFlags& a, GUIPopupFlags b)
+    {
+        a = a | b;
+        return a;
+    }
+
 }

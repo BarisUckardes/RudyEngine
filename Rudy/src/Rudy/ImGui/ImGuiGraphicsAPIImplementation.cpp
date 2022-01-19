@@ -1,7 +1,7 @@
 #include "ImGuiGraphicsAPIImplementation.h"
 #include <IMGUI/imgui_impl_opengl3.h>
 #include <IMGUI/imgui.h>
-#include <Rudy/Platform/Graphics/SupportedGraphicsApiDetection.h>
+#include <Rudy/Platform/Implementation/Graphics/SupportedGraphicsApiDetection.h>
 namespace Rudy
 {
 	void ImGuiGraphicsAPIImplementation::CreateAPICore(GraphicsAPIType apiType)

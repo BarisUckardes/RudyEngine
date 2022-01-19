@@ -1,5 +1,5 @@
 #pragma once
-#include <Rudy/Component/Component.h>
+#include <Rudy/World/Component/Component.h>
 
 namespace Rudy
 {

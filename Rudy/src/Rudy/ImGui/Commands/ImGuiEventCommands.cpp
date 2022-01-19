@@ -21,19 +21,19 @@ namespace Rudy
     }
     bool ImGuiEventCommands::IsMouseButtonClicked(GUIMouseButtons button)
     {
-        return ImGui::IsMouseClicked(button);
+        return ImGui::IsMouseClicked((int)button);
     }
     bool ImGuiEventCommands::IsMouseButtonDoubleClicked(GUIMouseButtons button)
     {
-        return ImGui::IsMouseDoubleClicked(button);
+        return ImGui::IsMouseDoubleClicked((int)button);
     }
     bool ImGuiEventCommands::IsMouseButtonDown(GUIMouseButtons button)
     {
-        return ImGui::IsMouseDown(button);
+        return ImGui::IsMouseDown((int)button);
     }
     bool ImGuiEventCommands::IsMouseButtonReleased(GUIMouseButtons button)
     {
-        return ImGui::IsMouseReleased(button);
+        return ImGui::IsMouseReleased((int)button);
     }
     bool ImGuiEventCommands::IsCurrentItemHavored()
     {

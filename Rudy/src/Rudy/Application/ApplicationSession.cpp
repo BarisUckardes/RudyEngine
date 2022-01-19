@@ -1,7 +1,7 @@
 #include "ApplicationSession.h"
 #include <Rudy/World/World.h>
 #include <Rudy/Asset/AssetPool.h>
-#include <Rudy/Windowing/Window.h>
+#include <Rudy/Application/Windowing/Window.h>
 #include <Rudy/Platform/Utility/PlatformDirectory.h>
 namespace Rudy
 {

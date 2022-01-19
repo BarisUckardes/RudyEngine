@@ -1,6 +1,6 @@
 #include "PlatformProcess.h"
-#include <Rudy/Platform/OS/PlatformOSDetection.h>
-#include <Rudy/Platform/OS/Windows/Process/WindowsProcess.h>
+#include <Rudy/Platform/Implementation/OS/PlatformOSDetection.h>
+#include <Rudy/Platform/Implementation/OS/Windows/Process/WindowsProcess.h>
 namespace Rudy
 {
 	PlatformProcess::PlatformProcess(const Array<String>& cmdArguments, const String& executablePath)

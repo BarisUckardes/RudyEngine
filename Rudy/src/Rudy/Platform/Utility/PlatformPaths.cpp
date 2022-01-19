@@ -1,6 +1,6 @@
 #include "PlatformPaths.h"
-#include <Rudy/Platform/OS/PlatformOSDetection.h>
-#include <Rudy/Platform/OS/Windows/Utility/WindowsPaths.h>
+#include <Rudy/Platform/Implementation/OS/PlatformOSDetection.h>
+#include <Rudy/Platform/Implementation/OS/Windows/Utility/WindowsPaths.h>
 
 namespace Rudy
 {

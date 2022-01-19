@@ -1,9 +1,9 @@
 #pragma once
 #include <Rudy/Core/Symbols.h>
 #include <Rudy/Memory/String.h>
-#include <Rudy/Events/Event.h>
-#include <Rudy/Windowing/WindowCreateParameters.h>
-#include <Rudy/Events/Delegate.h>
+#include <Rudy/Application/Events/Event.h>
+#include <Rudy/Application/Windowing/WindowCreateParameters.h>
+#include <Rudy/Application/Events/Delegate.h>
 #include <Rudy/Memory/Array.h>
 
 namespace Rudy

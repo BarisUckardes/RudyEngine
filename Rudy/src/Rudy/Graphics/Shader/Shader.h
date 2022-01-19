@@ -3,7 +3,7 @@
 #include <Rudy/Core/Symbols.h>
 #include <Rudy/Graphics/Device/GraphicsDeviceObject.h>
 #include <Rudy/Graphics/Shader/ShaderStage.h>
-#include <Rudy/Events/Delegate.h>
+#include <Rudy/Application/Events/Delegate.h>
 #include <Rudy/Memory/Array.h>
 namespace Rudy
 {

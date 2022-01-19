@@ -1,5 +1,5 @@
 #include "WorldLogicView.h"
-#include <Rudy/Resolver/Resolvers/LogicResolver.h>
+#include <Rudy/World/Resolver/Resolvers/LogicResolver.h>
 #include <Rudy/Reflection/Type/ReflectionType.h>
 namespace Rudy
 {

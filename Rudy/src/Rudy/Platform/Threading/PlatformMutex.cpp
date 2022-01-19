@@ -1,6 +1,6 @@
 #include "PlatformMutex.h"
-#include <Rudy/Platform/OS/PlatformOSDetection.h>
-#include <Rudy/Platform/OS/Windows/Threading/WindowsMutex.h>
+#include <Rudy/Platform/Implementation/OS/PlatformOSDetection.h>
+#include <Rudy/Platform/Implementation/OS/Windows/Threading/WindowsMutex.h>
 namespace Rudy
 {
 	PlatformMutex* PlatformMutex::Create()

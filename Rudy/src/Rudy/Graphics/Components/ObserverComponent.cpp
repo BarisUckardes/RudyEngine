@@ -1,6 +1,6 @@
 #include "ObserverComponent.h"
 #include <Rudy/World/World.h>
-#include <Rudy/Entity/Entity.h>
+#include <Rudy/World/Entity/Entity.h>
 #include <Rudy/World/Views/WorldGraphicsView.h>
 
 namespace Rudy

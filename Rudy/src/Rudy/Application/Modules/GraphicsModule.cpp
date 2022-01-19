@@ -1,7 +1,7 @@
 #include "GraphicsModule.h"
 #include <Rudy/World/World.h>
 #include <Rudy/World/Views/WorldGraphicsView.h>
-#include <Rudy/Resolver/Resolvers/GraphicsResolver.h>
+#include <Rudy/World/Resolver/Resolvers/GraphicsResolver.h>
 #include <Rudy/Application/ApplicationSession.h>
 namespace Rudy
 {
