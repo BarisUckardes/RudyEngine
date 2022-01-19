@@ -70,5 +70,24 @@ namespace Rudy
 	{
 		return ImGui::Button(*name,ImVec2(size.X,size.Y));
 	}
+
+	float ImGuiRenderCommands::CreateFloatSlider(const String& name,float value,float min,float max)
+	{
+		float intermediateValue = value;
+		ImGui::SliderFloat(*name,&intermediateValue,min,max);
+		return intermediateValue;
+	}
+
+	Vector2f ImGuiRenderCommands::CreateVector2Slider(const String& name, const Vector2f& value, float min, float max)
+	{
+		Vector2f intermediateValue = value;
+		ImGui::SliderFloat2(*name, &intermediateValue.X, min, max);
+		return intermediateValue;
+	}
+
+	void ImGuiRenderCommands::SignalPopup(const String& name)
+	{
+		ImGui::OpenPopup(*name);
+	}
 	
 }

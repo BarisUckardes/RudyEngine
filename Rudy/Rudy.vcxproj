@@ -165,6 +165,8 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\ImGui\Flags\GUIBackendFlags.h" />
+    <ClInclude Include="src\Rudy\ImGui\Flags\GUIPopupFlags.h" />
     <ClInclude Include="src\Rudy\Platform\Threading\PlatformMutex.h" />
     <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiCommands.h" />
     <ClInclude Include="src\Rudy\Memory\ByteBlock.h" />

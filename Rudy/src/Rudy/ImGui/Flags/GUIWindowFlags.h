@@ -3,6 +3,9 @@
 
 namespace Rudy
 {
+	/// <summary>
+	/// Window behaviour flags
+	/// </summary>
 	enum RUDY_API GUIWindowFlags
 	{
         None = 0,

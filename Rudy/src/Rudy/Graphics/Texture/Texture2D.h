@@ -1,14 +1,23 @@
 #pragma once
 #include <Rudy/Graphics/Texture/Texture.h>
+#include <Rudy/Memory/Memory.h>
 
 namespace Rudy
 {
+	class String;
 	/// <summary>
 	/// Graphics api agnostic texture2D class
 	/// </summary>
 	class RUDY_API Texture2D : public Texture
 	{
 	public:
+		/// <summary>
+		/// Loads the texture directly from the disk
+		/// </summary>
+		/// <param name="path"></param>
+		/// <returns></returns>
+		Texture2D* LoadFromDisk(GraphicsDevice* device,const String& path,bool bCreateMipmaps);
+
 		/// <summary>
 		/// Returns the width of the texture
 		/// </summary>
@@ -26,7 +35,7 @@ namespace Rudy
 		/// </summary>
 		/// <param name="data"></param>
 		/// <param name="size"></param>
-		virtual void SetTextureData(unsigned char* data, unsigned int size) = 0;
+		virtual void SetTextureData(Byte* data, unsigned int size) = 0;
 
 		/// <summary>
 		/// Graphics api implementations of a texture2D

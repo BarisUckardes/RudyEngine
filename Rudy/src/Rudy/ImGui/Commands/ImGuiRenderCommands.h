@@ -95,5 +95,43 @@ namespace Rudy
 		/// <param name="size"></param>
 		/// <returns></returns>
 		static bool CreateButton(const String& name, const Vector2f& size);
+
+		/// <summary>
+		/// Creates an float slider
+		/// </summary>
+		/// <returns></returns>
+		static float CreateFloatSlider(const String& name, float value, float min = 0.0f, float max = 100.0f);
+
+		/// <summary>
+		/// Creates an vector2f slsider
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="value"></param>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
+		/// <returns></returns>
+		static Vector2f CreateVector2Slider(const String& name, const Vector2f& value, float min = 0.0f, float max = 100.0f);
+
+		/// <summary>
+		/// Signals a popup to render
+		/// </summary>
+		/// <param name="name"></param>
+		static void SignalPopup(const String& name);
+
+		/// <summary>
+		/// Begins the rendering of the popup
+		/// </summary>
+		static void BeginPopup();
+
+		/// <summary>
+		/// Finalizes the rendering of the popup
+		/// </summary>
+		static void FinalizePopup();
+
+		/// <summary>
+		/// Terminates the rendering of the popup
+		/// </summary>
+		static void TerminateCurrentPopup();
+
 	};
 }
