@@ -21,13 +21,15 @@ namespace Rudy
 	struct VertexData
 	{
 		VertexData() = default;
-		VertexData(float x, float y, float r, float g, float b, float a)
+		VertexData(float x, float y,float u,float v, float r, float g, float b, float a)
 		{
 			Position = Vector2f(x, y);
+			Uv = Vector2f(u, v);
 			Color = ColorRgba(r, g, b, a);
 		}
 		~VertexData() = default;
 		Vector2f Position;
+		Vector2f Uv;
 		ColorRgba Color;
 	};
 	void TestModule::OnAttach()
@@ -80,6 +82,7 @@ namespace Rudy
 
 		Array<VertexLayoutElement> vertexLayoutElements;
 		vertexLayoutElements.Add(VertexLayoutElement(VertexLayoutDataType::Float2, "aPosition"));
+		vertexLayoutElements.Add(VertexLayoutElement(VertexLayoutDataType::Float2, "aUv"));
 		vertexLayoutElements.Add(VertexLayoutElement(VertexLayoutDataType::Float4, "aColor"));
 
 		VertexLayout vertexLayout(vertexLayoutElements);
@@ -87,9 +90,9 @@ namespace Rudy
 		vertexBuffer->Initialize(vertexLayout);
 
 		Array<VertexData> vertexes;
-		vertexes.Add(VertexData(-0.5f, -0.5f,1.0f,0.0f,0.0f,1.0f));
-		vertexes.Add(VertexData(0.5f, -0.5f,0.0f,1.0f,0.0f,1.0f));
-		vertexes.Add(VertexData(0.0f, 0.5f,0.0f,0.0f,1.0f,1.0f));
+		vertexes.Add(VertexData(-0.5f, -0.5f,0,0,1.0f,0.0f,0.0f,1.0f));
+		vertexes.Add(VertexData(0.5f, -0.5f,0,0,0.0f,1.0f,0.0f,1.0f));
+		vertexes.Add(VertexData(0.0f, 0.5f,0,0,0.0f,0.0f,1.0f,1.0f));
 
 		vertexBuffer->SetData((unsigned char*)vertexes.GetData(), sizeof(VertexData), vertexes.GetCursor());
 
@@ -115,19 +118,24 @@ namespace Rudy
 		vertexShader->Compile(
 		"#version 450 core\n"
 		"layout(location = 0) in vec2 aPosition;\n"
-		"layout(location = 1) in vec4 aColor;\n"
+		"layout(location = 1) in vec2 aUv;\n"
+		"layout(location = 2) in vec4 aColor;\n"
 		"out vec4 f_Color;\n"
+		"out vec2 f_Uv;\n"
 		"void main()\n"
 		
 		"{\n"
 			"gl_Position = vec4(aPosition.x, aPosition.y, 0.0, 1.0);\n"
 			"f_Color = aColor;\n"
+			"f_Uv = aUv;\n"
 		"}\n");
 
 		fragmenShader->Compile(
 		"#version 450 core\n"
 		"out vec4 FragColor;\n"
 		"in vec4 f_Color;\n"
+		"in vec2 f_Uv;\n"
+		"uniform sampler2D f_Texture;\n"
 		"void main()\n"
 		"{\n"
 			"FragColor = f_Color;\n"

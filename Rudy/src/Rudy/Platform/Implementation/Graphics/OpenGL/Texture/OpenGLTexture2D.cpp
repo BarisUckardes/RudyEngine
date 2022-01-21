@@ -37,10 +37,10 @@ namespace Rudy
 		/*
 		* Set texture parameters
 		*/
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(GetWrapModeS()));
+	/*	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(GetWrapModeS()));
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(GetWrapModeT()));
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, OpenGLTextureMinFilterConversions::GetOpenGLMinFilter(GetMinFilter()));
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, OpenGLTextureMagFilterConversions::GetOpenGLMagFilter(GetMagFilter()));
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, OpenGLTextureMagFilterConversions::GetOpenGLMagFilter(GetMagFilter()));*/
 
 		/*
 		* Validate and generate mipmaps
@@ -81,10 +81,10 @@ namespace Rudy
 		/*
 		* Set texture parameters
 		*/
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(GetWrapModeS()));
+		/*glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(GetWrapModeS()));
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(GetWrapModeT()));
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, OpenGLTextureMinFilterConversions::GetOpenGLMinFilter(GetMinFilter()));
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, OpenGLTextureMagFilterConversions::GetOpenGLMagFilter(GetMagFilter()));
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, OpenGLTextureMagFilterConversions::GetOpenGLMagFilter(GetMagFilter()));*/
 
 		/*
 		* Unbind texture

@@ -6,6 +6,7 @@ namespace Rudy
 	class VertexBuffer;
 	class IndexBuffer;
 	class ShaderProgram;
+	class Texture2D;
 	class RUDY_API DeferredRenderable : public Component
 	{
 		GENERATE_REFLECTABLE_OBJECT(DeferredRenderable);
@@ -21,6 +22,7 @@ namespace Rudy
 		VertexBuffer* m_VertexBuffer;
 		IndexBuffer* m_IndexBuffer;
 		ShaderProgram* m_Program;
+		Texture2D* m_Texture;
 	};
 
 
