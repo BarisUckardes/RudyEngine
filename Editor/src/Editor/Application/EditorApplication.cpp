@@ -9,6 +9,7 @@
 #include <Bite/GUI/Module/MainMenu/MainMenuBarGUIModule.h>
 #include <Bite/GUI/Module/Window/WindowGUIModule.h>
 #include <Bite/Editor/Command/Commands/ProjectLoaderEditorCommand.h>
+#include <Bite/Editor/Command/Commands/EditorResouceLoadCommand.h>
 #include <Rudy/Platform/Utility/PlatformFile.h>
 #include <Rudy/Asset/AssetDefinition.h>
 #include <Rudy/Asset/AssetPackage.h>
@@ -24,10 +25,19 @@ namespace EditorLauncher
 		guiModules.Add(new Bite::WindowGUIModule());
 
 		/*
+		* Create editor command parameters
+		*/
+		Rudy::Array <Rudy::AssetType> resourceAssetTypes;
+		resourceAssetTypes.Add(Rudy::AssetType::Texture2D);
+		Rudy::Array<Rudy::String> resourceNames;
+		resourceNames.Add("FolderIcon.png");
+
+		/*
 		* Create editor commands
 		*/
 		Rudy::Array<Bite::EditorCommand*> commands;
 		commands.Add(new Bite::ProjectLoaderEditorCommand(projectFolderPath));
+		commands.Add(new Bite::EditorResouceLoadCommand(resourceAssetTypes,resourceNames));
 
 		/*
 		* Register editor application modules

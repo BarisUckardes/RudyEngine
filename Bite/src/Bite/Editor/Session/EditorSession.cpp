@@ -5,6 +5,7 @@
 #include <Bite/Domain/DomainView.h>
 #include <Rudy/Platform/Utility/PlatformPaths.h>
 #include <Rudy/Platform/Utility/PlatformDirectory.h>
+#include <Bite/Editor/Resource/EditorResource.h>
 namespace Bite
 {
 	EditorSession::EditorSession(Rudy::ApplicationSession* applicationSession)
@@ -37,6 +38,31 @@ namespace Bite
 	{
 		return m_ProjectProperties;
 	}
+	Rudy::RudyObject* EditorSession::GetEditorResource(Rudy::AssetType type, const Rudy::String& name)
+	{
+		/*
+		* Try get editor resource
+		*/
+		for (int i = 0; i < m_EditorResources.GetCursor(); i++)
+		{
+			/*
+			* Get editor resource
+			*/
+			const EditorResource* resource = m_EditorResources[i];
+
+			/*
+			* Validate
+			*/
+			if (type == resource->GetAssetType())
+			{
+				printf("FOUND RESOURCE OBJECT \n");
+				return resource->GetResourceObject();
+			}
+				
+
+		}
+		return nullptr;
+	}
 	void EditorSession::SetProject(const Rudy::String& name, unsigned int major, unsigned int minor, const Rudy::Guid& id)
 	{
 		/*
@@ -57,5 +83,9 @@ namespace Bite
 		printf("	Major Version: %d\n",major);
 		printf("	Minor Version: %d\n",minor);
 		printf("	Project ID: %s\n",*id.GetAsString());
+	}
+	void EditorSession::SetEditorResources(const Rudy::Array<EditorResource*>& resources)
+	{
+		m_EditorResources = resources;
 	}
 }

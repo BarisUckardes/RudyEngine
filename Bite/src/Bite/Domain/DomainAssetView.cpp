@@ -61,7 +61,7 @@ namespace Bite
 		/*
 		* Try load asset
 		*/
-		m_TargetAsset->Load();
+		m_TargetAsset->Load(nullptr);
 	}
 	void DomainAssetView::DeleteAsset()
 	{

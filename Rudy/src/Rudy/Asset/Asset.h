@@ -4,6 +4,7 @@
 namespace Rudy
 {
 	class AssetPackage;
+	class ApplicationSession;
 	/// <summary>
 	/// Represents a single loaded asset
 	/// </summary>
@@ -11,12 +12,23 @@ namespace Rudy
 	{
 		friend class AssetPackage;
 	public:
-		Asset(const AssetDefinition& definition,AssetPackage* ownerPackage);
+		Asset(const AssetDefinition& definition,AssetPackage* ownerPackage,bool btargetsRawFile);
 
 		/// <summary>
 		/// Loads the asset if hasnt already
 		/// </summary>
-		void Load();
+		void Load(ApplicationSession* session);
+
+		/// <summary>
+		/// Loads file content into memory
+		/// </summary>
+		/// <param name="bCacheAsync"></param>
+		void Cache(bool bCacheAsync);
+
+		/// <summary>
+		/// Deletes the cached memory
+		/// </summary>
+		void DeleteCache();
 
 		/// <summary>
 		/// Unloads the asset if its loaded
@@ -53,12 +65,18 @@ namespace Rudy
 		/// <returns></returns>
 		FORCEINLINE bool IsLoaded() const;
 
+		/// <summary>
+		/// Returns whether this asset is a raw file
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE bool IsRawFile() const;
 	private:
 		~Asset();
 		RudyObject* m_LoadedObject;
 		AssetPackage* m_OwnerPackage;
 		AssetDefinition m_Definition;
 		unsigned long m_SizeInBytes;
+		bool m_bTargetsRawFile;
 	};
 
 

@@ -3,6 +3,8 @@
 #include <Rudy/Asset/Asset.h>
 #include <Rudy/Platform/Utility/PlatformFile.h>
 #include <Rudy/Memory/ByteBlock.h>
+#include <Rudy/Platform/Utility/PlatformFile.h>
+#include <Rudy/Asset/AssetUtilities.h>
 #include <stdio.h>
 namespace Rudy
 {
@@ -61,7 +63,7 @@ namespace Rudy
 			/*
 			* Register asset
 			*/
-			m_Assets.Add(new Asset(definition,this));
+			m_Assets.Add(new Asset(definition,this,false));
 
 			/*
 			* Increment byteStart
@@ -93,43 +95,72 @@ namespace Rudy
 		m_Definitions.Clear();
 		m_Assets.Clear();
 	}
-	Asset* AssetPackage::RegisterVirtualAsset(const String& packagePath)
+	Asset* AssetPackage::RegisterVirtualAsset(const String& assetPath,bool bTargetsRawFile)
 	{
-		/*
-		* Load asset file definition bytes
-		*/
-		ByteBlock defintionBlockBytes;
-		PlatformFile::Read(packagePath, 0, 48u, defintionBlockBytes);
+		Asset* asset = nullptr;
+		if (bTargetsRawFile)
+		{
+			/*
+			* Create asset definiton
+			*/
+			AssetType assetType = AssetUtilities::GetAssetTypeViaExtension(assetPath);
+			String name = PlatformFile::GetFileNameFromPath(assetPath);
+			Guid id = Guid::Create();
+			unsigned long offset = 0;
+			unsigned long size = 0;
+			PlatformFile::GetFileLength(assetPath, size);
+			AssetDefinition definition(assetPath, assetType, id, name, offset, size);
 
-		/*
-		* Slice asset definition bytes
-		*/
-		ByteBlock typeBytes(defintionBlockBytes, 0, 4);
-		ByteBlock idBytes(defintionBlockBytes, 4, 20);
-		ByteBlock nameBytes(defintionBlockBytes, 20, 40);
-		ByteBlock offsetBytes(defintionBlockBytes, 40, 44);
-		ByteBlock sizeBytes(defintionBlockBytes, 44, 48);
+			/*
+			* Create asset
+			*/
+			asset = new Asset(definition, this, true);
 
-		/*
-		* Create asset definiton
-		*/
-		AssetType assetType = typeBytes.To<AssetType>();
-		String name((char*)nameBytes.GetBlock(), nameBytes.GetBlockSize());
-		Guid id = idBytes.To<Guid>();
-		unsigned long offset = offsetBytes.To<unsigned long>();
-		unsigned long size = sizeBytes.To<unsigned long>();
-		AssetDefinition definition(packagePath, assetType, id, name, offset, size);
+			/*
+			* Register asset and definition
+			*/
+			m_Assets.Add(asset);
+			m_Definitions.Add(definition);
+		}
+		else
+		{
+			/*
+			* Load asset file definition bytes
+			*/
+			ByteBlock defintionBlockBytes;
+			PlatformFile::Read(assetPath, 0, 48u, defintionBlockBytes);
 
-		/*
-		* Create asset
-		*/
-		Asset* asset = new Asset(definition,this);
+			/*
+			* Slice asset definition bytes
+			*/
+			ByteBlock typeBytes(defintionBlockBytes, 0, 4);
+			ByteBlock idBytes(defintionBlockBytes, 4, 20);
+			ByteBlock nameBytes(defintionBlockBytes, 20, 40);
+			ByteBlock offsetBytes(defintionBlockBytes, 40, 44);
+			ByteBlock sizeBytes(defintionBlockBytes, 44, 48);
 
-		/*
-		* Register asset and definition
-		*/
-		m_Assets.Add(asset);
-		m_Definitions.Add(definition);
+			/*
+			* Create asset definiton
+			*/
+			AssetType assetType = typeBytes.To<AssetType>();
+			String name((char*)nameBytes.GetBlock(), nameBytes.GetBlockSize());
+			Guid id = idBytes.To<Guid>();
+			unsigned long offset = offsetBytes.To<unsigned long>();
+			unsigned long size = sizeBytes.To<unsigned long>();
+			AssetDefinition definition(assetPath, assetType, id, name, offset, size);
+
+			/*
+			* Create asset
+			*/
+			asset = new Asset(definition, this, false);
+
+			/*
+			* Register asset and definition
+			*/
+			m_Assets.Add(asset);
+			m_Definitions.Add(definition);
+		}
+		
 
 		return asset;
 	}

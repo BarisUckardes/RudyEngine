@@ -6,6 +6,7 @@
 #include <Rudy/Platform/Implementation/Graphics/OpenGL/Texture/OpenGLTextureMagFilterConversions.h>
 #include <Rudy/Platform/Implementation/Graphics/OpenGL/Texture/OpenGLTextureMinFilterConversions.h>
 #include <Rudy/Platform/Implementation/Graphics/OpenGL/Texture/OpenGLTextureWrapModeConversions.h>
+#include <stdio.h>
 
 namespace Rudy
 {
@@ -25,11 +26,27 @@ namespace Rudy
 		/*
 		* Set texture data
 		*/
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, GetWidth(), GetHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0,
+			OpenGLTextureInternalFormatConversions::GetOpenGLTextureInternalFormat(GetTextureInternalFormat()),
+			GetWidth(), GetHeight(),
+			0,
+			OpenGLTextureFormatConversions::GetOpenGLTextureFormat(GetTextureFormat()),
+			OpenGLTextureDataTypeConversions::GetOpenGLTextureDataType(GetTextureDataType()),
+			data);
 
 		/*
 		* Set texture parameters
 		*/
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(GetWrapModeS()));
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(GetWrapModeT()));
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, OpenGLTextureMinFilterConversions::GetOpenGLMinFilter(GetMinFilter()));
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, OpenGLTextureMagFilterConversions::GetOpenGLMagFilter(GetMagFilter()));
+
+		/*
+		* Validate and generate mipmaps
+		*/
+		/*if(HasMipmaps())
+			glGenerateMipmap(GL_TEXTURE_2D);*/
 
 		/*
 		* Unbind texture
@@ -37,7 +54,7 @@ namespace Rudy
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	void OpenGLTexture2D::Initialize(unsigned int width, unsigned int height, TextureFormat format, TextureInternalFormat internalFormat, TextureDataType dataType, TextureMinFilter minFilter, TextureMagFilter magFilter, TextureWrapMode wrapModeS, TextureWrapMode wrapModeT, bool generateMipmaps)
+	void OpenGLTexture2D::InitializeCore()
 	{
 		/*
 		* Generate texture id
@@ -54,26 +71,20 @@ namespace Rudy
 		*/
 		glTexImage2D(GL_TEXTURE_2D,
 			0,
-			OpenGLTextureFormatConversions::GetOpenGLTextureFormat(format),
-			width, height,
+			OpenGLTextureInternalFormatConversions::GetOpenGLTextureInternalFormat(GetTextureInternalFormat()),
+			GetWidth(), GetHeight(),
 			0,
-			OpenGLTextureInternalFormatConversions::GetOpenGLTextureInternalFormat(internalFormat),
-			OpenGLTextureDataTypeConversions::GetOpenGLTextureDataType(dataType),
+			OpenGLTextureFormatConversions::GetOpenGLTextureFormat(GetTextureFormat()),
+			OpenGLTextureDataTypeConversions::GetOpenGLTextureDataType(GetTextureDataType()),
 			nullptr);
 
 		/*
 		* Set texture parameters
 		*/
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(wrapModeS));
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(wrapModeT));
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, OpenGLTextureMinFilterConversions::GetOpenGLMinFilter(minFilter));
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, OpenGLTextureMagFilterConversions::GetOpenGLMagFilter(magFilter));
-
-		/*
-		* Validate and generate mipmaps
-		*/
-		if(generateMipmaps)
-			glGenerateMipmap(GL_TEXTURE_2D);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(GetWrapModeS()));
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(GetWrapModeT()));
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, OpenGLTextureMinFilterConversions::GetOpenGLMinFilter(GetMinFilter()));
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, OpenGLTextureMagFilterConversions::GetOpenGLMagFilter(GetMagFilter()));
 
 		/*
 		* Unbind texture

@@ -1,5 +1,6 @@
 #include "OpenGLTextureWrapModeConversions.h"
 #include <GLAD/glad.h>
+#include <stdio.h>
 namespace Rudy
 {
     unsigned int OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(TextureWrapMode wrapMode)
@@ -16,6 +17,7 @@ namespace Rudy
 				return GL_CLAMP_TO_BORDER;
 				break;
 			case Rudy::TextureWrapMode::Repeat:
+				printf("Texture wrap mode\n");
 				return GL_REPEAT;
 				break;
 			case Rudy::TextureWrapMode::Mirror:

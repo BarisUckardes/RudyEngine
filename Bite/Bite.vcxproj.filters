@@ -84,6 +84,12 @@
     <ClInclude Include="src\Bite\GUI\Module\Window\Templates\DomainObserverGUIWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Bite\Editor\Command\Commands\EditorResouceLoadCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bite\Editor\Resource\EditorResource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bite\Module\BiteModule.cpp">
@@ -138,6 +144,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Bite\GUI\Module\Window\Templates\DomainObserverGUIWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bite\Editor\Command\Commands\EditorResouceLoadCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bite\Editor\Resource\EditorResource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

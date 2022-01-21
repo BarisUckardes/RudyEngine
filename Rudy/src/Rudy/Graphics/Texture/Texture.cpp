@@ -21,6 +21,21 @@ namespace Rudy
 		return m_DataType;
 	}
 
+	TextureMinFilter Texture::GetMinFilter() const
+	{
+		return m_MinFilter;
+	}
+
+	TextureMagFilter Texture::GetMagFilter() const
+	{
+		return m_MagFilter;
+	}
+
+	bool Texture::HasMipmaps() const
+	{
+		return m_HasMipmaps;
+	}
+
 	void Texture::SetTextureFormat(TextureFormat format)
 	{
 		m_Format = format;

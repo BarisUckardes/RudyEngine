@@ -1,10 +1,12 @@
 #pragma once
 #include <Rudy/Graphics/Texture/Texture.h>
 #include <Rudy/Memory/Memory.h>
-
+#include <Rudy/Graphics/Texture/Texture2DDiskLoadResult.h>
 namespace Rudy
 {
 	class String;
+	class AssetPackage;
+	class Asset;
 	/// <summary>
 	/// Graphics api agnostic texture2D class
 	/// </summary>
@@ -16,7 +18,8 @@ namespace Rudy
 		/// </summary>
 		/// <param name="path"></param>
 		/// <returns></returns>
-		Texture2D* LoadFromDisk(GraphicsDevice* device,const String& path,bool bCreateMipmaps);
+		static Asset* LoadFromDisk(const String& path,bool bCreateMipmaps, AssetPackage* ownerPackage, GraphicsDevice* device);
+		static Texture2DDiskLoadResult LoadToMemoryFromDisk(const String& path);
 
 		/// <summary>
 		/// Returns the width of the texture
@@ -29,6 +32,18 @@ namespace Rudy
 		/// </summary>
 		/// <returns></returns>
 		FORCEINLINE unsigned int GetHeight() const;
+
+		/// <summary>
+		/// Returns the wrap mode S for this texture
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE TextureWrapMode GetWrapModeS() const;
+
+		/// <summary>
+		/// Returns the wrap mode T for this texture;
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE TextureWrapMode GetWrapModeT() const;
 
 		/// <summary>
 		/// Updates the texture with data given
@@ -50,11 +65,11 @@ namespace Rudy
 		/// <param name="wrapModeS"></param>
 		/// <param name="wrapModeT"></param>
 		/// <param name="createMipmaps"></param>
-		virtual void Initialize(unsigned int width, unsigned int height,
+		void Initialize(unsigned int width, unsigned int height,
 			TextureFormat format, TextureInternalFormat internalFormat, TextureDataType dataType,
 			TextureMinFilter minFilter, TextureMagFilter magFilter,
 			TextureWrapMode wrapModeS, TextureWrapMode wrapModeT,
-			bool createMipmaps) = 0;
+			bool bCreateMipmaps);
 	protected:
 		Texture2D() = default;
 		~Texture2D() = default;
@@ -69,6 +84,33 @@ namespace Rudy
 		/// </summary>
 		/// <param name="height"></param>
 		void SetHeight(unsigned int height);
+
+		/// <summary>
+		/// Sets the wrap mode S
+		/// </summary>
+		/// <param name="mode"></param>
+		void SetWrapModeS(TextureWrapMode mode);
+
+		/// <summary>
+		/// Sets the wrap mode T
+		/// </summary>
+		/// <param name="mode"></param>
+		void SetWrapModeT(TextureWrapMode mode);
+
+		/// <summary>
+		/// Graphics api implementation of the initialization
+		/// </summary>
+		/// <param name="width"></param>
+		/// <param name="height"></param>
+		/// <param name="format"></param>
+		/// <param name="internalFormat"></param>
+		/// <param name="dataType"></param>
+		/// <param name="minFilter"></param>
+		/// <param name="magFilter"></param>
+		/// <param name="wrapModeS"></param>
+		/// <param name="wrapModeT"></param>
+		/// <param name="createMipmaps"></param>
+		virtual void InitializeCore() = 0;
 	private:
 		TextureWrapMode m_WrapModeS;
 		TextureWrapMode m_WrapModeT;

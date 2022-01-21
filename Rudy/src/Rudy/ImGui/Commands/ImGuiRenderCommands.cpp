@@ -2,6 +2,8 @@
 #include <Rudy/Memory/String.h>
 #include <IMGUI/imgui.h>
 #include <Rudy/Mathematics/Vector2f.h>
+#include <Rudy/Graphics/Texture/Texture2D.h>
+#include <stdio.h>
 namespace Rudy
 {
 	//void ImGuiRenderCommands::ShowDemoWindow()
@@ -66,6 +68,12 @@ namespace Rudy
 		return ImGui::Button(*name);
 	}
 
+	bool ImGuiRenderCommands::CreateTexturedButton(const String& name,const Vector2f& size, const Texture2D* texture)
+	{
+		return ImGui::ImageButton(texture->GetNativeHandle(),ImVec2(size.X,size.Y));
+		return false;
+	}
+
 	bool ImGuiRenderCommands::CreateButton(const String& name, const Vector2f& size)
 	{
 		return ImGui::Button(*name,ImVec2(size.X,size.Y));
@@ -88,6 +96,11 @@ namespace Rudy
 	void ImGuiRenderCommands::SignalPopup(const String& name)
 	{
 		ImGui::OpenPopup(*name);
+	}
+
+	void ImGuiRenderCommands::CreateImage(Texture2D* texture, const Vector2f& size)
+	{
+		ImGui::Image(texture->GetNativeHandle(), ImVec2(size.X,size.Y));
 	}
 	
 }

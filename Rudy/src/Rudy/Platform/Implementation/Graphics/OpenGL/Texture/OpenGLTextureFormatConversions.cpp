@@ -1,5 +1,6 @@
 #include "OpenGLTextureFormatConversions.h"
 #include <GLAD/glad.h>
+#include <stdio.h>
 namespace Rudy
 {
     unsigned int OpenGLTextureFormatConversions::GetOpenGLTextureFormat(TextureFormat format)
@@ -43,6 +44,7 @@ namespace Rudy
 				return GL_RGB;
 				break;
 			case Rudy::TextureFormat::Rgba:
+				printf("Texture format\n");
 				return GL_RGBA;
 				break;
 			case Rudy::TextureFormat::Luminance:

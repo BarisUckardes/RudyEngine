@@ -165,6 +165,8 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\Graphics\Texture\Texture2DDiskLoadResult.h" />
+    <ClInclude Include="src\Rudy\Graphics\Texture\TextureParameters.h" />
     <ClInclude Include="src\Rudy\Jobs\JobBatch.h" />
     <ClInclude Include="src\Rudy\Jobs\JobPool.h" />
     <ClInclude Include="src\Rudy\Jobs\Job.h" />

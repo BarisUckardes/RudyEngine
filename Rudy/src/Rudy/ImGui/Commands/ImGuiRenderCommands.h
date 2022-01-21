@@ -4,6 +4,7 @@
 namespace Rudy
 {
 	class String;
+	class Texture2D;
 	struct Vector2f;
 	class RUDY_API ImGuiRenderCommands
 	{
@@ -89,6 +90,14 @@ namespace Rudy
 		static bool CreateButton(const String& name);
 
 		/// <summary>
+		/// Creates an interactable textured button
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="texture"></param>
+		/// <returns></returns>
+		static bool CreateTexturedButton(const String& name,const Vector2f& size, const Texture2D* texture);
+
+		/// <summary>
 		/// Creates and interactable button with a size parameter
 		/// </summary>
 		/// <param name="name"></param>
@@ -133,5 +142,10 @@ namespace Rudy
 		/// </summary>
 		static void TerminateCurrentPopup();
 
+		/// <summary>
+		/// Creates a texture box
+		/// </summary>
+		/// <param name="texture"></param>
+		static void CreateImage(Texture2D* texture,const Vector2f& size);
 	};
 }

@@ -2,6 +2,10 @@
 #include <Bite/GUI/Module/Window/WindowLayout.h>
 #include <Bite/GUI/Module/Window/WindowLayoutGeneration.h>
 #include <Rudy/Mathematics/Vector2f.h>
+namespace Rudy
+{
+	class Texture2D;
+}
 namespace Bite
 {
 	class DomainView;
@@ -17,8 +21,9 @@ namespace Bite
 	private:
 		DomainView* m_DomainView;
 		DomainFolderView* m_CurrentFolderView;
+		Rudy::Texture2D* m_FolderIconTexture;
 		Rudy::Vector2f m_FolderIconSize;
-		Rudy::Vector2f m_FileIconSize;
+		Rudy::Vector2f m_AssetIconSize;
 		Rudy::Vector2f m_ItemPadding;
 	};
 

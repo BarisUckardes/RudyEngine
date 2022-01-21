@@ -1,5 +1,6 @@
 #include "OpenGLTextureDataTypeConversions.h"
 #include <GLAD/glad.h>
+#include <stdio.h>
 namespace Rudy
 {
 	unsigned int OpenGLTextureDataTypeConversions::GetOpenGLTextureDataType(TextureDataType dataType)
@@ -13,6 +14,7 @@ namespace Rudy
 			return GL_BYTE;
 			break;
 		case Rudy::TextureDataType::UnsignedByte:
+			printf("\nTexture data type\n");
 			return GL_UNSIGNED_BYTE;
 			break;
 		case Rudy::TextureDataType::Short:

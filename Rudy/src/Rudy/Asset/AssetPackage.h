@@ -11,7 +11,17 @@ namespace Rudy
 	{
 		friend class AssetPool;
 	public:
+		/// <summary>
+		/// Creates the package via path, this means its' a not raw asset package
+		/// </summary>
+		/// <param name="packagePath"></param>
 		AssetPackage(const String& packagePath);
+
+		/// <summary>
+		/// Creates the package in memeory(virtual package)
+		/// </summary>
+		AssetPackage();
+
 		~AssetPackage();
 
 		/// <summary>
@@ -19,7 +29,7 @@ namespace Rudy
 		/// </summary>
 		/// <param name="path"></param>
 		/// <returns></returns>
-		Asset* RegisterVirtualAsset(const String& path);
+		Asset* RegisterVirtualAsset(const String& path,bool bTargetsRawFile);
 		
 		/// <summary>
 		/// Removes a virtual asset
@@ -76,7 +86,6 @@ namespace Rudy
 		/// <returns></returns>
 		Array<AssetDefinition> GetDefinitions() const;
 	private:
-		AssetPackage();
 		Array<Asset*> m_Assets;
 		Array<AssetDefinition> m_Definitions;
 		Guid m_PackageID;

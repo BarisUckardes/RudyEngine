@@ -6,6 +6,7 @@
 #include <Rudy/Graphics/Texture/TextureMagFilter.h>
 #include <Rudy/Graphics/Texture/TextureMinFilter.h>
 #include <Rudy/Graphics/Texture/TextureWrapMode.h>
+#include <Rudy/Object/RudyObject.h>
 namespace Rudy
 {
 	/// <summary>
@@ -16,7 +17,6 @@ namespace Rudy
 	public:
 		Texture() = default;
 		virtual ~Texture() = 0;
-
 		/// <summary>
 		/// Returns the format of this texture
 		/// </summary>

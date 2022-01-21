@@ -1,17 +1,28 @@
 #include "Texture2D.h"
 #include <Rudy/Graphics/Device/GraphicsDevice.h>
 #include <Rudy/Platform/Utility/PlatformFile.h>
+#include <Rudy/Asset/Asset.h>
+#include <Rudy/Asset/AssetPackage.h>
 #include <STBI/stb_image.h>
+
 
 namespace Rudy
 {
-	Texture2D* Texture2D::LoadFromDisk(GraphicsDevice* device,const String& path,bool bCreateMipmaps)
+	Asset* Texture2D::LoadFromDisk(const String& path, bool bCreateMipmaps, AssetPackage* ownerPackage, GraphicsDevice* device)
+	{
+		/*
+		* Create virtual asset and register it
+		*/
+		Asset* asset = ownerPackage->RegisterVirtualAsset(path, true);
+		return asset;
+	}
+	Texture2DDiskLoadResult Texture2D::LoadToMemoryFromDisk(const String& path)
 	{
 		/*
 		* Validate file
 		*/
 		if (!PlatformFile::IsFileExists(path))
-			return nullptr;
+			return Texture2DDiskLoadResult();
 
 		/*
 		* Load texture data from the disk
@@ -29,50 +40,57 @@ namespace Rudy
 		/*
 		* Load stbi data
 		*/
-		stbi_uc* data = nullptr;
-		{
-			data = stbi_load(*path, &width, &height, &channels, 0);
-		}
+		Byte* data = nullptr;
+		data = stbi_load(*path, &width, &height, &channels, 0);
 
 		/*
 		* Validate data dimensions
 		*/
 		if (width <= 0 || height <= 0)
 		{
-			return nullptr;
+			return Texture2DDiskLoadResult();
 		}
+		
+		/*
+		* Create result s
+		*/
+		Texture2DDiskLoadResult loadResult;
+		loadResult.DataBlock = ByteBlock(data,width*height*channels);
+		loadResult.ChannelCount = channels;
+		loadResult.Width = width;
+		loadResult.Height = height;
 
 		/*
-		* Minimal format catch
+		* Free stbi data
 		*/
-		if (channels == 3) // RGB
-		{
-			format = TextureFormat::Rgb;
-			internalFormat = TextureInternalFormat::Rgb32f;
-		}
-		else if (channels == 4) // RGBA
-		{
-			format = TextureFormat::Rgba;
-			internalFormat = TextureInternalFormat::Rgba32f;
-		}
-		dataType = TextureDataType::UnsignedByte;
+		stbi_image_free(data);
+
+		return loadResult;
+	}
+	
+	void Texture2D::Initialize(unsigned int width, unsigned int height, TextureFormat format, TextureInternalFormat internalFormat, TextureDataType dataType, TextureMinFilter minFilter, TextureMagFilter magFilter, TextureWrapMode wrapModeS, TextureWrapMode wrapModeT, bool bCreateMipmaps)
+	{
+		/*
+		* Set properties
+		*/
+		SetWidth(width);
+		SetHeight(height);
+		SetTextureFormat(format);
+		SetTextureInternalFormat(internalFormat);
+		SetTextureDataType(dataType);
+		SetMinFilter(minFilter);
+		SetMagFilter(magFilter);
+		SetWrapModeS(wrapModeS);
+		SetWrapModeT(wrapModeT);
+		SetMipmapState(bCreateMipmaps);
 
 		/*
-		* Create texture
+		* Call graphics api implementation
 		*/
-		Texture2D* texture = device->CreateTexture2D();
-		texture->Initialize(width, height,
-			format, internalFormat,
-			dataType,
-			TextureMinFilter::Linear, TextureMagFilter::Linear,
-			TextureWrapMode::Repeat, TextureWrapMode::Repeat,bCreateMipmaps);
+		InitializeCore();
 
-		/*
-		* Set texture data
-		*/
-		texture->SetTextureData(data, width * height * channels);
-
-		return texture;
+		printf("Texture created with following details\nWidth: %d\nHeight: %d\nFormat: %d\nInternal Format: %d",width,height,
+			format,internalFormat);
 	}
 	unsigned int Texture2D::GetWidth() const
 	{
@@ -82,6 +100,14 @@ namespace Rudy
 	{
 		return m_Height;
 	}
+	TextureWrapMode Texture2D::GetWrapModeS() const
+	{
+		return m_WrapModeS;
+	}
+	TextureWrapMode Texture2D::GetWrapModeT() const
+	{
+		return m_WrapModeT;
+	}
 	void Texture2D::SetWidth(unsigned int width)
 	{
 		m_Width = width;
@@ -89,5 +115,13 @@ namespace Rudy
 	void Texture2D::SetHeight(unsigned int height)
 	{
 		m_Height = height;
+	}
+	void Texture2D::SetWrapModeS(TextureWrapMode mode)
+	{
+		m_WrapModeS = mode;
+	}
+	void Texture2D::SetWrapModeT(TextureWrapMode mode)
+	{
+		m_WrapModeT = mode;
 	}
 }

@@ -54,7 +54,7 @@ namespace Rudy
 	String WindowsPaths::GetProgramFilesPath()
 	{
 		char* buffer = new char[SPECIAL_FOLDER_PATH_SIZE];
-		SHGetSpecialFolderPathA(NULL, buffer, CSIDL_PROGRAMS, false);
+		SHGetSpecialFolderPathA(NULL, buffer, CSIDL_PROGRAM_FILES, false);
 		return String(buffer);
 	}
 

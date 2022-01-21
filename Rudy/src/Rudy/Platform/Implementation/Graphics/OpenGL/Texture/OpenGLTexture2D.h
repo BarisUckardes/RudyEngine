@@ -15,12 +15,9 @@ namespace Rudy
 
 		virtual void* GetNativeHandle() const override;
 		virtual void SetTextureData(unsigned char* data, unsigned int size) override;
-		virtual void Initialize(unsigned int width, unsigned int height,
-			TextureFormat format, TextureInternalFormat internalFormat, TextureDataType dataType,
-			TextureMinFilter minFilter, TextureMagFilter magFilter,
-			TextureWrapMode wrapModeS, TextureWrapMode wrapModeT,
-			bool createMipmaps) override;
 	protected:
+		virtual void InitializeCore() override;
+
 		virtual void FreeDeviceObjectCore() override;
 	private:
 		unsigned int m_TextureID;

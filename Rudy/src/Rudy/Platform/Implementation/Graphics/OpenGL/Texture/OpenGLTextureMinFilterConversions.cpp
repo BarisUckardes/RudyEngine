@@ -1,5 +1,6 @@
 #include "OpenGLTextureMinFilterConversions.h"
 #include <GLAD/glad.h>
+#include <stdio.h>
 namespace Rudy
 {
     unsigned int OpenGLTextureMinFilterConversions::GetOpenGLMinFilter(TextureMinFilter filter)
@@ -7,6 +8,7 @@ namespace Rudy
 		switch (filter)
 		{
 			case Rudy::TextureMinFilter::Nearest:
+				printf("Texture min filter\n");
 				return GL_NEAREST;
 				break;
 			case Rudy::TextureMinFilter::Linear:
