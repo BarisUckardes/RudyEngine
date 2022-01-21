@@ -14,7 +14,7 @@ namespace Rudy
 
 
 		virtual void* GetNativeHandle() const override;
-		virtual void SetTextureData(unsigned char* data, unsigned int size) override;
+		virtual void SetTextureData(Byte* data, unsigned int size) override;
 	protected:
 		virtual void InitializeCore() override;
 

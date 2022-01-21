@@ -74,6 +74,7 @@ namespace Rudy
 		~Asset();
 		RudyObject* m_LoadedObject;
 		AssetPackage* m_OwnerPackage;
+		void* m_CachedData;
 		AssetDefinition m_Definition;
 		unsigned long m_SizeInBytes;
 		bool m_bTargetsRawFile;

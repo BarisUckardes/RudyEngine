@@ -46,16 +46,18 @@ namespace Rudy
 		/*
 		* Validate data dimensions
 		*/
-		if (width <= 0 || height <= 0)
+		if (width <= 0 || height <= 0 || !data)
 		{
+			printf("\nStbi image data is corrupted\n");
 			return Texture2DDiskLoadResult();
 		}
-		
+
 		/*
 		* Create result s
 		*/
 		Texture2DDiskLoadResult loadResult;
 		loadResult.DataBlock = ByteBlock(data,width*height*channels);
+		loadResult.NativaDataBlock = data;
 		loadResult.ChannelCount = channels;
 		loadResult.Width = width;
 		loadResult.Height = height;
@@ -63,7 +65,7 @@ namespace Rudy
 		/*
 		* Free stbi data
 		*/
-		stbi_image_free(data);
+		//stbi_image_free(data);
 
 		return loadResult;
 	}
@@ -88,9 +90,6 @@ namespace Rudy
 		* Call graphics api implementation
 		*/
 		InitializeCore();
-
-		printf("Texture created with following details\nWidth: %d\nHeight: %d\nFormat: %d\nInternal Format: %d",width,height,
-			format,internalFormat);
 	}
 	unsigned int Texture2D::GetWidth() const
 	{

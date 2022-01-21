@@ -58,7 +58,7 @@ namespace Rudy
 					* Initialize texture
 					*/
 					texture->Initialize(result.Width, result.Height,
-						TextureFormat::Rgba, TextureInternalFormat::Rgba32f,
+						TextureFormat::Rgba, TextureInternalFormat::Rgba8,
 						TextureDataType::UnsignedByte,
 						TextureMinFilter::Nearest, TextureMagFilter::Linear,
 						TextureWrapMode::Repeat ,TextureWrapMode::Repeat,false);
@@ -134,6 +134,12 @@ namespace Rudy
 		* Set loaded object
 		*/
 		m_LoadedObject = loadedObject;
+	}
+	void Asset::Cache(bool bCacheAsync)
+	{
+	}
+	void Asset::DeleteCache()
+	{
 	}
 	void Asset::Unload()
 	{

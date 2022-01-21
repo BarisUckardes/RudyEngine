@@ -29,6 +29,7 @@ namespace Rudy
         m_Block = byteBlock;
         m_BlockSize = size;
         m_TranferType = ByteBlockTransferType::Copy;
+
     }
 
     ByteBlock::ByteBlock(const ByteBlock& block)

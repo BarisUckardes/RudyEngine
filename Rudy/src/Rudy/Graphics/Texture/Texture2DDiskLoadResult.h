@@ -14,6 +14,8 @@ namespace Rudy
 		/// </summary>
 		ByteBlock DataBlock;
 
+		Byte* NativaDataBlock;
+
 		/// <summary>
 		/// Width of the texture
 		/// </summary>

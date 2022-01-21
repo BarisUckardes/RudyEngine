@@ -16,7 +16,7 @@ namespace Rudy
 		return (void*)(&m_TextureID);
 	}
 
-	void OpenGLTexture2D::SetTextureData(unsigned char* data, unsigned int size)
+	void OpenGLTexture2D::SetTextureData(Byte* data, unsigned int size)
 	{
 		/*
 		* Bind texture
@@ -24,23 +24,27 @@ namespace Rudy
 		glBindTexture(GL_TEXTURE_2D, m_TextureID);
 
 		/*
-		* Set texture data
-		*/
-		glTexImage2D(GL_TEXTURE_2D, 0,
-			OpenGLTextureInternalFormatConversions::GetOpenGLTextureInternalFormat(GetTextureInternalFormat()),
-			GetWidth(), GetHeight(),
-			0,
-			OpenGLTextureFormatConversions::GetOpenGLTextureFormat(GetTextureFormat()),
-			OpenGLTextureDataTypeConversions::GetOpenGLTextureDataType(GetTextureDataType()),
-			data);
-
-		/*
 		* Set texture parameters
 		*/
-	/*	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(GetWrapModeS()));
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(GetWrapModeT()));
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, OpenGLTextureMinFilterConversions::GetOpenGLMinFilter(GetMinFilter()));
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, OpenGLTextureMagFilterConversions::GetOpenGLMagFilter(GetMagFilter()));*/
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+
+		/*
+		* Set texture data
+		*/
+		glTexImage2D(GL_TEXTURE_2D,
+			0,
+			GL_RGBA,
+			GetWidth(), GetHeight(),
+			0,
+			GL_RGBA,
+			GL_UNSIGNED_BYTE,
+			data);
+
+	
 
 		/*
 		* Validate and generate mipmaps
@@ -67,24 +71,24 @@ namespace Rudy
 		glBindTexture(GL_TEXTURE_2D, m_TextureID);
 
 		/*
+		* Set texture parameters
+		*/
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		/*
 		* Allocate texture data
 		*/
 		glTexImage2D(GL_TEXTURE_2D,
 			0,
-			OpenGLTextureInternalFormatConversions::GetOpenGLTextureInternalFormat(GetTextureInternalFormat()),
+			GL_RGBA,
 			GetWidth(), GetHeight(),
 			0,
-			OpenGLTextureFormatConversions::GetOpenGLTextureFormat(GetTextureFormat()),
-			OpenGLTextureDataTypeConversions::GetOpenGLTextureDataType(GetTextureDataType()),
+			GL_RGBA,
+			GL_UNSIGNED_BYTE,
 			nullptr);
-
-		/*
-		* Set texture parameters
-		*/
-		/*glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(GetWrapModeS()));
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(GetWrapModeT()));
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, OpenGLTextureMinFilterConversions::GetOpenGLMinFilter(GetMinFilter()));
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, OpenGLTextureMagFilterConversions::GetOpenGLMagFilter(GetMagFilter()));*/
 
 		/*
 		* Unbind texture
