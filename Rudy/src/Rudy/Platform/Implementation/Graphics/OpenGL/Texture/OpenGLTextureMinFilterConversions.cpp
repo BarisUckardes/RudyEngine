@@ -8,7 +8,6 @@ namespace Rudy
 		switch (filter)
 		{
 			case Rudy::TextureMinFilter::Nearest:
-				printf("Texture min filter\n");
 				return GL_NEAREST;
 				break;
 			case Rudy::TextureMinFilter::Linear:

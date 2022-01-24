@@ -8,13 +8,15 @@
 #include <stdio.h>
 namespace Bite
 {
+	GENERATE_REFLECTABLE_TYPE(DomainObserverGUIWindow);
+	GENERATE_WINDOW_GENERATOR(DomainObserverGUIWindow);
+
 	#define DEFAULT_ITEM_PADDING_HORIZONTAL 8
 	#define DEFAULT_ITEM_PADDING_VERTICAL 8
 	#define DEFAULT_FOLDER_ICON_SIZE 64
 	#define DEFAULT_ASSET_ICON_SIZE 48
-	GENERATE_REFLECTABLE_TYPE(DomainObserverGUIWindow);
-	GENERATE_WINDOW_GENERATOR(DomainObserverGUIWindow);
-	int texID;
+	#define DEFAULT_ITEM_TEXT_SIZE 16
+	
 	void DomainObserverGUIWindow::OnLayoutSetup()
 	{
 		/*
@@ -33,6 +35,7 @@ namespace Bite
 		m_AssetIconSize = Rudy::Vector2f(DEFAULT_ASSET_ICON_SIZE, DEFAULT_ASSET_ICON_SIZE);
 		m_FolderIconSize = Rudy::Vector2f(DEFAULT_FOLDER_ICON_SIZE, DEFAULT_FOLDER_ICON_SIZE);
 		m_ItemPadding = Rudy::Vector2f(DEFAULT_ITEM_PADDING_HORIZONTAL, DEFAULT_ITEM_PADDING_VERTICAL);
+		m_ItemTextSize = DEFAULT_ITEM_TEXT_SIZE;
 
 		/*
 		* Get editor resources
@@ -74,6 +77,7 @@ namespace Bite
 			/*
 			* Render sub folder as button
 			*/
+			const Rudy::Vector2f itemStartPosition = itemCursorPosition;
 			Rudy::ImGuiLayoutCommands::SetCursorPosition(itemCursorPosition);
 			if (Rudy::ImGuiRenderCommands::CreateTexturedButton(subFolder->GetName(), m_FolderIconSize,m_FolderIconTexture))
 			{
@@ -82,13 +86,24 @@ namespace Bite
 			}
 
 			/*
+			* Cache next item position
+			*/
+			const Rudy::Vector2f nextItemPosition = Rudy::ImGuiLayoutCommands::GetCursorPosition();
+
+			/*
+			* Create folder text
+			*/
+			Rudy::ImGuiLayoutCommands::SetCursorPosition(itemStartPosition + Rudy::Vector2f(0,m_FolderIconSize.Y + m_ItemPadding.Y));
+			Rudy::ImGuiRenderCommands::CreateText(subFolder->GetName());
+
+			/*
 			* Validate next line
 			*/
 			const float nextPositionHorizontal = itemCursorPosition.X + m_FolderIconSize.X*2 + m_ItemPadding.X;
 			if (nextPositionHorizontal >= itemAvailableSpace.X)
 			{
 				itemCursorPosition.X = startPosition.X;
-				itemCursorPosition.Y += m_FolderIconSize.Y + m_ItemPadding.Y;
+				itemCursorPosition.Y += m_FolderIconSize.Y + m_ItemPadding.Y + m_ItemTextSize;
 			}
 			else
 			{

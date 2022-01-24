@@ -298,7 +298,6 @@ namespace Rudy
 				return GL_DEPTH_STENCIL;
 				break;
 			case Rudy::TextureInternalFormat::Rgba32f:
-				printf("Texture internal format..\n");
 				return GL_RGBA32F;
 				break;
 			case Rudy::TextureInternalFormat::Rgb32f:

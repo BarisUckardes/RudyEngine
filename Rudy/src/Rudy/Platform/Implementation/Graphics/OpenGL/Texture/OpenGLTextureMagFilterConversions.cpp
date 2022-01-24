@@ -11,7 +11,6 @@ namespace Rudy
 				return GL_NEAREST;
 				break;
 			case Rudy::TextureMagFilter::Linear:
-				printf("Texture mag filter\n");
 				return GL_LINEAR;
 				break;
 			default:

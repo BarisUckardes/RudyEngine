@@ -25,6 +25,7 @@ namespace Bite
 		Rudy::Vector2f m_FolderIconSize;
 		Rudy::Vector2f m_AssetIconSize;
 		Rudy::Vector2f m_ItemPadding;
+		float m_ItemTextSize;
 	};
 
 

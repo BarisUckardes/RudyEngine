@@ -53,11 +53,14 @@ namespace Rudy
 		void operator-=(const float other);
 		void operator*=(const float other);
 		void operator/=(const float other);
-		//Vector2f operator+(const Vector2f& b);
-		//Vector2f operator-(const Vector2f& b);
-		//Vector2f operator/(const Vector2f& b);
-		//Vector2f operator*(const Vector2f& b);
-		//bool operator==(const Vector2f& b);
-		//bool operator!=(const Vector2f& b);
 	};
+
+	static Vector2f operator+(const Vector2f& a, const Vector2f& b)
+	{
+		return Vector2f(a.X + b.X, a.Y + b.Y);
+	}
+	static Vector2f operator-(const Vector2f& a, const Vector2f& b)
+	{
+		return Vector2f(a.X - b.X, a.Y - b.Y);
+	}
 }

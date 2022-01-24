@@ -91,4 +91,6 @@ namespace Rudy
 		X /= other;
 		Y /= other;
 	}
+
+	
 }

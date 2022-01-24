@@ -44,7 +44,6 @@ namespace Rudy
 				return GL_RGB;
 				break;
 			case Rudy::TextureFormat::Rgba:
-				printf("Texture format\n");
 				return GL_RGBA;
 				break;
 			case Rudy::TextureFormat::Luminance:

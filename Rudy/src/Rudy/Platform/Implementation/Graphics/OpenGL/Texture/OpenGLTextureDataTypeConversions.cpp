@@ -14,7 +14,6 @@ namespace Rudy
 			return GL_BYTE;
 			break;
 		case Rudy::TextureDataType::UnsignedByte:
-			printf("\nTexture data type\n");
 			return GL_UNSIGNED_BYTE;
 			break;
 		case Rudy::TextureDataType::Short:
