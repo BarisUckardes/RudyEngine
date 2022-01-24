@@ -20,7 +20,7 @@ namespace Rudy
 
 		virtual void FreeDeviceObjectCore() override;
 	private:
-		unsigned int m_TextureID;
+		unsigned int m_TextureID = 0;
 	};
 
 }

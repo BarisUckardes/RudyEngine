@@ -47,7 +47,7 @@ namespace Rudy
 					/*
 					* Load texture into memory
 					*/
-					Texture2DDiskLoadResult result = Texture2D::LoadToMemoryFromDisk(m_Definition.GetSourceAbsolutePath());
+					Texture2DDiskLoadResult* result = Texture2D::LoadToMemoryFromDisk(m_Definition.GetSourceAbsolutePath());
 
 					/*
 					* Create new texture2d object
@@ -57,7 +57,7 @@ namespace Rudy
 					/*
 					* Initialize texture
 					*/
-					texture->Initialize(result.Width, result.Height,
+					texture->Initialize(result->Width, result->Height,
 						TextureFormat::Rgba, TextureInternalFormat::Rgba8,
 						TextureDataType::UnsignedByte,
 						TextureMinFilter::Nearest, TextureMagFilter::Linear,
@@ -66,7 +66,7 @@ namespace Rudy
 					/*
 					* Set texture data
 					*/
-					texture->SetTextureData(result.DataBlock.GetBlock(), result.DataBlock.GetBlockSize());
+					texture->SetTextureData(result->NativaDataBlock, result->DataBlock.GetBlockSize());
 					
 					loadedObject = (RudyObject*)texture;
 					break;

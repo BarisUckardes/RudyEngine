@@ -38,7 +38,6 @@ namespace Bite
 		* Get editor resources
 		*/
 		m_FolderIconTexture = (Rudy::Texture2D*)GetOwnerSession()->GetEditorResource(Rudy::AssetType::Texture2D, "FolderIcon.png");
-		texID = Rudy::Texture2D::GetOpenGLTexture("C:/Program Files/Rudy/Bite/Resources/FolderIcon.png");
 	}
 	void DomainObserverGUIWindow::OnLayoutRender()
 	{
@@ -76,16 +75,12 @@ namespace Bite
 			* Render sub folder as button
 			*/
 			Rudy::ImGuiLayoutCommands::SetCursorPosition(itemCursorPosition);
-		/*	if (Rudy::ImGuiRenderCommands::CreateTexturedButton(subFolder->GetName(), m_FolderIconSize,m_FolderIconTexture))
-			{
-				nextFrameFolderView = subFolder;
-				printf("Set next folder: %s\n", *subFolder->GetName());
-			}*/
-			if (Rudy::ImGuiRenderCommands::CreateTexturedButton(m_FolderIconSize, texID))
+			if (Rudy::ImGuiRenderCommands::CreateTexturedButton(subFolder->GetName(), m_FolderIconSize,m_FolderIconTexture))
 			{
 				nextFrameFolderView = subFolder;
 				printf("Set next folder: %s\n", *subFolder->GetName());
 			}
+
 			/*
 			* Validate next line
 			*/

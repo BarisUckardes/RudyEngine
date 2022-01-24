@@ -89,7 +89,6 @@ namespace Rudy
 		/// <param name="state"></param>
 		void SetMipmapState(bool state);
 	private:
-		
 		TextureFormat m_Format;
 		TextureInternalFormat m_InternalFormat;
 		TextureDataType m_DataType;

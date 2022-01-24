@@ -7,6 +7,7 @@
 #include <Rudy/Platform/Implementation/Graphics/OpenGL/Texture/OpenGLTextureMinFilterConversions.h>
 #include <Rudy/Platform/Implementation/Graphics/OpenGL/Texture/OpenGLTextureWrapModeConversions.h>
 #include <stdio.h>
+#include <STBI/stb_image.h>
 
 namespace Rudy
 {
@@ -26,31 +27,28 @@ namespace Rudy
 		/*
 		* Set texture parameters
 		*/
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(GetWrapModeS()));
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(GetWrapModeT()));
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, OpenGLTextureMinFilterConversions::GetOpenGLMinFilter(GetMinFilter()));
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, OpenGLTextureMagFilterConversions::GetOpenGLMagFilter(GetMagFilter()));
 
 		/*
 		* Set texture data
 		*/
 		glTexImage2D(GL_TEXTURE_2D,
 			0,
-			GL_RGBA,
+			OpenGLTextureInternalFormatConversions::GetOpenGLTextureInternalFormat(GetTextureInternalFormat()),
 			GetWidth(), GetHeight(),
 			0,
-			GL_RGBA,
-			GL_UNSIGNED_BYTE,
+			OpenGLTextureFormatConversions::GetOpenGLTextureFormat(GetTextureFormat()),
+			OpenGLTextureDataTypeConversions::GetOpenGLTextureDataType(GetTextureDataType()),
 			data);
-
-	
 
 		/*
 		* Validate and generate mipmaps
 		*/
-		/*if(HasMipmaps())
-			glGenerateMipmap(GL_TEXTURE_2D);*/
+		if(HasMipmaps())
+			glGenerateMipmap(GL_TEXTURE_2D);
 
 		/*
 		* Unbind texture
@@ -73,21 +71,21 @@ namespace Rudy
 		/*
 		* Set texture parameters
 		*/
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(GetWrapModeS()));
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, OpenGLTextureWrapModeConversions::GetOpenGLWrapMode(GetWrapModeT()));
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, OpenGLTextureMinFilterConversions::GetOpenGLMinFilter(GetMinFilter()));
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, OpenGLTextureMagFilterConversions::GetOpenGLMagFilter(GetMagFilter()));
 
 		/*
 		* Allocate texture data
 		*/
 		glTexImage2D(GL_TEXTURE_2D,
 			0,
-			GL_RGBA,
+			OpenGLTextureInternalFormatConversions::GetOpenGLTextureInternalFormat(GetTextureInternalFormat()),
 			GetWidth(), GetHeight(),
 			0,
-			GL_RGBA,
-			GL_UNSIGNED_BYTE,
+			OpenGLTextureFormatConversions::GetOpenGLTextureFormat(GetTextureFormat()),
+			OpenGLTextureDataTypeConversions::GetOpenGLTextureDataType(GetTextureDataType()),
 			nullptr);
 
 		/*
