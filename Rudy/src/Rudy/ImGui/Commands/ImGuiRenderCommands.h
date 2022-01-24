@@ -130,7 +130,7 @@ namespace Rudy
 		/// <summary>
 		/// Begins the rendering of the popup
 		/// </summary>
-		static void BeginPopup();
+		static bool BeginPopup(const String& popupName,GUIWindowFlags flags = GUIWindowFlags::None);
 
 		/// <summary>
 		/// Finalizes the rendering of the popup

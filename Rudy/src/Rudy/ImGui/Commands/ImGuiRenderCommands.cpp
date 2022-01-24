@@ -103,6 +103,21 @@ namespace Rudy
 		ImGui::OpenPopup(*name);
 	}
 
+	bool ImGuiRenderCommands::BeginPopup(const String& popupName,GUIWindowFlags flags)
+	{
+		return ImGui::BeginPopup(*popupName,(int)flags);
+	}
+
+	void ImGuiRenderCommands::FinalizePopup()
+	{
+		ImGui::EndPopup();
+	}
+
+	void ImGuiRenderCommands::TerminateCurrentPopup()
+	{
+		ImGui::CloseCurrentPopup();
+	}
+
 	void ImGuiRenderCommands::CreateImage(Texture2D* texture, const Vector2f& size)
 	{
 		ImGui::Image(texture->GetNativeHandle(), ImVec2(size.X,size.Y));

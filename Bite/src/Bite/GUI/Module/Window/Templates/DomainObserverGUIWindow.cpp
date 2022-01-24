@@ -148,6 +148,44 @@ namespace Bite
 		}
 
 		/*
+		* Validate and render asset create context menu popup
+		*/
+		if (!Rudy::ImGuiEventCommands::IsAnyItemHavored() &&
+			Rudy::ImGuiEventCommands::IsWindowFocused() &&
+			Rudy::ImGuiEventCommands::IsMouseButtonClicked(Rudy::GUIMouseButtons::Right))
+		{
+			Rudy::ImGuiRenderCommands::SignalPopup("Asset_Create_Popup");
+		}
+		if (Rudy::ImGuiRenderCommands::BeginPopup("Asset_Create_Popup"))
+		{
+			if (Rudy::ImGuiRenderCommands::BeginMenu("Graphics"))
+			{
+				if (Rudy::ImGuiRenderCommands::CreateMenuItem("Shader"))
+				{
+
+				}
+				if (Rudy::ImGuiRenderCommands::CreateMenuItem("Shader Program"))
+				{
+
+				}
+				if (Rudy::ImGuiRenderCommands::CreateMenuItem("Material"))
+				{
+
+				}
+				Rudy::ImGuiRenderCommands::FinalizeMenu();
+			}
+			if (Rudy::ImGuiRenderCommands::CreateMenuItem("Folder"))
+			{
+
+			}
+			if (Rudy::ImGuiRenderCommands::CreateMenuItem("World"))
+			{
+
+			}
+			Rudy::ImGuiRenderCommands::FinalizePopup();
+		}
+
+		/*
 		* Set next frame properties
 		*/
 		m_CurrentFolderView = nextFrameFolderView;
