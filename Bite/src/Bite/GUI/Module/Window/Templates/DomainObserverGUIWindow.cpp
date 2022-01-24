@@ -6,6 +6,7 @@
 #include <Bite/Domain/DomainAssetView.h>
 #include <Rudy/Graphics/Texture/Texture2D.h>
 #include <stdio.h>
+#include <Rudy/Platform/Utility/PlatformFile.h>
 namespace Bite
 {
 	GENERATE_REFLECTABLE_TYPE(DomainObserverGUIWindow);
@@ -16,6 +17,7 @@ namespace Bite
 	#define DEFAULT_FOLDER_ICON_SIZE 64
 	#define DEFAULT_ASSET_ICON_SIZE 48
 	#define DEFAULT_ITEM_TEXT_SIZE 16
+	#define DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE 16
 	
 	void DomainObserverGUIWindow::OnLayoutSetup()
 	{
@@ -41,6 +43,10 @@ namespace Bite
 		* Get editor resources
 		*/
 		m_FolderIconTexture = (Rudy::Texture2D*)GetOwnerSession()->GetEditorResource(Rudy::AssetType::Texture2D, "FolderIcon.png");
+		m_FolderDeleteTexture = (Rudy::Texture2D*)GetOwnerSession()->GetEditorResource(Rudy::AssetType::Texture2D, "DeleteIcon.png");
+		m_FolderRenameTexture = (Rudy::Texture2D*)GetOwnerSession()->GetEditorResource(Rudy::AssetType::Texture2D, "EditIcon.png");
+		m_AssetDeleteTexture = (Rudy::Texture2D*)GetOwnerSession()->GetEditorResource(Rudy::AssetType::Texture2D, "DeleteIcon.png");
+		m_AssetRenameTexture = (Rudy::Texture2D*)GetOwnerSession()->GetEditorResource(Rudy::AssetType::Texture2D, "EditIcon.png");
 	}
 	void DomainObserverGUIWindow::OnLayoutRender()
 	{
@@ -48,6 +54,8 @@ namespace Bite
 		* Next frame properties
 		*/
 		DomainFolderView* nextFrameFolderView = m_CurrentFolderView;
+		DomainFolderView* nextFrameQuickFolderView = m_CurrentQuickMenuFolderView;
+		DomainAssetView* nextFrameQuickAssetView = m_CurrentQuickMenuAssetView;
 
 		/*
 		* Render current folder path
@@ -82,8 +90,12 @@ namespace Bite
 			if (Rudy::ImGuiRenderCommands::CreateTexturedButton(subFolder->GetName(), m_FolderIconSize,m_FolderIconTexture))
 			{
 				nextFrameFolderView = subFolder;
-				printf("Set next folder: %s\n", *subFolder->GetName());
 			}
+
+			/*
+			* Cache whether the folder is havored or not
+			*/
+			const bool isFolderHavored = Rudy::ImGuiEventCommands::IsCurrentItemHavored();
 
 			/*
 			* Cache next item position
@@ -110,6 +122,14 @@ namespace Bite
 				itemCursorPosition.X += m_FolderIconSize.X + m_ItemPadding.X;
 			}
 			
+			/*
+			* Validate and render folder quick menu
+			*/
+			if (isFolderHavored && Rudy::ImGuiEventCommands::IsMouseButtonClicked(Rudy::GUIMouseButtons::Right))
+			{
+				nextFrameQuickFolderView = subFolder;
+				Rudy::ImGuiRenderCommands::SignalPopup("Folder_Quick_Menu");
+			}
 		}
 
 		/*
@@ -121,16 +141,21 @@ namespace Bite
 			/*
 			* Get asset
 			*/
-			DomainAssetView* asset = assets[assetIndex];
+			DomainAssetView* assetView = assets[assetIndex];
 
 			/*
 			* Render asset
 			*/
 			Rudy::ImGuiLayoutCommands::SetCursorPosition(itemCursorPosition);
-			if (Rudy::ImGuiRenderCommands::CreateButton(asset->GetAssetName(), m_FolderIconSize))
+			if (Rudy::ImGuiRenderCommands::CreateButton(assetView->GetAssetName(), m_FolderIconSize))
 			{
-				printf("Asset seþected: %s\n", *asset->GetAssetName());
+				printf("Asset seþected: %s\n", *assetView->GetAssetName());
 			}
+
+			/*
+			* Cache whether the asset is havored or not
+			*/
+			const bool isAssetHavored = Rudy::ImGuiEventCommands::IsCurrentItemHavored();
 
 			/*
 			* Validate next line
@@ -145,6 +170,57 @@ namespace Bite
 			{
 				itemCursorPosition.X += m_AssetIconSize.X + m_ItemPadding.X;
 			}
+
+			/*
+			* Validate and render asset quick menu
+			*/
+			if (isAssetHavored && Rudy::ImGuiEventCommands::IsMouseButtonClicked(Rudy::GUIMouseButtons::Right))
+			{
+				nextFrameQuickAssetView = assetView;
+				Rudy::ImGuiRenderCommands::SignalPopup("Asset_Quick_Menu");
+			}
+		}
+
+		/*
+		* Validate and render folder quick menu
+		*/
+		if (m_CurrentQuickMenuFolderView != nullptr && Rudy::ImGuiRenderCommands::BeginPopup("Folder_Quick_Menu"))
+		{
+			Rudy::ImGuiRenderCommands::CreateImage(m_FolderRenameTexture, Rudy::Vector2f(DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE, DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE));
+			Rudy::ImGuiLayoutCommands::StayHere();
+			if (Rudy::ImGuiRenderCommands::CreateMenuItem("Rename"))
+			{
+
+			}
+
+			Rudy::ImGuiRenderCommands::CreateImage(m_FolderDeleteTexture, Rudy::Vector2f(DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE, DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE));
+			Rudy::ImGuiLayoutCommands::StayHere();
+			if (Rudy::ImGuiRenderCommands::CreateMenuItem("Delete"))
+			{
+
+			}
+			Rudy::ImGuiRenderCommands::FinalizePopup();
+		}
+
+		/*
+		* Validate and render asset quick menu
+		*/
+		if (m_CurrentQuickMenuAssetView != nullptr && Rudy::ImGuiRenderCommands::BeginPopup("Asset_Quick_Menu"))
+		{
+			Rudy::ImGuiRenderCommands::CreateImage(m_AssetRenameTexture, Rudy::Vector2f(DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE, DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE));
+			Rudy::ImGuiLayoutCommands::StayHere();
+			if (Rudy::ImGuiRenderCommands::CreateMenuItem("Rename"))
+			{
+
+			}
+
+			Rudy::ImGuiRenderCommands::CreateImage(m_AssetDeleteTexture, Rudy::Vector2f(DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE, DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE));
+			Rudy::ImGuiLayoutCommands::StayHere();
+			if (Rudy::ImGuiRenderCommands::CreateMenuItem("Delete"))
+			{
+
+			}
+			Rudy::ImGuiRenderCommands::FinalizePopup();
 		}
 
 		/*
@@ -172,6 +248,23 @@ namespace Bite
 				{
 
 				}
+				if (Rudy::ImGuiRenderCommands::CreateMenuItem("Framebuffer2D"))
+				{
+
+				}
+				Rudy::ImGuiRenderCommands::FinalizeMenu();
+			}
+			if (Rudy::ImGuiRenderCommands::BeginMenu("Compute"))
+			{
+				if (Rudy::ImGuiRenderCommands::CreateMenuItem("Compute Shader"))
+				{
+
+				}
+				if (Rudy::ImGuiRenderCommands::CreateMenuItem("GPGPU Kernel"))
+				{
+
+				}
+
 				Rudy::ImGuiRenderCommands::FinalizeMenu();
 			}
 			if (Rudy::ImGuiRenderCommands::CreateMenuItem("Folder"))
@@ -186,9 +279,51 @@ namespace Bite
 		}
 
 		/*
+		* Validate if clicked to empty space 
+		*/
+		if (Rudy::ImGuiEventCommands::IsWindowFocused() && Rudy::ImGuiEventCommands::IsWindowHavored() && !Rudy::ImGuiEventCommands::IsAnyItemHavored() &&
+			(Rudy::ImGuiEventCommands::IsMouseButtonClicked(Rudy::GUIMouseButtons::Left) || Rudy::ImGuiEventCommands::IsMouseButtonClicked(Rudy::GUIMouseButtons::Right))
+			)
+		{
+			nextFrameQuickFolderView = nullptr;
+			nextFrameQuickAssetView = nullptr;
+		}
+
+
+		/*
+		* Validate and gather drag drop paths
+		*/
+		if (Rudy::ImGuiEventCommands::IsWindowHavored /* && XInput->GetFileDropEvent() != nullptr */)
+		{
+			Rudy::Array<Rudy::String> drops;
+			/*
+			* Iterate each file drop
+			*/
+			for (unsigned int i = 0; i < drops.GetCursor(); i++)
+			{
+				/*
+				* Get file drop path
+				*/
+				const Rudy::String dropPath = drops[i];
+
+				/*
+				* Get file extension
+				*/
+				const Rudy::String dropFileExtension = Rudy::PlatformFile::GetFileExtension(dropPath);
+
+				/*
+				* Catch file type
+				*/
+
+			}
+		}
+
+		/*
 		* Set next frame properties
 		*/
 		m_CurrentFolderView = nextFrameFolderView;
+		m_CurrentQuickMenuFolderView = nextFrameQuickFolderView;
+		m_CurrentQuickMenuAssetView = nextFrameQuickAssetView;
 	}
 	void DomainObserverGUIWindow::OnLayoutFinalize()
 	{

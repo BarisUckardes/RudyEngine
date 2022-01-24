@@ -11,6 +11,7 @@
 #include <Rudy/Application/Events/Keyboard/KeyboardCharEvent.h>
 #include <Rudy/Application/Events/Keyboard/KeyboardKeyDownEvent.h>
 #include <Rudy/Application/Events/Keyboard/KeyboardKeyReleasedEvent.h>
+#include <Rudy/Application/Events/Window/WindowDropFileEvent.h>
 #include <Rudy/Graphics/Device/GraphicsDevice.h>
 namespace Rudy
 {
@@ -234,6 +235,38 @@ namespace Rudy
 				KeyboardCharEvent* event = new KeyboardCharEvent(keyCode);
 				data.EventCallback->Invoke(event);
 			});
+
+		glfwSetDropCallback(m_NativeWindow,[](GLFWwindow* window, int dropCount, const char** dropPaths)
+			{
+				/*
+				* Get window data
+				*/
+				GLFWWindowData& data = *(GLFWWindowData*)glfwGetWindowUserPointer(window);
+
+				/*
+				* Iterate and generate drop file data
+				*/
+				Array<String> dropPathsStrings;
+				for (unsigned int i = 0; i < dropCount; i++)
+				{
+					/*
+					* Get drop path
+					*/
+					const char* dropPath = dropPaths[i];
+
+					/*
+					* Register drop path
+					*/
+					dropPathsStrings.Add(dropPath);
+				}
+
+				/*
+				* Create window file drop event
+				*/
+				WindowDropFileEvent* event = new WindowDropFileEvent(dropPathsStrings);
+				data.EventCallback->Invoke(event);
+			}
+		);
 
 		/*
 		* Set event callback

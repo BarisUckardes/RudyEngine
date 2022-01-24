@@ -61,6 +61,11 @@ namespace Rudy
 		/// <summary>
 		/// Represetns a mouse position changed event
 		/// </summary>
-		MousePositionChanged = 11
+		MousePositionChanged = 11,
+
+		/// <summary>
+		/// Represents a file drop to window
+		/// </summary>
+		WindowFileDrop = 12
 	};
 }

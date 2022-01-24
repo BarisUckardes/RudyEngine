@@ -53,7 +53,7 @@ namespace Bite
 			/*
 			* Validate
 			*/
-			if (type == resource->GetAssetType())
+			if (type == resource->GetAssetType() && name == resource->GetName())
 			{
 				printf("FOUND RESOURCE OBJECT \n");
 				return resource->GetResourceObject();

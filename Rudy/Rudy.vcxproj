@@ -329,6 +329,7 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     <ClInclude Include="src\Rudy\Platform\Implementation\OS\Windows\Memory\WindowsGuid.h" />
     <ClInclude Include="src\Rudy\Platform\Implementation\OS\Windows\Process\WindowsProcess.h" />
     <ClInclude Include="src\Rudy\Platform\Implementation\OS\Windows\Threading\WindowsMutex.h" />
+    <ClInclude Include="src\Rudy\Application\Events\Window\WindowDropFileEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Rudy\Jobs\JobBatch.cpp" />
@@ -456,6 +457,7 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     <ClCompile Include="src\Rudy\Platform\Implementation\OS\Windows\Memory\WindowsGuid.cpp" />
     <ClCompile Include="src\Rudy\Platform\Implementation\OS\Windows\Process\WindowsProcess.cpp" />
     <ClCompile Include="src\Rudy\Platform\Implementation\OS\Windows\Threading\WindowsMutex.cpp" />
+    <ClCompile Include="src\Rudy\Application\Events\Window\WindowDropFileEvent.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -29,8 +29,12 @@ namespace EditorLauncher
 		*/
 		Rudy::Array <Rudy::AssetType> resourceAssetTypes;
 		resourceAssetTypes.Add(Rudy::AssetType::Texture2D);
+		resourceAssetTypes.Add(Rudy::AssetType::Texture2D);
+		resourceAssetTypes.Add(Rudy::AssetType::Texture2D);
 		Rudy::Array<Rudy::String> resourceNames;
 		resourceNames.Add("FolderIcon.png");
+		resourceNames.Add("DeleteIcon.png");
+		resourceNames.Add("EditIcon.png");
 
 		/*
 		* Create editor commands

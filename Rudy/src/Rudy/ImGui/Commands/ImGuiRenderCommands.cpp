@@ -123,7 +123,8 @@ namespace Rudy
 
 	void ImGuiRenderCommands::CreateImage(Texture2D* texture, const Vector2f& size)
 	{
-		ImGui::Image(texture->GetNativeHandle(), ImVec2(size.X,size.Y));
+		int texID = *(int*)texture->GetNativeHandle();
+		ImGui::Image((int*)texID, ImVec2(size.X,size.Y));
 	}
 	
 }
