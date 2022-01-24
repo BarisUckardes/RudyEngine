@@ -18,6 +18,7 @@ namespace Rudy
 		/// </summary>
 		/// <param name="path"></param>
 		/// <returns></returns>
+		static int GetOpenGLTexture(const String& path);
 		static Asset* LoadFromDisk(const String& path,bool bCreateMipmaps, AssetPackage* ownerPackage, GraphicsDevice* device);
 		static Texture2DDiskLoadResult LoadToMemoryFromDisk(const String& path);
 

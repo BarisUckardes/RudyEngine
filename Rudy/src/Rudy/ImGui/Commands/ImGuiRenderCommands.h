@@ -96,7 +96,7 @@ namespace Rudy
 		/// <param name="texture"></param>
 		/// <returns></returns>
 		static bool CreateTexturedButton(const String& name,const Vector2f& size, const Texture2D* texture);
-
+		static bool CreateTexturedButton(const Vector2f& size, int tex);
 		/// <summary>
 		/// Creates and interactable button with a size parameter
 		/// </summary>

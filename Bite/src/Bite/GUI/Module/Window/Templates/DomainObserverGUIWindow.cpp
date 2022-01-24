@@ -4,6 +4,7 @@
 #include <Bite/Domain/DomainView.h>
 #include <Bite/Domain/DomainFolderView.h>
 #include <Bite/Domain/DomainAssetView.h>
+#include <Rudy/Graphics/Texture/Texture2D.h>
 #include <stdio.h>
 namespace Bite
 {
@@ -13,7 +14,7 @@ namespace Bite
 	#define DEFAULT_ASSET_ICON_SIZE 48
 	GENERATE_REFLECTABLE_TYPE(DomainObserverGUIWindow);
 	GENERATE_WINDOW_GENERATOR(DomainObserverGUIWindow);
-
+	int texID;
 	void DomainObserverGUIWindow::OnLayoutSetup()
 	{
 		/*
@@ -37,7 +38,7 @@ namespace Bite
 		* Get editor resources
 		*/
 		m_FolderIconTexture = (Rudy::Texture2D*)GetOwnerSession()->GetEditorResource(Rudy::AssetType::Texture2D, "FolderIcon.png");
-
+		texID = Rudy::Texture2D::GetOpenGLTexture("C:/Program Files/Rudy/Bite/Resources/FolderIcon.png");
 	}
 	void DomainObserverGUIWindow::OnLayoutRender()
 	{
@@ -75,12 +76,16 @@ namespace Bite
 			* Render sub folder as button
 			*/
 			Rudy::ImGuiLayoutCommands::SetCursorPosition(itemCursorPosition);
-			if (Rudy::ImGuiRenderCommands::CreateTexturedButton(subFolder->GetName(), m_FolderIconSize,m_FolderIconTexture))
+		/*	if (Rudy::ImGuiRenderCommands::CreateTexturedButton(subFolder->GetName(), m_FolderIconSize,m_FolderIconTexture))
+			{
+				nextFrameFolderView = subFolder;
+				printf("Set next folder: %s\n", *subFolder->GetName());
+			}*/
+			if (Rudy::ImGuiRenderCommands::CreateTexturedButton(m_FolderIconSize, texID))
 			{
 				nextFrameFolderView = subFolder;
 				printf("Set next folder: %s\n", *subFolder->GetName());
 			}
-
 			/*
 			* Validate next line
 			*/

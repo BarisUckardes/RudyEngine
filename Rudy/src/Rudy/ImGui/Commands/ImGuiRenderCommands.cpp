@@ -73,6 +73,11 @@ namespace Rudy
 		return ImGui::ImageButton(texture->GetNativeHandle(),ImVec2(size.X,size.Y));
 	}
 
+	bool ImGuiRenderCommands::CreateTexturedButton(const Vector2f& size, int tex)
+	{
+		return ImGui::ImageButton((int*)tex, ImVec2(size.X, size.Y));
+	}
+
 	bool ImGuiRenderCommands::CreateButton(const String& name, const Vector2f& size)
 	{
 		return ImGui::Button(*name,ImVec2(size.X,size.Y));

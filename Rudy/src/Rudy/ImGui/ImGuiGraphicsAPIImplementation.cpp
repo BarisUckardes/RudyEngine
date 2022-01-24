@@ -11,7 +11,7 @@ namespace Rudy
 			case Rudy::GraphicsAPIType::Undefined:
 				break;
 			case Rudy::GraphicsAPIType::OpenGL:
-				ImGui_ImplOpenGL3_Init("#version 450");
+				ImGui_ImplOpenGL3_Init("#version 410");
 				break;
 			case Rudy::GraphicsAPIType::DÝrectx9:
 				break;
