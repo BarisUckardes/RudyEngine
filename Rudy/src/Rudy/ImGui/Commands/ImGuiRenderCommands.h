@@ -1,47 +1,48 @@
 #pragma once
 #include <Rudy/Core/Symbols.h>
 #include <Rudy/ImGui/Flags/GUIWindowFlags.h>
+#include <Rudy/Platform/Implementation/Graphics/GraphicsAPIType.h>
 namespace Rudy
 {
-	class String;
-	class Texture2D;
-	struct Vector2f;
+	class String ;
+	class Texture2D ;
+	struct Vector2f ;
 	class RUDY_API ImGuiRenderCommands
 	{
 	public:
-		ImGuiRenderCommands() = delete;
-		~ImGuiRenderCommands() = delete;
+		static ImGuiRenderCommands* Create(GraphicsAPIType preferredApiType);
+		ImGuiRenderCommands() = default ;
+		~ImGuiRenderCommands() = default ;
 
-		//static void ShowDemoWindow();
 
 		/// <summary>
 		/// Begins the rendering of the main menu bar
 		/// </summary>
-		static bool BeginMainMenuBar();
+		bool BeginMainMenuBar()const ;
 
 		/// <summary>
 		/// Finalizes the rendering of the main menu bar
 		/// </summary>
-		static void FinalizeMainMenuBar();
+		void FinalizeMainMenuBar()const ;
 
 		/// <summary>
 		/// Begins the rendering of a menu
 		/// </summary>
 		/// <param name="name"></param>
 		/// <returns></returns>
-		static bool BeginMenu(const String& name);
+		bool BeginMenu(const String& name)const ;
 
 		/// <summary>
 		/// Finalizes the rendering of a menu
 		/// </summary>
-		static void FinalizeMenu();
+		void FinalizeMenu()const ;
 
 		/// <summary>
 		/// Begins the rendering of a menu item
 		/// </summary>
 		/// <param name="name"></param>
 		/// <returns></returns>
-		static bool CreateMenuItem(const String& name);
+		bool CreateMenuItem(const String& name)const ;
 
 		/// <summary>
 		/// Begins the rendering of a window
@@ -49,7 +50,7 @@ namespace Rudy
 		/// <param name="name"></param>
 		/// <param name="isExitRequested"></param>
 		/// <returns></returns>
-		static bool BeginWindow(const String& name, bool& isExitRequested, GUIWindowFlags flags = GUIWindowFlags::None);
+		bool BeginWindow(const String& name, bool& isExitRequested, GUIWindowFlags flags = GUIWindowFlags::None)const ;
 
 		/// <summary>
 		/// Begins the rendering of a window
@@ -57,37 +58,37 @@ namespace Rudy
 		/// <param name="name"></param>
 		/// <param name="isExitRequested"></param>
 		/// <returns></returns>
-		static bool BeginWindow(const String& name, GUIWindowFlags flags = GUIWindowFlags::None);
+		bool BeginWindow(const String& name, GUIWindowFlags flags = GUIWindowFlags::None)const ;
 
 		/// <summary>
 		/// Finalizes the rendering of a window
 		/// </summary>
-		static void FinalizeWindow();
+		void FinalizeWindow()const ;
 
 		/// <summary>
 		/// Creates a selectable item
 		/// </summary>
 		/// <param name="name"></param>
 		/// <returns></returns>
-		static bool CreateSelectableItem(const String& name);
+		bool CreateSelectableItem(const String& name)const ;
 
 		/// <summary>
 		/// Creates a text label 
 		/// </summary>
 		/// <param name="text"></param>
-		static void CreateText(const String& text);
+		void CreateText(const String& text)const ;
 
 		/// <summary>
 		/// Creates an horizontal line
 		/// </summary>
-		static void CreateHorizontalLine();
+		void CreateHorizontalLine()const ;
 
 		/// <summary>
 		/// Creates an interactable button
 		/// </summary>
 		/// <param name="name"></param>
 		/// <returns></returns>
-		static bool CreateButton(const String& name);
+		bool CreateButton(const String& name)const ;
 
 		/// <summary>
 		/// Creates an interactable textured button
@@ -95,21 +96,21 @@ namespace Rudy
 		/// <param name="name"></param>
 		/// <param name="texture"></param>
 		/// <returns></returns>
-		static bool CreateTexturedButton(const String& name,const Vector2f& size, const Texture2D* texture);
-		static bool CreateTexturedButton(const Vector2f& size, int tex);
+		virtual bool CreateTexturedButton(const String& name, const Vector2f& size, const Texture2D* texture) const = 0;
+
 		/// <summary>
 		/// Creates and interactable button with a size parameter
 		/// </summary>
 		/// <param name="name"></param>
 		/// <param name="size"></param>
 		/// <returns></returns>
-		static bool CreateButton(const String& name, const Vector2f& size);
+		bool CreateButton(const String& name, const Vector2f& size)const ;
 
 		/// <summary>
 		/// Creates an float slider
 		/// </summary>
 		/// <returns></returns>
-		static float CreateFloatSlider(const String& name, float value, float min = 0.0f, float max = 100.0f);
+		float CreateFloatSlider(const String& name, float value, float min = 0.0f, float max = 100.0f)const ;
 
 		/// <summary>
 		/// Creates an vector2f slsider
@@ -119,33 +120,33 @@ namespace Rudy
 		/// <param name="min"></param>
 		/// <param name="max"></param>
 		/// <returns></returns>
-		static Vector2f CreateVector2Slider(const String& name, const Vector2f& value, float min = 0.0f, float max = 100.0f);
+		Vector2f CreateVector2Slider(const String& name, const Vector2f& value, float min = 0.0f, float max = 100.0f)const ;
 
 		/// <summary>
 		/// Signals a popup to render
 		/// </summary>
 		/// <param name="name"></param>
-		static void SignalPopup(const String& name);
+		void SignalPopup(const String& name)const ;
 
 		/// <summary>
 		/// Begins the rendering of the popup
 		/// </summary>
-		static bool BeginPopup(const String& popupName,GUIWindowFlags flags = GUIWindowFlags::None);
+		bool BeginPopup(const String& popupName,GUIWindowFlags flags = GUIWindowFlags::None)const ;
 
 		/// <summary>
 		/// Finalizes the rendering of the popup
 		/// </summary>
-		static void FinalizePopup();
+		void FinalizePopup()const ;
 
 		/// <summary>
 		/// Terminates the rendering of the popup
 		/// </summary>
-		static void TerminateCurrentPopup();
+		void TerminateCurrentPopup()const ;
 
 		/// <summary>
 		/// Creates a texture box
 		/// </summary>
 		/// <param name="texture"></param>
-		static void CreateImage(Texture2D* texture,const Vector2f& size);
-	};
+		void CreateImage(Texture2D* texture,const Vector2f& size)const ;
+	}const ;
 }

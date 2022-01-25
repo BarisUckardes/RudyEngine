@@ -3,6 +3,8 @@
 #include <Bite/GUI/Menu Item/MenuItemTree.h>
 #include <Bite/GUI/Module/MainMenu/Templates/MainMenuItemTemplates.h>
 #include <Rudy/ImGui/Commands/ImGuiRenderCommands.h>
+#include <Bite/GUI/Painter/GUIPainter.h>
+#include <Bite/Editor/Session/EditorSession.h>
 namespace Bite
 {
 	void MainMenuBarGUIModule::OnAttach()
@@ -13,10 +15,10 @@ namespace Bite
 
 	void MainMenuBarGUIModule::OnUpdate()
 	{
-		if (Rudy::ImGuiRenderCommands::BeginMainMenuBar())
+		if (GetOwnerSession()->GetSessionPainter()->GetRenderCommands()->BeginMainMenuBar())
 		{
 			RenderMenuItemTree(m_Tree);
-			Rudy::ImGuiRenderCommands::FinalizeMainMenuBar();
+			GetOwnerSession()->GetSessionPainter()->GetRenderCommands()->FinalizeMainMenuBar();
 		}
 	}
 
@@ -42,18 +44,18 @@ namespace Bite
 		*/
 		if (tree->HasSubTrees())
 		{
-			if (Rudy::ImGuiRenderCommands::BeginMenu(tree->GetName()))
+			if (GetOwnerSession()->GetSessionPainter()->GetRenderCommands()->BeginMenu(tree->GetName()))
 			{
 				Rudy::Array<MenuItemTree*>subTrees = tree->GetSubTrees();
 				for (unsigned int subIndex = 0; subIndex < subTrees.GetCursor(); subIndex++)
 					RenderMenuItemTree(subTrees[subIndex]);
 
-				Rudy::ImGuiRenderCommands::FinalizeMenu();
+				GetOwnerSession()->GetSessionPainter()->GetRenderCommands()->FinalizeMenu();
 			}
 		}
 		else
 		{
-			if (Rudy::ImGuiRenderCommands::CreateMenuItem(tree->GetName()))
+			if (GetOwnerSession()->GetSessionPainter()->GetRenderCommands()->CreateMenuItem(tree->GetName()))
 			{
 				tree->Invoke();
 			}

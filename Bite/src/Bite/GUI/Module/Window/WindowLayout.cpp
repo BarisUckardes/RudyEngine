@@ -1,5 +1,6 @@
 #include "WindowLayout.h"
-
+#include <Bite/Editor/Session/EditorSession.h>
+#include <Bite/GUI/Painter/GUIPainter.h>
 namespace Bite
 {
     Rudy::String WindowLayout::GetWindowName() const
@@ -9,6 +10,14 @@ namespace Bite
     EditorSession* WindowLayout::GetOwnerSession() const
     {
         return m_OwnerSession;
+    }
+    GUIPainter* WindowLayout::GetPainter() const
+    {
+        return m_OwnerSession->GetSessionPainter();
+    }
+    GUIPainterEventLedger* WindowLayout::GetEventLedger() const
+    {
+        return m_OwnerSession->GetSessionPainter()->GetEventLedger();
     }
     void WindowLayout::SetEditorSession(EditorSession* session)
     {

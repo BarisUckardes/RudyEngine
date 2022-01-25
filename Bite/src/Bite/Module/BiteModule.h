@@ -12,6 +12,7 @@ namespace Bite
 	class GUIModule;
 	class EditorSession;
 	class EditorCommand;
+	class GUIPainter;
 	/// <summary>
 	/// Main bite module
 	/// </summary>
@@ -32,6 +33,7 @@ namespace Bite
 		Rudy::Array<GUIModule*> m_GUIModules;
 		Rudy::Array<EditorCommand*> m_EditorCommands;
 		Rudy::ImGuiRenderer* m_ImGuiRenderer;
+		GUIPainter* m_Painter;
 		EditorSession* m_Session;
 	};
 

@@ -14,7 +14,7 @@
 #include <Rudy/Memory/ByteBlock.h>
 
 #define PROJECT_ENTRY_SIZE 100
-bool RenderGUI();
+bool RenderGUI(Rudy::ImGuiRenderCommands* renderCommands);
 
 struct ProjectFileContent
 {
@@ -144,6 +144,7 @@ int main(int argumentCount, char** arguments)
 	/*
 	* Slope loop
 	*/
+	Rudy::ImGuiRenderCommands* commands = Rudy::ImGuiRenderCommands::Create(window->GetGraphicsDevice()->GetApiType());
 	bool exitRequest = false;
 	while (!exitRequest)
 	{
@@ -166,7 +167,7 @@ int main(int argumentCount, char** arguments)
 		* Render gui
 		*/
 		renderer->Begin();
-		exitRequest = RenderGUI();
+		exitRequest = RenderGUI(commands);
 		renderer->End();
 
 		/*
@@ -183,14 +184,14 @@ int main(int argumentCount, char** arguments)
 	}
 	return 0;
 }
-bool RenderGUI()
+bool RenderGUI(Rudy::ImGuiRenderCommands* renderCommands)
 {
 	/*
 	* Render window
 	*/
 	Rudy::ImGuiLayoutCommands::SetNextWindowSize(Rudy::ImGuiLayoutCommands::GetViewportSize());
 	Rudy::ImGuiLayoutCommands::SetNextWindowPosition(Rudy::ImGuiLayoutCommands::GetViewportPosition());
-	if (Rudy::ImGuiRenderCommands::BeginWindow("Main Window",
+	if (renderCommands->BeginWindow("Main Window",
 		Rudy::GUIWindowFlags::NoTitleBar |
 		Rudy::GUIWindowFlags::NoCollapse |
 		Rudy::GUIWindowFlags::NoResize   |
@@ -204,8 +205,8 @@ bool RenderGUI()
 		/*
 		* Render projects text
 		*/
-		Rudy::ImGuiRenderCommands::CreateText("Projects:");
-		Rudy::ImGuiRenderCommands::CreateHorizontalLine();
+		renderCommands->CreateText("Projects:");
+		renderCommands->CreateHorizontalLine();
 
 		/*
 		* Render projects
@@ -220,7 +221,7 @@ bool RenderGUI()
 			/*
 			* Render selectable
 			*/
-			if (Rudy::ImGuiRenderCommands::CreateSelectableItem(g_Projects[i]))
+			if (renderCommands->CreateSelectableItem(g_Projects[i]))
 			{
 				/*
 				* Create editor process
@@ -230,16 +231,16 @@ bool RenderGUI()
 				Rudy::PlatformProcess* platformProcess = Rudy::PlatformProcess::Create(cmdArguments,
 					"C:/Program Files/Rudy/Rudy/Editor.exe");
 				platformProcess->Start();
-				Rudy::ImGuiRenderCommands::FinalizeWindow();
+				renderCommands->FinalizeWindow();
 				return true;
 			}
 		}
-		Rudy::ImGuiRenderCommands::CreateHorizontalLine();
+		renderCommands->CreateHorizontalLine();
 
 		/*
 		* Render create new project button
 		*/
-		if (Rudy::ImGuiRenderCommands::CreateButton("Create new project"))
+		if (renderCommands->CreateButton("Create new project"))
 		{
 			/*
 			* Create project name&path
@@ -321,6 +322,6 @@ bool RenderGUI()
 				Rudy::ByteBlock(newProjectFileByte, projectFileByteBlock.GetBlockSize() + 100));
 		}
 	}
-	Rudy::ImGuiRenderCommands::FinalizeWindow();
+	renderCommands->FinalizeWindow();
 	return false;
 }

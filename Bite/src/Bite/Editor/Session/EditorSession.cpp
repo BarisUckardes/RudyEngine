@@ -8,9 +8,10 @@
 #include <Bite/Editor/Resource/EditorResource.h>
 namespace Bite
 {
-	EditorSession::EditorSession(Rudy::ApplicationSession* applicationSession)
+	EditorSession::EditorSession(Rudy::ApplicationSession* applicationSession,GUIPainter* painter)
 	{
 		m_ApplicationSession = applicationSession;
+		m_Painter = painter;
 
 		/*
 		* Initialize domain view
@@ -62,6 +63,10 @@ namespace Bite
 
 		}
 		return nullptr;
+	}
+	GUIPainter* EditorSession::GetSessionPainter() const
+	{
+		return m_Painter;
 	}
 	void EditorSession::SetProject(const Rudy::String& name, unsigned int major, unsigned int minor, const Rudy::Guid& id)
 	{

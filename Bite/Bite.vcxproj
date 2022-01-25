@@ -160,6 +160,8 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Bite\GUI\Painter\GUIPainterEventLedger.h" />
+    <ClInclude Include="src\Bite\GUI\Painter\GUIPainter.h" />
     <ClInclude Include="src\Bite\Editor\Resource\EditorResource.h" />
     <ClInclude Include="src\Bite\Editor\Command\Commands\EditorResouceLoadCommand.h" />
     <ClInclude Include="src\Bite\GUI\Module\Window\Templates\DomainObserverGUIWindow.h" />
@@ -187,6 +189,8 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     <ClInclude Include="src\Bite\Project\ProjectVersion.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Bite\GUI\Painter\GUIPainterEventLedger.cpp" />
+    <ClCompile Include="src\Bite\GUI\Painter\GUIPainter.cpp" />
     <ClCompile Include="src\Bite\Editor\Resource\EditorResource.cpp" />
     <ClCompile Include="src\Bite\Editor\Command\Commands\EditorResouceLoadCommand.cpp" />
     <ClCompile Include="src\Bite\GUI\Module\Window\Templates\DomainObserverGUIWindow.cpp" />

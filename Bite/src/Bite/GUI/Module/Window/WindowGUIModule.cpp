@@ -1,6 +1,8 @@
 #include "WindowGUIModule.h"
 #include <Bite/GUI/Module/Window/GUIWindowManager.h>
 #include <Rudy/ImGui/Commands/ImGuiRenderCommands.h>
+#include <Bite/Editor/Session/EditorSession.h>
+#include <Bite/GUI/Painter/GUIPainter.h>
 namespace Bite
 {
 	void WindowGUIModule::OnAttach()
@@ -22,6 +24,7 @@ namespace Bite
 		/*
 		* Draw windows
 		*/
+		Rudy::ImGuiRenderCommands* renderCommands = GetOwnerSession()->GetSessionPainter()->GetRenderCommands();
 		for (unsigned int i = 0; i < layouts.GetCursor(); i++)
 		{
 			/*
@@ -38,7 +41,7 @@ namespace Bite
 			/*
 			* Draw window
 			*/
-			isVisible = Rudy::ImGuiRenderCommands::BeginWindow(layout->GetWindowName(),isExitRequested);
+			isVisible = renderCommands->BeginWindow(layout->GetWindowName(),isExitRequested);
 
 			/*
 			* Check if window is visible
@@ -77,7 +80,7 @@ namespace Bite
 				finalizedWindows.Add(layout);
 			}
 
-			Rudy::ImGuiRenderCommands::FinalizeWindow();
+			renderCommands->FinalizeWindow();
 		}
 
 		/*

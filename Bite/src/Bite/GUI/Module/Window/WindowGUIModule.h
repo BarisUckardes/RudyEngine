@@ -4,6 +4,10 @@
 namespace Bite
 {
 	class GUIWindowManager;
+
+	/// <summary>
+	/// GUIModule for windowing
+	/// </summary>
 	class BITE_API WindowGUIModule : public GUIModule
 	{
 	public:

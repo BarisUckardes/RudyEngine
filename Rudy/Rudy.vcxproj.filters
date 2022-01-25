@@ -510,6 +510,9 @@
     <ClInclude Include="src\Rudy\Application\Events\Window\WindowDropFileEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Rudy\Platform\Implementation\Graphics\OpenGL\ImGui\OpenGLImGuiRenderCommands.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Rudy\Mathematics\Vector2f.cpp">
@@ -888,6 +891,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rudy\Application\Events\Window\WindowDropFileEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Platform\Implementation\Graphics\OpenGL\ImGui\OpenGLImGuiRenderCommands.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -7,6 +7,7 @@
 #include <Bite/Editor/Session/EditorSession.h>
 #include <Bite/Editor/Command/EditorCommand.h>
 #include <Rudy/ImGui/Commands/ImGuiRenderCommands.h>
+#include <Bite/GUI/Painter/GUIPainter.h>
 namespace Bite
 {
 	BiteModule::BiteModule(const Rudy::Array<GUIModule*>& guiModules,const Rudy::Array<EditorCommand*>& editorCommands)
@@ -30,9 +31,15 @@ namespace Bite
 			Rudy::GUIBackendFlags::None, Rudy::GUIConfigFlags::DockingEnable);
 
 		/*
+		* Create gui painter
+		*/
+		GUIPainter* painter = new GUIPainter(defaultDevice->GetApiType());
+		m_Painter = painter;
+
+		/*
 		* Create editor session
 		*/
-		EditorSession* editorSession = new EditorSession(GetOwnerSession());
+		EditorSession* editorSession = new EditorSession(GetOwnerSession(),painter);
 		m_Session = editorSession;
 
 		/*
@@ -112,6 +119,7 @@ namespace Bite
 		* End bite gui modules
 		*/
 		m_ImGuiRenderer->End();
+		m_Painter->ClearEvents();
 	}
 	void BiteModule::OnDetach()
 	{
@@ -162,6 +170,14 @@ namespace Bite
 	}
 	void BiteModule::OnReceiveApplicationEvent(Rudy::Event* event)
 	{
+		/*
+		* Forward events to imgui renderer
+		*/
 		m_ImGuiRenderer->OnEventReceived(event);
+
+		/*
+		* Forward events to gui painter
+		*/
+		m_Painter->OnPainterReceivedEvent(event);
 	}
 }

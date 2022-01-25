@@ -14,13 +14,14 @@ namespace Bite
 {
 	class DomainView;
 	class EditorResource;
+	class GUIPainter;
 	/// <summary>
 	/// Represents a session of the editor
 	/// </summary>
 	class BITE_API EditorSession
 	{
 	public:
-		EditorSession(Rudy::ApplicationSession* applicationSession);
+		EditorSession(Rudy::ApplicationSession* applicationSession,GUIPainter* painter);
 		~EditorSession();
 
 		/// <summary>
@@ -56,6 +57,12 @@ namespace Bite
 		FORCEINLINE Rudy::RudyObject* GetEditorResource(Rudy::AssetType type, const Rudy::String& name);
 
 		/// <summary>
+		/// Returns the session gui painter
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE GUIPainter* GetSessionPainter() const;
+
+		/// <summary>
 		/// Sets the project for this editor session
 		/// </summary>
 		/// <param name="name"></param>
@@ -73,6 +80,7 @@ namespace Bite
 		Rudy::Array<EditorResource*> m_EditorResources;
 		Rudy::ApplicationSession* m_ApplicationSession;
 		DomainView* m_DomainView;
+		GUIPainter* m_Painter;
 		ProjectProperties m_ProjectProperties;
 	};
 

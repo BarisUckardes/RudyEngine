@@ -7,6 +7,9 @@
 #include <Rudy/Graphics/Texture/Texture2D.h>
 #include <stdio.h>
 #include <Rudy/Platform/Utility/PlatformFile.h>
+#include <Bite/GUI/Painter/GUIPainterEventLedger.h>
+#include <Bite/GUI/Painter/GUIPainter.h>
+#include <Rudy/Input/Keys.h>
 namespace Bite
 {
 	GENERATE_REFLECTABLE_TYPE(DomainObserverGUIWindow);
@@ -51,6 +54,15 @@ namespace Bite
 	void DomainObserverGUIWindow::OnLayoutRender()
 	{
 		/*
+		* Get render commands
+		*/
+		const Rudy::ImGuiRenderCommands* renderCommands = GetPainter()->GetRenderCommands();
+
+		if (GetEventLedger()->IsKeyPressed(RUDY_KEY_W))
+		{
+			printf("GUI RECEIVED\n");
+		}
+		/*
 		* Next frame properties
 		*/
 		DomainFolderView* nextFrameFolderView = m_CurrentFolderView;
@@ -60,13 +72,13 @@ namespace Bite
 		/*
 		* Render current folder path
 		*/
-		if (m_CurrentFolderView->GetParentFolder() != nullptr && Rudy::ImGuiRenderCommands::CreateButton("Back"))
+		if (m_CurrentFolderView->GetParentFolder() != nullptr && renderCommands->CreateButton("Back"))
 		{
 			nextFrameFolderView = m_CurrentFolderView->GetParentFolder();
 		}
 		Rudy::ImGuiLayoutCommands::StayHere();
-		Rudy::ImGuiRenderCommands::CreateText(m_CurrentFolderView->GetAbsolutePath());
-		Rudy::ImGuiRenderCommands::CreateHorizontalLine();
+		renderCommands->CreateText(m_CurrentFolderView->GetAbsolutePath());
+		renderCommands->CreateHorizontalLine();
 
 		/*
 		* Render folders
@@ -87,7 +99,7 @@ namespace Bite
 			*/
 			const Rudy::Vector2f itemStartPosition = itemCursorPosition;
 			Rudy::ImGuiLayoutCommands::SetCursorPosition(itemCursorPosition);
-			if (Rudy::ImGuiRenderCommands::CreateTexturedButton(subFolder->GetName(), m_FolderIconSize,m_FolderIconTexture))
+			if (renderCommands->CreateTexturedButton(subFolder->GetName(), m_FolderIconSize,m_FolderIconTexture))
 			{
 				nextFrameFolderView = subFolder;
 			}
@@ -106,7 +118,7 @@ namespace Bite
 			* Create folder text
 			*/
 			Rudy::ImGuiLayoutCommands::SetCursorPosition(itemStartPosition + Rudy::Vector2f(0,m_FolderIconSize.Y + m_ItemPadding.Y));
-			Rudy::ImGuiRenderCommands::CreateText(subFolder->GetName());
+			renderCommands->CreateText(subFolder->GetName());
 
 			/*
 			* Validate next line
@@ -128,7 +140,7 @@ namespace Bite
 			if (isFolderHavored && Rudy::ImGuiEventCommands::IsMouseButtonClicked(Rudy::GUIMouseButtons::Right))
 			{
 				nextFrameQuickFolderView = subFolder;
-				Rudy::ImGuiRenderCommands::SignalPopup("Folder_Quick_Menu");
+				renderCommands->SignalPopup("Folder_Quick_Menu");
 			}
 		}
 
@@ -147,7 +159,7 @@ namespace Bite
 			* Render asset
 			*/
 			Rudy::ImGuiLayoutCommands::SetCursorPosition(itemCursorPosition);
-			if (Rudy::ImGuiRenderCommands::CreateButton(assetView->GetAssetName(), m_FolderIconSize))
+			if (renderCommands->CreateButton(assetView->GetAssetName(), m_FolderIconSize))
 			{
 				printf("Asset seþected: %s\n", *assetView->GetAssetName());
 			}
@@ -177,50 +189,50 @@ namespace Bite
 			if (isAssetHavored && Rudy::ImGuiEventCommands::IsMouseButtonClicked(Rudy::GUIMouseButtons::Right))
 			{
 				nextFrameQuickAssetView = assetView;
-				Rudy::ImGuiRenderCommands::SignalPopup("Asset_Quick_Menu");
+				renderCommands->SignalPopup("Asset_Quick_Menu");
 			}
 		}
 
 		/*
 		* Validate and render folder quick menu
 		*/
-		if (m_CurrentQuickMenuFolderView != nullptr && Rudy::ImGuiRenderCommands::BeginPopup("Folder_Quick_Menu"))
+		if (m_CurrentQuickMenuFolderView != nullptr && renderCommands->BeginPopup("Folder_Quick_Menu"))
 		{
-			Rudy::ImGuiRenderCommands::CreateImage(m_FolderRenameTexture, Rudy::Vector2f(DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE, DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE));
+			renderCommands->CreateImage(m_FolderRenameTexture, Rudy::Vector2f(DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE, DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE));
 			Rudy::ImGuiLayoutCommands::StayHere();
-			if (Rudy::ImGuiRenderCommands::CreateMenuItem("Rename"))
+			if (renderCommands->CreateMenuItem("Rename"))
 			{
 
 			}
 
-			Rudy::ImGuiRenderCommands::CreateImage(m_FolderDeleteTexture, Rudy::Vector2f(DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE, DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE));
+			renderCommands->CreateImage(m_FolderDeleteTexture, Rudy::Vector2f(DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE, DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE));
 			Rudy::ImGuiLayoutCommands::StayHere();
-			if (Rudy::ImGuiRenderCommands::CreateMenuItem("Delete"))
+			if (renderCommands->CreateMenuItem("Delete"))
 			{
 
 			}
-			Rudy::ImGuiRenderCommands::FinalizePopup();
+			renderCommands->FinalizePopup();
 		}
 
 		/*
 		* Validate and render asset quick menu
 		*/
-		if (m_CurrentQuickMenuAssetView != nullptr && Rudy::ImGuiRenderCommands::BeginPopup("Asset_Quick_Menu"))
+		if (m_CurrentQuickMenuAssetView != nullptr && renderCommands->BeginPopup("Asset_Quick_Menu"))
 		{
-			Rudy::ImGuiRenderCommands::CreateImage(m_AssetRenameTexture, Rudy::Vector2f(DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE, DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE));
+			renderCommands->CreateImage(m_AssetRenameTexture, Rudy::Vector2f(DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE, DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE));
 			Rudy::ImGuiLayoutCommands::StayHere();
-			if (Rudy::ImGuiRenderCommands::CreateMenuItem("Rename"))
+			if (renderCommands->CreateMenuItem("Rename"))
 			{
 
 			}
 
-			Rudy::ImGuiRenderCommands::CreateImage(m_AssetDeleteTexture, Rudy::Vector2f(DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE, DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE));
+			renderCommands->CreateImage(m_AssetDeleteTexture, Rudy::Vector2f(DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE, DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE));
 			Rudy::ImGuiLayoutCommands::StayHere();
-			if (Rudy::ImGuiRenderCommands::CreateMenuItem("Delete"))
+			if (renderCommands->CreateMenuItem("Delete"))
 			{
 
 			}
-			Rudy::ImGuiRenderCommands::FinalizePopup();
+			renderCommands->FinalizePopup();
 		}
 
 		/*
@@ -230,52 +242,52 @@ namespace Bite
 			Rudy::ImGuiEventCommands::IsWindowFocused() &&
 			Rudy::ImGuiEventCommands::IsMouseButtonClicked(Rudy::GUIMouseButtons::Right))
 		{
-			Rudy::ImGuiRenderCommands::SignalPopup("Asset_Create_Popup");
+			renderCommands->SignalPopup("Asset_Create_Popup");
 		}
-		if (Rudy::ImGuiRenderCommands::BeginPopup("Asset_Create_Popup"))
+		if (renderCommands->BeginPopup("Asset_Create_Popup"))
 		{
-			if (Rudy::ImGuiRenderCommands::BeginMenu("Graphics"))
+			if (renderCommands->BeginMenu("Graphics"))
 			{
-				if (Rudy::ImGuiRenderCommands::CreateMenuItem("Shader"))
+				if (renderCommands->CreateMenuItem("Shader"))
 				{
 
 				}
-				if (Rudy::ImGuiRenderCommands::CreateMenuItem("Shader Program"))
+				if (renderCommands->CreateMenuItem("Shader Program"))
 				{
 
 				}
-				if (Rudy::ImGuiRenderCommands::CreateMenuItem("Material"))
+				if (renderCommands->CreateMenuItem("Material"))
 				{
 
 				}
-				if (Rudy::ImGuiRenderCommands::CreateMenuItem("Framebuffer2D"))
+				if (renderCommands->CreateMenuItem("Framebuffer2D"))
 				{
 
 				}
-				Rudy::ImGuiRenderCommands::FinalizeMenu();
+				renderCommands->FinalizeMenu();
 			}
-			if (Rudy::ImGuiRenderCommands::BeginMenu("Compute"))
+			if (renderCommands->BeginMenu("Compute"))
 			{
-				if (Rudy::ImGuiRenderCommands::CreateMenuItem("Compute Shader"))
+				if (renderCommands->CreateMenuItem("Compute Shader"))
 				{
 
 				}
-				if (Rudy::ImGuiRenderCommands::CreateMenuItem("GPGPU Kernel"))
+				if (renderCommands->CreateMenuItem("GPGPU Kernel"))
 				{
 
 				}
 
-				Rudy::ImGuiRenderCommands::FinalizeMenu();
+				renderCommands->FinalizeMenu();
 			}
-			if (Rudy::ImGuiRenderCommands::CreateMenuItem("Folder"))
-			{
-
-			}
-			if (Rudy::ImGuiRenderCommands::CreateMenuItem("World"))
+			if (renderCommands->CreateMenuItem("Folder"))
 			{
 
 			}
-			Rudy::ImGuiRenderCommands::FinalizePopup();
+			if (renderCommands->CreateMenuItem("World"))
+			{
+
+			}
+			renderCommands->FinalizePopup();
 		}
 
 		/*
@@ -309,7 +321,7 @@ namespace Bite
 				/*
 				* Get file extension
 				*/
-				const Rudy::String dropFileExtension = Rudy::PlatformFile::GetFileExtension(dropPath);
+				///const Rudy::String dropFileExtension = Rudy::PlatformFile::GetFileExtension(dropPath);
 
 				/*
 				* Catch file type
