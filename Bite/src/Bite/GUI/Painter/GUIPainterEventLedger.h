@@ -33,12 +33,43 @@ namespace Bite
 		/// <returns></returns>
 		FORCEINLINE bool IsKeyReleased(unsigned int key) const;
 
-
+		/// <summary>
+		/// Returns if the specified button is pressed
+		/// </summary>
+		/// <param name="button"></param>
+		/// <returns></returns>
 		FORCEINLINE bool IsMouseButtonPressed(unsigned int button) const;
+
+		/// <summary>
+		/// Returns if the specified button is released
+		/// </summary>
+		/// <param name="button"></param>
+		/// <returns></returns>
 		FORCEINLINE bool IsMouseButtonReleased(unsigned int button) const;
+
+		/// <summary>
+		/// Returns if the specified button is down
+		/// </summary>
+		/// <param name="button"></param>
+		/// <returns></returns>
 		FORCEINLINE bool IsMouseButtonDown(unsigned int button) const;
+
+		/// <summary>
+		/// Returns the mouse wheel scroll amount
+		/// </summary>
+		/// <returns></returns>
 		FORCEINLINE float GetMouseWheelAmount() const;
+
+		/// <summary>
+		/// Get mouse cursor position in pixel coordinates
+		/// </summary>
+		/// <returns></returns>
 		FORCEINLINE Rudy::Vector2f GetMouseCursor() const;
+
+		/// <summary>
+		/// Returns the drop file events
+		/// </summary>
+		/// <returns></returns>
 		FORCEINLINE Rudy::Array<Rudy::String> GetDropFiles() const;
 	private:
 		enum class KeyEvent
@@ -64,6 +95,9 @@ namespace Bite
 		~GUIPainterEventLedger();
 
 		Rudy::Array<KeyEvent> m_KeyStates;
+		Rudy::Array<KeyEvent> m_MouseButtonStates;
+		Rudy::Vector2f m_CursorPosition;
+		float m_MouseWheelAmount;
 	};
 
 

@@ -30,6 +30,26 @@ namespace Bite
 	{
 		return m_KeyStates[key] == KeyEvent::Released;
 	}
+	bool GUIPainterEventLedger::IsMouseButtonPressed(unsigned int button) const
+	{
+		return m_KeyStates[button] == KeyEvent::Pressed;
+	}
+	bool GUIPainterEventLedger::IsMouseButtonReleased(unsigned int button) const
+	{
+		return m_KeyStates[button] == KeyEvent::Released;
+	}
+	bool GUIPainterEventLedger::IsMouseButtonDown(unsigned int button) const
+	{
+		return m_KeyStates[button] == KeyEvent::Down;
+	}
+	float GUIPainterEventLedger::GetMouseWheelAmount() const
+	{
+		return m_MouseWheelAmount;
+	}
+	Rudy::Vector2f GUIPainterEventLedger::GetMouseCursor() const
+	{
+		return m_CursorPosition;
+	}
 	void GUIPainterEventLedger::OnLedgerReceivedEvent(Rudy::Event* event)
 	{
 		/*
