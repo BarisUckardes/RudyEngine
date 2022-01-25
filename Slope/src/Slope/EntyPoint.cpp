@@ -14,7 +14,7 @@
 #include <Rudy/Memory/ByteBlock.h>
 
 #define PROJECT_ENTRY_SIZE 100
-bool RenderGUI(Rudy::ImGuiRenderCommands* renderCommands);
+bool RenderGUI(Rudy::ImGuiRenderCommands* renderCommands, Rudy::ImGuiLayoutCommands* layoutCommands);
 
 struct ProjectFileContent
 {
@@ -144,7 +144,8 @@ int main(int argumentCount, char** arguments)
 	/*
 	* Slope loop
 	*/
-	Rudy::ImGuiRenderCommands* commands = Rudy::ImGuiRenderCommands::Create(window->GetGraphicsDevice()->GetApiType());
+	Rudy::ImGuiRenderCommands* renderCommands = Rudy::ImGuiRenderCommands::Create(window->GetGraphicsDevice()->GetApiType());
+	Rudy::ImGuiLayoutCommands* layoutCommands = new Rudy::ImGuiLayoutCommands();
 	bool exitRequest = false;
 	while (!exitRequest)
 	{
@@ -167,7 +168,7 @@ int main(int argumentCount, char** arguments)
 		* Render gui
 		*/
 		renderer->Begin();
-		exitRequest = RenderGUI(commands);
+		exitRequest = RenderGUI(renderCommands, layoutCommands);
 		renderer->End();
 
 		/*
@@ -184,13 +185,13 @@ int main(int argumentCount, char** arguments)
 	}
 	return 0;
 }
-bool RenderGUI(Rudy::ImGuiRenderCommands* renderCommands)
+bool RenderGUI(Rudy::ImGuiRenderCommands* renderCommands,Rudy::ImGuiLayoutCommands* layoutCommands)
 {
 	/*
 	* Render window
 	*/
-	Rudy::ImGuiLayoutCommands::SetNextWindowSize(Rudy::ImGuiLayoutCommands::GetViewportSize());
-	Rudy::ImGuiLayoutCommands::SetNextWindowPosition(Rudy::ImGuiLayoutCommands::GetViewportPosition());
+	layoutCommands->SetNextWindowSize(layoutCommands->GetViewportSize());
+	layoutCommands->SetNextWindowPosition(layoutCommands->GetViewportPosition());
 	if (renderCommands->BeginWindow("Main Window",
 		Rudy::GUIWindowFlags::NoTitleBar |
 		Rudy::GUIWindowFlags::NoCollapse |
@@ -200,7 +201,7 @@ bool RenderGUI(Rudy::ImGuiRenderCommands* renderCommands)
 		Rudy::GUIWindowFlags::NoNavFocus
 	))
 	{
-		Rudy::ImGuiLayoutCommands::SetCurrentWindowFontScale(5.0f);
+		layoutCommands->SetCurrentWindowFontScale(5.0f);
 
 		/*
 		* Render projects text

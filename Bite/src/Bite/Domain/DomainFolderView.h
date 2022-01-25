@@ -3,6 +3,11 @@
 #include <Rudy/Memory/Array.h>
 #include <Rudy/Memory/String.h>
 #include <Rudy/Memory/Guid.h>
+#include <Rudy/Asset/AssetType.h>
+namespace Rudy
+{
+	class AssetPackage;
+}
 namespace Bite
 {
 	class DomainAssetView;
@@ -15,7 +20,7 @@ namespace Bite
 	{
 	public:
 		DomainFolderView(DomainFolderView* parentFolder,
-			const Rudy::String& selfPath);
+			const Rudy::String& selfPath,Rudy::AssetPackage* package);
 
 		/// <summary>
 		/// Returns the sub folders
@@ -52,6 +57,12 @@ namespace Bite
 		/// </summary>
 		/// <returns></returns>
 		FORCEINLINE Rudy::String GetAbsolutePath() const;
+
+		/// <summary>
+		/// Registers an external asset
+		/// </summary>
+		/// <param name="path"></param>
+		void RegisterExternalAssetViaPath(const Rudy::String& name,Rudy::AssetType assetType);
 	private:
 		Rudy::Array<DomainFolderView*> m_SubFolders;
 		Rudy::Array<DomainAssetView*> m_Assets;;

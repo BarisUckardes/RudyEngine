@@ -6,6 +6,8 @@
 #include <Rudy/Platform/Utility/PlatformPaths.h>
 #include <Rudy/Platform/Utility/PlatformDirectory.h>
 #include <Bite/Editor/Resource/EditorResource.h>
+#include <Rudy/Asset/AssetPackage.h>
+#include <Rudy/Asset/AssetPool.h>
 namespace Bite
 {
 	EditorSession::EditorSession(Rudy::ApplicationSession* applicationSession,GUIPainter* painter)
@@ -14,9 +16,14 @@ namespace Bite
 		m_Painter = painter;
 
 		/*
+		* Create editor asset pakcage
+		*/
+		m_AssetPackage = applicationSession->GetAssetPool()->CreateVirtualPackage();
+
+		/*
 		* Initialize domain view
 		*/
-		m_DomainView = new DomainView(Rudy::PlatformPaths::GetDomainPath());
+		m_DomainView = new DomainView(Rudy::PlatformPaths::GetDomainPath(),m_AssetPackage);
 
 	}
 	EditorSession::~EditorSession()

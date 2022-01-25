@@ -9,6 +9,7 @@ namespace Rudy
 {
 	class ApplicationSession;
 	class RudyObject;
+	class AssetPackage;
 }
 namespace Bite
 {
@@ -63,6 +64,12 @@ namespace Bite
 		FORCEINLINE GUIPainter* GetSessionPainter() const;
 
 		/// <summary>
+		/// Returns the virtual asset package of the editor
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE Rudy::AssetPackage* GetEditorAssetPackage() const;
+
+		/// <summary>
 		/// Sets the project for this editor session
 		/// </summary>
 		/// <param name="name"></param>
@@ -79,6 +86,7 @@ namespace Bite
 	private:
 		Rudy::Array<EditorResource*> m_EditorResources;
 		Rudy::ApplicationSession* m_ApplicationSession;
+		Rudy::AssetPackage* m_AssetPackage;
 		DomainView* m_DomainView;
 		GUIPainter* m_Painter;
 		ProjectProperties m_ProjectProperties;

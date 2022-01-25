@@ -48,6 +48,12 @@ namespace Rudy
 		FORCEINLINE AssetPackage* GetOwnerPackage() const;
 
 		/// <summary>
+		/// Returns the asset definition
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE AssetDefinition GetAssetDefinition() const;
+
+		/// <summary>
 		/// Returns the asset id
 		/// </summary>
 		/// <returns></returns>

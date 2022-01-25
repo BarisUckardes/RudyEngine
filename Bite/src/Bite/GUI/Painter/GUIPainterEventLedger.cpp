@@ -1,6 +1,12 @@
 #include "GUIPainterEventLedger.h"
 #include <Rudy/Application/Events/Keyboard/KeyboardKeyDownEvent.h>
 #include <Rudy/Application/Events/Keyboard/KeyboardKeyReleasedEvent.h>
+#include <Rudy/Application/Events/Mouse/MouseButtonDownEvent.h>
+#include <Rudy/Application/Events/Mouse/MouseButtonUpEvent.h>
+#include <Rudy/Application/Events/Mouse/MousePositionChangedEvent.h>
+#include <Rudy/Application/Events/Mouse/MouseScrolledEvent.h>
+#include <Rudy/Application/Events/Window/WindowDropFileEvent.h>
+#include <Rudy/ImGui/Commands/ImGuiEventCommands.h>
 #include <stdio.h>
 
 namespace Bite
@@ -17,6 +23,7 @@ namespace Bite
 	{
 		m_KeyStates.Clear();
 		m_KeyStates.Reserve(360);
+		m_FileDrops.Clear();
 	}
 	bool GUIPainterEventLedger::IsKeyPressed(unsigned int key) const
 	{
@@ -30,10 +37,6 @@ namespace Bite
 	{
 		return m_KeyStates[key] == KeyEvent::Released;
 	}
-	bool GUIPainterEventLedger::IsMouseButtonPressed(unsigned int button) const
-	{
-		return m_KeyStates[button] == KeyEvent::Pressed;
-	}
 	bool GUIPainterEventLedger::IsMouseButtonReleased(unsigned int button) const
 	{
 		return m_KeyStates[button] == KeyEvent::Released;
@@ -42,13 +45,33 @@ namespace Bite
 	{
 		return m_KeyStates[button] == KeyEvent::Down;
 	}
-	float GUIPainterEventLedger::GetMouseWheelAmount() const
+	bool GUIPainterEventLedger::IsWindowHavored() const
+	{
+		return Rudy::ImGuiEventCommands::IsWindowHavored();
+	}
+	bool GUIPainterEventLedger::IsWindowFocused() const
+	{
+		return Rudy::ImGuiEventCommands::IsWindowFocused();
+	}
+	bool GUIPainterEventLedger::IsAnyItemHavored() const
+	{
+		return Rudy::ImGuiEventCommands::IsAnyItemHavored();
+	}
+	bool GUIPainterEventLedger::IsCurrentItemHavored() const
+	{
+		return Rudy::ImGuiEventCommands::IsCurrentItemHavored();
+	}
+	Rudy::Vector2f GUIPainterEventLedger::GetMouseWheelAmount() const
 	{
 		return m_MouseWheelAmount;
 	}
-	Rudy::Vector2f GUIPainterEventLedger::GetMouseCursor() const
+	Rudy::Vector2i GUIPainterEventLedger::GetMouseCursor() const
 	{
 		return m_CursorPosition;
+	}
+	Rudy::Array<Rudy::String> GUIPainterEventLedger::GetFileDrops() const
+	{
+		return m_FileDrops;
 	}
 	void GUIPainterEventLedger::OnLedgerReceivedEvent(Rudy::Event* event)
 	{
@@ -106,15 +129,71 @@ namespace Bite
 			case Rudy::EventType::WindowOffsetChanged:
 				break;
 			case Rudy::EventType::MouseButtonDown:
+			{
+				/*
+				* Get mouse button down event
+				*/
+				Rudy::MouseButtonDownEvent* mEvent = (Rudy::MouseButtonDownEvent*)event;
+
+				/*
+				* Validate if its a pressed or down event
+				*/
+				m_KeyStates[mEvent->GetButton()] = KeyEvent::Down;
 				break;
+			}
 			case Rudy::EventType::MouseButtonUp:
+			{
+				/*
+				* Get mouse button down event
+				*/
+				Rudy::MouseButtonUpEvent* mEvent = (Rudy::MouseButtonUpEvent*)event;
+
+				/*
+				* Set release button
+				*/
+				m_KeyStates[mEvent->GetButton()] = KeyEvent::Released;
 				break;
+			}
 			case Rudy::EventType::MouseScrolled:
+			{
+				/*
+				* Get mouse wheel scrolled
+				*/
+				Rudy::MouseScrolledEvent* mEvent = (Rudy::MouseScrolledEvent*)event;
+
+				/*
+				* Set scroll
+				*/
+				m_MouseWheelAmount = mEvent->GetAmount();
+
 				break;
+			}
 			case Rudy::EventType::MousePositionChanged:
+			{
+				/*
+				* Get mouse position
+				*/
+				Rudy::MousePositionChangedEvent* mEvent = (Rudy::MousePositionChangedEvent*)event;
+
+				/*
+				* Set mouse position
+				*/
+				m_CursorPosition = mEvent->GetPosition();
 				break;
+			}
 			case Rudy::EventType::WindowFileDrop:
+			{
+				/*
+				* get file drop event
+				*/
+				Rudy::WindowDropFileEvent* wEvent = (Rudy::WindowDropFileEvent*)event;
+
+				/*
+				* Set file drops
+				*/
+				m_FileDrops = wEvent->GetDropFilePaths();
 				break;
+			}
 			default:
 				break;
 		}

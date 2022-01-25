@@ -5,6 +5,7 @@
 namespace Rudy
 {
 	class ImGuiRenderCommands;
+	class ImGuiLayoutCommands;
 }
 namespace Bite
 {
@@ -27,6 +28,12 @@ namespace Bite
 		/// </summary>
 		/// <returns></returns>
 		FORCEINLINE Rudy::ImGuiRenderCommands* GetRenderCommands() const;
+
+		/// <summary>
+		/// Returns the layout commands
+		/// </summary>
+		/// <returns></returns>
+		FORCEINLINE Rudy::ImGuiLayoutCommands* GetLayoutCommands() const;
 	private:
 		GUIPainter(Rudy::GraphicsAPIType apiType);
 		~GUIPainter();
@@ -44,6 +51,7 @@ namespace Bite
 
 		GUIPainterEventLedger* m_EventLedger;
 		Rudy::ImGuiRenderCommands* m_RenderCommands;
+		Rudy::ImGuiLayoutCommands* m_LayoutCommands;
 	};
 
 }

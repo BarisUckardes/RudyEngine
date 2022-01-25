@@ -4,7 +4,7 @@
 #include <Bite/Domain/DomainFolderView.h>
 namespace Bite
 {
-	DomainView::DomainView(const Rudy::String& domainPath)
+	DomainView::DomainView(const Rudy::String& domainPath,Rudy::AssetPackage* package)
 	{
 		/*
 		* Set domain path
@@ -14,7 +14,7 @@ namespace Bite
 		/*
 		* Initialize
 		*/
-		Initialize();
+		Initialize(package);
 	}
 	DomainView::~DomainView()
 	{
@@ -24,7 +24,7 @@ namespace Bite
 	{
 		return m_RootFolder;
 	}
-	void DomainView::Initialize()
+	void DomainView::Initialize(Rudy::AssetPackage* package)
 	{
 		/*
 		* Collect folders
@@ -48,7 +48,7 @@ namespace Bite
 		/*
 		* Create folder view for the root folder
 		*/
-		m_RootFolder = new DomainFolderView(nullptr,m_DomainPath);
+		m_RootFolder = new DomainFolderView(nullptr,m_DomainPath,package);
 		printf("Domain View Initialization finished.!\n");
 	}
 }

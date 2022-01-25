@@ -4,7 +4,7 @@
 #include <stdio.h>
 namespace Bite
 {
-	DomainFolderView::DomainFolderView(DomainFolderView* parentFolder, const Rudy::String& selfPath)
+	DomainFolderView::DomainFolderView(DomainFolderView* parentFolder, const Rudy::String& selfPath,Rudy::AssetPackage* package)
 	{
 		/*
 		* Set folder properties
@@ -29,7 +29,7 @@ namespace Bite
 			/*
 			* Create sub folder view
 			*/
-			DomainFolderView* subFolder = new DomainFolderView(this,folderPath);
+			DomainFolderView* subFolder = new DomainFolderView(this,folderPath,package);
 			printf("Found folder: [%s]\n", *subFolder->GetName());
 
 			/*
@@ -53,7 +53,7 @@ namespace Bite
 			/*
 			* Create file view
 			*/
-			DomainAssetView* assetView = nullptr;
+			DomainAssetView* assetView = new DomainAssetView(filePath,package);
 			printf("Found asset: [%s]\n", *assetView->GetAssetName());
 
 			/*
@@ -85,5 +85,20 @@ namespace Bite
 	Rudy::String DomainFolderView::GetAbsolutePath() const
 	{
 		return m_AbsolutePath;
+	}
+	void DomainFolderView::RegisterExternalAssetViaPath(const Rudy::String& name, Rudy::AssetType assetType)
+	{
+		/*
+		* Catch asset type and generate source file
+		*/
+
+		/*
+		* Write source file to location
+		*/
+
+		/*
+		* Generate new DomainAssetView with written file
+		*/
+
 	}
 }

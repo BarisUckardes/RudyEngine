@@ -1,6 +1,11 @@
 #pragma once
 #include <Bite/Core/Symbols.h>
 #include <Rudy/Memory/String.h>
+
+namespace Rudy
+{
+	class AssetPackage;
+}
 namespace Bite
 {
 	class DomainFolderView;
@@ -11,7 +16,7 @@ namespace Bite
 	class BITE_API DomainView
 	{
 	public:
-		DomainView(const Rudy::String& domainPath);
+		DomainView(const Rudy::String& domainPath,Rudy::AssetPackage* package);
 		DomainView() = delete;
 		~DomainView();
 
@@ -24,7 +29,7 @@ namespace Bite
 		/// <summary>
 		/// Loads intial domain view
 		/// </summary>
-		void Initialize();
+		void Initialize(Rudy::AssetPackage* package);
 
 		DomainFolderView* m_RootFolder;
 		Rudy::String m_DomainPath;

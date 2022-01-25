@@ -165,6 +165,7 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.h" />
     <ClInclude Include="src\Rudy\Platform\Implementation\Graphics\OpenGL\ImGui\OpenGLImGuiRenderCommands.h" />
     <ClInclude Include="src\Rudy\Graphics\Texture\Texture2DDiskLoadResult.h" />
     <ClInclude Include="src\Rudy\Graphics\Texture\TextureParameters.h" />
@@ -182,7 +183,6 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     <ClInclude Include="src\Rudy\Memory\Memory.h" />
     <ClInclude Include="src\Rudy\Platform\Process\PlatformProcess.h" />
     <ClInclude Include="src\Rudy\ImGui\Flags\GUIMouseButtons.h" />
-    <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.h" />
     <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiLayoutCommands.h" />
     <ClInclude Include="src\Rudy\ImGui\Flags\GUIWindowFlags.h" />
     <ClInclude Include="src\Rudy\Platform\Process\PlatformProcessState.h" />
@@ -333,6 +333,7 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     <ClInclude Include="src\Rudy\Application\Events\Window\WindowDropFileEvent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.cpp" />
     <ClCompile Include="src\Rudy\Platform\Implementation\Graphics\OpenGL\ImGui\OpenGLImGuiRenderCommands.cpp" />
     <ClCompile Include="src\Rudy\Jobs\JobBatch.cpp" />
     <ClCompile Include="src\Rudy\Jobs\JobPool.cpp" />
@@ -342,7 +343,6 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     <ClCompile Include="src\Rudy\Memory\ByteBlock.cpp" />
     <ClCompile Include="src\Rudy\Memory\Memory.cpp" />
     <ClCompile Include="src\Rudy\Platform\Process\PlatformProcess.cpp" />
-    <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.cpp" />
     <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiLayoutCommands.cpp" />
     <ClCompile Include="src\Rudy\Asset\AssetUtilities.cpp" />
     <ClCompile Include="src\Rudy\Asset\AssetDefinition.cpp" />

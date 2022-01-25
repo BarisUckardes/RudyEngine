@@ -7,6 +7,7 @@ namespace Rudy
 {
 	class Asset;
 	class RudyObject;
+	class AssetPackage;
 }
 namespace Bite
 {
@@ -17,7 +18,7 @@ namespace Bite
 	class BITE_API DomainAssetView
 	{
 	public:
-		DomainAssetView(const Rudy::String& absoluteAssetPath,EditorSession* session);
+		DomainAssetView(const Rudy::String& assetPath,Rudy::AssetPackage* package);
 		DomainAssetView() = delete;
 		~DomainAssetView();
 
@@ -52,9 +53,6 @@ namespace Bite
 	private:
 		Rudy::Asset* m_TargetAsset;
 		EditorSession* m_OwnerSession;
-		Rudy::AssetDefinition m_Definition;
-		Rudy::String m_AbsolutePath;
-		Rudy::String m_AssetName;
 	};
 
 

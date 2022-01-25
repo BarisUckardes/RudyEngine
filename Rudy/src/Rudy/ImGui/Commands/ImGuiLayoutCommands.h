@@ -3,21 +3,24 @@
 #include <Rudy/Mathematics/Vector2f.h>
 namespace Rudy
 {
+	/// <summary>
+	/// Encapsulates the immediate gui layout commands
+	/// </summary>
 	class RUDY_API ImGuiLayoutCommands
 	{
 	public:
-		ImGuiLayoutCommands() = delete;
-		~ImGuiLayoutCommands() = delete;
+		ImGuiLayoutCommands() = default;
+		~ImGuiLayoutCommands() = default;
 
-		static void StayHere();
-		static void SetCursorPosition(const Vector2f& position);
-		static void SetNextWindowSize(const Vector2f& size);
-		static void SetNextWindowPosition(const Vector2f& position);
-		static void SetCurrentWindowFontScale(float scale);
-		static Vector2f GetViewportSize();
-		static Vector2f GetViewportPosition();
-		static Vector2f GetAvailableSpace();
-		static Vector2f GetCursorPosition();
+	    void StayHere() const;
+	    void SetCursorPosition(const Vector2f& position) const;
+	    void SetNextWindowSize(const Vector2f& size) const;
+	    void SetNextWindowPosition(const Vector2f& position) const;
+	    void SetCurrentWindowFontScale(float scale) const;
+	    Vector2f GetViewportSize() const;
+	    Vector2f GetViewportPosition() const;
+	    Vector2f GetAvailableSpace() const;
+	    Vector2f GetCursorPosition() const;
 	};
 
 

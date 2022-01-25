@@ -447,9 +447,6 @@
     <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiLayoutCommands.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Rudy\ImGui\Flags\GUIMouseButtons.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -511,6 +508,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Rudy\Platform\Implementation\Graphics\OpenGL\ImGui\OpenGLImGuiRenderCommands.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -857,9 +857,6 @@
     <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiLayoutCommands.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Rudy\Platform\Process\PlatformProcess.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -894,6 +891,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rudy\Platform\Implementation\Graphics\OpenGL\ImGui\OpenGLImGuiRenderCommands.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

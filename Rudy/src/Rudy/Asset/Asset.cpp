@@ -165,6 +165,10 @@ namespace Rudy
 	{
 		return m_OwnerPackage;
 	}
+	AssetDefinition Asset::GetAssetDefinition() const
+	{
+		return m_Definition;
+	}
 	unsigned long Asset::GetSizeInBytes() const
 	{
 		return m_Definition.GetSize();

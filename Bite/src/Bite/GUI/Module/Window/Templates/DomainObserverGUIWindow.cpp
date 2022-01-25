@@ -53,15 +53,19 @@ namespace Bite
 	}
 	void DomainObserverGUIWindow::OnLayoutRender()
 	{
+		
 		/*
 		* Get render commands
 		*/
 		const Rudy::ImGuiRenderCommands* renderCommands = GetPainter()->GetRenderCommands();
+		const Rudy::ImGuiLayoutCommands* layoutCommands = GetPainter()->GetLayoutCommands();
+		const GUIPainterEventLedger* eventLedger = GetPainter()->GetEventLedger();
 
 		if (GetEventLedger()->IsKeyPressed(RUDY_KEY_W))
 		{
 			printf("GUI RECEIVED\n");
 		}
+
 		/*
 		* Next frame properties
 		*/
@@ -76,7 +80,7 @@ namespace Bite
 		{
 			nextFrameFolderView = m_CurrentFolderView->GetParentFolder();
 		}
-		Rudy::ImGuiLayoutCommands::StayHere();
+		layoutCommands->StayHere();
 		renderCommands->CreateText(m_CurrentFolderView->GetAbsolutePath());
 		renderCommands->CreateHorizontalLine();
 
@@ -84,9 +88,9 @@ namespace Bite
 		* Render folders
 		*/
 		Rudy::Array<DomainFolderView*> subFolders = m_CurrentFolderView->GetSubFolders();
-		const Rudy::Vector2f itemAvailableSpace = Rudy::ImGuiLayoutCommands::GetAvailableSpace();
-		const Rudy::Vector2f startPosition = Rudy::ImGuiLayoutCommands::GetCursorPosition();
-		Rudy::Vector2f itemCursorPosition = Rudy::ImGuiLayoutCommands::GetCursorPosition();
+		const Rudy::Vector2f itemAvailableSpace = layoutCommands->GetAvailableSpace();
+		const Rudy::Vector2f startPosition = layoutCommands->GetCursorPosition();
+		Rudy::Vector2f itemCursorPosition = layoutCommands->GetCursorPosition();
 		for (unsigned int subFolderIndex = 0; subFolderIndex < subFolders.GetCursor(); subFolderIndex++)
 		{
 			/*
@@ -98,7 +102,7 @@ namespace Bite
 			* Render sub folder as button
 			*/
 			const Rudy::Vector2f itemStartPosition = itemCursorPosition;
-			Rudy::ImGuiLayoutCommands::SetCursorPosition(itemCursorPosition);
+			layoutCommands->SetCursorPosition(itemCursorPosition);
 			if (renderCommands->CreateTexturedButton(subFolder->GetName(), m_FolderIconSize,m_FolderIconTexture))
 			{
 				nextFrameFolderView = subFolder;
@@ -107,17 +111,17 @@ namespace Bite
 			/*
 			* Cache whether the folder is havored or not
 			*/
-			const bool isFolderHavored = Rudy::ImGuiEventCommands::IsCurrentItemHavored();
+			const bool isFolderHavored = eventLedger->IsCurrentItemHavored();
 
 			/*
 			* Cache next item position
 			*/
-			const Rudy::Vector2f nextItemPosition = Rudy::ImGuiLayoutCommands::GetCursorPosition();
+			const Rudy::Vector2f nextItemPosition = layoutCommands->GetCursorPosition();
 
 			/*
 			* Create folder text
 			*/
-			Rudy::ImGuiLayoutCommands::SetCursorPosition(itemStartPosition + Rudy::Vector2f(0,m_FolderIconSize.Y + m_ItemPadding.Y));
+			layoutCommands->SetCursorPosition(itemStartPosition + Rudy::Vector2f(0,m_FolderIconSize.Y + m_ItemPadding.Y));
 			renderCommands->CreateText(subFolder->GetName());
 
 			/*
@@ -137,7 +141,7 @@ namespace Bite
 			/*
 			* Validate and render folder quick menu
 			*/
-			if (isFolderHavored && Rudy::ImGuiEventCommands::IsMouseButtonClicked(Rudy::GUIMouseButtons::Right))
+			if (isFolderHavored && eventLedger->IsMouseButtonDown(RUDY_MOUSE_BUTTON_RIGHT))
 			{
 				nextFrameQuickFolderView = subFolder;
 				renderCommands->SignalPopup("Folder_Quick_Menu");
@@ -158,7 +162,7 @@ namespace Bite
 			/*
 			* Render asset
 			*/
-			Rudy::ImGuiLayoutCommands::SetCursorPosition(itemCursorPosition);
+			layoutCommands->SetCursorPosition(itemCursorPosition);
 			if (renderCommands->CreateButton(assetView->GetAssetName(), m_FolderIconSize))
 			{
 				printf("Asset seþected: %s\n", *assetView->GetAssetName());
@@ -167,7 +171,7 @@ namespace Bite
 			/*
 			* Cache whether the asset is havored or not
 			*/
-			const bool isAssetHavored = Rudy::ImGuiEventCommands::IsCurrentItemHavored();
+			const bool isAssetHavored = eventLedger->IsCurrentItemHavored();
 
 			/*
 			* Validate next line
@@ -186,7 +190,7 @@ namespace Bite
 			/*
 			* Validate and render asset quick menu
 			*/
-			if (isAssetHavored && Rudy::ImGuiEventCommands::IsMouseButtonClicked(Rudy::GUIMouseButtons::Right))
+			if (isAssetHavored && eventLedger->IsMouseButtonDown(RUDY_MOUSE_BUTTON_RIGHT))
 			{
 				nextFrameQuickAssetView = assetView;
 				renderCommands->SignalPopup("Asset_Quick_Menu");
@@ -199,14 +203,14 @@ namespace Bite
 		if (m_CurrentQuickMenuFolderView != nullptr && renderCommands->BeginPopup("Folder_Quick_Menu"))
 		{
 			renderCommands->CreateImage(m_FolderRenameTexture, Rudy::Vector2f(DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE, DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE));
-			Rudy::ImGuiLayoutCommands::StayHere();
+			layoutCommands->StayHere();
 			if (renderCommands->CreateMenuItem("Rename"))
 			{
 
 			}
 
 			renderCommands->CreateImage(m_FolderDeleteTexture, Rudy::Vector2f(DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE, DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE));
-			Rudy::ImGuiLayoutCommands::StayHere();
+			layoutCommands->StayHere();
 			if (renderCommands->CreateMenuItem("Delete"))
 			{
 
@@ -220,14 +224,14 @@ namespace Bite
 		if (m_CurrentQuickMenuAssetView != nullptr && renderCommands->BeginPopup("Asset_Quick_Menu"))
 		{
 			renderCommands->CreateImage(m_AssetRenameTexture, Rudy::Vector2f(DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE, DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE));
-			Rudy::ImGuiLayoutCommands::StayHere();
+			layoutCommands->StayHere();
 			if (renderCommands->CreateMenuItem("Rename"))
 			{
 
 			}
 
 			renderCommands->CreateImage(m_AssetDeleteTexture, Rudy::Vector2f(DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE, DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE));
-			Rudy::ImGuiLayoutCommands::StayHere();
+			layoutCommands->StayHere();
 			if (renderCommands->CreateMenuItem("Delete"))
 			{
 
@@ -238,9 +242,9 @@ namespace Bite
 		/*
 		* Validate and render asset create context menu popup
 		*/
-		if (!Rudy::ImGuiEventCommands::IsAnyItemHavored() &&
-			Rudy::ImGuiEventCommands::IsWindowFocused() &&
-			Rudy::ImGuiEventCommands::IsMouseButtonClicked(Rudy::GUIMouseButtons::Right))
+		if (!eventLedger->IsAnyItemHavored() &&
+			eventLedger->IsWindowFocused() &&
+			eventLedger->IsMouseButtonDown(RUDY_MOUSE_BUTTON_RIGHT))
 		{
 			renderCommands->SignalPopup("Asset_Create_Popup");
 		}
@@ -293,8 +297,9 @@ namespace Bite
 		/*
 		* Validate if clicked to empty space 
 		*/
-		if (Rudy::ImGuiEventCommands::IsWindowFocused() && Rudy::ImGuiEventCommands::IsWindowHavored() && !Rudy::ImGuiEventCommands::IsAnyItemHavored() &&
-			(Rudy::ImGuiEventCommands::IsMouseButtonClicked(Rudy::GUIMouseButtons::Left) || Rudy::ImGuiEventCommands::IsMouseButtonClicked(Rudy::GUIMouseButtons::Right))
+		if (eventLedger->IsWindowFocused() && eventLedger->IsWindowHavored() &&
+			!eventLedger->IsAnyItemHavored() &&
+			(eventLedger->IsMouseButtonDown(RUDY_MOUSE_BUTTON_RIGHT) || eventLedger->IsMouseButtonDown(RUDY_MOUSE_BUTTON_LEFT))
 			)
 		{
 			nextFrameQuickFolderView = nullptr;
@@ -305,28 +310,47 @@ namespace Bite
 		/*
 		* Validate and gather drag drop paths
 		*/
-		if (Rudy::ImGuiEventCommands::IsWindowHavored /* && XInput->GetFileDropEvent() != nullptr */)
+		const Rudy::Array<Rudy::String> fileDrops = eventLedger->GetFileDrops();
+		if (eventLedger->IsWindowHavored())
 		{
-			Rudy::Array<Rudy::String> drops;
+			
 			/*
 			* Iterate each file drop
 			*/
-			for (unsigned int i = 0; i < drops.GetCursor(); i++)
+			for (unsigned int i = 0; i < fileDrops.GetCursor(); i++)
 			{
 				/*
 				* Get file drop path
 				*/
-				const Rudy::String dropPath = drops[i];
+				const Rudy::String dropPath = fileDrops[i];
 
 				/*
 				* Get file extension
 				*/
-				///const Rudy::String dropFileExtension = Rudy::PlatformFile::GetFileExtension(dropPath);
+				Rudy::String dropFileExtension;
+				Rudy::PlatformFile::GetFileExtension(dropPath,dropFileExtension);
 
 				/*
 				* Catch file type
 				*/
+				if (dropFileExtension == ".png" || dropFileExtension == ".jpg" || dropFileExtension == ".jpeg") // validate image
+				{
+					/*
+					* Create new image asset
+					*/
 
+					
+				}
+				if (dropFileExtension == ".obj" || dropFileExtension == ".fbx") // validate mesh
+				{
+					/*
+					* Create new mesh asset
+					*/
+				}
+				if (dropFileExtension == ".wav") // validate sound file
+				{
+
+				}
 			}
 		}
 
@@ -336,6 +360,7 @@ namespace Bite
 		m_CurrentFolderView = nextFrameFolderView;
 		m_CurrentQuickMenuFolderView = nextFrameQuickFolderView;
 		m_CurrentQuickMenuAssetView = nextFrameQuickAssetView;
+
 	}
 	void DomainObserverGUIWindow::OnLayoutFinalize()
 	{
