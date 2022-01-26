@@ -167,11 +167,52 @@ namespace Bite
 				/*
 				* Generate shader content bytes
 				*/
+				Rudy::Byte* assetContentBuffer = new Rudy::Byte[4 + sourceText.GetCursor()];
+				Rudy::Memory::MemoryCopy(assetContentBuffer, &stage, 4);
+				Rudy::Memory::MemoryCopy((assetContentBuffer + 4), (char*) * sourceText, sourceText.GetCursor());
+				assetContentBytes = Rudy::ByteBlock(assetContentBuffer,4 + sourceText.GetCursor());
 
+				/*
+				* Free allocated resources
+				*/
+				delete[] assetContentBuffer;
 				break;
 			}
 			case Rudy::AssetType::ShaderProgram:
+			{
+				/*
+				* Generate header
+				*/
+				Rudy::AssetHeaderContainer header;
+				header.Type = assetType;
+				header.ID = Rudy::Guid::Create();
+				Rudy::Memory::MemoryCopy(&header.Name, (void*)*name, name.GetCursor() + 1);
+				header.Offset = sizeof(Rudy::AssetHeaderContainer);
+				header.Size = 4 + 20 + 20;
+
+				/*
+				* Generate header bytes
+				*/
+				headerBytes = Rudy::AssetHeaderGenerator::GenerateByteBlock(header);
+
+				/*
+				* Generate shader program content bytes
+				*/
+				const Rudy::String& shaderName = "Undefined shader name";
+				const Rudy::String& shaderCategory = "Undefined shader category";
+				const unsigned long shaderCount = 0;
+				Rudy::Byte* assetContentBuffer = new Rudy::Byte[4 + 20 + 20];
+				Rudy::Memory::MemoryCopy(assetContentBuffer, (void*)&shaderCount, sizeof(unsigned long));
+				Rudy::Memory::MemoryCopy(assetContentBuffer, (void*)*shaderName, shaderName.GetCursor() + 1);
+				Rudy::Memory::MemoryCopy((assetContentBuffer + 4 + 20), (void*)*shaderCategory, shaderCategory.GetCursor() + 1);
+				assetContentBytes = Rudy::ByteBlock(assetContentBuffer, 4 + 20 +20);
+
+				/*
+				* Free allocated resources
+				*/
+				delete[] assetContentBuffer;
 				break;
+			}
 			case Rudy::AssetType::Mesh:
 				break;
 			case Rudy::AssetType::Framebuffer2D:

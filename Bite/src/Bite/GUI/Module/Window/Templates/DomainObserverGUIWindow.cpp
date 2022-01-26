@@ -19,7 +19,7 @@ namespace Bite
 	#define DEFAULT_ITEM_PADDING_HORIZONTAL 8
 	#define DEFAULT_ITEM_PADDING_VERTICAL 8
 	#define DEFAULT_FOLDER_ICON_SIZE 64
-	#define DEFAULT_ASSET_ICON_SIZE 48
+	#define DEFAULT_ASSET_ICON_SIZE 64
 	#define DEFAULT_ITEM_TEXT_SIZE 16
 	#define DEFAULT_FOLDER_QUICK_MENU_ITEM_SIZE 16
 	
@@ -163,8 +163,9 @@ namespace Bite
 			/*
 			* Render asset
 			*/
+			const Rudy::Vector2f itemStartPosition = itemCursorPosition;
 			layoutCommands->SetCursorPosition(itemCursorPosition);
-			if (renderCommands->CreateButton(assetView->GetAssetName(), m_FolderIconSize))
+			if (renderCommands->CreateTexturedButton(assetView->GetAssetName(), m_AssetIconSize, m_FolderRenameTexture))
 			{
 				printf("Asset seşected: %s\n", *assetView->GetAssetName());
 			}
@@ -173,6 +174,18 @@ namespace Bite
 			* Cache whether the asset is havored or not
 			*/
 			const bool isAssetHavored = eventLedger->IsCurrentItemHavored();
+
+
+			/*
+			* Cache next item position
+			*/
+			const Rudy::Vector2f nextItemPosition = layoutCommands->GetCursorPosition();
+
+			/*
+			* Create folder text
+			*/
+			layoutCommands->SetCursorPosition(itemStartPosition + Rudy::Vector2f(0, m_AssetIconSize.Y + m_ItemPadding.Y));
+			renderCommands->CreateText(assetView->GetAssetName());
 
 			/*
 			* Validate next line
@@ -260,7 +273,7 @@ namespace Bite
 				}
 				if (renderCommands->CreateMenuItem("Shader Program"))
 				{
-
+					m_CurrentFolderView->CreateAsset("Mag_shader_program", Rudy::AssetType::ShaderProgram, nullptr);
 				}
 				if (renderCommands->CreateMenuItem("Material"))
 				{
