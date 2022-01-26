@@ -9,14 +9,14 @@ namespace Rudy
 namespace Bite
 {
 	class DomainFolderView;
-
+	class EditorSession;
 	/// <summary>
 	/// Represents a editor's view of the domain
 	/// </summary>
 	class BITE_API DomainView
 	{
 	public:
-		DomainView(const Rudy::String& domainPath,Rudy::AssetPackage* package);
+		DomainView(const Rudy::String& domainPath,EditorSession* package);
 		DomainView() = delete;
 		~DomainView();
 
@@ -29,9 +29,10 @@ namespace Bite
 		/// <summary>
 		/// Loads intial domain view
 		/// </summary>
-		void Initialize(Rudy::AssetPackage* package);
+		void Initialize();
 
 		DomainFolderView* m_RootFolder;
+		EditorSession* m_OwnerSession;
 		Rudy::String m_DomainPath;
 	};
 

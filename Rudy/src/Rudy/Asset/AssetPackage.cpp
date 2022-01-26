@@ -6,6 +6,8 @@
 #include <Rudy/Platform/Utility/PlatformFile.h>
 #include <Rudy/Asset/AssetUtilities.h>
 #include <stdio.h>
+#include <Rudy/Asset/Containers/AssetHeaderContainer.h>
+#include <Rudy/Asset/AssetHeaderGenerator.h>
 namespace Rudy
 {
 	AssetPackage::AssetPackage(const String& packagePath)
@@ -40,30 +42,20 @@ namespace Rudy
 				byteBlock);
 
 			/*
-			* Create definition
+			* Create header
 			*/
-			ByteBlock typeBytes(byteBlock, 0, 4);
-			ByteBlock idBytes(byteBlock, 4, 20);
-			ByteBlock nameBytes(byteBlock, 20, 40);
-			ByteBlock offsetBytes(byteBlock, 40, 44);
-			ByteBlock sizeBytes(byteBlock, 44, 48);
-
-			AssetType assetType = typeBytes.To<AssetType>();
-			String name((char*)nameBytes.GetBlock(), nameBytes.GetBlockSize());
-			Guid id = idBytes.To<Guid>();
-			unsigned long offset = offsetBytes.To<unsigned long>();
-			unsigned long size = sizeBytes.To<unsigned long>();
-			AssetDefinition definition(packagePath,assetType,id,name,offset,size);
+			ByteBlock headerBytes(byteBlock, 0, 48);
+			AssetHeaderContainer header = AssetHeaderGenerator::GenerateHeader(headerBytes);
 
 			/*
-			* Register definition
+			* Register header
 			*/
-			m_Definitions.Add(definition);
+			m_Headers.Add(AssetHeaderGenerator::GenerateHeader(headerBytes));
 
 			/*
 			* Register asset
 			*/
-			m_Assets.Add(new Asset(definition,this,false));
+			m_Assets.Add(new Asset(header,"PackagePath", this, false));
 
 			/*
 			* Increment byteStart
@@ -92,7 +84,7 @@ namespace Rudy
 		/*
 		* Clear
 		*/
-		m_Definitions.Clear();
+		m_Headers.Clear();
 		m_Assets.Clear();
 	}
 	Asset* AssetPackage::RegisterVirtualAsset(const String& assetPath,bool bTargetsRawFile)
@@ -101,7 +93,7 @@ namespace Rudy
 		if (bTargetsRawFile)
 		{
 			/*
-			* Create asset definiton
+			* Get asset properties
 			*/
 			AssetType assetType = AssetUtilities::GetAssetTypeViaExtension(assetPath);
 			String name = PlatformFile::GetFileNameFromPath(assetPath);
@@ -109,18 +101,27 @@ namespace Rudy
 			unsigned long offset = 0;
 			unsigned long size = 0;
 			PlatformFile::GetFileLength(assetPath, size);
-			AssetDefinition definition(assetPath, assetType, id, name, offset, size);
+
+			/*
+			* Generate asset header
+			*/
+			AssetHeaderContainer header;
+			header.Type = assetType;
+			header.ID = id;
+			Memory::MemoryCopy(&header.Name, (void*)*name, name.GetCursor());
+			header.Offset = offset;
+			header.Size = size;
 
 			/*
 			* Create asset
 			*/
-			asset = new Asset(definition, this, true);
+			asset = new Asset(header,assetPath, this, true);
 
 			/*
 			* Register asset and definition
 			*/
 			m_Assets.Add(asset);
-			m_Definitions.Add(definition);
+			m_Headers.Add(header);
 		}
 		else
 		{
@@ -128,37 +129,22 @@ namespace Rudy
 			* Load asset file definition bytes
 			*/
 			ByteBlock defintionBlockBytes;
-			PlatformFile::Read(assetPath, 0, 48u, defintionBlockBytes);
+			PlatformFile::Read(assetPath, 0, sizeof(AssetHeaderContainer), defintionBlockBytes);
 
 			/*
-			* Slice asset definition bytes
+			* Generate to asset
 			*/
-			ByteBlock typeBytes(defintionBlockBytes, 0, 4);
-			ByteBlock idBytes(defintionBlockBytes, 4, 20);
-			ByteBlock nameBytes(defintionBlockBytes, 20, 40);
-			ByteBlock offsetBytes(defintionBlockBytes, 40, 44);
-			ByteBlock sizeBytes(defintionBlockBytes, 44, 48);
-
-			/*
-			* Create asset definiton
-			*/
-			AssetType assetType = typeBytes.To<AssetType>();
-			String name((char*)nameBytes.GetBlock(), nameBytes.GetBlockSize());
-			Guid id = idBytes.To<Guid>();
-			unsigned long offset = offsetBytes.To<unsigned long>();
-			unsigned long size = sizeBytes.To<unsigned long>();
-			AssetDefinition definition(assetPath, assetType, id, name, offset, size);
+			AssetHeaderContainer header = AssetHeaderGenerator::GenerateHeader(defintionBlockBytes);
 
 			/*
 			* Create asset
 			*/
-			asset = new Asset(definition, this, false);
+			asset = new Asset(header,assetPath,this,false);
 
 			/*
-			* Register asset and definition
+			* Register header
 			*/
-			m_Assets.Add(asset);
-			m_Definitions.Add(definition);
+			m_Headers.Add(header);
 		}
 		
 
@@ -169,22 +155,22 @@ namespace Rudy
 		/*
 		* Iterate and validate
 		*/
-		for (int i = 0; i < m_Definitions.GetCursor(); i++)
+		for (int i = 0; i < m_Headers.GetCursor(); i++)
 		{
 			/*
-			* Get definition
+			* Get header
 			*/
-			const AssetDefinition& definition = m_Definitions[i];
+			const AssetHeaderContainer& header = m_Headers[i];
 
 			/*
 			* Validate guid
 			*/
-			if (definition.GetID() == id)
+			if (header.ID == id)
 			{
 				m_Assets[i]->Unload();
 				delete m_Assets[i];
 				m_Assets.RemoveIndex(i);
-				m_Definitions.RemoveIndex(i);
+				m_Headers.RemoveIndex(i);
 				return true;
 			}
 		}
@@ -195,17 +181,17 @@ namespace Rudy
 		/*
 		* Iterate and validate
 		*/
-		for (int i = 0; i < m_Definitions.GetCursor(); i++)
+		for (int i = 0; i < m_Headers.GetCursor(); i++)
 		{
 			/*
-			* Get definition
+			* Get header
 			*/
-			const AssetDefinition& definition = m_Definitions[i];
+			const AssetHeaderContainer& header = m_Headers[i];
 
 			/*
 			* Validate guid
 			*/
-			if (definition.GetID() == id)
+			if (header.ID == id)
 			{
 				return m_Assets[i];
 			}
@@ -231,28 +217,28 @@ namespace Rudy
 			asset->Unload();
 		}
 	}
-	AssetDefinition AssetPackage::GetDefiniton(const Guid& id)
+	AssetHeaderContainer AssetPackage::GetHeader(const Guid& id)
 	{
 		/*
 		* Iterate and validate
 		*/
-		for (int i = 0; i < m_Definitions.GetCursor(); i++)
+		for (int i = 0; i < m_Headers.GetCursor(); i++)
 		{
 			/*
-			* Get defintion
+			* Get header
 			*/
-			const AssetDefinition& defintion = m_Definitions[i];
+			const AssetHeaderContainer& header = m_Headers[i];
 
 			/*
 			* Validate
 			*/
-			if (defintion.GetID() == id)
+			if (header.ID == id)
 			{
-				return defintion;
+				return header;
 			}
 		}
 
-		return AssetDefinition();
+		return AssetHeaderContainer();
 	}
 	Guid AssetPackage::GetPackageID() const
 	{
@@ -265,17 +251,17 @@ namespace Rudy
 		/*
 		* Iterate and gather total asset size
 		*/
-		for (int i = 0; i < m_Definitions.GetCursor(); i++)
+		for (int i = 0; i < m_Headers.GetCursor(); i++)
 		{
 			/*
 			* Get asset
 			*/
-			const AssetDefinition& definition = m_Definitions[i];
+			const AssetHeaderContainer& header = m_Headers[i];
 
 			/*
 			* Get and increment
 			*/
-			totalSize += definition.GetSize();
+			totalSize += header.Size;
 		}
 
 		return totalSize;
@@ -306,8 +292,8 @@ namespace Rudy
 	{
 		return m_bVirtual;
 	}
-	Array<AssetDefinition> AssetPackage::GetDefinitions() const
+	Array<AssetHeaderContainer> AssetPackage::GetHeaders() const
 	{
-		return m_Definitions;
+		return m_Headers;
 	}
 }

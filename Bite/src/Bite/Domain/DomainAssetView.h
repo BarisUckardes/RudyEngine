@@ -18,7 +18,7 @@ namespace Bite
 	class BITE_API DomainAssetView
 	{
 	public:
-		DomainAssetView(const Rudy::String& assetPath,Rudy::AssetPackage* package);
+		DomainAssetView(const Rudy::String& assetPath,EditorSession* ownerSession);
 		DomainAssetView() = delete;
 		~DomainAssetView();
 

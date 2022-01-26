@@ -9,12 +9,13 @@
 #include <stdio.h>
 namespace Rudy
 {
-	Asset::Asset(const AssetDefinition& definition,AssetPackage* ownerPackage,bool bTargetsRawFile)
+	Asset::Asset(const AssetHeaderContainer& header,const String& assetAbsolutePath,AssetPackage* ownerPackage,bool bTargetsRawFile)
 	{
 		m_LoadedObject = nullptr;
 		m_OwnerPackage = ownerPackage;
-		m_Definition = definition;
+		m_Header = header;
 		m_bTargetsRawFile = bTargetsRawFile;
+		m_AbsolutePath = assetAbsolutePath;
 	}
 	void Asset::Load(ApplicationSession* session)
 	{
@@ -27,7 +28,7 @@ namespace Rudy
 		/*
 		* Catch asset type and create asset
 		*/
-		AssetType type = m_Definition.GetType();
+		AssetType type = m_Header.Type;
 		RudyObject* loadedObject = nullptr;
 		
 		if (m_bTargetsRawFile)
@@ -47,7 +48,7 @@ namespace Rudy
 					/*
 					* Load texture into memory
 					*/
-					Texture2DDiskLoadResult* result = Texture2D::LoadToMemoryFromDisk(m_Definition.GetSourceAbsolutePath());
+					Texture2DDiskLoadResult* result = Texture2D::LoadToMemoryFromDisk(m_AbsolutePath);
 
 					/*
 					* Create new texture2d object
@@ -67,7 +68,7 @@ namespace Rudy
 					* Set texture data
 					*/
 					texture->SetTextureData(result->NativaDataBlock, result->DataBlock.GetBlockSize());
-					
+
 					loadedObject = (RudyObject*)texture;
 					break;
 				}
@@ -95,8 +96,8 @@ namespace Rudy
 			* Load the asset bytes
 			*/
 			ByteBlock byteBlock;
-			PlatformFile::Read(m_Definition.GetSourceAbsolutePath(),
-				m_Definition.GetOffset(), m_Definition.GetOffset() + m_Definition.GetSize(),
+			PlatformFile::Read(m_AbsolutePath,
+				m_Header.Offset, m_Header.Offset + m_Header.Size,
 				byteBlock);
 
 			switch (type)
@@ -165,17 +166,17 @@ namespace Rudy
 	{
 		return m_OwnerPackage;
 	}
-	AssetDefinition Asset::GetAssetDefinition() const
+	AssetHeaderContainer Asset::GetAssetHeader() const
 	{
-		return m_Definition;
+		return m_Header;
 	}
 	unsigned long Asset::GetSizeInBytes() const
 	{
-		return m_Definition.GetSize();
+		return m_Header.Size;
 	}
 	Guid Asset::GetID() const
 	{
-		return m_Definition.GetID();
+		return m_Header.ID;
 	}
 	bool Asset::IsLoaded() const
 	{

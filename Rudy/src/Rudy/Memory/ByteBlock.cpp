@@ -70,12 +70,16 @@ namespace Rudy
     {
         return m_Block;
     }
+    Byte* ByteBlock::GetAdress(unsigned long offset) const
+    {
+        return &m_Block[offset];
+    }
     unsigned long ByteBlock::GetBlockSize() const
     {
         return m_BlockSize;
     }
 
-    Byte ByteBlock::operator[](unsigned long index)
+    Byte ByteBlock::operator[](unsigned long index) const
     {
         return m_Block[index];
     }

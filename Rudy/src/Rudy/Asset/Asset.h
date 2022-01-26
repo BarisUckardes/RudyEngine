@@ -1,6 +1,7 @@
 #pragma once
 #include <Rudy/Object/RudyObject.h>
 #include <Rudy/Asset/AssetDefinition.h>
+#include <Rudy/Asset/Containers/AssetHeaderContainer.h>
 namespace Rudy
 {
 	class AssetPackage;
@@ -12,7 +13,7 @@ namespace Rudy
 	{
 		friend class AssetPackage;
 	public:
-		Asset(const AssetDefinition& definition,AssetPackage* ownerPackage,bool btargetsRawFile);
+		Asset(const AssetHeaderContainer& header,const String& assetAbsolutePath,AssetPackage* ownerPackage,bool btargetsRawFile);
 
 		/// <summary>
 		/// Loads the asset if hasnt already
@@ -51,7 +52,7 @@ namespace Rudy
 		/// Returns the asset definition
 		/// </summary>
 		/// <returns></returns>
-		FORCEINLINE AssetDefinition GetAssetDefinition() const;
+		FORCEINLINE AssetHeaderContainer GetAssetHeader() const;
 
 		/// <summary>
 		/// Returns the asset id
@@ -81,7 +82,8 @@ namespace Rudy
 		RudyObject* m_LoadedObject;
 		AssetPackage* m_OwnerPackage;
 		void* m_CachedData;
-		AssetDefinition m_Definition;
+		AssetHeaderContainer m_Header;
+		String m_AbsolutePath;
 		unsigned long m_SizeInBytes;
 		bool m_bTargetsRawFile;
 	};

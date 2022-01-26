@@ -12,16 +12,15 @@ namespace Bite
 {
 	class DomainAssetView;
 	class DomainFolderView;
+	class EditorSession;
 
 	/// <summary>
 	/// Represetns a folder in the domain view
 	/// </summary>
 	class BITE_API DomainFolderView
 	{
+		friend class DomainView;
 	public:
-		DomainFolderView(DomainFolderView* parentFolder,
-			const Rudy::String& selfPath,Rudy::AssetPackage* package);
-
 		/// <summary>
 		/// Returns the sub folders
 		/// </summary>
@@ -59,14 +58,25 @@ namespace Bite
 		FORCEINLINE Rudy::String GetAbsolutePath() const;
 
 		/// <summary>
+		/// Creates anew folder
+		/// </summary>
+		/// <param name="folderName"></param>
+		void CreateSubFolder(const Rudy::String& folderName);
+
+		/// <summary>
 		/// Registers an external asset
 		/// </summary>
 		/// <param name="path"></param>
-		void RegisterExternalAssetViaPath(const Rudy::String& name,Rudy::AssetType assetType);
+		void CreateAsset(const Rudy::String& name,Rudy::AssetType assetType,void* parameter);
 	private:
+		DomainFolderView(DomainFolderView* parentFolder,
+			const Rudy::String& selfPath,EditorSession* editorSession);
+		~DomainFolderView() = default;
+
 		Rudy::Array<DomainFolderView*> m_SubFolders;
 		Rudy::Array<DomainAssetView*> m_Assets;;
 		DomainFolderView* m_ParentFolder;
+		EditorSession* m_OwnerSession;
 		Rudy::Guid m_ID;
 		Rudy::String m_Name;
 		Rudy::String m_AbsolutePath;

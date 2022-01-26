@@ -23,6 +23,13 @@ namespace Rudy
 		FORCEINLINE Byte* GetBlock() const;
 
 		/// <summary>
+		/// Returns the pointer with a offset
+		/// </summary>
+		/// <param name="offset"></param>
+		/// <returns></returns>
+		FORCEINLINE Byte* GetAdress(unsigned long offset) const;
+
+		/// <summary>
 		/// Returns the size of the block
 		/// </summary>
 		/// <returns></returns>
@@ -44,9 +51,9 @@ namespace Rudy
 		/// <param name="end"></param>
 		/// <returns></returns>
 		template<typename TObject>
-		TObject To(unsigned long offset);
+		TObject To(unsigned long offset) const;
 
-		Byte operator[](unsigned long index);
+		Byte operator[](unsigned long index) const;
 		ByteBlock& operator=(ByteBlock&& block) noexcept;
 	private:
 		Byte* m_Block;
@@ -59,7 +66,7 @@ namespace Rudy
 		return *(TObject*)m_Block;
 	}
 	template<typename TObject>
-	inline TObject ByteBlock::To(unsigned long offset)
+	inline TObject ByteBlock::To(unsigned long offset) const
 	{
 		return *(TObject*)(m_Block + offset);
 	}

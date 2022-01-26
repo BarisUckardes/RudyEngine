@@ -23,7 +23,7 @@ namespace Bite
 		/*
 		* Initialize domain view
 		*/
-		m_DomainView = new DomainView(Rudy::PlatformPaths::GetDomainPath(),m_AssetPackage);
+		m_DomainView = new DomainView(Rudy::PlatformPaths::GetDomainPath(),this);
 
 	}
 	EditorSession::~EditorSession()
@@ -74,6 +74,10 @@ namespace Bite
 	GUIPainter* EditorSession::GetSessionPainter() const
 	{
 		return m_Painter;
+	}
+	Rudy::AssetPackage* EditorSession::GetEditorAssetPackage() const
+	{
+		return m_AssetPackage;
 	}
 	void EditorSession::SetProject(const Rudy::String& name, unsigned int major, unsigned int minor, const Rudy::Guid& id)
 	{

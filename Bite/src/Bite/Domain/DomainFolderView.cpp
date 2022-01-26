@@ -1,10 +1,15 @@
 #include "DomainFolderView.h"
 #include <Rudy/Platform/Utility/PlatformDirectory.h>
 #include <Bite/Domain/DomainAssetView.h>
+#include <Rudy/Graphics/Shader/ShaderStage.h>
+#include <Rudy/Asset/Containers/ShaderContainer.h>
 #include <stdio.h>
+#include <Rudy/Memory/ByteBlock.h>
+#include <Rudy/Asset/AssetHeaderGenerator.h>
+#include <Rudy/Platform/Utility/PlatformFile.h>
 namespace Bite
 {
-	DomainFolderView::DomainFolderView(DomainFolderView* parentFolder, const Rudy::String& selfPath,Rudy::AssetPackage* package)
+	DomainFolderView::DomainFolderView(DomainFolderView* parentFolder, const Rudy::String& selfPath,EditorSession* ownerSession)
 	{
 		/*
 		* Set folder properties
@@ -13,6 +18,7 @@ namespace Bite
 		m_AbsolutePath = selfPath;
 		m_Name = Rudy::PlatformDirectory::GetFolderNameFromPath(selfPath);
 		m_ID = Rudy::Guid::Create();
+		m_OwnerSession = ownerSession;
 
 		/*
 		* Gather folders
@@ -29,8 +35,7 @@ namespace Bite
 			/*
 			* Create sub folder view
 			*/
-			DomainFolderView* subFolder = new DomainFolderView(this,folderPath,package);
-			printf("Found folder: [%s]\n", *subFolder->GetName());
+			DomainFolderView* subFolder = new DomainFolderView(this,folderPath, ownerSession);
 
 			/*
 			* Register folder view
@@ -53,8 +58,7 @@ namespace Bite
 			/*
 			* Create file view
 			*/
-			DomainAssetView* assetView = new DomainAssetView(filePath,package);
-			printf("Found asset: [%s]\n", *assetView->GetAssetName());
+			DomainAssetView* assetView = new DomainAssetView(filePath, ownerSession);
 
 			/*
 			* Register asset view
@@ -86,19 +90,110 @@ namespace Bite
 	{
 		return m_AbsolutePath;
 	}
-	void DomainFolderView::RegisterExternalAssetViaPath(const Rudy::String& name, Rudy::AssetType assetType)
+	void DomainFolderView::CreateSubFolder(const Rudy::String& folderName)
 	{
+		/*
+		* Create folder absolute path
+		*/
+		const Rudy::String absolutePath = m_AbsolutePath + "/" + folderName;
+
+		/*
+		* Create physical folder
+		*/
+		Rudy::PlatformDirectory::CreateDirectory(absolutePath);
+
+		/*
+		* Create sub folder view
+		*/
+		m_SubFolders.Add(new DomainFolderView(this, absolutePath,m_OwnerSession));
+	}
+	void DomainFolderView::CreateAsset(const Rudy::String& name, Rudy::AssetType assetType,void* parameter)
+	{
+		/*
+		* Generate asset path
+		*/
+		Rudy::String assetPath = m_AbsolutePath + "/" + name + ".rasset";
+		Rudy::ByteBlock headerBytes;
+		Rudy::ByteBlock assetContentBytes;
+
 		/*
 		* Catch asset type and generate source file
 		*/
+		switch (assetType)
+		{
+			case Rudy::AssetType::Undefined:
+				break;
+			case Rudy::AssetType::Prefab:
+				break;
+			case Rudy::AssetType::World:
+				break;
+			case Rudy::AssetType::Texture1D:
+				break;
+			case Rudy::AssetType::Texture2D:
+				break;
+			case Rudy::AssetType::Texture3D:
+				break;
+			case Rudy::AssetType::CubeTexture:
+				break;
+			case Rudy::AssetType::Material:
+				break;
+			case Rudy::AssetType::Shader:
+			{
+				/*
+				* Get requested shader stage
+				*/
+				Rudy::ShaderStage stage = *(Rudy::ShaderStage*)parameter;
+
+				/*
+				* Generate new shader container
+				*/
+				Rudy::String sourceText = "No Shader source";
+
+				/*
+				* Generate header
+				*/
+				Rudy::AssetHeaderContainer header;
+				header.Type = assetType;
+				header.ID = Rudy::Guid::Create();
+				Rudy::Memory::MemoryCopy(&header.Name, (void*)*name, name.GetCursor() +1);
+				header.Offset = sizeof(Rudy::AssetHeaderContainer);
+				header.Size = 4 + sourceText.GetCursor() + 1;
+
+				/*
+				* Generate byte block
+				*/
+				headerBytes = Rudy::AssetHeaderGenerator::GenerateByteBlock(header);
+
+				/*
+				* Generate shader content bytes
+				*/
+
+				break;
+			}
+			case Rudy::AssetType::ShaderProgram:
+				break;
+			case Rudy::AssetType::Mesh:
+				break;
+			case Rudy::AssetType::Framebuffer2D:
+				break;
+			default:
+				break;
+		}
+		
+		/*
+		* Write header to file
+		*/
+		Rudy::PlatformFile::Write(assetPath, headerBytes);
 
 		/*
-		* Write source file to location
+		* Write shader content to file
 		*/
+		Rudy::PlatformFile::WriteAppend(assetPath,assetContentBytes);
 
 		/*
 		* Generate new DomainAssetView with written file
 		*/
-
+		DomainAssetView* assetView = new DomainAssetView(assetPath, m_OwnerSession);
+		m_Assets.Add(assetView);
 	}
 }

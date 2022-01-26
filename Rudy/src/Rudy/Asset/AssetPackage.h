@@ -1,5 +1,6 @@
 #pragma once
 #include <Rudy/Asset/AssetDefinition.h>
+#include <Rudy/Asset/Containers/AssetHeaderContainer.h>
 namespace Rudy
 {
 	class RudyObject;
@@ -55,7 +56,7 @@ namespace Rudy
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		FORCEINLINE AssetDefinition GetDefiniton(const Guid& id);
+		FORCEINLINE AssetHeaderContainer GetHeader(const Guid& id);
 
 		/// <summary>
 		/// Returns the id of this package
@@ -84,10 +85,10 @@ namespace Rudy
 		/// Returns all the definitions this asset package has
 		/// </summary>
 		/// <returns></returns>
-		Array<AssetDefinition> GetDefinitions() const;
+		Array<AssetHeaderContainer> GetHeaders() const;
 	private:
 		Array<Asset*> m_Assets;
-		Array<AssetDefinition> m_Definitions;
+		Array<AssetHeaderContainer> m_Headers;
 		Guid m_PackageID;
 		String m_PackagePath;
 		bool m_bVirtual;

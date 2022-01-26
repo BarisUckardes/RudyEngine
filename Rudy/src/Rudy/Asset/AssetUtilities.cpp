@@ -14,7 +14,6 @@ namespace Rudy
 		/*
 		* Catch
 		*/
-		printf("Extension check: %s || %s\n", *extension,*filePath);
 		if (extension == ".jpg" || extension == ".png" || extension == ".jpeg")
 		{
 			return AssetType::Texture2D;

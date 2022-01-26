@@ -12,7 +12,6 @@ namespace Rudy
 		/*
 		* Create virtual asset and register it
 		*/
-		printf("Stage 1: load from disk\n");
 		Asset* asset = ownerPackage->RegisterVirtualAsset(path, true);
 		return asset;
 	}

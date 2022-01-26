@@ -9,24 +9,17 @@
 #include <stdio.h>
 namespace Bite
 {
-	DomainAssetView::DomainAssetView(const Rudy::String& path,Rudy::AssetPackage* package)
+	DomainAssetView::DomainAssetView(const Rudy::String& path,EditorSession* ownerSession)
 	{
-
-		/*
-		* Get file bytes 24-40 to determine its GUID 
-		*/
-		Rudy::ByteBlock idBlock;
-		Rudy::PlatformFile::Read(path,24,40, idBlock);
-		
-		/*
-		* Generate id
-		*/
-		Rudy::Guid assetID = idBlock.To<Rudy::Guid>();
-
 		/*
 		* Get the asset
 		*/
-		m_TargetAsset = package->RegisterVirtualAsset(path, false);
+		m_TargetAsset = ownerSession->GetEditorAssetPackage()->RegisterVirtualAsset(path, false);
+
+		/*
+		* Set asset view properties
+		*/
+		m_OwnerSession = ownerSession;
 	}
 	DomainAssetView::~DomainAssetView()
 	{
@@ -65,6 +58,6 @@ namespace Bite
 	}
 	Rudy::String DomainAssetView::GetAssetName() const
 	{
-		return m_TargetAsset->GetAssetDefinition().GetName();
+		return m_TargetAsset->GetAssetHeader().Name;
 	}
 }

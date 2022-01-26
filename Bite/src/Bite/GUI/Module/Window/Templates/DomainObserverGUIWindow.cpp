@@ -10,6 +10,7 @@
 #include <Bite/GUI/Painter/GUIPainterEventLedger.h>
 #include <Bite/GUI/Painter/GUIPainter.h>
 #include <Rudy/Input/Keys.h>
+#include <Rudy/Graphics/Shader/ShaderStage.h>
 namespace Bite
 {
 	GENERATE_REFLECTABLE_TYPE(DomainObserverGUIWindow);
@@ -254,7 +255,8 @@ namespace Bite
 			{
 				if (renderCommands->CreateMenuItem("Shader"))
 				{
-
+					Rudy::ShaderStage stage = Rudy::ShaderStage::Vertex;
+					m_CurrentFolderView->CreateAsset("Mah_shader_asset", Rudy::AssetType::Shader, &stage);
 				}
 				if (renderCommands->CreateMenuItem("Shader Program"))
 				{
@@ -285,7 +287,10 @@ namespace Bite
 			}
 			if (renderCommands->CreateMenuItem("Folder"))
 			{
-
+				/*
+				* Create sub folder
+				*/
+				m_CurrentFolderView->CreateSubFolder("TETET");
 			}
 			if (renderCommands->CreateMenuItem("World"))
 			{

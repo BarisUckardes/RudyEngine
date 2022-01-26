@@ -11,7 +11,8 @@ namespace Rudy
 	class RUDY_API AssetDefinition
 	{
 	public:
-		AssetDefinition(const String& sourceAbsolutePath,AssetType type,const Guid& id,const String& name,unsigned long offset,unsigned long size);
+		AssetDefinition(const String& sourceAbsolutePath,
+			AssetType type,const Guid& id,const String& name,unsigned long offset,unsigned long size);
 		AssetDefinition() = default;
 		~AssetDefinition() = default;
 

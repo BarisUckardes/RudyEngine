@@ -165,6 +165,9 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\Asset\AssetHeaderGenerator.h" />
+    <ClInclude Include="src\Rudy\Asset\Containers\AssetHeaderContainer.h" />
+    <ClInclude Include="src\Rudy\Asset\Containers\ShaderContainer.h" />
     <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.h" />
     <ClInclude Include="src\Rudy\Platform\Implementation\Graphics\OpenGL\ImGui\OpenGLImGuiRenderCommands.h" />
     <ClInclude Include="src\Rudy\Graphics\Texture\Texture2DDiskLoadResult.h" />
@@ -333,6 +336,7 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     <ClInclude Include="src\Rudy\Application\Events\Window\WindowDropFileEvent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rudy\Asset\AssetHeaderGenerator.cpp" />
     <ClCompile Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.cpp" />
     <ClCompile Include="src\Rudy\Platform\Implementation\Graphics\OpenGL\ImGui\OpenGLImGuiRenderCommands.cpp" />
     <ClCompile Include="src\Rudy\Jobs\JobBatch.cpp" />
