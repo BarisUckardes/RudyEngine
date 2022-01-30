@@ -564,10 +564,6 @@ namespace Rudy
 		* Update variables
 		*/
 		m_Capacity = m_Cursor;
-
-		/*
-		* TODO FNISH IT
-		*/
 	}
 
 	template<typename TValue>

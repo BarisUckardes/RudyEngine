@@ -166,15 +166,21 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Rudy\Asset\AssetHeaderGenerator.h" />
+    <ClInclude Include="src\Rudy\Asset\AssetWriteConstants.h" />
     <ClInclude Include="src\Rudy\Asset\Containers\AssetHeaderContainer.h" />
     <ClInclude Include="src\Rudy\Asset\Containers\ShaderContainer.h" />
+    <ClInclude Include="src\Rudy\Core\Log.h" />
     <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiEventCommands.h" />
+    <ClInclude Include="src\Rudy\Platform\Assert\PlatformAssert.h" />
     <ClInclude Include="src\Rudy\Platform\Implementation\Graphics\OpenGL\ImGui\OpenGLImGuiRenderCommands.h" />
     <ClInclude Include="src\Rudy\Graphics\Texture\Texture2DDiskLoadResult.h" />
     <ClInclude Include="src\Rudy\Graphics\Texture\TextureParameters.h" />
     <ClInclude Include="src\Rudy\Jobs\JobBatch.h" />
     <ClInclude Include="src\Rudy\Jobs\JobPool.h" />
     <ClInclude Include="src\Rudy\Jobs\Job.h" />
+    <ClInclude Include="src\Rudy\Platform\Implementation\OS\Windows\Assert\WindowsAssert.h" />
+    <ClInclude Include="src\Rudy\Platform\Implementation\OS\Windows\Log\WindowsLog.h" />
+    <ClInclude Include="src\Rudy\Platform\Log\PlatformLog.h" />
     <ClInclude Include="src\Rudy\Platform\Threading\PlatformThread.h" />
     <ClInclude Include="src\Rudy\ImGui\Flags\GUIBackendFlags.h" />
     <ClInclude Include="src\Rudy\ImGui\Flags\GUIConfigFlags.h" />
@@ -182,7 +188,6 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     <ClInclude Include="src\Rudy\Platform\Threading\PlatformMutex.h" />
     <ClInclude Include="src\Rudy\ImGui\Commands\ImGuiCommands.h" />
     <ClInclude Include="src\Rudy\Memory\ByteBlock.h" />
-    <ClInclude Include="src\Rudy\Memory\ByteBlockTransferType.h" />
     <ClInclude Include="src\Rudy\Memory\Memory.h" />
     <ClInclude Include="src\Rudy\Platform\Process\PlatformProcess.h" />
     <ClInclude Include="src\Rudy\ImGui\Flags\GUIMouseButtons.h" />

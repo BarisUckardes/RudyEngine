@@ -33,7 +33,7 @@ namespace Rudy
 		/// Returns the shader name of this program
 		/// </summary>
 		/// <returns></returns>
-		FORCEINLINE String GetShaderName() const;
+		FORCEINLINE String GetProgramName() const;
 
 		/// <summary>
 		/// Returns the last error message of this program
@@ -46,6 +46,18 @@ namespace Rudy
 		/// </summary>
 		/// <returns></returns>
 		FORCEINLINE bool IsLinked() const;
+
+		/// <summary>
+		/// Sets the shader name of this shader program
+		/// </summary>
+		/// <param name="name"></param>
+		void SetProgramName(const String& name);
+
+		/// <summary>
+		/// Sets the shader category of this shader program
+		/// </summary>
+		/// <param name="category"></param>
+		void SetProgramCategory(const String& category);
 
 		/// <summary>
 		/// Registers a program link listener
@@ -82,7 +94,7 @@ namespace Rudy
 		Delegate<void,void*>* m_ShaderCompileListener;
 		Array<Delegate<void,void*>*> m_LinkedListeners;
 		String m_Category;
-		String m_ShaderName;
+		String m_ProgramName;
 		String m_LastErrorMessage;
 		bool m_Linked;
 	};

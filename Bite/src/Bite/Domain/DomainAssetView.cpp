@@ -7,6 +7,7 @@
 #include <Rudy/Asset/Asset.h>
 #include <Rudy/Asset/AssetPackage.h>
 #include <stdio.h>
+#include <Rudy/Core/Log.h>
 namespace Bite
 {
 	DomainAssetView::DomainAssetView(const Rudy::String& path,EditorSession* ownerSession)

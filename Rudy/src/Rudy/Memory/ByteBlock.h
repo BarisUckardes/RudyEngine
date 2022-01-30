@@ -1,8 +1,16 @@
 #pragma once
 #include <Rudy/Memory/Memory.h>
-#include <Rudy/Memory/ByteBlockTransferType.h>
 namespace Rudy
 {
+
+	/// <summary>
+	/// The transfer operations for byte block
+	/// </summary>
+	enum class RUDY_API ByteBlockTransferType
+	{
+		Copy = 0,
+		Move = 1
+	};
 
 	/// <summary>
 	/// Represents a block of bytes
@@ -70,4 +78,5 @@ namespace Rudy
 	{
 		return *(TObject*)(m_Block + offset);
 	}
+
 }

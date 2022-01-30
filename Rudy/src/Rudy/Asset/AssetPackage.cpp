@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <Rudy/Asset/Containers/AssetHeaderContainer.h>
 #include <Rudy/Asset/AssetHeaderGenerator.h>
+#include <Rudy/Core/Log.h>
 namespace Rudy
 {
 	AssetPackage::AssetPackage(const String& packagePath)
@@ -118,9 +119,8 @@ namespace Rudy
 			asset = new Asset(header,assetPath, this, true);
 
 			/*
-			* Register asset and definition
+			* Register asset header
 			*/
-			m_Assets.Add(asset);
 			m_Headers.Add(header);
 		}
 		else
@@ -147,6 +147,10 @@ namespace Rudy
 			m_Headers.Add(header);
 		}
 		
+		/*
+		* Register asset
+		*/
+		m_Assets.Add(asset);
 
 		return asset;
 	}

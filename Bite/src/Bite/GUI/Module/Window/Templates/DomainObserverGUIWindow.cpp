@@ -209,6 +209,11 @@ namespace Bite
 				nextFrameQuickAssetView = assetView;
 				renderCommands->SignalPopup("Asset_Quick_Menu");
 			}
+
+			/*
+			* Try asset to load
+			*/
+			assetView->TryLoadAsset(false);
 		}
 
 		/*

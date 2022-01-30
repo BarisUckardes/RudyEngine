@@ -15,9 +15,9 @@ namespace Rudy
     {
         return m_Category;
     }
-    String ShaderProgram::GetShaderName() const
+    String ShaderProgram::GetProgramName() const
     {
-        return m_ShaderName;
+        return m_ProgramName;
     }
     String ShaderProgram::GetLastErrorMessage() const
     {
@@ -27,6 +27,15 @@ namespace Rudy
     {
         return m_Linked;
     }
+    void ShaderProgram::SetProgramName(const String& name)
+    {
+        m_ProgramName = name;
+    }
+    void ShaderProgram::SetProgramCategory(const String& category)
+    {
+        m_Category = category;
+    }
+   
     void ShaderProgram::RegisterLinkListener(Delegate<void,void*>* listener)
     {
         m_LinkedListeners.Add(listener);

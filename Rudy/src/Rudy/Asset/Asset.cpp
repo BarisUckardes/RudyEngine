@@ -2,11 +2,15 @@
 #include <Rudy/Platform/Utility/PlatformFile.h>
 #include <Rudy/Memory/ByteBlock.h>
 #include <Rudy/Graphics/Texture/Texture2D.h>
+#include <Rudy/Graphics/Shader/Shader.h>
+#include <Rudy/Graphics/Shader/ShaderProgram.h>
 #include <Rudy/Asset/AssetPackage.h>
 #include <Rudy/Asset/AssetPool.h>
 #include <Rudy/Application/ApplicationSession.h>
 #include <Rudy/Graphics/Device/GraphicsDevice.h>
 #include <stdio.h>
+#include <Rudy/Core/Log.h>
+#include <Rudy/Asset/AssetWriteConstants.h>
 namespace Rudy
 {
 	Asset::Asset(const AssetHeaderContainer& header,const String& assetAbsolutePath,AssetPackage* ownerPackage,bool bTargetsRawFile)
@@ -16,6 +20,10 @@ namespace Rudy
 		m_Header = header;
 		m_bTargetsRawFile = bTargetsRawFile;
 		m_AbsolutePath = assetAbsolutePath;
+	}
+	bool Asset::HasCache() const
+	{
+		return m_bHasCache;
 	}
 	void Asset::Load(ApplicationSession* session)
 	{
@@ -92,13 +100,24 @@ namespace Rudy
 		}
 		else
 		{
+			ByteBlock assetContentBytes;
+
 			/*
-			* Load the asset bytes
+			* Validate cahce
 			*/
-			ByteBlock byteBlock;
-			PlatformFile::Read(m_AbsolutePath,
-				m_Header.Offset, m_Header.Offset + m_Header.Size,
-				byteBlock);
+			if (m_bHasCache)
+			{
+				/*
+				* Load cached data here
+				*/
+			}
+			else
+			{
+				PlatformFile::Read(m_AbsolutePath,
+					m_Header.Offset, m_Header.Offset + m_Header.Size,
+					assetContentBytes);
+			}
+			
 
 			switch (type)
 			{
@@ -119,8 +138,92 @@ namespace Rudy
 				case Rudy::AssetType::Material:
 					break;
 				case Rudy::AssetType::Shader:
+				{
+					/*
+					* Get shader stage type
+					*/
+					const ShaderStage stage = assetContentBytes.To<ShaderStage>(0);
+
+					/*
+					* Calculate the length of the shader source
+					*/
+					const unsigned long shaderSourceLength = assetContentBytes.GetBlockSize() - 4u + 1u; // TODO: something sketchy about the byte strides
+
+					/*
+					* Get shader stage source
+					*/
+					const String sourceText((char*)assetContentBytes.GetAdress(0)+4,shaderSourceLength);
+					/*
+					* Create a shader
+					*/
+					Shader* shader = session->GetDefaultGraphicsDevice()->CreateShader(stage);
+
+					/*
+					* Compile shader
+					*/
+					shader->Compile(sourceText);
+
+					/*
+					* Set loaded object as shader
+					*/
+					loadedObject = (RudyObject*)shader;
 					break;
+				}
 				case Rudy::AssetType::ShaderProgram:
+				{
+					/*
+					* Get shader program shader count
+					*/
+					const unsigned int shaderCount = assetContentBytes.To<unsigned int>(0);
+
+					/*
+					* Get shader program name
+					*/
+					const String programName((char*)assetContentBytes.GetAdress(0) + 4, ASSET_WRITE_MAX_NAME);
+
+					/*
+					* Get shader program category
+					*/
+					const String programCategory((char*)assetContentBytes.GetAdress(0) + ASSET_WRITE_MAX_NAME + 4, ASSET_WRITE_MAX_NAME);
+
+					/*
+					* Iterate and convert shader guids
+					*/
+					const unsigned int shadersOffset = 4u + ASSET_WRITE_MAX_NAME + ASSET_WRITE_MAX_NAME;
+					Array<Shader*> programShaders;
+					for (unsigned int i = 0; i < shaderCount; i++)
+					{
+						/*
+						* Get shader guid
+						*/
+						const Guid shaderID = assetContentBytes.To<Guid>(shadersOffset + i * sizeof(Guid));
+
+						/*
+						* Load shader via asset pool
+						*/
+						Shader* loadedShader = nullptr;
+
+						/*
+						* Register shader into list
+						*/
+						programShaders.Add(loadedShader);
+					}
+
+					/*
+					* Create shader program
+					*/
+					ShaderProgram* program = session->GetDefaultGraphicsDevice()->CreateShaderProgram();
+					/*program->SetProgramName(programName);
+					program->SetProgramCategory(programCategory);
+					program->LinkProgram(programShaders);*/
+
+
+					/*
+					* Set loaded object as shader program
+					*/
+					loadedObject = (RudyObject*)program;
+					break;
+				}
 					break;
 				case Rudy::AssetType::Mesh:
 					break;
@@ -138,9 +241,11 @@ namespace Rudy
 	}
 	void Asset::Cache(bool bCacheAsync)
 	{
+		m_bHasCache = true;
 	}
 	void Asset::DeleteCache()
 	{
+		m_bHasCache = false;
 	}
 	void Asset::Unload()
 	{
