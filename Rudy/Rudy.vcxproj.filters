@@ -537,6 +537,9 @@
     <ClInclude Include="src\Rudy\Asset\AssetWriteConstants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Rudy\ImGui\Flags\GUIDockNodeFlags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Rudy\Mathematics\Vector2f.cpp">

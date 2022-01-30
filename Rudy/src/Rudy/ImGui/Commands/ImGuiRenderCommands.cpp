@@ -5,6 +5,7 @@
 #include <Rudy/Graphics/Texture/Texture2D.h>
 #include <stdio.h>
 #include <Rudy/Platform/Implementation/Graphics/OpenGL/ImGui/OpenGLImGuiRenderCommands.h>
+#include <Rudy/Mathematics/Vector2i.h>
 namespace Rudy
 {
 	ImGuiRenderCommands* ImGuiRenderCommands::Create(GraphicsAPIType type)
@@ -131,6 +132,12 @@ namespace Rudy
 	{
 		int texID = *(int*)texture->GetNativeHandle();
 		ImGui::Image((int*)texID, ImVec2(size.X,size.Y));
+	}
+
+	void ImGuiRenderCommands::CreateDockspace(const String& dockspaceName, const Vector2i& size, GUIDockNodeFlags flags)
+	{
+		const unsigned int dockSpaceID = ImGui::GetID(*dockspaceName);
+		ImGui::DockSpace(dockSpaceID, ImVec2(size.X, size.Y), (int)flags);
 	}
 	
 }

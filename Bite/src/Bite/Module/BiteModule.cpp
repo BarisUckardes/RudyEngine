@@ -7,6 +7,7 @@
 #include <Bite/Editor/Session/EditorSession.h>
 #include <Bite/Editor/Command/EditorCommand.h>
 #include <Rudy/ImGui/Commands/ImGuiRenderCommands.h>
+#include <Rudy/ImGui/Commands/ImGuiLayoutCommands.h>
 #include <Bite/GUI/Painter/GUIPainter.h>
 namespace Bite
 {
@@ -99,6 +100,20 @@ namespace Bite
 		m_ImGuiRenderer->Begin();
 
 		/*
+		* Create dockspace window
+		*/
+		m_Painter->GetLayoutCommands()->SetNextWindowPosition(m_Painter->GetLayoutCommands()->GetViewportPosition());
+		m_Painter->GetLayoutCommands()->SetNextWindowSize(m_Painter->GetLayoutCommands()->GetViewportSize());
+		m_Painter->GetRenderCommands()->BeginWindow("DockspaceWindow",
+			Rudy::GUIWindowFlags::NoTitleBar | Rudy::GUIWindowFlags::NoCollapse | Rudy::GUIWindowFlags::NoResize | Rudy::GUIWindowFlags::NoMove |
+			Rudy::GUIWindowFlags::NoBringToFrontOnFocus | Rudy::GUIWindowFlags::NoNavFocus | Rudy::GUIWindowFlags::MenuBar);
+
+		/*
+		* Create dockspace
+		*/
+		m_Painter->GetRenderCommands()->CreateDockspace("MainDockspace", Rudy::Vector2i(0, 0),Rudy::GUIDockNodeFlags::None | Rudy::GUIDockNodeFlags::PassthruCentralNode);
+
+		/*
 		* Update each gui module
 		*/
 		for (int i = 0; i < m_GUIModules.GetCursor(); i++)
@@ -113,7 +128,11 @@ namespace Bite
 			*/
 			guiModule->OnUpdate();
 		}
-		//Rudy::ImGuiRenderCommands::ShowDemoWindow();
+
+		/*
+		* End dockspace window
+		*/
+		m_Painter->GetRenderCommands()->FinalizeWindow();
 
 		/*
 		* End bite gui modules

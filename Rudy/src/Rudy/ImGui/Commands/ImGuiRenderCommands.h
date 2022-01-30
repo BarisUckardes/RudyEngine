@@ -1,12 +1,14 @@
 #pragma once
 #include <Rudy/Core/Symbols.h>
 #include <Rudy/ImGui/Flags/GUIWindowFlags.h>
+#include <Rudy/ImGui/Flags/GUIDockNodeFlags.h>
 #include <Rudy/Platform/Implementation/Graphics/GraphicsAPIType.h>
 namespace Rudy
 {
 	class String ;
 	class Texture2D ;
 	struct Vector2f ;
+	struct Vector2i;
 	class RUDY_API ImGuiRenderCommands
 	{
 	public:
@@ -147,6 +149,14 @@ namespace Rudy
 		/// Creates a texture box
 		/// </summary>
 		/// <param name="texture"></param>
-		void CreateImage(Texture2D* texture,const Vector2f& size)const ;
-	}const ;
+		void CreateImage(Texture2D* texture,const Vector2f& size) const ;
+
+		/// <summary>
+		/// Creates a dockspace
+		/// </summary>
+		/// <param name="dockSpaceID"></param>
+		/// <param name="position"></param>
+		/// <param name="flags"></param>
+		void CreateDockspace(const String& dockSpaceName, const Vector2i& position, GUIDockNodeFlags flags);
+	};
 }
