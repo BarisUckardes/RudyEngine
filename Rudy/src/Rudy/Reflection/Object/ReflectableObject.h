@@ -1,6 +1,5 @@
 #pragma once
 #include <Rudy/Core/Symbols.h>
-#include <Rudy/Reflection/Type/ReflectionType.h>
 namespace Rudy
 {
 	//typedef unsigned int RudyType;
@@ -14,6 +13,18 @@ namespace Rudy
 		virtual ReflectionType* GetType() const = 0;
 	};
 
+	typedef ReflectableObject* (*DefaultReflectableObjectGenerator)(void);
+
+	/// <summary>
+	/// Dispatcher for reflectable default object
+	/// </summary>
+	class RUDY_API DefaultReflectableObjectDispatcher
+	{
+	public:
+		DefaultReflectableObjectDispatcher(DefaultReflectableObjectGenerator generator, ReflectionType* ownerType);
+		~DefaultReflectableObjectDispatcher() = default;
+	};
+
 	#define GENERATE_REFLECTABLE_OBJECT(type) private:\
 											  static Rudy::ReflectionType* s_Type;\
 											  protected:\
@@ -24,9 +35,7 @@ namespace Rudy
 											  
 
 	#define GENERATE_REFLECTABLE_TYPE(type)\
-	Rudy::ReflectionType* type::s_Type = new Rudy::ReflectionType(#type,sizeof(type));
-
-	
-		
+	Rudy::ReflectionType* type::s_Type = new Rudy::ReflectionType(#type,sizeof(type));\
+	Rudy::DefaultReflectableObjectDispatcher(s_Type,...);
 
 }

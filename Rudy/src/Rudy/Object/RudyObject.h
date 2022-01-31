@@ -4,6 +4,7 @@
 #include <Rudy/Memory/Array.h>
 #include <Rudy/Memory/Guid.h>
 #include <Rudy/Reflection/Object/ReflectableObject.h>
+#include <Rudy/Reflection/Type/ReflectionType.h>
 namespace Rudy
 {
 	/// <summary>

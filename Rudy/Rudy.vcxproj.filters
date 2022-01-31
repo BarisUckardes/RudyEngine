@@ -528,16 +528,22 @@
     <ClInclude Include="src\Rudy\Core\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Rudy\Asset\AssetWriteConstants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\ImGui\Flags\GUIDockNodeFlags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="src\Rudy\Platform\Log\PlatformLog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Rudy\Platform\Implementation\OS\Windows\Log\WindowsLog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rudy\Asset\AssetWriteConstants.h">
+    <ClInclude Include="src\Rudy\Asset\Containers\World\WorldContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rudy\ImGui\Flags\GUIDockNodeFlags.h">
+    <ClInclude Include="src\Rudy\Reflection\Field\ReflectionTypeField.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -924,6 +930,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rudy\Asset\AssetHeaderGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Reflection\Field\ReflectionTypeField.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

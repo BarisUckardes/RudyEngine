@@ -2,8 +2,11 @@
 
 namespace Rudy
 {
-	/*ReflectionType* ReflectableObject::GetType() const
+	DefaultReflectableObjectDispatcher::DefaultReflectableObjectDispatcher(DefaultReflectableObjectGenerator generator, ReflectionType* ownerType)
 	{
-		return nullptr;
-	}*/
+		/*
+		* Register its default constructor to owner type
+		*/
+		//ownerType->
+	}
 }
