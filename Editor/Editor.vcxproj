@@ -21,9 +21,11 @@
   <ItemGroup>
     <ClCompile Include="src\Editor\Application\EditorApplication.cpp" />
     <ClCompile Include="src\Editor\EntryPoint.cpp" />
+    <ClCompile Include="TestClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Editor\Application\EditorApplication.h" />
+    <ClInclude Include="TestClass.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bite\Bite.vcxproj">

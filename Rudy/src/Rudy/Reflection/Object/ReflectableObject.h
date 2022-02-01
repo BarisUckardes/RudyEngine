@@ -1,28 +1,40 @@
 #pragma once
 #include <Rudy/Core/Symbols.h>
+#include <Rudy/Memory/String.h>
+#include <Rudy/Reflection/Base/ReflectionBase.h>
+#include <Rudy/Reflection/Type/ReflectionType.h>
 namespace Rudy
 {
 	//typedef unsigned int RudyType;
 	/// <summary>
 	/// Base object for all reflectable objects
 	/// </summary>
-	class ReflectionType;
 	class RUDY_API ReflectableObject
 	{
 	public:
 		virtual ReflectionType* GetType() const = 0;
 	};
 
-	typedef ReflectableObject* (*DefaultReflectableObjectGenerator)(void);
+	class RUDY_API ReflectableObjectCreator
+	{
+	public:
+		template<typename TObject>
+		static TObject* CreateReflectableObjectGenerator()
+		{
+			return new TObject();
+		}
+		ReflectableObjectCreator() = delete;
+		~ReflectableObjectCreator() = delete;
+	};
 
 	/// <summary>
 	/// Dispatcher for reflectable default object
 	/// </summary>
-	class RUDY_API DefaultReflectableObjectDispatcher
+	class RUDY_API ReflectableObjectDispatcher
 	{
 	public:
-		DefaultReflectableObjectDispatcher(DefaultReflectableObjectGenerator generator, ReflectionType* ownerType);
-		~DefaultReflectableObjectDispatcher() = default;
+		ReflectableObjectDispatcher(ReflectableObjectGenerator generator, ReflectionType* ownerType);
+		~ReflectableObjectDispatcher() = default;
 	};
 
 	#define GENERATE_REFLECTABLE_OBJECT(type) private:\
@@ -36,6 +48,5 @@ namespace Rudy
 
 	#define GENERATE_REFLECTABLE_TYPE(type)\
 	Rudy::ReflectionType* type::s_Type = new Rudy::ReflectionType(#type,sizeof(type));\
-	Rudy::DefaultReflectableObjectDispatcher(s_Type,...);
-
+	Rudy::ReflectableObjectDispatcher dispatcher_type_##type((Rudy::ReflectableObjectGenerator)&Rudy::ReflectableObjectCreator::CreateReflectableObjectGenerator<type>, type::GetStaticType());
 }

@@ -5,7 +5,6 @@ namespace Rudy
 
 	String RudyObject::GetName() const
 	{
-
 		return m_Name;
 	}
 	bool RudyObject::IsDestroyed() const

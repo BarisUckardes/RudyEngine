@@ -1,7 +1,7 @@
 #pragma once
 #include <Rudy/Memory/String.h>
 #include <Rudy/Memory/Guid.h>
-#include <Rudy/Reflection/Object/ReflectableObject.h>
+#include <Rudy/Reflection/Base/ReflectionBase.h>
 namespace Rudy
 {
 	class ReflectionTypeField;
@@ -48,7 +48,7 @@ namespace Rudy
 		TObject* GenerateDefaultObjectAs() const;
 
 	private:
-		DefaultReflectableObjectGenerator m_DefaultObjectGenerator;
+		ReflectableObjectGenerator m_DefaultObjectGenerator;
 		Array<ReflectionTypeField*> m_Fields;
 		String m_TypeName;
 		Guid m_TypeID;

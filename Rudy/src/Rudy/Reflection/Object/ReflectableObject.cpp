@@ -2,7 +2,7 @@
 
 namespace Rudy
 {
-	DefaultReflectableObjectDispatcher::DefaultReflectableObjectDispatcher(DefaultReflectableObjectGenerator generator, ReflectionType* ownerType)
+	ReflectableObjectDispatcher::ReflectableObjectDispatcher(ReflectableObjectGenerator generator, ReflectionType* ownerType)
 	{
 		/*
 		* Register its default constructor to owner type

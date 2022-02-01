@@ -15,6 +15,7 @@ namespace Rudy
 		friend class ApplicationSession;
 		GENERATE_REFLECTABLE_OBJECT(World);
 	public:
+		World() = default;
 		/// <summary>
 		/// Returns all the views this world has
 		/// </summary>

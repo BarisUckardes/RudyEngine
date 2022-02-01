@@ -3,6 +3,7 @@
 namespace Rudy
 {
 	GENERATE_REFLECTABLE_TYPE(PerspectiveObserver);
+
 	void PerspectiveObserver::DestroyCore()
 	{
 	}
