@@ -8,6 +8,9 @@
 #include <Rudy/Core/Log.h>
 int main(int argumentCount, char** arguments)
 {
+	Rudy::ReflectionType* type = typeof(TestClass);
+	LOG("Type name: %s", *type->GetTypeName());
+
 	/*
 	* Get editor executable path
 	*/

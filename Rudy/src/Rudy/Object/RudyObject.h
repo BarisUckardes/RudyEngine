@@ -3,8 +3,7 @@
 #include <Rudy/Memory/String.h>
 #include <Rudy/Memory/Array.h>
 #include <Rudy/Memory/Guid.h>
-#include <Rudy/Reflection/Object/ReflectableObject.h>
-#include <Rudy/Reflection/Type/ReflectionType.h>
+#include <Rudy/Reflection/ReflectionCore.h>
 namespace Rudy
 {
 	/// <summary>

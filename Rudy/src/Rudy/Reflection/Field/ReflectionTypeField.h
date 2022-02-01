@@ -9,7 +9,7 @@ namespace Rudy
 	class ReflectionType;
 	class RUDY_API ReflectionTypeField
 	{
-		friend class ReflectionTypeFieldDispatcher;
+		friend class ReflectionFieldTypeDispatcher;
 	public:
 		ReflectionTypeField(const String& fieldName, unsigned int offset, unsigned int size, ReflectionType* ownerType,ReflectionType* fieldType);
 		~ReflectionTypeField() = default;
@@ -129,16 +129,16 @@ namespace Rudy
 	}
 
 	/// <summary>
-	/// A type field dispatcher
+	/// A dispatcher class for registering fied types
 	/// </summary>
-	class RUDY_API ReflectionTypeFieldDispatcher
+	class RUDY_API ReflectionFieldTypeDispatcher
 	{
 	public:
-		ReflectionTypeFieldDispatcher(ReflectionType* ownerType, const String& fieldName, unsigned int fieldOffset, unsigned int fieldSize);
-		ReflectionTypeFieldDispatcher() = default;
-		~ReflectionTypeFieldDispatcher() = default;
+		ReflectionFieldTypeDispatcher(ReflectionType* ownerType, const String& fieldName, unsigned int fieldOffset, unsigned int fieldSize);
+		ReflectionFieldTypeDispatcher() = default;
+		~ReflectionFieldTypeDispatcher() = default;
 	};
 
-#define GENERATE_TYPE_FIELD(type,field) Rudy::ReflectionTypeFieldDispatcher dispatcher_type_field_##type(type::GetStaticType(),#field,offsetof(type,field),sizeof(type::field));
+#define GENERATE_TYPE_FIELD(type,field) Rudy::ReflectionFieldTypeDispatcher dispatcher_type_field_##type(type::GetStaticType(),#field,offsetof(type,field),sizeof(type::field));
 
 }

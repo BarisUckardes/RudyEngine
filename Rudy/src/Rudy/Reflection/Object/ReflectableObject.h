@@ -12,12 +12,24 @@ namespace Rudy
 	class RUDY_API ReflectableObject
 	{
 	public:
+		/// <summary>
+		/// Returns the type of this object
+		/// </summary>
+		/// <returns></returns>
 		virtual ReflectionType* GetType() const = 0;
 	};
 
+	/// <summary>
+	/// A class for creating reflectable object default contstructor function pointer
+	/// </summary>
 	class RUDY_API ReflectableObjectCreator
 	{
 	public:
+		/// <summary>
+		/// Creates a function pointer to the default constructor of a reflectable object
+		/// </summary>
+		/// <typeparam name="TObject"></typeparam>
+		/// <returns></returns>
 		template<typename TObject>
 		static TObject* CreateReflectableObjectGenerator()
 		{
@@ -28,7 +40,7 @@ namespace Rudy
 	};
 
 	/// <summary>
-	/// Dispatcher for reflectable default object
+	/// Dispatcher class for registering the reflectable objects
 	/// </summary>
 	class RUDY_API ReflectableObjectDispatcher
 	{
@@ -48,5 +60,6 @@ namespace Rudy
 
 	#define GENERATE_REFLECTABLE_TYPE(type)\
 	Rudy::ReflectionType* type::s_Type = new Rudy::ReflectionType(#type,sizeof(type));\
-	Rudy::ReflectableObjectDispatcher dispatcher_type_##type((Rudy::ReflectableObjectGenerator)&Rudy::ReflectableObjectCreator::CreateReflectableObjectGenerator<type>, type::GetStaticType());
+	Rudy::ReflectableObjectDispatcher dispatcher_t_##type((Rudy::ReflectableObjectGenerator)&Rudy::ReflectableObjectCreator::CreateReflectableObjectGenerator<type>, type::GetStaticType());\
+	GENERATE_INTERMEDIATE_TYPE(type)
 }

@@ -59,4 +59,22 @@ namespace Rudy
 	{
 		m_Fields.Add(typeField);
 	}
+	ReflectionRawTypeDispatcher::ReflectionRawTypeDispatcher(const String& typeName, unsigned int typeSize)
+	{
+		/*
+		* Create new type
+		*/
+		ReflectionType* rawType = new ReflectionType(typeName,typeSize);
+		m_Type = rawType;
+		/*
+		* Register raw type to assembly
+		*/
+	}
+
+	ReflectionType* ReflectionRawTypeDispatcher::GetRawType() const
+	{
+		return m_Type;
+	}
+
+
 }

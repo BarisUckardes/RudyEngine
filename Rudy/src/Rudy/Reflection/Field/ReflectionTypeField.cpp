@@ -35,7 +35,7 @@ namespace Rudy
         return m_OwnerType;
     }
 
-    ReflectionTypeFieldDispatcher::ReflectionTypeFieldDispatcher(ReflectionType* ownerType,const String& fieldName,unsigned int fieldOffset,unsigned int fieldSize)
+    ReflectionFieldTypeDispatcher::ReflectionFieldTypeDispatcher(ReflectionType* ownerType,const String& fieldName,unsigned int fieldOffset,unsigned int fieldSize)
     {
         /*
         * Create type field
@@ -46,7 +46,6 @@ namespace Rudy
         * Register type field to type
         */
         ownerType->RegisterTypeField(typeField);
-
     }
 
 }

@@ -4,7 +4,7 @@
 namespace Rudy
 {
 	class ReflectableObject;
-	class ReflectableType;
+	class ReflectionType;
 	class ReflectionTypeField;
 	typedef ReflectableObject* (*ReflectableObjectGenerator)(void);
 }
