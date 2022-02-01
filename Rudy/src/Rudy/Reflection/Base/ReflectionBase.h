@@ -5,7 +5,7 @@ namespace Rudy
 {
 	class ReflectableObject;
 	class ReflectableType;
-	class ReflectableTypeField;
+	class ReflectionTypeField;
 	typedef ReflectableObject* (*ReflectableObjectGenerator)(void);
 }
 

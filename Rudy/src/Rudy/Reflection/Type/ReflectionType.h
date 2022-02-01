@@ -10,6 +10,7 @@ namespace Rudy
 	/// </summary>
 	class RUDY_API ReflectionType
 	{
+		friend class ReflectionTypeFieldDispatcher;
 	public:
 		ReflectionType(const String& typeName,unsigned int typeSize);
 		~ReflectionType() = default;
@@ -40,6 +41,12 @@ namespace Rudy
 		Guid GetTypeID() const;
 
 		/// <summary>
+		/// Returns the type size in bytes
+		/// </summary>
+		/// <returns></returns>
+		unsigned int GetTypeSizeInBytes() const;
+
+		/// <summary>
 		/// Generates default object
 		/// </summary>
 		/// <typeparam name="TObject"></typeparam>
@@ -48,6 +55,12 @@ namespace Rudy
 		TObject* GenerateDefaultObjectAs() const;
 
 	private:
+		/// <summary>
+		/// An internal method used in registering type fields into this type
+		/// </summary>
+		/// <param name="typeField"></param>
+		void RegisterTypeField(ReflectionTypeField* typeField);
+
 		ReflectableObjectGenerator m_DefaultObjectGenerator;
 		Array<ReflectionTypeField*> m_Fields;
 		String m_TypeName;

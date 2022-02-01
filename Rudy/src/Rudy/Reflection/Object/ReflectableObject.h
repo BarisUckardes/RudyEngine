@@ -40,8 +40,8 @@ namespace Rudy
 	#define GENERATE_REFLECTABLE_OBJECT(type) private:\
 											  static Rudy::ReflectionType* s_Type;\
 											  protected:\
-											  virtual Rudy::ReflectionType* GetType() const override { return s_Type;}\
 											  public:\
+											  virtual Rudy::ReflectionType* GetType() const override { return s_Type; }\
 											  static Rudy::ReflectionType* GetStaticType() { return s_Type;}\
 											  static Rudy::String GetStaticClassName() { return #type;}
 											  

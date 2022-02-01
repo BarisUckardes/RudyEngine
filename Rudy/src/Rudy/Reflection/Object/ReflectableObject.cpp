@@ -7,6 +7,5 @@ namespace Rudy
 		/*
 		* Register its default constructor to owner type
 		*/
-		//ownerType->
 	}
 }

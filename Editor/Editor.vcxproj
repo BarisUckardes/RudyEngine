@@ -21,11 +21,11 @@
   <ItemGroup>
     <ClCompile Include="src\Editor\Application\EditorApplication.cpp" />
     <ClCompile Include="src\Editor\EntryPoint.cpp" />
-    <ClCompile Include="TestClass.cpp" />
+    <ClCompile Include="src\Editor\Test\TestClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Editor\Application\EditorApplication.h" />
-    <ClInclude Include="TestClass.h" />
+    <ClInclude Include="src\Editor\Test\TestClass.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bite\Bite.vcxproj">
@@ -136,7 +136,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);RUDY_OS_WINDOWS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Rudy\src;$(SolutionDir)Bite\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -157,7 +157,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);RUDY_OS_WINDOWS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Rudy\src;$(SolutionDir)Bite\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>

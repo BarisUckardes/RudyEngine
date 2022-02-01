@@ -549,6 +549,9 @@
     <ClInclude Include="src\Rudy\Reflection\Base\ReflectionBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Rudy\Reflection\Assembly\ReflectionAssembly.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Rudy\Mathematics\Vector2f.cpp">
@@ -939,6 +942,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rudy\Reflection\Base\ReflectionBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Reflection\Assembly\ReflectionAssembly.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -4,7 +4,8 @@
 #include "Application/EditorApplication.h"
 #include <Rudy/Platform/Implementation/OS/Windows/Window/WindowsWindow.h>
 #include <Rudy/Application/Events/Keyboard/KeyboardKeyDownEvent.h>
-
+#include "Test/TestClass.h"
+#include <Rudy/Core/Log.h>
 int main(int argumentCount, char** arguments)
 {
 	/*
