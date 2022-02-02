@@ -10,7 +10,6 @@
 int main(int argumentCount, char** arguments)
 {
 	TestClass cls;
-	
 
 	/*
 	* Get editor executable path

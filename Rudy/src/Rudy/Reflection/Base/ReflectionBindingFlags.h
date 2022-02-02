@@ -68,6 +68,11 @@ namespace Rudy
 		/// <summary>
 		/// Represents a pure virtual bindable
 		/// </summary>
-		ReflectionBindingFlags_PureVirtual = 1 << 11
+		ReflectionBindingFlags_PureVirtual = 1 << 11,
+
+		/// <summary>
+		/// Represents a read-only function
+		/// </summary>
+		ReflectionBindingFlags_ConstFunction = 1 << 12
 	};
 }

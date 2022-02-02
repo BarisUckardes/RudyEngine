@@ -165,8 +165,10 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\Reflection\Function\ReflectionFunction.h" />
     <ClInclude Include="src\Rudy\Core\Defs.h" />
     <ClInclude Include="src\Rudy\Reflection\Base\ReflectionBindingFlags.h" />
+    <ClInclude Include="src\Rudy\Reflection\Function\ReflectionFunctionParameter.h" />
     <ClInclude Include="src\Rudy\Reflection\Type\ReflectionRawTypes.h" />
     <ClInclude Include="src\Rudy\Reflection\ReflectionCore.h" />
     <ClInclude Include="src\Rudy\Reflection\Assembly\ReflectionAssembly.h" />
@@ -350,6 +352,7 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     <ClInclude Include="src\Rudy\Application\Events\Window\WindowDropFileEvent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rudy\Reflection\Function\ReflectionFunction.cpp" />
     <ClCompile Include="src\Rudy\Reflection\Type\ReflectionRawTypes.cpp" />
     <ClCompile Include="src\Rudy\Reflection\Assembly\ReflectionAssembly.cpp" />
     <ClCompile Include="src\Rudy\Reflection\Base\ReflectionBase.cpp" />

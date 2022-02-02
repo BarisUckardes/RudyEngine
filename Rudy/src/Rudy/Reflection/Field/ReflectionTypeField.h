@@ -9,6 +9,10 @@
 namespace Rudy
 {
 	class ReflectionType;
+
+	/// <summary>
+	/// Represents the reflection of a type field
+	/// </summary>
 	class RUDY_API ReflectionTypeField
 	{
 		friend class ReflectionFieldTypeDispatcher;

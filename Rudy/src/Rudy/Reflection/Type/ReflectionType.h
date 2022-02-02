@@ -13,7 +13,7 @@ namespace Rudy
 	{
 		friend class ReflectionFieldTypeDispatcher;
 	public:
-		ReflectionType(const String& typeName, unsigned int typeSize,bool bPrimitive);
+		ReflectionType(const String& typeName, unsigned int typeSize,ReflectionType* inheritedClass,bool bPrimitive);
 		~ReflectionType() = default;
 
 		/// <summary>
@@ -54,6 +54,12 @@ namespace Rudy
 		unsigned int GetTypeSizeInBytes() const;
 
 		/// <summary>
+		/// Returns the inherited classes
+		/// </summary>
+		/// <returns></returns>
+		Array<ReflectionType*> GetInheritedClasses() const;
+
+		/// <summary>
 		/// Generates default object
 		/// </summary>
 		/// <typeparam name="TObject"></typeparam>
@@ -69,6 +75,7 @@ namespace Rudy
 		void RegisterTypeField(ReflectionTypeField* typeField);
 
 		ReflectableObjectGenerator m_DefaultObjectGenerator;
+		Array<ReflectionType*> m_InheritedClasses;
 		Array<ReflectionTypeField*> m_Fields;
 		String m_TypeName;
 		Guid m_TypeID;

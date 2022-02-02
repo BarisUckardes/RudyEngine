@@ -3,7 +3,7 @@
 #include <stdio.h>
 namespace Rudy
 {
-	ReflectionType::ReflectionType(const String& typeName, unsigned int typeSize,bool bPrimitive)
+	ReflectionType::ReflectionType(const String& typeName, unsigned int typeSize,ReflectionType* inheritedClasses,bool bPrimitive)
 	{
 		/*
 		* Set reflection properties
@@ -11,6 +11,7 @@ namespace Rudy
 		m_TypeName = typeName;
 		m_TypeSize = typeSize;
 		m_bPrimitive = bPrimitive;
+		//m_InheritedClasses = inheritedClasses;
 
 		/*
 		* Register this reflection into its assembly
