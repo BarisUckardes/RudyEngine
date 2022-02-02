@@ -552,10 +552,10 @@
     <ClInclude Include="src\Rudy\Reflection\Assembly\ReflectionAssembly.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rudy\Reflection\Type\ReflectionRawTypes.h">
+    <ClInclude Include="src\Rudy\Reflection\ReflectionCore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rudy\Reflection\ReflectionCore.h">
+    <ClInclude Include="src\Rudy\Reflection\Type\ReflectionRawTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -68,6 +68,7 @@ namespace Rudy
 		Array<Entity*> m_Entities;
 		ApplicationSession* m_OwnerSession;
 	};
+	GENERATE_REFLECTION_ACCESSOR(World);
 	template<typename TView, typename ...TParameters>
 	inline TView* World::RegisterView(TParameters... parameters)
 	{

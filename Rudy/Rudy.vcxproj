@@ -165,8 +165,8 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Rudy\Reflection\ReflectionCore.h" />
     <ClInclude Include="src\Rudy\Reflection\Type\ReflectionRawTypes.h" />
+    <ClInclude Include="src\Rudy\Reflection\ReflectionCore.h" />
     <ClInclude Include="src\Rudy\Reflection\Assembly\ReflectionAssembly.h" />
     <ClInclude Include="src\Rudy\Reflection\Base\ReflectionBase.h" />
     <ClInclude Include="src\Rudy\Reflection\Field\ReflectionTypeField.h" />

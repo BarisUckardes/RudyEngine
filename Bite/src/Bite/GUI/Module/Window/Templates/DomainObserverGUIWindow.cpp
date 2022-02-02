@@ -13,7 +13,7 @@
 #include <Rudy/Graphics/Shader/ShaderStage.h>
 namespace Bite
 {
-	GENERATE_REFLECTABLE_TYPE(DomainObserverGUIWindow);
+	GENERATE_REFLECTABLE_TYPE(DomainObserverGUIWindow)
 	GENERATE_WINDOW_GENERATOR(DomainObserverGUIWindow);
 
 	#define DEFAULT_ITEM_PADDING_HORIZONTAL 8

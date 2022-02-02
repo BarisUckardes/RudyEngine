@@ -55,11 +55,15 @@ namespace Rudy
 											  public:\
 											  virtual Rudy::ReflectionType* GetType() const override { return s_Type; }\
 											  static Rudy::ReflectionType* GetStaticType() { return s_Type;}\
-											  static Rudy::String GetStaticClassName() { return #type;}
+												
 											  
 
 	#define GENERATE_REFLECTABLE_TYPE(type)\
 	Rudy::ReflectionType* type::s_Type = new Rudy::ReflectionType(#type,sizeof(type));\
-	Rudy::ReflectableObjectDispatcher dispatcher_t_##type((Rudy::ReflectableObjectGenerator)&Rudy::ReflectableObjectCreator::CreateReflectableObjectGenerator<type>, type::GetStaticType());\
-	GENERATE_INTERMEDIATE_TYPE(type)
+
+	#define GENERATE_REFLECTION_ACCESSOR(type) class GET_RAW_NAME(type)_reflection_type_acccessor_\
+	{\
+	public:\
+		static Rudy::ReflectionType* GetOwnerType() { return type::GetStaticType(); }\
+	}
 }

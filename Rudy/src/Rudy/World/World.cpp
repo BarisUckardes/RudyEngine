@@ -12,6 +12,7 @@ namespace Rudy
 		* Set owner session
 		*/
 		m_OwnerSession = targetSession;
+
 	}
 
 	Array<WorldView*> World::GetViews() const

@@ -66,9 +66,11 @@ namespace Rudy
 		*/
 		ReflectionType* rawType = new ReflectionType(typeName,typeSize);
 		m_Type = rawType;
+
 		/*
 		* Register raw type to assembly
 		*/
+		LOG("Raw type registered %s", *m_Type->GetTypeName());
 	}
 
 	ReflectionType* ReflectionRawTypeDispatcher::GetRawType() const

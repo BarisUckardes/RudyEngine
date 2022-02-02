@@ -2,6 +2,7 @@
 #include <Rudy/Memory/String.h>
 #include <Rudy/Memory/Guid.h>
 #include <Rudy/Reflection/Base/ReflectionBase.h>
+#include <Rudy/Core/Log.h>
 namespace Rudy
 {
 	class ReflectionTypeField;
@@ -93,48 +94,9 @@ namespace Rudy
 		ReflectionTypeUtils() = delete;
 		~ReflectionTypeUtils() = delete;
 
-		template<typename TObject>
-		static ReflectionType* GetTypeOf();
 	};
 
-	/// <summary>
-	/// Intermediate reflection type
-	/// </summary>
-	/// <typeparam name="TType"></typeparam>
-	template<typename TType>
-	class ReflectionIntermediateType
-	{
-	private:
-		static ReflectionIntermediateType* s_IntermediateType;
-	public:
-		static ReflectionType* GetStaticType() { return s_IntermediateType->m_Type; }
-		ReflectionIntermediateType(ReflectionType* type);
-	private:
-		ReflectionType* m_Type;
-	};
-
-	template<typename TType>
-	ReflectionIntermediateType<TType>* ReflectionIntermediateType<TType>::s_IntermediateType = nullptr;
-
-	template<typename TType>
-	ReflectionIntermediateType<TType>::ReflectionIntermediateType(ReflectionType* type)
-	{
-		m_Type = type;
-		s_IntermediateType = this;
-	}
-
-	template<typename TObject>
-	inline ReflectionType* ReflectionTypeUtils::GetTypeOf()
-	{
-		return ReflectionIntermediateType<TObject>::GetStaticType();
-	}
 	
-#define typeof(type) Rudy::ReflectionIntermediateType<type>::GetStaticType()
-#define GENERATE_INTERMEDIATE_TYPE(type) ReflectionIntermediateType<type>* intermediate_##type(type::GetStaticType());
-
-#define GENERATE_RAW_INTERMEDIATE_TYPE(type) ReflectionIntermediateType<type>* intermediate_raw_##type(dispatcher_raw_type_##type->GetRawType());
-
-#define GENERATE_RAW_TYPE(type) Rudy::ReflectionRawTypeDispatcher dispatcher_raw_type_##type(#type,sizeof(type));\
-								//GENERATE_RAW_INTERMEDIATE_TYPE(type)
-
+#define GET_RAW_NAME(name) name
+#define typeof(type) GET_RAW_NAME(type)_reflection_type_acccessor_::GetOwnerType()
 }
