@@ -13,7 +13,7 @@ namespace Rudy
 	{
 		friend class ReflectionFieldTypeDispatcher;
 	public:
-		ReflectionType(const String& typeName, unsigned int typeSize);
+		ReflectionType(const String& typeName, unsigned int typeSize,bool bPrimitive);
 		~ReflectionType() = default;
 
 		/// <summary>
@@ -42,6 +42,12 @@ namespace Rudy
 		Guid GetTypeID() const;
 
 		/// <summary>
+		/// Returns whether this type is a primitive type or not
+		/// </summary>
+		/// <returns></returns>
+		bool IsPrimitive() const;
+
+		/// <summary>
 		/// Returns the type size in bytes
 		/// </summary>
 		/// <returns></returns>
@@ -67,6 +73,7 @@ namespace Rudy
 		String m_TypeName;
 		Guid m_TypeID;
 		unsigned int m_TypeSize;
+		bool m_bPrimitive;
 	};
 
 	template<typename TObject>

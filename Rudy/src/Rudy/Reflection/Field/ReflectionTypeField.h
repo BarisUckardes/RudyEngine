@@ -3,6 +3,8 @@
 #include <Rudy/Memory/String.h>
 #include <Rudy/Memory/Memory.h>
 #include <Rudy/Reflection/Base/ReflectionBase.h>
+#include <Rudy/Reflection/Type/ReflectionRawTypes.h>
+#include <Rudy/Reflection/Base/ReflectionBindingFlags.h>
 #include <cstddef>
 namespace Rudy
 {
@@ -11,7 +13,10 @@ namespace Rudy
 	{
 		friend class ReflectionFieldTypeDispatcher;
 	public:
-		ReflectionTypeField(const String& fieldName, unsigned int offset, unsigned int size, ReflectionType* ownerType,ReflectionType* fieldType);
+		ReflectionTypeField(const String& fieldName,
+			unsigned int offset, unsigned int size,
+			ReflectionType* ownerType,ReflectionType* fieldType,
+			int flags);
 		~ReflectionTypeField() = default;
 
 		/// <summary>
@@ -45,6 +50,66 @@ namespace Rudy
 		ReflectionType* GetOwnerType() const;
 
 		/// <summary>
+		/// Returns whether this type field is a static field
+		/// </summary>
+		/// <returns></returns>
+		bool IsStatic() const;
+
+		/// <summary>
+		/// Returns whether this type field is a member field
+		/// </summary>
+		/// <returns></returns>
+		bool IsInstance() const;
+
+		/// <summary>
+		/// Returns whether this type field is public 
+		/// </summary>
+		/// <returns></returns>
+		bool IsPublic() const;
+
+		/// <summary>
+		/// Returns whether this type field private
+		/// </summary>
+		/// <returns></returns>
+		bool IsPrivate() const;
+
+		/// <summary>
+		/// Returns whether this type field is protected
+		/// </summary>
+		/// <returns></returns>
+		bool IsProtected() const;
+
+		/// <summary>
+		/// Returns whether this type field is const
+		/// </summary>
+		/// <returns></returns>
+		bool IsConst() const;
+
+		/// <summary>
+		/// Returns whether this type field is a reference
+		/// </summary>
+		/// <returns></returns>
+		bool IsReference() const;
+
+		/// <summary>
+		/// Returns whether this type field is a pointer
+		/// </summary>
+		/// <returns></returns>
+		bool IsPointer() const;
+
+		/// <summary>
+		/// Returns whether this type field is a value
+		/// </summary>
+		/// <returns></returns>
+		bool IsValue() const;
+
+		/// <summary>
+		/// Returns the binding flags of this type field
+		/// </summary>
+		/// <returns></returns>
+		int GetBindingFlags() const;
+
+		/// <summary>
 		/// Returns a pointer to the value of the specified object's field
 		/// </summary>
 		/// <typeparam name="TField"></typeparam>
@@ -76,6 +141,7 @@ namespace Rudy
 		String m_FieldName;
 		unsigned int m_FieldOffset;
 		unsigned int m_FieldSize;
+		int m_Flags;
 	};
 	template<typename TField>
 	inline TField* ReflectionTypeField::GetFieldPtr(void* objectPtr) const
@@ -134,11 +200,14 @@ namespace Rudy
 	class RUDY_API ReflectionFieldTypeDispatcher
 	{
 	public:
-		ReflectionFieldTypeDispatcher(ReflectionType* ownerType, const String& fieldName, unsigned int fieldOffset, unsigned int fieldSize);
+		ReflectionFieldTypeDispatcher(ReflectionType* ownerType,ReflectionType* fieldType,
+			const String& fieldName,
+			unsigned int fieldOffset, unsigned int fieldSize,
+			int flags);
 		ReflectionFieldTypeDispatcher() = default;
 		~ReflectionFieldTypeDispatcher() = default;
 	};
-
-#define GENERATE_TYPE_FIELD(type,field) Rudy::ReflectionFieldTypeDispatcher dispatcher_type_field_##type(type::GetStaticType(),#field,offsetof(type,field),sizeof(type::field));
+	
+#define GENERATE_TYPE_FIELD(type,field,fieldType,bindingFlags) Rudy::ReflectionFieldTypeDispatcher dispatcher_type_field_##type##field(type::GetStaticType(),typeof(fieldType),#field,offsetof(type,field),sizeof(type::field),bindingFlags);
 
 }

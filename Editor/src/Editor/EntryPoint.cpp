@@ -7,12 +7,10 @@
 #include "Test/TestClass.h"
 #include <Rudy/Core/Log.h>
 #include <Rudy/World/World.h>
-
 int main(int argumentCount, char** arguments)
 {
-	Rudy::ReflectionType* type = typeof(uint);
+	TestClass cls;
 	
-	LOG("GETTTTTTTTTTTT Type name: %s", *type->GetTypeName());
 
 	/*
 	* Get editor executable path

@@ -1,5 +1,5 @@
 #include "ReflectionRawTypes.h"
-#define GENERATE_RAW_TYPE(type) Rudy::ReflectionType* GET_RAW_NAME(type)_reflection_type_acccessor_::s_OwnerType = new Rudy::ReflectionType(#type,sizeof(type));
+#define GENERATE_RAW_TYPE(type) Rudy::ReflectionType* GET_RAW_NAME(type)_reflection_type_acccessor_::s_OwnerType = new Rudy::ReflectionType(#type,sizeof(type),true);
 
 GENERATE_RAW_TYPE(int);
 GENERATE_RAW_TYPE(uint);

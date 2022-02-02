@@ -59,7 +59,7 @@ namespace Rudy
 											  
 
 	#define GENERATE_REFLECTABLE_TYPE(type)\
-	Rudy::ReflectionType* type::s_Type = new Rudy::ReflectionType(#type,sizeof(type));\
+	Rudy::ReflectionType* type::s_Type = new Rudy::ReflectionType(#type,sizeof(type),false);\
 
 	#define GENERATE_REFLECTION_ACCESSOR(type) class GET_RAW_NAME(type)_reflection_type_acccessor_\
 	{\

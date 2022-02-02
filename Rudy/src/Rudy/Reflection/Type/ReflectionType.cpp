@@ -3,13 +3,14 @@
 #include <stdio.h>
 namespace Rudy
 {
-	ReflectionType::ReflectionType(const String& typeName, unsigned int typeSize)
+	ReflectionType::ReflectionType(const String& typeName, unsigned int typeSize,bool bPrimitive)
 	{
 		/*
 		* Set reflection properties
 		*/
 		m_TypeName = typeName;
 		m_TypeSize = typeSize;
+		m_bPrimitive = bPrimitive;
 
 		/*
 		* Register this reflection into its assembly
@@ -25,6 +26,10 @@ namespace Rudy
 	Guid ReflectionType::GetTypeID() const
 	{
 		return m_TypeID;
+	}
+	bool ReflectionType::IsPrimitive() const
+	{
+		return m_bPrimitive;
 	}
 	ReflectionTypeField* ReflectionType::GetField(const String& fieldName) const
 	{
@@ -64,7 +69,7 @@ namespace Rudy
 		/*
 		* Create new type
 		*/
-		ReflectionType* rawType = new ReflectionType(typeName,typeSize);
+		ReflectionType* rawType = new ReflectionType(typeName,typeSize,true);
 		m_Type = rawType;
 
 		/*
