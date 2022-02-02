@@ -88,7 +88,7 @@ namespace Rudy
 		~Asset();
 		RudyObject* m_LoadedObject;
 		AssetPackage* m_OwnerPackage;
-		ByteBlock m_CachedData;
+		Rudy::ByteBlock m_CachedData;
 		AssetHeaderContainer m_Header;
 		String m_AbsolutePath;
 		unsigned long m_SizeInBytes;

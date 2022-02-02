@@ -55,7 +55,7 @@ namespace Rudy
 		* Create result s
 		*/
 		Texture2DDiskLoadResult* loadResult = new Texture2DDiskLoadResult();
-		loadResult->DataBlock = ByteBlock(data,width*height*channels);
+		loadResult->DataBlock = Rudy::ByteBlock(data,width*height*channels);
 		loadResult->NativaDataBlock = data;
 		loadResult->ChannelCount = channels;
 		loadResult->Width = width;

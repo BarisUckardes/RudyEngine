@@ -12,7 +12,7 @@ namespace Rudy
 		/// <summary>
 		/// The actual data for the image
 		/// </summary>
-		ByteBlock DataBlock;
+		Rudy::ByteBlock DataBlock;
 
 		Byte* NativaDataBlock;
 

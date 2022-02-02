@@ -278,14 +278,14 @@ bool RenderGUI(Rudy::ImGuiRenderCommands* renderCommands,Rudy::ImGuiLayoutComman
 			projectFileContent.ProjectID = Rudy::Guid::Create();
 			projectFileContent.VersionMajor = 48;
 			projectFileContent.VersionMinor = 113;
-			Rudy::ByteBlock projectFileContentByteBlock((Rudy::Byte*)&projectFileContent,sizeof(ProjectFileContent));
+			Rudy::ByteBlock projectFileContentByteBlock((Byte*)&projectFileContent,sizeof(ProjectFileContent));
 			Rudy::PlatformFile::Write(projectPath + "Project.rproject", projectFileContentByteBlock);
 
 			/*
 			* Write default project settings
 			*/
 			Rudy::Guid zeroGuid;
-			Rudy::ByteBlock worldSettingByteBlock((Rudy::Byte*)&zeroGuid, sizeof(Rudy::Guid));
+			Rudy::ByteBlock worldSettingByteBlock((Byte*)&zeroGuid, sizeof(Rudy::Guid));
 			Rudy::PlatformFile::Write(projectPath + "Settings/CurrentWorld.rsetting", worldSettingByteBlock);
 			
 			/*
@@ -297,7 +297,7 @@ bool RenderGUI(Rudy::ImGuiRenderCommands* renderCommands,Rudy::ImGuiLayoutComman
 			/*
 			* Create new file content byte block
 			*/
-			Rudy::Byte* newProjectFileByte = new Rudy::Byte[projectFileByteBlock.GetBlockSize() + 100];
+			Byte* newProjectFileByte = new Byte[projectFileByteBlock.GetBlockSize() + 100];
 
 			/*
 			* Copy the old contents

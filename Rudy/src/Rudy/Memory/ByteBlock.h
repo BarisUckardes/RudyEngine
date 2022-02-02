@@ -18,9 +18,9 @@ namespace Rudy
 	class RUDY_API ByteBlock
 	{
 	public:
-		ByteBlock(const ByteBlock& block, unsigned long startIndex, unsigned long endIndex);
+		ByteBlock(const Rudy::ByteBlock& block, unsigned long startIndex, unsigned long endIndex);
 		ByteBlock(void* block, unsigned long size);
-		ByteBlock(const ByteBlock& block);
+		ByteBlock(const Rudy::ByteBlock& block);
 		ByteBlock();
 		~ByteBlock();
 
@@ -62,19 +62,19 @@ namespace Rudy
 		TObject To(unsigned long offset) const;
 
 		Byte operator[](unsigned long index) const;
-		ByteBlock& operator=(ByteBlock&& block) noexcept;
+		Rudy::ByteBlock& operator=(Rudy::ByteBlock&& block) noexcept;
 	private:
 		Byte* m_Block;
-		ByteBlockTransferType m_TranferType;
+		Rudy::ByteBlockTransferType m_TranferType;
 		unsigned long m_BlockSize;
 	};
 	template<typename TObject>
-	inline TObject ByteBlock::To() const
+	inline TObject Rudy::ByteBlock::To() const
 	{
 		return *(TObject*)m_Block;
 	}
 	template<typename TObject>
-	inline TObject ByteBlock::To(unsigned long offset) const
+	inline TObject Rudy::ByteBlock::To(unsigned long offset) const
 	{
 		return *(TObject*)(m_Block + offset);
 	}

@@ -10,7 +10,7 @@
 
 int main(int argumentCount, char** arguments)
 {
-	Rudy::ReflectionType* type = typeof(int);
+	Rudy::ReflectionType* type = typeof(uint);
 	
 	LOG("GETTTTTTTTTTTT Type name: %s", *type->GetTypeName());
 

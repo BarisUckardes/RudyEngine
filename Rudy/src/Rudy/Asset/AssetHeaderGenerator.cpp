@@ -3,12 +3,12 @@
 
 namespace Rudy
 {
-    ByteBlock AssetHeaderGenerator::GenerateByteBlock(const AssetHeaderContainer& header)
+    Rudy::ByteBlock AssetHeaderGenerator::GenerateByteBlock(const AssetHeaderContainer& header)
     {
-        return ByteBlock((void*)&header, sizeof(AssetHeaderContainer));
+        return Rudy::ByteBlock((void*)&header, sizeof(AssetHeaderContainer));
     }
 
-    AssetHeaderContainer AssetHeaderGenerator::GenerateHeader(const ByteBlock& block)
+    AssetHeaderContainer AssetHeaderGenerator::GenerateHeader(const Rudy::ByteBlock& block)
     {
         AssetHeaderContainer header;
 

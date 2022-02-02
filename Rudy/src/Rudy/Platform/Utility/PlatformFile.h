@@ -46,7 +46,7 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <param name="content"></param>
 		/// <returns></returns>
-		static bool Write(const String& path, const ByteBlock& byteBlock);
+		static bool Write(const String& path, const Rudy::ByteBlock& byteBlock);
 
 		/// <summary>
 		/// Opens and appends to binary file
@@ -54,7 +54,7 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <param name="bytes"></param>
 		/// <returns></returns>
-		static bool WriteAppend(const String& path, const ByteBlock& byteBlock);
+		static bool WriteAppend(const String& path, const Rudy::ByteBlock& byteBlock);
 
 		/// <summary>
 		/// Writes to an existing file
@@ -78,7 +78,7 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <param name="contentOut"></param>
 		/// <returns></returns>
-		static bool Read(const String& path, ByteBlock& byteBlock);
+		static bool Read(const String& path, Rudy::ByteBlock& byteBlock);
 
 		/// <summary>
 		/// Reads the file
@@ -88,7 +88,7 @@ namespace Rudy
 		/// <param name="end"></param>
 		/// <param name="contentOut"></param>
 		/// <returns></returns>
-		static bool Read(const String& path, unsigned long start, unsigned long end, ByteBlock& byteBlock);
+		static bool Read(const String& path, unsigned long start, unsigned long end, Rudy::ByteBlock& byteBlock);
 
 		/// <summary>
 		/// Returns the file size in length

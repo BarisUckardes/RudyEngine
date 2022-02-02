@@ -169,7 +169,7 @@ namespace Bite
 				/*
 				* Generate shader content bytes
 				*/
-				Rudy::Byte* assetContentBuffer = new Rudy::Byte[4 + sourceText.GetCursor()];
+				Byte* assetContentBuffer = new Byte[4 + sourceText.GetCursor()];
 				Rudy::Memory::MemoryCopy(assetContentBuffer, &stage, 4);
 				Rudy::Memory::MemoryCopy((assetContentBuffer + 4), (char*) * sourceText, sourceText.GetCursor());
 				assetContentBytes = Rudy::ByteBlock(assetContentBuffer,4 + sourceText.GetCursor());
@@ -204,7 +204,7 @@ namespace Bite
 				Rudy::String shaderName = "Undefined shader name";
 				Rudy::String shaderCategory = "Undefined shader category";
 				unsigned long shaderCount = 0;
-				Rudy::Byte* assetContentBuffer = new Rudy::Byte[4 + ASSET_WRITE_MAX_NAME + ASSET_WRITE_MAX_NAME];
+				Byte* assetContentBuffer = new Byte[4 + ASSET_WRITE_MAX_NAME + ASSET_WRITE_MAX_NAME];
 				Rudy::Memory::MemoryCopy(assetContentBuffer, &shaderCount, sizeof(unsigned long));
 				Rudy::Memory::MemoryCopy(assetContentBuffer+4,(char*) * shaderName, ASSET_WRITE_MAX_NAME);
 				Rudy::Memory::MemoryCopy((assetContentBuffer + 4 + ASSET_WRITE_MAX_NAME), (char*)*shaderCategory, ASSET_WRITE_MAX_NAME);

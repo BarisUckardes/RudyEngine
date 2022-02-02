@@ -18,14 +18,14 @@ namespace Rudy
 		/// </summary>
 		/// <param name="defintion"></param>
 		/// <returns></returns>
-		FORCEINLINE static ByteBlock GenerateByteBlock(const AssetHeaderContainer& defintion);
+		FORCEINLINE static Rudy::ByteBlock GenerateByteBlock(const AssetHeaderContainer& defintion);
 
 		/// <summary>
 		/// Generates a definition out of the byte block
 		/// </summary>
 		/// <param name="block"></param>
 		/// <returns></returns>
-		FORCEINLINE static AssetHeaderContainer GenerateHeader(const ByteBlock& block);
+		FORCEINLINE static AssetHeaderContainer GenerateHeader(const Rudy::ByteBlock& block);
 	};
 
 

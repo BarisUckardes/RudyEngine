@@ -1,4 +1,5 @@
 #pragma once
+#include <Rudy/Core/Defs.h>
 #ifdef RUDY_BUILD
 #define RUDY_API __declspec(dllexport)
 #else
@@ -8,4 +9,5 @@
 #define RUDY_EXPORT __declspec(dllexport)
 
 #define FORCEINLINE __forceinline
+
 

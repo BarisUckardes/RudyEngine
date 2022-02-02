@@ -100,7 +100,7 @@ namespace Rudy
 		}
 		else
 		{
-			ByteBlock assetContentBytes;
+			Rudy::ByteBlock assetContentBytes;
 
 			/*
 			* Validate cahce

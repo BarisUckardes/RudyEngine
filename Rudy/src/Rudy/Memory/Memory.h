@@ -3,7 +3,7 @@
 
 namespace Rudy
 {
-	typedef unsigned char Byte;
+
 	/// <summary>
 	/// Memory utility class
 	/// </summary>

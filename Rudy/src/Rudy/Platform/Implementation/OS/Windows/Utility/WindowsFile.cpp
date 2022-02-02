@@ -248,7 +248,7 @@ namespace Rudy
 
         return true;
     }
-    bool WindowsFile::ReadBytes(const String& path,ByteBlock& byteBlock)
+    bool WindowsFile::ReadBytes(const String& path, ByteBlock& byteBlock)
     {
         /*
          * Get file size first

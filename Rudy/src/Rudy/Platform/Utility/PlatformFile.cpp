@@ -68,7 +68,7 @@ namespace Rudy
 				break;
 		}
 	}
-	bool PlatformFile::Write(const String& path, const ByteBlock& byteBlock)
+	bool PlatformFile::Write(const String& path, const Rudy::ByteBlock& byteBlock)
 	{
 		PlatformOSType platformType = GetCurrentPlatform();
 		switch (platformType)
@@ -84,7 +84,7 @@ namespace Rudy
 			break;
 		}
 	}
-	bool PlatformFile::WriteAppend(const String& path, const ByteBlock& byteBlock)
+	bool PlatformFile::WriteAppend(const String& path, const Rudy::ByteBlock& byteBlock)
 	{
 		PlatformOSType platformType = GetCurrentPlatform();
 		switch (platformType)
@@ -133,7 +133,7 @@ namespace Rudy
 		}
 	}
 
-	bool PlatformFile::Read(const String& path, ByteBlock& byteBlock)
+	bool PlatformFile::Read(const String& path, Rudy::ByteBlock& byteBlock)
 	{
 		PlatformOSType platformType = GetCurrentPlatform();
 		switch (platformType)
@@ -149,7 +149,7 @@ namespace Rudy
 			break;
 		}
 	}
-	bool PlatformFile::Read(const String& path, unsigned long startByte, unsigned long endByte, ByteBlock& byteBlock)
+	bool PlatformFile::Read(const String& path, unsigned long startByte, unsigned long endByte, Rudy::ByteBlock& byteBlock)
 	{
 		PlatformOSType platformType = GetCurrentPlatform();
 		switch (platformType)

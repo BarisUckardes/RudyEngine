@@ -82,7 +82,7 @@ namespace Rudy
 		/// <summary>
 		/// Field data represented as a byte block
 		/// </summary>
-		ByteBlock FieldData;
+		Rudy::ByteBlock FieldData;
 	};
 
 	/// <summary>

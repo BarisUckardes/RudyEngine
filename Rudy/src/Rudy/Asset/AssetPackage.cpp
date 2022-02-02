@@ -13,7 +13,7 @@ namespace Rudy
 {
 	AssetPackage::AssetPackage(const String& packagePath)
 	{
-		constexpr unsigned int definitionBytes = 48u;
+		constexpr unsigned int headerByteCount = 48u;
 
 		/*
 		* Get total file size
@@ -24,7 +24,7 @@ namespace Rudy
 		/*
 		* Get how many definitions this package has
 		*/
-		ByteBlock byteBlock;
+		Rudy::ByteBlock byteBlock;
 		PlatformFile::Read(packagePath, 0, 4, byteBlock);
 		const unsigned int definitionCount = byteBlock.To<unsigned int>();
 
@@ -37,21 +37,20 @@ namespace Rudy
 			/*
 			* Get defintion block
 			*/
-			ByteBlock byteBlock;
+			Rudy::ByteBlock headerByteBlock;
 			PlatformFile::Read(packagePath,
-				byteStart, byteStart + definitionBytes,
-				byteBlock);
+				byteStart, byteStart + headerByteCount,
+				headerByteBlock);
 
 			/*
 			* Create header
 			*/
-			ByteBlock headerBytes(byteBlock, 0, 48);
-			AssetHeaderContainer header = AssetHeaderGenerator::GenerateHeader(headerBytes);
+			AssetHeaderContainer header = AssetHeaderGenerator::GenerateHeader(headerByteBlock);
 
 			/*
 			* Register header
 			*/
-			m_Headers.Add(AssetHeaderGenerator::GenerateHeader(headerBytes));
+			m_Headers.Add(AssetHeaderGenerator::GenerateHeader(headerByteBlock));
 
 			/*
 			* Register asset
@@ -61,7 +60,7 @@ namespace Rudy
 			/*
 			* Increment byteStart
 			*/
-			byteStart += definitionBytes;
+			byteStart += headerByteCount;
 		}
 
 		/*
@@ -128,7 +127,7 @@ namespace Rudy
 			/*
 			* Load asset file definition bytes
 			*/
-			ByteBlock defintionBlockBytes;
+			Rudy::ByteBlock defintionBlockBytes;
 			PlatformFile::Read(assetPath, 0, sizeof(AssetHeaderContainer), defintionBlockBytes);
 
 			/*
