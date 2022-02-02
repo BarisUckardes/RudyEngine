@@ -56,23 +56,10 @@ namespace Rudy
 											  virtual Rudy::ReflectionType* GetType() const override { return s_Type; }\
 											  static Rudy::ReflectionType* GetStaticType() { return s_Type;}\
 												
-	#define GENERATE_REFLECTABLE_TYPE(type)\
-	Rudy::ReflectionType* type::s_Type = new Rudy::ReflectionType(#type,sizeof(type),nullptr,false);\
+	#define GENERATE_REFLECTABLE_TYPE(type,...)\
+	Rudy::ReflectionType* type::s_Type = new Rudy::ReflectionType(#type,sizeof(type),{__VA_ARGS__},false);\
 
-	//#define GENERATE_REFLECTABLE_TYPE(type,inheritance0)\
-	//Rudy::ReflectionType* type::s_Type = new Rudy::ReflectionType(#type,sizeof(type),inheritance0,false);\
-
-	/*#define GENERATE_REFLECTABLE_TYPE(type,inheritance0,inheritance1)\
-	Rudy::ReflectionType* type::s_Type = new Rudy::ReflectionType(#type,sizeof(type),false,inheritance0);\
-
-	#define GENERATE_REFLECTABLE_TYPE(type,inheritance0,inheritance1,inheritance2)\
-	Rudy::ReflectionType* type::s_Type = new Rudy::ReflectionType(#type,sizeof(type),false,inheritance0);\
-
-	#define GENERATE_REFLECTABLE_TYPE(type,inheritance0,inheritance1,inheritance2,inheritance3)\
-	Rudy::ReflectionType* type::s_Type = new Rudy::ReflectionType(#type,sizeof(type),false,inheritance0);\
-
-	#define GENERATE_REFLECTABLE_TYPE(type,inheritance0,inheritance1,inheritance2,inheritance3,inheritance4)\
-	Rudy::ReflectionType* type::s_Type = new Rudy::ReflectionType(#type,sizeof(type),false,inheritance0);\*/
+	
 
 	#define GENERATE_REFLECTION_ACCESSOR(type) class GET_RAW_NAME(type)_reflection_type_acccessor_\
 	{\

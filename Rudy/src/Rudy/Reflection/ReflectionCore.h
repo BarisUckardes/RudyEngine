@@ -4,3 +4,4 @@
 #include <Rudy/Reflection/Object/ReflectableObject.h>
 #include <Rudy/Reflection/Type/ReflectionType.h>
 #include <Rudy/Reflection/Type/ReflectionRawTypes.h>
+#include <Rudy/Reflection/Function/ReflectionFunction.h>

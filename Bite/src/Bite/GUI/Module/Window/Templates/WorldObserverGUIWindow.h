@@ -11,6 +11,7 @@ namespace Bite
 		WorldObserverGUIWindow() = default;
 		~WorldObserverGUIWindow() = default;
 	};
+	GENERATE_REFLECTION_ACCESSOR(WorldObserverGUIWindow);
 
 
 }

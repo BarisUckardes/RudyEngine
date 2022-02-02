@@ -1,5 +1,6 @@
 #pragma once
 #include <Rudy/Core/Symbols.h>
+#include <initializer_list>
 namespace Rudy
 {
 	/*
@@ -16,6 +17,7 @@ namespace Rudy
 		Array(unsigned int allocateMultiplier = 2);
 		Array(const Array<TValue>& targetSource);
 		Array(const TValue* data, unsigned int count);
+		Array(std::initializer_list<TValue> initializerList);
 		~Array();
 
 		/// <summary>
@@ -54,7 +56,7 @@ namespace Rudy
 		/// Adds a new array to array
 		/// </summary>
 		/// <param name="elements"></param>
-		void Add(const Array<TValue>& elements);
+		void AddRange(const Array<TValue>& elements);
 
 		/// <summary>
 		/// Insert the item
@@ -196,6 +198,28 @@ namespace Rudy
 			m_Source[i] = data[i];
 		}
 	}
+
+	template<typename TValue>
+	Array<TValue>::Array(std::initializer_list<TValue> initializerList)
+	{
+
+		/*
+		* Allocate space
+		*/
+		m_Source = new TValue[initializerList.size()];
+		m_Cursor = initializerList.size();
+		m_Capacity = initializerList.size();
+		/*
+		* Copy
+		*/
+		unsigned int index = 0;
+		for (const TValue& value : initializerList)
+		{
+			m_Source[index] = value;
+			index++;
+		}
+	}
+
 	template<typename TValue>
 	Array<TValue>::~Array()
 	{
@@ -336,7 +360,7 @@ namespace Rudy
 	}
 
 	template<typename TValue>
-	void Array<TValue>::Add(const Array<TValue>& array)
+	void Array<TValue>::AddRange(const Array<TValue>& array)
 	{
 		/*
 		* Validate array bounds

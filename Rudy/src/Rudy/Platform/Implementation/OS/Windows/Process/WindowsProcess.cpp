@@ -36,7 +36,7 @@ namespace Rudy
         */
         Array<String> cmdCommands;
         cmdCommands.Add(GetExecutablePath());
-        cmdCommands.Add(GetCmdArguments());
+        cmdCommands.AddRange(GetCmdArguments());
         String concreteCmdCommands;
         for (int i = 0; i < cmdCommands.GetCursor(); i++)
             concreteCmdCommands += cmdCommands[i] + " ";

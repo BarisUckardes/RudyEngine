@@ -12,8 +12,9 @@ namespace Rudy
 	/// </summary>
 	class RUDY_API ReflectionFunction
 	{
+		friend class ReflectionMemberFunctionParameterDispatcher;
 	public:
-		ReflectionFunction(const String& functionName, const Array<ReflectionFunctionParameter>& parameters,ReflectionType* returnType,int flags);
+		ReflectionFunction(const String& functionName,ReflectionType* returnType, const Array<ReflectionFunctionParameter>& parameters,int flags);
 		ReflectionFunction();
 
 		/// <summary>
@@ -65,6 +66,12 @@ namespace Rudy
 		bool IsConstFunction() const;
 
 		/// <summary>
+		/// Returns the name of the function
+		/// </summary>
+		/// <returns></returns>
+		String GetName() const;
+
+		/// <summary>
 		/// Returns the parameter meta data list of this function's parameters
 		/// </summary>
 		/// <returns></returns>
@@ -87,6 +94,12 @@ namespace Rudy
 		template<typename TReturn,typename ...TArgs>
 		TReturn Call(void* targetObject, TArgs... args);
 	private:
+		/// <summary>
+		/// Internal setter for registering parameters into this function
+		/// </summary>
+		/// <param name="parameter"></param>
+		void RegisterParameter(const ReflectionFunctionParameter& parameter);
+
 		Array<ReflectionFunctionParameter> m_Parameters;
 		ReflectionType* m_ReturnType;
 		String m_Name;
@@ -99,5 +112,34 @@ namespace Rudy
 	{
 		return TReturn();
 	}
+
+	/// <summary>
+	/// Dispatches a reflection member function register call
+	/// </summary>
+	class RUDY_API ReflectionMemberFunctionDispatcher
+	{
+	public:
+		ReflectionMemberFunctionDispatcher(ReflectionType* memberType,ReflectionType* returnType, const String& functionName,const Array<ReflectionFunctionParameter>& parameters,int flags);
+
+		/// <summary>
+		/// Returns the function which created and registered within this dispatcher
+		/// </summary>
+		/// <returns></returns>
+		ReflectionFunction* GetFunction() const;
+	private:
+		ReflectionFunction* m_Function;
+	};
+
+	/// <summary>
+	/// Dispatches a reflection member function parameter register call
+	/// </summary>
+	class RUDY_API ReflectionMemberFunctionParameterDispatcher
+	{
+	public:
+		ReflectionMemberFunctionParameterDispatcher(ReflectionFunction* ownerFunction, ReflectionType* parameterType, const String& parameterName);
+		
+	};
+#define GENERATE_MEMBER_FUNCTION_PARAMETER(memberType,function,parameterType,parameterName) Rudy::ReflectionMemberFunctionParameterDispatcher GET_RAW_NAME(parameterName)GET_RAW_NAME(function)_reflection_member_function_parameter_dispatcher(GET_RAW_NAME(memberType)GET_RAW_NAME(function)_reflection_member_function_dispatcher.GetFunction(),typeof(parameterType),#parameterName);
+#define GENERATE_MEMBER_FUNCTION(memberType,function,returnType,flags) Rudy::ReflectionMemberFunctionDispatcher GET_RAW_NAME(memberType)GET_RAW_NAME(function)_reflection_member_function_dispatcher(typeof(memberType),typeof(returnType),#function,Rudy::Array<Rudy::ReflectionFunctionParameter>(),flags);
 
 }

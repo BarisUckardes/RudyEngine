@@ -1,9 +1,10 @@
 #include "ReflectionType.h"
 #include <Rudy/Reflection/Field/ReflectionTypeField.h>
+#include <Rudy/Reflection/Function/ReflectionFunction.h>
 #include <stdio.h>
 namespace Rudy
 {
-	ReflectionType::ReflectionType(const String& typeName, unsigned int typeSize,ReflectionType* inheritedClasses,bool bPrimitive)
+	ReflectionType::ReflectionType(const String& typeName, unsigned int typeSize,Array<ReflectionType*> inheritedClasses,bool bPrimitive)
 	{
 		/*
 		* Set reflection properties
@@ -11,7 +12,7 @@ namespace Rudy
 		m_TypeName = typeName;
 		m_TypeSize = typeSize;
 		m_bPrimitive = bPrimitive;
-		//m_InheritedClasses = inheritedClasses;
+		m_InheritedClasses = inheritedClasses;
 
 		/*
 		* Register this reflection into its assembly
@@ -61,22 +62,58 @@ namespace Rudy
 	{
 		return m_TypeSize;
 	}
+	Array<ReflectionType*> ReflectionType::GetInheritedClasses() const
+	{
+		return m_InheritedClasses;
+	}
+	ReflectionFunction* ReflectionType::GetFunction(const String& functionName) const
+	{
+		/*
+		* Iterate and search for name match
+		*/
+		for (unsigned int i = 0; i < m_Functions.GetCursor(); i++)
+		{
+			/*
+			* Get Field type
+			*/
+			ReflectionFunction* function = m_Functions[i];
+
+			/*
+			* Validate
+			*/
+			if (function->GetName() == functionName)
+			{
+				LOG("Function[%s] found in [%s]", *function->GetName(), *m_TypeName);
+				return function;
+			}
+				
+		}
+		LOG("Function NOT FOUNDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
+		return nullptr;
+	}
+	Array<ReflectionFunction*> ReflectionType::GetFunctions() const
+	{
+		return m_Functions;
+	}
 	void ReflectionType::RegisterTypeField(ReflectionTypeField* typeField)
 	{
 		m_Fields.Add(typeField);
+	}
+	void ReflectionType::RegisterFunction(ReflectionFunction* function)
+	{
+		m_Functions.Add(function);
 	}
 	ReflectionRawTypeDispatcher::ReflectionRawTypeDispatcher(const String& typeName, unsigned int typeSize)
 	{
 		/*
 		* Create new type
 		*/
-		ReflectionType* rawType = new ReflectionType(typeName,typeSize,true);
+		ReflectionType* rawType = new ReflectionType(typeName, typeSize, {}, true);
 		m_Type = rawType;
 
 		/*
 		* Register raw type to assembly
 		*/
-		LOG("Raw type registered %s", *m_Type->GetTypeName());
 	}
 
 	ReflectionType* ReflectionRawTypeDispatcher::GetRawType() const

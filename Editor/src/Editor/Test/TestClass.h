@@ -9,5 +9,7 @@ public:
 	unsigned int s_Static;
 	unsigned int a;
 	unsigned int b;
+
+	void MyReflectionMethod(int a, int b);
 };
 GENERATE_REFLECTION_ACCESSOR(TestClass);

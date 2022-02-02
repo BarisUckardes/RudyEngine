@@ -1,8 +1,7 @@
 #pragma once
 #include <Bite/Core/Symbols.h>
 #include <Rudy/Memory/String.h>
-#include <Rudy/Reflection/Object/ReflectableObject.h>
-#include <Rudy/Reflection/Type/ReflectionType.h>
+#include <Rudy/Reflection/ReflectionCore.h>
 namespace Bite
 {
 	class EditorSession;
@@ -16,6 +15,7 @@ namespace Bite
 		friend class GUIWindowManager;
 		friend class WindowGUIModule;
 	public:
+		GENERATE_REFLECTABLE_OBJECT(WindowLayout);
 		WindowLayout() = default;
 		~WindowLayout() = default;
 
@@ -88,5 +88,6 @@ namespace Bite
 		EditorSession* m_OwnerSession;
 		bool m_Visible;
 	};
+	GENERATE_REFLECTION_ACCESSOR(WindowLayout);
 
 }

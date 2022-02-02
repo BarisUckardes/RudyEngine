@@ -6,14 +6,16 @@
 namespace Rudy
 {
 	class ReflectionTypeField;
+	class ReflectionFunction;
 	/// <summary>
 	/// A reflection type
 	/// </summary>
 	class RUDY_API ReflectionType
 	{
 		friend class ReflectionFieldTypeDispatcher;
+		friend class ReflectionMemberFunctionDispatcher;
 	public:
-		ReflectionType(const String& typeName, unsigned int typeSize,ReflectionType* inheritedClass,bool bPrimitive);
+		ReflectionType(const String& typeName, unsigned int typeSize,Array< ReflectionType*> inheritedClasses,bool bPrimitive);
 		~ReflectionType() = default;
 
 		/// <summary>
@@ -60,6 +62,19 @@ namespace Rudy
 		Array<ReflectionType*> GetInheritedClasses() const;
 
 		/// <summary>
+		/// Returns the function via name
+		/// </summary>
+		/// <param name="functionName"></param>
+		/// <returns></returns>
+		ReflectionFunction* GetFunction(const String& functionName) const;
+
+		/// <summary>
+		/// Returns all the functions
+		/// </summary>
+		/// <returns></returns>
+		Array<ReflectionFunction*> GetFunctions() const;
+
+		/// <summary>
 		/// Generates default object
 		/// </summary>
 		/// <typeparam name="TObject"></typeparam>
@@ -74,9 +89,16 @@ namespace Rudy
 		/// <param name="typeField"></param>
 		void RegisterTypeField(ReflectionTypeField* typeField);
 
+		/// <summary>
+		/// An internal method used in registering functions into this type
+		/// </summary>
+		/// <param name="function"></param>
+		void RegisterFunction(ReflectionFunction* function);
+
 		ReflectableObjectGenerator m_DefaultObjectGenerator;
 		Array<ReflectionType*> m_InheritedClasses;
 		Array<ReflectionTypeField*> m_Fields;
+		Array<ReflectionFunction*> m_Functions;
 		String m_TypeName;
 		Guid m_TypeID;
 		unsigned int m_TypeSize;

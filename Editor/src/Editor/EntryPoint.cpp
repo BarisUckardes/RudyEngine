@@ -10,7 +10,14 @@
 int main(int argumentCount, char** arguments)
 {
 	TestClass cls;
-
+	Rudy::Array<Rudy::ReflectionFunctionParameter> methodParameters = typeof(TestClass)->GetFunction("MyReflectionMethod")->GetParameters();
+	LOG("+++++++++++++++ COUNT: %d", methodParameters.GetCursor());
+	for (unsigned int i = 0; i < methodParameters.GetCursor(); i++)
+	{
+		const Rudy::ReflectionFunctionParameter& parameter = methodParameters[i];
+		LOG("++++++++++++++++Parameter found: [%s,%s]", *parameter.Name,*parameter.Type->GetTypeName());
+	}
+	Rudy::Array<int> a = { 0,1,2,3,4,5 };
 	/*
 	* Get editor executable path
 	*/
