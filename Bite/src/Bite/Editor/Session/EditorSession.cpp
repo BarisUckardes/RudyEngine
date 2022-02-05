@@ -30,7 +30,7 @@ namespace Bite
 	{
 		m_ApplicationSession = nullptr;
 	}
-	Rudy::ApplicationSession* EditorSession::GetApplictionSession() const
+	Rudy::ApplicationSession* EditorSession::GetApplicationSession() const
 	{
 		return m_ApplicationSession;
 	}
@@ -63,7 +63,6 @@ namespace Bite
 			*/
 			if (type == resource->GetAssetType() && name == resource->GetName())
 			{
-				printf("FOUND RESOURCE OBJECT \n");
 				return resource->GetResourceObject();
 			}
 				
@@ -92,13 +91,13 @@ namespace Bite
 		/*
 		* Set window title
 		*/
-		GetApplictionSession()->GetSessionWindow()->SetTitle(name);
+		GetApplicationSession()->GetSessionWindow()->SetTitle(name);
 
-		printf("Project settings adjusted as...\n");
+	/*	printf("Project settings adjusted as...\n");
 		printf("	Name: %s\n",*name);
 		printf("	Major Version: %d\n",major);
 		printf("	Minor Version: %d\n",minor);
-		printf("	Project ID: %s\n",*id.GetAsString());
+		printf("	Project ID: %s\n",*id.GetAsString());*/
 	}
 	void EditorSession::SetEditorResources(const Rudy::Array<EditorResource*>& resources)
 	{

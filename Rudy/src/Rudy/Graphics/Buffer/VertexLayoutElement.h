@@ -9,7 +9,6 @@ namespace Rudy
 	/// </summary>
 	struct RUDY_API VertexLayoutElement
 	{
-		
 		VertexLayoutElement(VertexLayoutDataType dataType, const String& name, bool isNormalized = false);
 		VertexLayoutElement() = default;
 

@@ -24,7 +24,7 @@ namespace Rudy
 		* Set buffer data
 		*/
 		glBufferData(GL_ARRAY_BUFFER, elementSize * elementCount, dataPtr, GL_STATIC_DRAW);
-        printf("%d bytes vertex buffer\n", elementSize * elementCount);
+
 
         /*
         * Unbind
@@ -76,7 +76,6 @@ namespace Rudy
                     (int)vertexLayout.GetStride(),
                     (const void*)elements[i].Offset);
                 vertexLayoutIndex++;
-                printf("1 FLOATS %d components\n", elements[i].GetComponentCount());
                 break;
             case VertexLayoutDataType::Mat3:
             case VertexLayoutDataType::Mat4:

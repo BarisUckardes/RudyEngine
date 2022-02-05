@@ -119,6 +119,7 @@ namespace Rudy
 			*/
 			
 		}
+		LOG("Application close request !");
 
 		/*
 		* Detach all modules

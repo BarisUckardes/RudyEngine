@@ -77,11 +77,6 @@ namespace Rudy
 	AssetPackage::~AssetPackage()
 	{
 		/*
-		* Unload package
-		*/
-		UnloadPackage();
-
-		/*
 		* Clear
 		*/
 		m_Headers.Clear();

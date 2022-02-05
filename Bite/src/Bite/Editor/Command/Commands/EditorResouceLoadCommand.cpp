@@ -19,7 +19,7 @@ namespace Bite
 		/*
 		* Create new virtual package
 		*/
-		m_EditorResourcePackage = GetOwnerSession()->GetApplictionSession()->GetAssetPool()->CreateVirtualPackage();
+		m_EditorResourcePackage = GetOwnerSession()->GetApplicationSession()->GetAssetPool()->CreateVirtualPackage();
 
 		/*
 		* Load resources

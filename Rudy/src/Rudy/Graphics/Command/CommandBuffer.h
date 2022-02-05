@@ -4,7 +4,9 @@
 #include <Rudy/Memory/Array.h>
 namespace Rudy
 {
-
+	/*
+	* Forward declarations
+	*/
 	class RenderCommand;
 	class ShaderProgram;
 	class VertexBuffer;

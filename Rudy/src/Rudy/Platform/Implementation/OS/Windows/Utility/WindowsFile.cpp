@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <Rudy/Platform/Utility/PlatformError.h>
 #include <Rudy/Memory/ByteBlock.h>
+#include <Rudy/Core/Log.h>
 namespace Rudy
 {
     unsigned long g_TransferredBytes;
@@ -84,7 +85,7 @@ namespace Rudy
         */
         unsigned long writtenBytes = 0;
         bool isSuccess = WriteFile(fileHandle, content.GetSource(), content.GetCursor(), &writtenBytes, NULL);
-        printf("Written bytes %d\n", writtenBytes);
+
 
         if (!isSuccess)
         {

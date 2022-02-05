@@ -39,7 +39,7 @@ namespace Bite
 		/*
 		* Try load asset
 		*/
-		m_TargetAsset->Load(m_OwnerSession->GetApplictionSession());
+		m_TargetAsset->Load(m_OwnerSession->GetApplicationSession(),false);
 	}
 	void DomainAssetView::DeleteAsset()
 	{

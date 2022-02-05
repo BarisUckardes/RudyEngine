@@ -160,6 +160,10 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Bite\Domain\Assets\ShaderProgramAssetWriter.h" />
+    <ClInclude Include="src\Bite\Domain\Assets\AssetWriters.h" />
+    <ClInclude Include="src\Bite\Domain\Assets\ShaderAssetWriter.h" />
+    <ClInclude Include="src\Bite\Domain\Assets\IAssetWriter.h" />
     <ClInclude Include="src\Bite\GUI\Painter\GUIPainterEventLedger.h" />
     <ClInclude Include="src\Bite\GUI\Painter\GUIPainter.h" />
     <ClInclude Include="src\Bite\Editor\Resource\EditorResource.h" />
@@ -189,6 +193,9 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     <ClInclude Include="src\Bite\Project\ProjectVersion.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Bite\Domain\Assets\ShaderProgramAssetWriter.cpp" />
+    <ClCompile Include="src\Bite\Domain\Assets\ShaderAssetWriter.cpp" />
+    <ClCompile Include="src\Bite\Domain\Assets\IAssetWriter.cpp" />
     <ClCompile Include="src\Bite\GUI\Painter\GUIPainterEventLedger.cpp" />
     <ClCompile Include="src\Bite\GUI\Painter\GUIPainter.cpp" />
     <ClCompile Include="src\Bite\Editor\Resource\EditorResource.cpp" />

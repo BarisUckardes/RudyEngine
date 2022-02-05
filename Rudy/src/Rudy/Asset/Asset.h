@@ -67,7 +67,7 @@ namespace Rudy
 		/// <summary>
 		/// Loads the asset if hasnt already
 		/// </summary>
-		void Load(ApplicationSession* session);
+		void Load(ApplicationSession* session,bool bCacheLoadedData);
 
 		/// <summary>
 		/// Loads file content into memory

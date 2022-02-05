@@ -30,11 +30,9 @@ namespace Bite
 		/*
 		* Collect folders
 		*/
-		printf("Domain View Initialization started...\n");
 		Rudy::Array<Rudy::String> folderPaths;
 		if (!Rudy::PlatformDirectory::GetFoldersInDirectory(m_DomainPath + "/", folderPaths))
 		{
-			printf("	Loading folder paths failed!\n");
 		}
 
 		/*
@@ -43,13 +41,12 @@ namespace Bite
 		Rudy::Array<Rudy::String> filePaths;
 		if (!Rudy::PlatformDirectory::GetFilesInDirectoryViaExtension(m_DomainPath + "/", ".rasset", filePaths))
 		{
-			printf("	Loading .rasset files failed\n");
+
 		}
 
 		/*
 		* Create folder view for the root folder
 		*/
 		m_RootFolder = new DomainFolderView(nullptr,m_DomainPath,m_OwnerSession);
-		printf("Domain View Initialization finished.!\n");
 	}
 }

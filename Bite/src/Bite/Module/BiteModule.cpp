@@ -142,7 +142,7 @@ namespace Bite
 	}
 	void BiteModule::OnDetach()
 	{
-
+		
 		/*
 		* Execute editor commands
 		*/
@@ -158,7 +158,7 @@ namespace Bite
 			*/
 			editorCommand->OnFinalize();
 		}
-
+		return;
 		/*
 		* Detach gui modules
 		*/

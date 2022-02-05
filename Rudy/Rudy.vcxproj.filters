@@ -570,6 +570,27 @@
     <ClInclude Include="src\Rudy\Reflection\Function\ReflectionFunctionParameter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Rudy\Reflection\Enum\ReflectionEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Asset\Loaders\IAssetLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Asset\Loaders\Texture2DAssetLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Asset\Loaders\ShaderAssetLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Asset\Loaders\AssetLoaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Asset\Loaders\ShaderProgramAssetLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rudy\Asset\AssetContentSizes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Rudy\Mathematics\Vector2f.cpp">
@@ -969,6 +990,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rudy\Reflection\Function\ReflectionFunction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Reflection\Enum\ReflectionEnum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Asset\Loaders\IAssetLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Asset\Loaders\Texture2DAssetLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Asset\Loaders\ShaderAssetLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Asset\Loaders\ShaderProgramAssetLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rudy\Asset\AssetContentSizes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

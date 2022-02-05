@@ -22,7 +22,6 @@ namespace Rudy
         */
         const Guid id = block.To<Guid>(4);
 
-
         /*
         * Get chars
         */

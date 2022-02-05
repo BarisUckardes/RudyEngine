@@ -29,7 +29,7 @@ namespace Bite
 		/// returns the application session
 		/// </summary>
 		/// <returns></returns>
-		FORCEINLINE Rudy::ApplicationSession* GetApplictionSession() const;
+		FORCEINLINE Rudy::ApplicationSession* GetApplicationSession() const;
 
 		/// <summary>
 		/// Returns the domain view of this editor session

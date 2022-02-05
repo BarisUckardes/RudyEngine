@@ -2,7 +2,6 @@
 #include <Rudy/Memory/Memory.h>
 namespace Rudy
 {
-
 	/// <summary>
 	/// The transfer operations for byte block
 	/// </summary>
@@ -61,7 +60,13 @@ namespace Rudy
 		template<typename TObject>
 		TObject To(unsigned long offset) const;
 
+		/// <summary>
+		/// Byte block indexer operator
+		/// </summary>
+		/// <param name="index"></param>
+		/// <returns></returns>
 		Byte operator[](unsigned long index) const;
+
 		Rudy::ByteBlock& operator=(Rudy::ByteBlock&& block) noexcept;
 	private:
 		Byte* m_Block;

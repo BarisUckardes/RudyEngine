@@ -16,7 +16,7 @@ namespace Bite
 	GENERATE_REFLECTABLE_TYPE(DomainObserverGUIWindow)
 	GENERATE_WINDOW_GENERATOR(DomainObserverGUIWindow);
 
-	#define DEFAULT_ITEM_PADDING_HORIZONTAL 8
+	#define DEFAULT_ITEM_PADDING_HORIZONTAL 24
 	#define DEFAULT_ITEM_PADDING_VERTICAL 8
 	#define DEFAULT_FOLDER_ICON_SIZE 64
 	#define DEFAULT_ASSET_ICON_SIZE 64
@@ -61,11 +61,6 @@ namespace Bite
 		const Rudy::ImGuiRenderCommands* renderCommands = GetPainter()->GetRenderCommands();
 		const Rudy::ImGuiLayoutCommands* layoutCommands = GetPainter()->GetLayoutCommands();
 		const GUIPainterEventLedger* eventLedger = GetPainter()->GetEventLedger();
-
-		if (GetEventLedger()->IsKeyPressed(RUDY_KEY_W))
-		{
-			printf("GUI RECEIVED\n");
-		}
 
 		/*
 		* Next frame properties
@@ -167,7 +162,7 @@ namespace Bite
 			layoutCommands->SetCursorPosition(itemCursorPosition);
 			if (renderCommands->CreateTexturedButton(assetView->GetAssetName(), m_AssetIconSize, m_FolderRenameTexture))
 			{
-				printf("Asset seþected: %s\n", *assetView->GetAssetName());
+
 			}
 
 			/*

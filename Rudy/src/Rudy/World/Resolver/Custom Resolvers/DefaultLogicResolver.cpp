@@ -25,12 +25,10 @@ namespace Rudy
 	}
 	void DefaultLogicResolver::OnRegisterComponent(Component* component)
 	{
-		printf("Default logic resolver registered a component\n");
 		m_RegisterPendingComponents.Add(component);
 	}
 	void DefaultLogicResolver::OnRemoveComponent(Component* component)
 	{
-		printf("Default logic resolver removed a component\n");
 		m_RemovePendingComponents.Add(component);
 	}
 	void DefaultLogicResolver::InvalidatePendings()

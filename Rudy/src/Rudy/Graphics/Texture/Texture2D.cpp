@@ -56,15 +56,14 @@ namespace Rudy
 		*/
 		Texture2DDiskLoadResult* loadResult = new Texture2DDiskLoadResult();
 		loadResult->DataBlock = Rudy::ByteBlock(data,width*height*channels);
-		loadResult->NativaDataBlock = data;
 		loadResult->ChannelCount = channels;
 		loadResult->Width = width;
 		loadResult->Height = height;
 
 		/*
-		* Free stbi data
+		* Free loaded stbi image data
 		*/
-		//stbi_image_free(data);
+		stbi_image_free(data);
 
 		return loadResult;
 	}

@@ -33,7 +33,7 @@ namespace Bite
                 break;
             case Rudy::AssetType::Texture2D:
             {
-                asset = Rudy::Texture2D::LoadFromDisk(m_AbsolutePath, true, ownerPackage, session->GetApplictionSession()->GetDefaultGraphicsDevice());
+                asset = Rudy::Texture2D::LoadFromDisk(m_AbsolutePath, true, ownerPackage, session->GetApplicationSession()->GetDefaultGraphicsDevice());
                 break;
             }
             case Rudy::AssetType::Texture3D:
@@ -57,7 +57,7 @@ namespace Bite
         /*
         * Load asset
         */
-        asset->Load(session->GetApplictionSession());
+        asset->Load(session->GetApplicationSession(),false);
 
         /*
         * Set loaded object

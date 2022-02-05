@@ -19,6 +19,12 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <returns></returns>
 		static Asset* LoadFromDisk(const String& path,bool bCreateMipmaps, AssetPackage* ownerPackage, GraphicsDevice* device);
+
+		/// <summary>
+		/// Loads a texture file from the disk
+		/// </summary>
+		/// <param name="path"></param>
+		/// <returns></returns>
 		static Texture2DDiskLoadResult* LoadToMemoryFromDisk(const String& path);
 
 		/// <summary>

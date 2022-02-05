@@ -33,6 +33,5 @@ namespace Rudy
 			localOffset += m_Elements[i].Size;
 			m_Stride += m_Elements[i].Size;
 		}
-		printf("Stride: %d\n", m_Stride);
 	}
 }

@@ -16,7 +16,7 @@ namespace Bite
 		* Check if already has this generator
 		*/
 		WindowLayout* layout = generator();
-		printf("New gui window %s\n", *layout->GetWindowName());
+
 		if (HasGenerator(layout->GetType()))
 		{
 			delete layout;

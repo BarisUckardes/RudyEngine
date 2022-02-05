@@ -9,8 +9,12 @@
 #include <Rudy/Platform/Utility/PlatformFile.h>
 #include <Rudy/Core/Log.h>
 #include <Rudy/Asset/AssetWriteConstants.h>
+#include <Bite/Domain/Assets/AssetWriters.h>
+#include <Bite/Editor/Session/EditorSession.h>
+
 namespace Bite
 {
+
 	DomainFolderView::DomainFolderView(DomainFolderView* parentFolder, const Rudy::String& selfPath,EditorSession* ownerSession)
 	{
 		/*
@@ -119,6 +123,15 @@ namespace Bite
 		Rudy::ByteBlock assetContentBytes;
 
 		/*
+		* Generate asset header
+		*/
+		Rudy::AssetHeaderContainer header;
+		header.Type = assetType;
+		header.ID = Rudy::Guid::Create();
+		Rudy::Memory::MemoryCopy(&header.Name, (void*)*name, name.GetCursor() + 1);
+		header.Offset = sizeof(Rudy::AssetHeaderContainer);
+
+		/*
 		* Catch asset type and generate source file
 		*/
 		switch (assetType)
@@ -147,75 +160,53 @@ namespace Bite
 				Rudy::ShaderStage stage = *(Rudy::ShaderStage*)parameter;
 
 				/*
-				* Generate new shader container
+				* Create shader default source
 				*/
 				Rudy::String sourceText = "No Shader source";
 
 				/*
-				* Generate header
+				* Create shader write parameters
 				*/
-				Rudy::AssetHeaderContainer header;
-				header.Type = assetType;
-				header.ID = Rudy::Guid::Create();
-				Rudy::Memory::MemoryCopy(&header.Name, (void*)*name, name.GetCursor() +1);
-				header.Offset = sizeof(Rudy::AssetHeaderContainer);
+				ShaderWriteParameters parameters = { stage,sourceText };
+
+				/*
+				* Write asset contets
+				*/
+				ShaderAssetWriter writer(m_OwnerSession->GetApplicationSession());
+				writer.Write(&parameters, assetContentBytes);
+
+				/*
+				* Set header target asset  size
+				*/
 				header.Size = 4 + sourceText.GetCursor();
 
-				/*
-				* Generate byte block
-				*/
-				headerBytes = Rudy::AssetHeaderGenerator::GenerateByteBlock(header);
-
-				/*
-				* Generate shader content bytes
-				*/
-				Byte* assetContentBuffer = new Byte[4 + sourceText.GetCursor()];
-				Rudy::Memory::MemoryCopy(assetContentBuffer, &stage, 4);
-				Rudy::Memory::MemoryCopy((assetContentBuffer + 4), (char*) * sourceText, sourceText.GetCursor());
-				assetContentBytes = Rudy::ByteBlock(assetContentBuffer,4 + sourceText.GetCursor());
-
-				/*
-				* Free allocated resources
-				*/
-				delete[] assetContentBuffer;
 				break;
 			}
 			case Rudy::AssetType::ShaderProgram:
 			{
-				
 				/*
-				* Generate header
+				* Get shader program parameter
 				*/
-				Rudy::AssetHeaderContainer header;
-				header.Type = assetType;
-				header.ID = Rudy::Guid::Create();
-				Rudy::Memory::MemoryCopy(&header.Name, (void*)*name, name.GetCursor() + 1);
-				header.Offset = sizeof(Rudy::AssetHeaderContainer);
-				header.Size = 4 + ASSET_WRITE_MAX_NAME + ASSET_WRITE_MAX_NAME;
-				LOG("Shader program writing header");
-				/*
-				* Generate header bytes
-				*/
-				headerBytes = Rudy::AssetHeaderGenerator::GenerateByteBlock(header);
+				Rudy::String programName = "Default program name";
+				Rudy::String categoryName = "Default category name";
+				Rudy::Array<Rudy::Shader*> shaders;
 
 				/*
-				* Generate shader program content bytes
+				* Create shader program write parameters
 				*/
-				Rudy::String shaderName = "Undefined shader name";
-				Rudy::String shaderCategory = "Undefined shader category";
-				unsigned long shaderCount = 0;
-				Byte* assetContentBuffer = new Byte[4 + ASSET_WRITE_MAX_NAME + ASSET_WRITE_MAX_NAME];
-				Rudy::Memory::MemoryCopy(assetContentBuffer, &shaderCount, sizeof(unsigned long));
-				Rudy::Memory::MemoryCopy(assetContentBuffer+4,(char*) * shaderName, ASSET_WRITE_MAX_NAME);
-				Rudy::Memory::MemoryCopy((assetContentBuffer + 4 + ASSET_WRITE_MAX_NAME), (char*)*shaderCategory, ASSET_WRITE_MAX_NAME);
-				assetContentBytes = Rudy::ByteBlock(assetContentBuffer, 4 + ASSET_WRITE_MAX_NAME + ASSET_WRITE_MAX_NAME);
+				ShaderProgramWriteParameters parameters = { programName,categoryName,shaders };
+			
+				/*
+				* Write asset contets
+				*/
+				ShaderProgramAssetWriter writer(m_OwnerSession->GetApplicationSession());
+				writer.Write(&parameters, assetContentBytes);
 
 				/*
-				* Free allocated resources
+				* Set header target asset size
 				*/
-				LOG("Free content buffer started");
-				delete[] assetContentBuffer;
-				LOG("Free content buffer");
+				header.Size = ASSET_WRITE_MAX_NAME + ASSET_WRITE_MAX_NAME + 4u + sizeof(unsigned char*)*shaders.GetCursor();
+
 				break;
 			}
 			case Rudy::AssetType::Mesh:
@@ -227,21 +218,25 @@ namespace Bite
 		}
 		
 		/*
+		* Generate header bytes
+		*/
+		headerBytes = Rudy::AssetHeaderGenerator::GenerateByteBlock(header);
+
+		/*
 		* Write header to file
 		*/
-		LOG("Write to file header started");
 		Rudy::PlatformFile::Write(assetPath, headerBytes);
-		LOG("Write to file header");
+
 		/*
 		* Write shader content to file
 		*/
 		Rudy::PlatformFile::WriteAppend(assetPath,assetContentBytes);
-		LOG("Write to file asset content");
+
 		/*
 		* Generate new DomainAssetView with written file
 		*/
 		DomainAssetView* assetView = new DomainAssetView(assetPath, m_OwnerSession);
-		LOG("Register asset view");
+
 		/*
 		* Register asset view
 		*/

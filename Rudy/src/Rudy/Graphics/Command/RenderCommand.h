@@ -12,6 +12,9 @@ namespace Rudy
 		RenderCommand() = default;
 		~RenderCommand() = default;
 
+		/// <summary>
+		/// Executes the render command implementation
+		/// </summary>
 		virtual void Execute() = 0;
 	};
 }

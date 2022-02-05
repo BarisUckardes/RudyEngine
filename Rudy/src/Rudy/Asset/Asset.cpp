@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <Rudy/Core/Log.h>
 #include <Rudy/Asset/AssetWriteConstants.h>
+#include <Rudy/Asset/Loaders/AssetLoaders.h>
 namespace Rudy
 {
 	Asset::Asset(const AssetHeaderContainer& header,const String& assetAbsolutePath,AssetPackage* ownerPackage,bool bTargetsRawFile)
@@ -25,7 +26,7 @@ namespace Rudy
 	{
 		return m_bHasCache;
 	}
-	void Asset::Load(ApplicationSession* session)
+	void Asset::Load(ApplicationSession* session,bool bCacheLoadedData)
 	{
 		/*
 		* Validate if its loaded
@@ -44,10 +45,6 @@ namespace Rudy
 			switch (type)
 			{
 				case Rudy::AssetType::Undefined:
-					break;
-				case Rudy::AssetType::Prefab:
-					break;
-				case Rudy::AssetType::World:
 					break;
 				case Rudy::AssetType::Texture1D:
 					break;
@@ -75,7 +72,7 @@ namespace Rudy
 					/*
 					* Set texture data
 					*/
-					texture->SetTextureData(result->NativaDataBlock, result->DataBlock.GetBlockSize());
+					texture->SetTextureData(result->DataBlock.GetBlock(), result->DataBlock.GetBlockSize());
 
 					loadedObject = (RudyObject*)texture;
 					break;
@@ -84,15 +81,7 @@ namespace Rudy
 					break;
 				case Rudy::AssetType::CubeTexture:
 					break;
-				case Rudy::AssetType::Material:
-					break;
-				case Rudy::AssetType::Shader:
-					break;
-				case Rudy::AssetType::ShaderProgram:
-					break;
 				case Rudy::AssetType::Mesh:
-					break;
-				case Rudy::AssetType::Framebuffer2D:
 					break;
 				default:
 					break;
@@ -100,6 +89,9 @@ namespace Rudy
 		}
 		else
 		{
+			/*
+			* Create asset content bytes byte block
+			*/
 			Rudy::ByteBlock assetContentBytes;
 
 			/*
@@ -110,12 +102,24 @@ namespace Rudy
 				/*
 				* Load cached data here
 				*/
+				LOG("This asset has cache, loading from the cache");
 			}
 			else
 			{
+				LOG("No cache found for this asset, loading from the disk");
+				/*
+				* Read from the disk
+				*/
 				PlatformFile::Read(m_AbsolutePath,
 					m_Header.Offset, m_Header.Offset + m_Header.Size,
 					assetContentBytes);
+				/*
+				* Cache the data if its requested
+				*/
+				if (bCacheLoadedData)
+				{
+					m_CachedData = ByteBlock(assetContentBytes);
+				}
 			}
 			
 
@@ -140,88 +144,27 @@ namespace Rudy
 				case Rudy::AssetType::Shader:
 				{
 					/*
-					* Get shader stage type
+					* Create shader asset loader
 					*/
-					const ShaderStage stage = assetContentBytes.To<ShaderStage>(0);
-
-					/*
-					* Calculate the length of the shader source
-					*/
-					const unsigned long shaderSourceLength = assetContentBytes.GetBlockSize() - 4u + 1u; // TODO: something sketchy about the byte strides
-
-					/*
-					* Get shader stage source
-					*/
-					const String sourceText((char*)assetContentBytes.GetAdress(0)+4,shaderSourceLength);
-					/*
-					* Create a shader
-					*/
-					Shader* shader = session->GetDefaultGraphicsDevice()->CreateShader(stage);
-
-					/*
-					* Compile shader
-					*/
-					shader->Compile(sourceText);
+					ShaderAssetLoader loader(session);
 
 					/*
 					* Set loaded object as shader
 					*/
-					loadedObject = (RudyObject*)shader;
+					loadedObject = loader.Load(assetContentBytes);
 					break;
 				}
 				case Rudy::AssetType::ShaderProgram:
 				{
 					/*
-					* Get shader program shader count
+					* Create shader program asset resolver
 					*/
-					const unsigned int shaderCount = assetContentBytes.To<unsigned int>(0);
-
-					/*
-					* Get shader program name
-					*/
-					const String programName((char*)assetContentBytes.GetAdress(0) + 4, ASSET_WRITE_MAX_NAME);
-
-					/*
-					* Get shader program category
-					*/
-					const String programCategory((char*)assetContentBytes.GetAdress(0) + ASSET_WRITE_MAX_NAME + 4, ASSET_WRITE_MAX_NAME);
-
-					/*
-					* Iterate and convert shader guids
-					*/
-					const unsigned int shadersOffset = 4u + ASSET_WRITE_MAX_NAME + ASSET_WRITE_MAX_NAME;
-					Array<Shader*> programShaders;
-					for (unsigned int i = 0; i < shaderCount; i++)
-					{
-						/*
-						* Get shader guid
-						*/
-						const Guid shaderID = assetContentBytes.To<Guid>(shadersOffset + i * sizeof(Guid));
-
-						/*
-						* Load shader via asset pool
-						*/
-						Shader* loadedShader = nullptr;
-
-						/*
-						* Register shader into list
-						*/
-						programShaders.Add(loadedShader);
-					}
-
-					/*
-					* Create shader program
-					*/
-					ShaderProgram* program = session->GetDefaultGraphicsDevice()->CreateShaderProgram();
-					/*program->SetProgramName(programName);
-					program->SetProgramCategory(programCategory);
-					program->LinkProgram(programShaders);*/
-
+					ShaderAssetLoader loader(session);
 
 					/*
 					* Set loaded object as shader program
 					*/
-					loadedObject = (RudyObject*)program;
+					loadedObject = loader.Load(assetContentBytes);
 					break;
 				}
 					break;
@@ -256,11 +199,20 @@ namespace Rudy
 			return;
 
 		/*
-		* Unload
+		* Destroy object and its contents
 		*/
-		if(!m_LoadedObject->IsDestroyed())
+		if (!m_LoadedObject->IsDestroyed())
+		{
 			m_LoadedObject->Destroy();
+		}
+
+		LOG("DELETED asset ID : %s", m_Header.ID.GetAsString());
+
+		/*
+		* Delete heap object
+		*/
 		delete m_LoadedObject;
+
 		m_LoadedObject = nullptr;
 	}
 	RudyObject* Asset::GetLoadedObject() const

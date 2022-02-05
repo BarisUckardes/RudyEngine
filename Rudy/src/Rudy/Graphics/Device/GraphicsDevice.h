@@ -10,6 +10,9 @@
 #include <Rudy/Graphics/Shader/Shader.h>
 namespace Rudy
 {
+	/*
+	* Forward declerations
+	*/
 	class Window;
 	class IndexBuffer;
 	class VertexBuffer;
@@ -21,6 +24,7 @@ namespace Rudy
 	class GraphicsDeviceObject;
 	class String;
 	class Framebuffer;
+
 	/// <summary>
 	/// Graphics api-agnostic graphics device class
 	/// </summary>
