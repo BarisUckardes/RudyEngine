@@ -10,6 +10,6 @@ namespace Rudy
 		~ShaderProgramAssetLoader() = default;
 
 		// Inherited via IAssetResolver
-		virtual RudyObject* Load(const ByteBlock& assetContentBytes) override;
+		virtual AssetObject* Load(const ByteBlock& assetContentBytes) override;
 	};
 }

@@ -94,9 +94,5 @@ namespace Rudy
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	void OpenGLTexture2D::FreeDeviceObjectCore()
-	{
-		glDeleteTextures(1, &m_TextureID);
-	}
 
 }

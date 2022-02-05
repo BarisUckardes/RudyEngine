@@ -38,7 +38,7 @@ namespace Rudy
 		* Catch asset type and create asset
 		*/
 		AssetType type = m_Header.Type;
-		RudyObject* loadedObject = nullptr;
+		AssetObject* loadedObject = nullptr;
 		
 		if (m_bTargetsRawFile)
 		{
@@ -74,7 +74,7 @@ namespace Rudy
 					*/
 					texture->SetTextureData(result->DataBlock.GetBlock(), result->DataBlock.GetBlockSize());
 
-					loadedObject = (RudyObject*)texture;
+					loadedObject = (AssetObject*)texture;
 					break;
 				}
 				case Rudy::AssetType::Texture3D:
@@ -201,9 +201,9 @@ namespace Rudy
 		/*
 		* Destroy object and its contents
 		*/
-		if (!m_LoadedObject->IsDestroyed())
+		if (!m_LoadedObject->IsAssetFreed())
 		{
-			m_LoadedObject->Destroy();
+			m_LoadedObject->FreeAsset();
 		}
 
 		LOG("DELETED asset ID : %s", m_Header.ID.GetAsString());
@@ -215,7 +215,7 @@ namespace Rudy
 
 		m_LoadedObject = nullptr;
 	}
-	RudyObject* Asset::GetLoadedObject() const
+	AssetObject* Asset::GetLoadedObject() const
 	{
 		return m_LoadedObject;
 	}
@@ -248,8 +248,8 @@ namespace Rudy
 		/*
 		* Destory if its not destroyed
 		*/
-		if (!m_LoadedObject->IsDestroyed())
-			m_LoadedObject->Destroy();
+		if (!m_LoadedObject->IsAssetFreed())
+			m_LoadedObject->FreeAsset();
 
 		/*
 		* Delete heap object

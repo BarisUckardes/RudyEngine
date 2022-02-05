@@ -157,12 +157,4 @@ namespace Rudy
     {
 
     }
-    void OpenGLCommandBuffer::FreeDeviceObjectCore()
-    {
-        for (int i = 0; i < m_Commands.GetCursor(); i++)
-        {
-            delete m_Commands[i];
-        }
-        m_Commands.Clear();
-    }
 }

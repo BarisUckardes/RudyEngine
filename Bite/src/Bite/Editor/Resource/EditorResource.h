@@ -4,7 +4,7 @@
 #include <Rudy/Memory/String.h>
 namespace Rudy
 {
-	class RudyObject;
+	class AssetObject;
 	class AssetPackage;
 }
 namespace Bite
@@ -22,7 +22,7 @@ namespace Bite
 		/// Returns the object of the resource
 		/// </summary>
 		/// <returns></returns>
-		FORCEINLINE Rudy::RudyObject* GetResourceObject() const;
+		FORCEINLINE Rudy::AssetObject* GetResourceObject() const;
 
 		/// <summary>
 		/// Returns the resource asset type
@@ -44,7 +44,7 @@ namespace Bite
 	private:
 		~EditorResource();
 		Rudy::AssetType m_AssetType;
-		Rudy::RudyObject* m_TargetObject;
+		Rudy::AssetObject* m_TargetObject;
 		Rudy::String m_AbsolutePath;
 		Rudy::String m_Name;
 	};

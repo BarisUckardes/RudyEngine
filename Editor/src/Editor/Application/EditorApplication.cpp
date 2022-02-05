@@ -35,6 +35,7 @@ namespace EditorLauncher
 		resourceNames.Add("FolderIcon.png");
 		resourceNames.Add("DeleteIcon.png");
 		resourceNames.Add("EditIcon.png");
+		resourceNames.Add("WorldIcon.png");
 
 		/*
 		* Create editor commands

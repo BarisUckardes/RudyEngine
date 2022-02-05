@@ -24,12 +24,18 @@
     <ClCompile Include="src\Editor\Test\TestClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Editor\Test\TestSubClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Editor\Application\EditorApplication.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Editor\Test\TestClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\Test\TestSubClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

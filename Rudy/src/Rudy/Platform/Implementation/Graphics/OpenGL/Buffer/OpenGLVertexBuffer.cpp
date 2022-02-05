@@ -32,10 +32,6 @@ namespace Rudy
         glBindVertexArray(0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
-    void OpenGLVertexBuffer::FreeDeviceObjectCore()
-    {
-        glDeleteBuffers(2, (unsigned int*)&m_Handles);
-    }
     void OpenGLVertexBuffer::Initialize(const VertexLayout& vertexLayout)
     {
         unsigned int vertexArrayID = 0;

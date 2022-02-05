@@ -10,7 +10,7 @@ namespace Rudy
 	{
 		m_Session = nullptr;
 	}
-	RudyObject* IAssetLoader::Load(const ByteBlock& assetContentBytes)
+	AssetObject* IAssetLoader::Load(const ByteBlock& assetContentBytes)
 	{
 		return nullptr;
 	}

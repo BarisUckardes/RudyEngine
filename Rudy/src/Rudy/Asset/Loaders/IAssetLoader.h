@@ -5,8 +5,7 @@ namespace Rudy
 {
 	class ApplicationSession;
 	class ByteBlock;
-	class RudyObject;
-
+	class AssetObject;
 	/// <summary>
 	/// Asset loader interface for the custom asset loaders to implement
 	/// </summary>
@@ -22,7 +21,7 @@ namespace Rudy
 		/// </summary>
 		/// <param name="assetContentBytes"></param>
 		/// <returns></returns>
-		virtual RudyObject* Load(const ByteBlock& assetContentBytes) = 0;
+		virtual AssetObject* Load(const ByteBlock& assetContentBytes) = 0;
 
 	protected:
 

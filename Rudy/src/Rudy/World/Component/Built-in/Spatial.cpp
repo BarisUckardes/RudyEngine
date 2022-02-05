@@ -37,7 +37,4 @@ namespace Rudy
 	{
 		return false;
 	}
-	void Spatial::DestroyCore()
-	{
-	}
 }

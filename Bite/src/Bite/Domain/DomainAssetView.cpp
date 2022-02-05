@@ -53,7 +53,7 @@ namespace Bite
 	{
 
 	}
-	Rudy::RudyObject* DomainAssetView::GetAssetObject() const
+	Rudy::AssetObject* DomainAssetView::GetAssetObject() const
 	{
 		return m_TargetAsset == nullptr ? nullptr : m_TargetAsset->GetLoadedObject();
 	}

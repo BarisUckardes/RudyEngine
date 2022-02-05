@@ -36,9 +36,6 @@ namespace Rudy
 		}
 	}
 
-	void WorldLogicView::DestroyCore()
-	{
-	}
 
 	void WorldLogicView::RegisterResolverCore(IWorldResolver* resolver)
 	{

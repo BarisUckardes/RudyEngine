@@ -16,7 +16,6 @@ namespace Rudy
 
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;
-		virtual void DestroyCore() override;
 		virtual bool ShouldTick() const override;
 
 		VertexBuffer* m_VertexBuffer;

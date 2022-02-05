@@ -43,7 +43,7 @@ namespace Rudy
 			/*
 			* Destroy world
 			*/
-			world->Destroy();
+			world->FreeAsset();
 
 			/*
 			* Delete heap object
@@ -96,7 +96,7 @@ namespace Rudy
 			/*
 			* Destroy the world
 			*/
-			world->Destroy();
+			world->FreeAsset();
 
 			/*
 			* Free the memory

@@ -108,6 +108,9 @@
     <ClInclude Include="src\Bite\Domain\Assets\ShaderProgramAssetWriter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Bite\Domain\Assets\WorldAssetWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bite\Module\BiteModule.cpp">
@@ -183,6 +186,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Bite\Domain\Assets\ShaderProgramAssetWriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bite\Domain\Assets\WorldAssetWriter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

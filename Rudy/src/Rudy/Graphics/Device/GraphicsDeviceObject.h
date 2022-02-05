@@ -17,11 +17,6 @@ namespace Rudy
 		/// </summary>
 		/// <returns></returns>
 		virtual void* GetNativeHandle() const = 0;
-
-		/// <summary>
-		/// Frees the handles and allocations for this device object
-		/// </summary>
-		void FreeDeviceObject();
 	protected:
 		/// <summary>
 		/// Returns the owner graphics device
@@ -29,7 +24,6 @@ namespace Rudy
 		/// <returns></returns>
 		FORCEINLINE GraphicsDevice* GetOwnerGraphicsDevice() const;
 
-		virtual void FreeDeviceObjectCore() = 0;
 		GraphicsDeviceObject() = default;
 		virtual ~GraphicsDeviceObject() = 0;
 	private:

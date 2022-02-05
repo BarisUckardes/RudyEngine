@@ -7,6 +7,7 @@ namespace Rudy
 {
 	class ReflectionTypeField;
 	class ReflectionFunction;
+
 	/// <summary>
 	/// A reflection type
 	/// </summary>
@@ -14,8 +15,9 @@ namespace Rudy
 	{
 		friend class ReflectionFieldTypeDispatcher;
 		friend class ReflectionMemberFunctionDispatcher;
+		friend class ReflectionSubTypeDispatcher;
 	public:
-		ReflectionType(const String& typeName, unsigned int typeSize,Array< ReflectionType*> inheritedClasses,bool bPrimitive);
+		ReflectionType(const String& typeName, unsigned int typeSize,bool bPrimitive);
 		~ReflectionType() = default;
 
 		/// <summary>
@@ -50,6 +52,13 @@ namespace Rudy
 		bool IsPrimitive() const;
 
 		/// <summary>
+		/// Returns whether the given type is one of the classes which this type inherited
+		/// </summary>
+		/// <param name="type"></param>
+		/// <returns></returns>
+		bool IsSubType(ReflectionType* subType) const;
+
+		/// <summary>
 		/// Returns the type size in bytes
 		/// </summary>
 		/// <returns></returns>
@@ -59,7 +68,7 @@ namespace Rudy
 		/// Returns the inherited classes
 		/// </summary>
 		/// <returns></returns>
-		Array<ReflectionType*> GetInheritedClasses() const;
+		Array<ReflectionType*> GetSubTypes() const;
 
 		/// <summary>
 		/// Returns the function via name
@@ -95,8 +104,14 @@ namespace Rudy
 		/// <param name="function"></param>
 		void RegisterFunction(ReflectionFunction* function);
 
+		/// <summary>
+		/// An internal method used in registering inherited classes
+		/// </summary>
+		/// <param name="inheritedType"></param>
+		void RegisterSubType(ReflectionType* inheritedType);
+
 		ReflectableObjectGenerator m_DefaultObjectGenerator;
-		Array<ReflectionType*> m_InheritedClasses;
+		Array<ReflectionType*> m_SubTypes;
 		Array<ReflectionTypeField*> m_Fields;
 		Array<ReflectionFunction*> m_Functions;
 		String m_TypeName;
@@ -119,17 +134,25 @@ namespace Rudy
 	public:
 		ReflectionRawTypeDispatcher(const String& typeName, unsigned int typeSize);
 		~ReflectionRawTypeDispatcher() = default;
+
+		/// <summary>
+		/// Returns the raw type which is dispatched by this dispatcher
+		/// </summary>
+		/// <returns></returns>
 		ReflectionType* GetRawType() const;
 	private:
 		ReflectionType* m_Type;
 
 	};
-	class RUDY_API ReflectionTypeUtils
+
+	/// <summary>
+	/// A dispatcher for registering sub types into derived types
+	/// </summary>
+	class RUDY_API ReflectionSubTypeDispatcher
 	{
 	public:
-		ReflectionTypeUtils() = delete;
-		~ReflectionTypeUtils() = delete;
-
+		ReflectionSubTypeDispatcher(ReflectionType* targetType,ReflectionType* subType);
+		~ReflectionSubTypeDispatcher() = default;
 	};
 
 	

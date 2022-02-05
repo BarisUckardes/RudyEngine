@@ -46,7 +46,7 @@ namespace Bite
 	{
 		return m_ProjectProperties;
 	}
-	Rudy::RudyObject* EditorSession::GetEditorResource(Rudy::AssetType type, const Rudy::String& name)
+	Rudy::AssetObject* EditorSession::GetEditorResource(Rudy::AssetType type, const Rudy::String& name)
 	{
 		/*
 		* Try get editor resource

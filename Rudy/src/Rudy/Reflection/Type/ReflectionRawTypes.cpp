@@ -1,7 +1,7 @@
 #include "ReflectionRawTypes.h"
 #include <Rudy/Memory/Array.h>
-#define GENERATE_RAW_TYPE(type) Rudy::ReflectionType* GET_RAW_NAME(type)_reflection_type_acccessor_::s_OwnerType = new Rudy::ReflectionType(#type,sizeof(type),Rudy::Array<Rudy::ReflectionType*>(),true);
-#define GENERATE_VOID_TYPE Rudy::ReflectionType* GET_RAW_NAME(void)_reflection_type_acccessor_::s_OwnerType = new Rudy::ReflectionType("void",0,Rudy::Array<Rudy::ReflectionType*>(),true);
+#define GENERATE_RAW_TYPE(type) Rudy::ReflectionType* GET_RAW_NAME(type)_reflection_type_acccessor_::s_OwnerType = new Rudy::ReflectionType(#type,sizeof(type),true);
+#define GENERATE_VOID_TYPE Rudy::ReflectionType* GET_RAW_NAME(void)_reflection_type_acccessor_::s_OwnerType = new Rudy::ReflectionType("void",0,true);
 GENERATE_RAW_TYPE(int);
 GENERATE_RAW_TYPE(uint);
 GENERATE_RAW_TYPE(float);

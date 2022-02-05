@@ -49,8 +49,6 @@ namespace Rudy
 
 		virtual bool ShouldTick() const override;
 
-	protected:
-		virtual void DestroyCore() override;
 	private:
 		Vector3f m_Position;
 		Vector3f m_Rotation;

@@ -4,15 +4,16 @@
 #include <stdio.h>
 namespace Rudy
 {
-	ReflectionType::ReflectionType(const String& typeName, unsigned int typeSize,Array<ReflectionType*> inheritedClasses,bool bPrimitive)
+	ReflectionType::ReflectionType(const String& typeName, unsigned int typeSize,bool bPrimitive)
 	{
+		LOG("Type intialized %s", *typeName);
+
 		/*
 		* Set reflection properties
 		*/
 		m_TypeName = typeName;
 		m_TypeSize = typeSize;
 		m_bPrimitive = bPrimitive;
-		m_InheritedClasses = inheritedClasses;
 
 		/*
 		* Register this reflection into its assembly
@@ -58,13 +59,52 @@ namespace Rudy
 	{
 		return m_Fields;
 	}
+	bool ReflectionType::IsSubType(ReflectionType* subType) const
+	{
+		/*
+		* Iterate sub types and look for a match
+		*/
+		for (unsigned int i = 0; i < m_SubTypes.GetCursor(); i++)
+		{
+			/*
+			* Get sub type
+			*/
+			const ReflectionType* type = m_SubTypes[i];
+
+			/*
+			* Validate if its the type we are looking for
+			*/
+			if (type == subType)
+				return true;
+
+		}
+
+		/*
+		* Iterate sub types and check if the given type is down there
+		*/
+		for (unsigned int i = 0; i < m_SubTypes.GetCursor(); i++)
+		{
+			/*
+			* Get sub tyoe
+			*/
+			const ReflectionType* type = m_SubTypes[i];
+
+			/*
+			* Check
+			*/
+			if (type->IsSubType(subType))
+				return true;
+		}
+
+		return false;
+	}
 	unsigned int ReflectionType::GetTypeSizeInBytes() const
 	{
 		return m_TypeSize;
 	}
-	Array<ReflectionType*> ReflectionType::GetInheritedClasses() const
+	Array<ReflectionType*> ReflectionType::GetSubTypes() const
 	{
-		return m_InheritedClasses;
+		return m_SubTypes;
 	}
 	ReflectionFunction* ReflectionType::GetFunction(const String& functionName) const
 	{
@@ -83,12 +123,11 @@ namespace Rudy
 			*/
 			if (function->GetName() == functionName)
 			{
-				LOG("Function[%s] found in [%s]", *function->GetName(), *m_TypeName);
 				return function;
 			}
 				
 		}
-		LOG("Function NOT FOUNDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
+
 		return nullptr;
 	}
 	Array<ReflectionFunction*> ReflectionType::GetFunctions() const
@@ -103,12 +142,16 @@ namespace Rudy
 	{
 		m_Functions.Add(function);
 	}
+	void ReflectionType::RegisterSubType(ReflectionType* inheritedType)
+	{
+		m_SubTypes.Add(inheritedType);
+	}
 	ReflectionRawTypeDispatcher::ReflectionRawTypeDispatcher(const String& typeName, unsigned int typeSize)
 	{
 		/*
 		* Create new type
 		*/
-		ReflectionType* rawType = new ReflectionType(typeName, typeSize, {}, true);
+		ReflectionType* rawType = new ReflectionType(typeName, typeSize, true);
 		m_Type = rawType;
 
 		/*
@@ -121,5 +164,13 @@ namespace Rudy
 		return m_Type;
 	}
 
+
+	ReflectionSubTypeDispatcher::ReflectionSubTypeDispatcher(ReflectionType* targetType,ReflectionType* subType)
+	{
+		/*
+		* Register sub type
+		*/
+		targetType->RegisterSubType(subType);
+	}
 
 }

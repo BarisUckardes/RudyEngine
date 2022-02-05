@@ -55,7 +55,6 @@ namespace Rudy
         commandBuffer->FinalizeRecording();
         commandBuffer->Execute();
 
-        commandBuffer->FreeDeviceObject();
 
         delete commandBuffer;
     }

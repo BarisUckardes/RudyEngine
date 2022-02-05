@@ -50,18 +50,21 @@ namespace Rudy
 	};
 
 	#define GENERATE_REFLECTABLE_OBJECT(type) private:\
-											  static Rudy::ReflectionType* s_Type;\
+											  static Rudy::ReflectionType* s_Type_##type;\
 											  protected:\
 											  public:\
-											  virtual Rudy::ReflectionType* GetType() const override { return s_Type; }\
-											  static Rudy::ReflectionType* GetStaticType() { return s_Type;}\
+											  virtual Rudy::ReflectionType* GetType() const override { return s_Type_##type; }\
+											  static Rudy::ReflectionType* GetStaticType() { return s_Type_##type;}\
 												
-	#define GENERATE_REFLECTABLE_TYPE(type,...)\
-	Rudy::ReflectionType* type::s_Type = new Rudy::ReflectionType(#type,sizeof(type),{__VA_ARGS__},false);\
+	#define GENERATE_REFLECTABLE_TYPE(type)\
+	inline Rudy::ReflectionType* type::s_Type_##type = new Rudy::ReflectionType(#type,sizeof(type),false);\
 
-	
+	#define GENERATE_REFLECTABLE_SUB_TYPE(targetType,subType)\
+	Rudy::ReflectionSubTypeDispatcher GET_RAW_NAME(targetType)GET_RAW_NAME(subType)_reflection_sub_type(typeof(targetType),typeof(subType));
 
-	#define GENERATE_REFLECTION_ACCESSOR(type) class GET_RAW_NAME(type)_reflection_type_acccessor_\
+	#define GENERATE_REFLECTION_ACCESSOR(type)\
+	GENERATE_REFLECTABLE_TYPE(type);\
+	class GET_RAW_NAME(type)_reflection_type_acccessor_\
 	{\
 	public:\
 		static Rudy::ReflectionType* GetOwnerType() { return type::GetStaticType(); }\

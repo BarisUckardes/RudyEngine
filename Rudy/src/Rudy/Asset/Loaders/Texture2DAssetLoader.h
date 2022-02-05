@@ -14,7 +14,7 @@ namespace Rudy
 
 
 		// Inherited via IAssetResolver
-		virtual RudyObject* Load(const ByteBlock& assetContentBytes) override;
+		virtual AssetObject* Load(const ByteBlock& assetContentBytes) override;
 
 	};
 

@@ -17,7 +17,6 @@ namespace Rudy
 		virtual void* GetNativeHandle() const override;
 	protected:
 		virtual void SetDataCore(const unsigned char* dataPtr, const unsigned int elementSize, const unsigned int elementCount) override;
-		virtual void FreeDeviceObjectCore() override;
 	private:
 		unsigned int m_Handles[2];
 	};

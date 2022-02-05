@@ -7,8 +7,6 @@ namespace Rudy
 	{
 		GENERATE_REFLECTABLE_OBJECT(PerspectiveObserver);
 	public:
-		// Inherited via ObserverComponent
-		virtual void DestroyCore() override;
 
 		virtual bool ShouldTick() const override;
 

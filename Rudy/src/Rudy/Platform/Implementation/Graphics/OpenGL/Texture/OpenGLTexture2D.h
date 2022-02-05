@@ -17,8 +17,6 @@ namespace Rudy
 		virtual void SetTextureData(Byte* data, unsigned int size) override;
 	protected:
 		virtual void InitializeCore() override;
-
-		virtual void FreeDeviceObjectCore() override;
 	private:
 		unsigned int m_TextureID = 0;
 	};

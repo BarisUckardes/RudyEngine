@@ -8,7 +8,7 @@
 namespace Rudy
 {
 	class ApplicationSession;
-	class RudyObject;
+	class AssetObject;
 	class AssetPackage;
 }
 namespace Bite
@@ -55,7 +55,7 @@ namespace Bite
 		/// <param name="type"></param>
 		/// <param name="name"></param>
 		/// <returns></returns>
-		FORCEINLINE Rudy::RudyObject* GetEditorResource(Rudy::AssetType type, const Rudy::String& name);
+		FORCEINLINE Rudy::AssetObject* GetEditorResource(Rudy::AssetType type, const Rudy::String& name);
 
 		/// <summary>
 		/// Returns the session gui painter

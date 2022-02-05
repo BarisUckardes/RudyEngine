@@ -15,10 +15,6 @@ namespace Rudy
 		GetOwnerEntity()->GetOwnerWorld()->GetView<WorldGraphicsView>()->RemoveGraphicsObject(this);
 	}
 
-	void DeferredRenderable::DestroyCore()
-	{
-	}
-
 	bool DeferredRenderable::ShouldTick() const
 	{
 		return false;

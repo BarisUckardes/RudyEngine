@@ -65,7 +65,7 @@ namespace Bite
         m_TargetObject = asset->GetLoadedObject();
     }
 
-    Rudy::RudyObject* Bite::EditorResource::GetResourceObject() const
+    Rudy::AssetObject* Bite::EditorResource::GetResourceObject() const
     {
         return m_TargetObject;
     }

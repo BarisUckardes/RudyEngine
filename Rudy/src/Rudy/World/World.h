@@ -1,6 +1,6 @@
 #pragma once
 #include <Rudy/Memory/Array.h>
-#include <Rudy/Object/RudyObject.h>
+#include <Rudy/Object/AssetObject.h>
 #include <Rudy/World/WorldView.h>
 namespace Rudy
 {
@@ -10,7 +10,7 @@ namespace Rudy
 	/// <summary>
 	/// Represents a collection entities and setups
 	/// </summary>
-	class RUDY_API World : public RudyObject
+	class __declspec(dllexport) World : public AssetObject
 	{
 		friend class ApplicationSession;
 		GENERATE_REFLECTABLE_OBJECT(World);
@@ -58,7 +58,7 @@ namespace Rudy
 		/// <returns></returns>
 		FORCEINLINE GraphicsDevice* GetDefaultGraphicsDevice() const;
 	protected:
-		virtual void DestroyCore() override;
+		virtual void FreeAssetCore() override;
 	private:
 		World(ApplicationSession* targetSession);
 		~World() = default;
@@ -68,7 +68,9 @@ namespace Rudy
 		Array<Entity*> m_Entities;
 		ApplicationSession* m_OwnerSession;
 	};
+
 	GENERATE_REFLECTION_ACCESSOR(World);
+
 	template<typename TView, typename ...TParameters>
 	inline TView* World::RegisterView(TParameters... parameters)
 	{

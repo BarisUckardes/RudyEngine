@@ -3,7 +3,6 @@
 #include <Bite/GUI/Painter/GUIPainter.h>
 namespace Bite
 {
-    GENERATE_REFLECTABLE_TYPE(WindowLayout);
     Rudy::String WindowLayout::GetWindowName() const
     {
         return "Unnamed Window";

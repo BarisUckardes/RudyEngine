@@ -48,7 +48,6 @@ namespace Rudy
 		/// <returns></returns>
 		Array<GraphicsResolver*> GetGraphicsResolvers() const;
 	private:
-		virtual void DestroyCore() override;
 		virtual void RegisterResolverCore(IWorldResolver* resolver) override;
 		virtual void RemoveResolverCore(IWorldResolver* resolver) override;
 

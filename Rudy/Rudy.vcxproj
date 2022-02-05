@@ -165,6 +165,7 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Rudy\Object\AssetObject.h" />
     <ClInclude Include="src\Rudy\Asset\AssetContentSizes.h" />
     <ClInclude Include="src\Rudy\Asset\Loaders\ShaderProgramAssetLoader.h" />
     <ClInclude Include="src\Rudy\Asset\Loaders\AssetLoaders.h" />
@@ -359,6 +360,7 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     <ClInclude Include="src\Rudy\Asset\Loaders\Texture2DAssetLoader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rudy\Object\AssetObject.cpp" />
     <ClCompile Include="src\Rudy\Asset\AssetContentSizes.cpp" />
     <ClCompile Include="src\Rudy\Asset\Loaders\ShaderProgramAssetLoader.cpp" />
     <ClCompile Include="src\Rudy\Asset\Loaders\ShaderAssetLoader.cpp" />

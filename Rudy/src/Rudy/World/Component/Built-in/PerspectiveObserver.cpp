@@ -4,9 +4,6 @@ namespace Rudy
 {
 	GENERATE_REFLECTABLE_TYPE(PerspectiveObserver);
 
-	void PerspectiveObserver::DestroyCore()
-	{
-	}
 	bool PerspectiveObserver::ShouldTick() const
 	{
 		return false;

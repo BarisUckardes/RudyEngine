@@ -40,7 +40,6 @@ namespace Rudy
 		/// <param name="component"></param>
 		FORCEINLINE void RemoveComponent(Component* component);
 	protected:
-		virtual void DestroyCore() override;
 		virtual void RegisterResolverCore(IWorldResolver* resolver) override;
 		virtual void RemoveResolverCore(IWorldResolver* resolver) override;
 	private:

@@ -12,7 +12,7 @@ namespace Rudy
 	{
 
 	}
-	RudyObject* ShaderProgramAssetLoader::Load(const ByteBlock& assetContentBytes)
+	AssetObject* ShaderProgramAssetLoader::Load(const ByteBlock& assetContentBytes)
 	{
 		/*
 		* Get shader program shader count
@@ -60,6 +60,6 @@ namespace Rudy
 		program->SetProgramCategory(programCategory);
 		program->LinkProgram(programShaders);*/
 
-		return (RudyObject*)program;
+		return (AssetObject*)program;
 	}
 }

@@ -141,7 +141,18 @@ namespace Bite
 			case Rudy::AssetType::Prefab:
 				break;
 			case Rudy::AssetType::World:
+			{
+				/*
+				* Create default per world data
+				*/
+
+				/*
+				* Create dummy world data
+				*/
+
+
 				break;
+			}
 			case Rudy::AssetType::Texture1D:
 				break;
 			case Rudy::AssetType::Texture2D:

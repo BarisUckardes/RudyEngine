@@ -1,5 +1,5 @@
 #pragma once
-#include <Rudy/Object/RudyObject.h>
+#include <Rudy/Object/AssetObject.h>
 #include <Rudy/Asset/AssetDefinition.h>
 #include <Rudy/Asset/Containers/AssetHeaderContainer.h>
 #include <Rudy/Memory/ByteBlock.h>
@@ -20,7 +20,7 @@ namespace Rudy
 		/// returns the loaded asset
 		/// </summary>
 		/// <returns></returns>
-		FORCEINLINE RudyObject* GetLoadedObject() const;
+		FORCEINLINE AssetObject* GetLoadedObject() const;
 
 		/// <summary>
 		/// Returns the owner package of this asset
@@ -86,7 +86,7 @@ namespace Rudy
 		void Unload();
 	private:
 		~Asset();
-		RudyObject* m_LoadedObject;
+		AssetObject* m_LoadedObject;
 		AssetPackage* m_OwnerPackage;
 		Rudy::ByteBlock m_CachedData;
 		AssetHeaderContainer m_Header;

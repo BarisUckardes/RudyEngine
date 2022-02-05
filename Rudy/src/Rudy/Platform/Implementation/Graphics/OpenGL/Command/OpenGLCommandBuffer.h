@@ -28,8 +28,6 @@ namespace Rudy
 		virtual void DrawIndexed(unsigned int count) override;
 		virtual void DrawInstanced() override;
 
-	protected:
-		virtual void FreeDeviceObjectCore() override;
 	private:
 		Array<RenderCommand*> m_Commands;
 		const ShaderProgram* m_LastBindShaderProgram;

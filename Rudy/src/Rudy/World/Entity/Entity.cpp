@@ -15,8 +15,7 @@ namespace Rudy
     {
         return m_Spatial;
     }
-    void Entity::DestroyCore()
+    void Entity::DestroyEntity()
     {
-
     }
 }

@@ -6,7 +6,7 @@
 namespace Rudy
 {
 	class Asset;
-	class RudyObject;
+	class AssetObject;
 	class AssetPackage;
 }
 namespace Bite
@@ -43,7 +43,7 @@ namespace Bite
 		/// Returns the taret asset object of this asset view
 		/// </summary>
 		/// <returns></returns>
-		FORCEINLINE Rudy::RudyObject* GetAssetObject() const;
+		FORCEINLINE Rudy::AssetObject* GetAssetObject() const;
 
 		/// <summary>
 		/// Returns the asset name

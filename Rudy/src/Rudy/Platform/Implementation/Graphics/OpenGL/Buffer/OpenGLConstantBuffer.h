@@ -12,13 +12,9 @@ namespace Rudy
 		OpenGLConstantBuffer(const String& bufferName, unsigned int bufferSize);
 		~OpenGLConstantBuffer() = default;
 
-
-		
 		virtual void* GetNativeHandle() const override { return nullptr; }
 		virtual void SetBufferData(void* dataPtr) override;
 		virtual void Initialize() override;
-	protected:
-		virtual void FreeDeviceObjectCore() override;
 	private:
 		unsigned int m_BufferID;
 	};

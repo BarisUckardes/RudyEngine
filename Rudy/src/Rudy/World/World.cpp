@@ -5,7 +5,6 @@
 #include <Rudy/Reflection/Type/ReflectionType.h>
 namespace Rudy
 {
-	GENERATE_REFLECTABLE_TYPE(World);
 	World::World(ApplicationSession* targetSession)
 	{
 		/*
@@ -56,7 +55,7 @@ namespace Rudy
 	{
 		return m_OwnerSession->GetDefaultGraphicsDevice();
 	}
-	void World::DestroyCore()
+	void World::FreeAssetCore()
 	{
 		/*
 		* Destroy all entites
@@ -71,7 +70,7 @@ namespace Rudy
 			/*
 			* Destroy entity
 			*/
-			entity->Destroy();
+			entity->DestroyEntity();
 
 			/*
 			* Free from memory
@@ -93,7 +92,7 @@ namespace Rudy
 			/*
 			* Destory view
 			*/
-			view->Destroy();
+			//view->Destroy();
 
 			/*
 			* Free from memory
@@ -107,4 +106,5 @@ namespace Rudy
 		*/
 		m_OwnerSession->RemoveWorld(this);
 	}
+	
 }

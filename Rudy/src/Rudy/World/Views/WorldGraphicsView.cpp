@@ -110,9 +110,6 @@ namespace Rudy
 	{
 		return m_GraphicsResolvers;
 	}
-	void WorldGraphicsView::DestroyCore()
-	{
-	}
 
 	void WorldGraphicsView::RegisterResolverCore(IWorldResolver* resolver)
 	{
@@ -121,7 +118,6 @@ namespace Rudy
 		*/
 		GraphicsResolver* graphicsResolver = (GraphicsResolver*)resolver;
 		m_GraphicsResolvers.Add(graphicsResolver);
-		printf("Updated resolver count: %d\n", m_GraphicsResolvers.GetCursor());
 
 		/*
 		* Get graphics object register informations

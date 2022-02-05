@@ -66,8 +66,4 @@ namespace Rudy
 		}
 
 	}
-	void OpenGLShaderProgram::FreeDeviceObjectCore()
-	{
-		glDeleteProgram(m_ProgramID);
-	}
 }

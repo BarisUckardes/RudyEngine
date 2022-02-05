@@ -22,10 +22,12 @@
     <ClCompile Include="src\Editor\Application\EditorApplication.cpp" />
     <ClCompile Include="src\Editor\EntryPoint.cpp" />
     <ClCompile Include="src\Editor\Test\TestClass.cpp" />
+    <ClCompile Include="src\Editor\Test\TestSubClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Editor\Application\EditorApplication.h" />
     <ClInclude Include="src\Editor\Test\TestClass.h" />
+    <ClInclude Include="src\Editor\Test\TestSubClass.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bite\Bite.vcxproj">

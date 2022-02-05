@@ -33,6 +33,12 @@ namespace Rudy
 		/// <returns></returns>
 		FORCEINLINE Spatial* GetSpatial() const;
 
+
+		/// <summary>
+		/// Destroys this entity
+		/// </summary>
+		void DestroyEntity();
+
 		/// <summary>
 		/// Creates and returns the component specified
 		/// </summary>
@@ -58,8 +64,6 @@ namespace Rudy
 		/// <returns></returns>
 		template<typename TComponent>
 		TComponent* GetComponent() const;
-	protected:
-		virtual void DestroyCore() override;
 	private:
 		Array<Component*> m_Components;
 		World* m_OwnerWorld;

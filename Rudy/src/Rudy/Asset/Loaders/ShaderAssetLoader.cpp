@@ -10,7 +10,7 @@ namespace Rudy
 	{
 		
 	}
-	RudyObject* ShaderAssetLoader::Load(const ByteBlock& assetContentBytes)
+	AssetObject* ShaderAssetLoader::Load(const ByteBlock& assetContentBytes)
 	{
 		/*
 		* Get shader stage type
@@ -39,7 +39,7 @@ namespace Rudy
 		*/
 		shader->Compile(sourceText);
 
-		return (RudyObject*)shader;
+		return (AssetObject*)shader;
 	}
 
 }
