@@ -21,7 +21,7 @@ namespace Rudy
         g_TransferredBytes = dwNumberOfBytesTransfered;
     }
 
-    bool WindowsFile::IsFileExists(const String& path)
+    bool PlatformFile::IsFileExists(const String& path)
     {
         /*
         * Get file diagnostic
@@ -33,7 +33,7 @@ namespace Rudy
 
         return true;
     }
-    bool WindowsFile::CreateNewFile(const String& path)
+    bool PlatformFile::CreateNewFile(const String& path)
     {
         /*
         * Create file and return a file handle
@@ -53,7 +53,7 @@ namespace Rudy
 
         return fileHandle != nullptr;
     }
-    bool WindowsFile::DeleteExistingFile(const String& path)
+    bool PlatformFile::DeleteExistingFile(const String& path)
     {
         /*
         * Validate file path
@@ -65,7 +65,7 @@ namespace Rudy
 
         return false;
     }
-    bool WindowsFile::WriteToFileText(const String& path, const String& content)
+    bool PlatformFile::Write(const String& path, const String& content)
     {
         /*
         * Create new file
@@ -100,7 +100,7 @@ namespace Rudy
         return isSuccess;
     }
 
-    bool WindowsFile::WriteToFileBytes(const String& path, const ByteBlock& byteBlock)
+    bool PlatformFile::Write(const String& path, const ByteBlock& byteBlock)
     {
         /*
         * Create new file
@@ -133,7 +133,7 @@ namespace Rudy
 
         return isSuccess;
     }
-    bool WindowsFile::WriteToFileAppendBytes(const String& path, const ByteBlock& byteBlock)
+    bool PlatformFile::WriteAppend(const String& path, const ByteBlock& byteBlock)
     {
         /*
         * Create new file
@@ -165,7 +165,7 @@ namespace Rudy
         CloseHandle(fileHandle);
         return true;
     }
-    bool WindowsFile::WriteToExistingFile(const String& path, const String& content)
+    bool PlatformFile::WriteToExistingFile(const String& path, const String& content)
     {
         /*
         * Create new file
@@ -197,7 +197,7 @@ namespace Rudy
 
         return isSuccess;
     }
-    bool WindowsFile::ReadText(const String& path, String& contentOut)
+    bool PlatformFile::Read(const String& path, String& contentOut)
     {
         /*
          * Get file size first
@@ -249,7 +249,7 @@ namespace Rudy
 
         return true;
     }
-    bool WindowsFile::ReadBytes(const String& path, ByteBlock& byteBlock)
+    bool PlatformFile::Read(const String& path, ByteBlock& byteBlock)
     {
         /*
          * Get file size first
@@ -310,7 +310,7 @@ namespace Rudy
 
         return isSuccess;
     }
-    bool WindowsFile::ReadBytes(const String& path,
+    bool PlatformFile::Read(const String& path,
         unsigned long startByte,unsigned long endByte,
         ByteBlock& byteBlock)
     {
@@ -389,7 +389,7 @@ namespace Rudy
 
         return isSuccess;
     }
-    bool WindowsFile::GetFileLength(const String& path, unsigned long& sizeOut)
+    bool PlatformFile::GetFileLength(const String& path, unsigned long& sizeOut)
     {
         /*
         * Create file view
@@ -420,7 +420,7 @@ namespace Rudy
 
         return true;
     }
-    bool WindowsFile::GetFileExtension(const String& path, String& extension)
+    bool PlatformFile::GetFileExtension(const String& path, String& extension)
     {
         /*
          * First validate file
@@ -446,7 +446,7 @@ namespace Rudy
         return false;
     }
 
-    String WindowsFile::GetFileNameFromPath(const String& path)
+    String PlatformFile::GetFileNameFromPath(const String& path)
     {
         char* result = PathFindFileNameA(*path);
         return result;

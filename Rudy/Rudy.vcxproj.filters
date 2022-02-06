@@ -30,10 +30,10 @@
     <ClInclude Include="src\Rudy\Memory\String.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rudy\Application\Windowing\WindowCreateParameters.h">
+    <ClInclude Include="src\Rudy\Platform\Window\WindowCreateParameters.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rudy\Application\Windowing\Window.h">
+    <ClInclude Include="src\Rudy\Platform\Window\PlatformWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Rudy\Application\Events\Event.h">
@@ -608,9 +608,6 @@
     <ClCompile Include="src\Rudy\Memory\String.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rudy\Application\Windowing\Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Rudy\Application\Events\Event.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -869,19 +866,10 @@
     <ClCompile Include="src\Rudy\Platform\Implementation\Graphics\OpenGL\Command\Commands\OpenGLSetFramebufferRC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rudy\Platform\Utility\PlatformPaths.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Rudy\Platform\Implementation\OS\Windows\Utility\WindowsPaths.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rudy\Platform\Utility\PlatformDirectory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Rudy\Platform\Implementation\OS\Windows\Utility\WindowsDirectory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Rudy\Platform\Utility\PlatformFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rudy\Platform\Implementation\OS\Windows\Utility\WindowsFile.cpp">

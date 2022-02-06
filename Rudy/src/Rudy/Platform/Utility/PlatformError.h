@@ -1,16 +1,7 @@
 #pragma once
 #include <Rudy/Memory/String.h>
-
+#include <Rudy/Platform/Implementation/OS/Windows/Utility/WindowsError.h>
 namespace Rudy
 {
-	class RUDY_API PlatformError
-	{
-	public:
-		PlatformError() = delete;
-		~PlatformError() = delete;
-		
-		static String GetLastOSError();
-	};
-
 
 }

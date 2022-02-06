@@ -1,4 +1,4 @@
-#include <Rudy/Application/Windowing/Window.h>
+#include <Rudy/Platform/Window/PlatformWindow.h>
 #include <Rudy/Graphics/Device/GraphicsDevice.h>
 #include <Rudy/ImGui/ImGuiRenderer.h>
 #include <Rudy/Graphics/Command/CommandBuffer.h>
@@ -38,8 +38,10 @@ struct ProjectFileContent
 	/// </summary>
 	Rudy::Guid ProjectID;
 };
+
 Rudy::Array<Rudy::String> g_Projects;
 Rudy::String g_SlopeProjectsPath;
+
 int main(int argumentCount, char** arguments)
 {
 	/*
@@ -59,7 +61,7 @@ int main(int argumentCount, char** arguments)
 		/*
 		* Create rudy folder
 		*/
-		Rudy::PlatformDirectory::CreateDirectory(appDataRudyPath);
+		Rudy::PlatformDirectory::CreateDir(appDataRudyPath);
 	}
 
 	/*
@@ -70,7 +72,7 @@ int main(int argumentCount, char** arguments)
 		/*
 		* Create slope path
 		*/
-		Rudy::PlatformDirectory::CreateDirectory(slopePath);
+		Rudy::PlatformDirectory::CreateDir(slopePath);
 	}
 
 	/*
@@ -122,10 +124,11 @@ int main(int argumentCount, char** arguments)
 		projectByteOffset += PROJECT_ENTRY_SIZE;
 		g_Projects.Add(projectPath);
 	}
+
 	/*
 	* Create window
 	*/
-	Rudy::Window* window = Rudy::Window::Create("Slope", 100, 100, 1280, 720);
+	Rudy::PlatformWindow* window = new Rudy::PlatformWindow("Slope", 100, 100, 1280, 720,nullptr);
 
 	/*
 	* Create renderer
@@ -259,16 +262,16 @@ bool RenderGUI(Rudy::ImGuiRenderCommands* renderCommands,Rudy::ImGuiLayoutComman
 			*/
 			if (!Rudy::PlatformDirectory::IsDirectoryExists(Rudy::PlatformPaths::GetDocumentsPath() + "/Rudy_Projects"))
 			{
-				Rudy::PlatformDirectory::CreateDirectory(Rudy::PlatformPaths::GetDocumentsPath() + "/Rudy_Projects");
+				Rudy::PlatformDirectory::CreateDir(Rudy::PlatformPaths::GetDocumentsPath() + "/Rudy_Projects");
 			}
 
 			/*
 			* Create project folders
 			*/
-			Rudy::PlatformDirectory::CreateDirectory(projectPath);
-			Rudy::PlatformDirectory::CreateDirectory(projectPath + "Domain/");
-			Rudy::PlatformDirectory::CreateDirectory(projectPath + "Code/");
-			Rudy::PlatformDirectory::CreateDirectory(projectPath + "Settings/");
+			Rudy::PlatformDirectory::CreateDir(projectPath);
+			Rudy::PlatformDirectory::CreateDir(projectPath + "Domain/");
+			Rudy::PlatformDirectory::CreateDir(projectPath + "Code/");
+			Rudy::PlatformDirectory::CreateDir(projectPath + "Settings/");
 			
 			/*
 			* Write project file

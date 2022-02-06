@@ -1,7 +1,7 @@
 #include "ApplicationSession.h"
 #include <Rudy/World/World.h>
 #include <Rudy/Asset/AssetPool.h>
-#include <Rudy/Application/Windowing/Window.h>
+#include <Rudy/Platform/Window/PlatformWindow.h>
 #include <Rudy/Platform/Utility/PlatformDirectory.h>
 namespace Rudy
 {
@@ -9,7 +9,7 @@ namespace Rudy
 	{
 		return m_AssetPool;
 	}
-	ApplicationSession::ApplicationSession(const String& packagesPath,Window* window,GraphicsDevice* defaultDevice)
+	ApplicationSession::ApplicationSession(const String& packagesPath, PlatformWindow* window,GraphicsDevice* defaultDevice)
 	{
 		/*
 		* Set default graphics device
@@ -107,7 +107,7 @@ namespace Rudy
 
 	}
 
-	Window* ApplicationSession::GetSessionWindow() const
+	PlatformWindow* ApplicationSession::GetSessionWindow() const
 	{
 		return m_Window;
 	}

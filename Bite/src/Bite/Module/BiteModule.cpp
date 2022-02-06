@@ -2,7 +2,7 @@
 #include <Rudy/ImGui/ImGuiRenderer.h>
 #include <Rudy/Application/ApplicationSession.h>
 #include <Rudy/Graphics/Device/GraphicsDevice.h>
-#include <Rudy/Application/Windowing/Window.h>
+#include <Rudy/Platform/Window/PlatformWindow.h>
 #include <Bite/GUI/Module/GUIModule.h>
 #include <Bite/Editor/Session/EditorSession.h>
 #include <Bite/Editor/Command/EditorCommand.h>

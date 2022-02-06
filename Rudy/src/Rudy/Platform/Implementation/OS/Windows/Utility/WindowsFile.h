@@ -2,15 +2,16 @@
 #include <Rudy/Memory/String.h>
 namespace Rudy
 {
+#ifdef RUDY_OS_WINDOWS
 	class ByteBlock;
 	/// <summary>
 	/// Contains platform agnostic file actions
 	/// </summary>
-	class RUDY_API WindowsFile
+	class RUDY_API PlatformFile
 	{
 	public:
-		WindowsFile() = delete;
-		~WindowsFile() = delete;
+		PlatformFile() = delete;
+		~PlatformFile() = delete;
 		/// <summary>
 		/// Returns whether the file is exists
 		/// </summary>
@@ -38,7 +39,7 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <param name="content"></param>
 		/// <returns></returns>
-		static bool WriteToFileText(const String& path, const String& content);
+		static bool Write(const String& path, const String& content);
 
 		/// <summary>
 		/// Creates and writes text to file
@@ -46,7 +47,7 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <param name="content"></param>
 		/// <returns></returns>
-		static bool WriteToFileBytes(const String& path, const Rudy::ByteBlock& byteBlock);
+		static bool Write(const String& path, const Rudy::ByteBlock& byteBlock);
 
 		/// <summary>
 		/// Opens and appends bytes to file
@@ -54,7 +55,7 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <param name="bytes"></param>
 		/// <returns></returns>
-		static bool WriteToFileAppendBytes(const String& path, const Rudy::ByteBlock& byteBlock);
+		static bool WriteAppend(const String& path, const Rudy::ByteBlock& byteBlock);
 
 		/// <summary>
 		/// Writes to an existing file
@@ -70,7 +71,7 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <param name="contentOut"></param>
 		/// <returns></returns>
-		static bool ReadText(const String& path, String& contentOut);
+		static bool Read(const String& path, String& contentOut);
 
 		/// <summary>
 		/// Reads the file
@@ -78,7 +79,7 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <param name="contentOut"></param>
 		/// <returns></returns>
-		static bool ReadBytes(const String& path, Rudy::ByteBlock& byteBlock);
+		static bool Read(const String& path, Rudy::ByteBlock& byteBlock);
 
 		/// <summary>
 		/// Reads the file
@@ -86,7 +87,7 @@ namespace Rudy
 		/// <param name="path"></param>
 		/// <param name="contentOut"></param>
 		/// <returns></returns>
-		static bool ReadBytes(const String& path,
+		static bool Read(const String& path,
 			unsigned long startByte,unsigned long endByte,
 			Rudy::ByteBlock& byteBlock);
 
@@ -113,4 +114,5 @@ namespace Rudy
 		/// <returns></returns>
 		static String GetFileNameFromPath(const String& path);
 	};
+#endif
 }

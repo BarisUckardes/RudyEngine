@@ -113,6 +113,7 @@ namespace Rudy
 				PlatformFile::Read(m_AbsolutePath,
 					m_Header.Offset, m_Header.Offset + m_Header.Size,
 					assetContentBytes);
+
 				/*
 				* Cache the data if its requested
 				*/

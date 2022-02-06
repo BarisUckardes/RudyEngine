@@ -8,7 +8,7 @@
 #include <Rudy/Graphics/Texture/Texture.h>
 #include <Rudy/ImGui/ImGuiRenderer.h>
 #include <IMGUI/imgui.h>
-#include <Rudy/Application/Windowing/Window.h>
+#include <Rudy/Platform/Window/PlatformWindow.h>
 namespace Rudy
 {
     void DeferredGraphicsResolver::Resolve()

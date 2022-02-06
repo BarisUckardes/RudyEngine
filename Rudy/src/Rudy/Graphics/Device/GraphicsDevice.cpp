@@ -3,7 +3,7 @@
 #include <Rudy/Graphics/Device/GraphicsDeviceObject.h>
 namespace Rudy
 {
-	GraphicsDevice* GraphicsDevice::Create(Window* window,GraphicsAPIType preferredAPIType)
+	GraphicsDevice* GraphicsDevice::Create(PlatformWindow* window,GraphicsAPIType preferredAPIType)
 	{
 		switch (preferredAPIType)
 		{
@@ -43,7 +43,7 @@ namespace Rudy
 	{
 		return m_TargetWindow != nullptr;
 	}
-	Window* GraphicsDevice::GetTargetWindow() const
+	PlatformWindow* GraphicsDevice::GetTargetWindow() const
 	{
 		return m_TargetWindow;
 	}
@@ -51,7 +51,7 @@ namespace Rudy
 	{
 		return m_APIType;
 	}
-	void GraphicsDevice::Initialize(Window* window)
+	void GraphicsDevice::Initialize(PlatformWindow* window)
 	{
 		/*
 		* Set the window first

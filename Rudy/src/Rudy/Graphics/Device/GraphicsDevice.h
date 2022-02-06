@@ -13,7 +13,7 @@ namespace Rudy
 	/*
 	* Forward declerations
 	*/
-	class Window;
+	class PlatformWindow;
 	class IndexBuffer;
 	class VertexBuffer;
 	class CommandBuffer;
@@ -39,7 +39,7 @@ namespace Rudy
 		/// </summary>
 		/// <param name="preferredAPIType"></param>
 		/// <returns></returns>
-		static GraphicsDevice* Create(Window* window,GraphicsAPIType preferredAPIType);
+		static GraphicsDevice* Create(PlatformWindow* window,GraphicsAPIType preferredAPIType);
 
 		/// <summary>
 		/// Returns whether this graphics device targets a window or just a headless graphics device
@@ -51,7 +51,7 @@ namespace Rudy
 		/// Returns the target window.(if has one)
 		/// </summary>
 		/// <returns></returns>
-		Window* GetTargetWindow() const;
+		PlatformWindow* GetTargetWindow() const;
 
 		/// <summary>
 		/// Returns the api type for this graphics device
@@ -63,7 +63,7 @@ namespace Rudy
 		/// Initializes this graphics device
 		/// </summary>
 		/// <param name="window"></param>
-		void Initialize(Window* window);
+		void Initialize(PlatformWindow* window);
 
 		/// <summary>
 		/// Creates a command buffer using this device
@@ -138,6 +138,6 @@ namespace Rudy
 		virtual void InitializeCore() = 0;
 	private:
 		GraphicsAPIType m_APIType;
-		Window* m_TargetWindow;
+		PlatformWindow* m_TargetWindow;
 	};
 }

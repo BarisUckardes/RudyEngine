@@ -3,11 +3,13 @@
 
 namespace Rudy
 {
-	class RUDY_API WindowsPaths
+#ifdef RUDY_OS_WINDOWS
+	class RUDY_API PlatformPaths
 	{
+		friend class Application;
 	public:
-		WindowsPaths() = default;
-		~WindowsPaths() = default;
+		PlatformPaths() = default;
+		~PlatformPaths() = default;
 
 		/// <summary>
 		/// Returns the path of this running application
@@ -50,5 +52,10 @@ namespace Rudy
 		/// </summary>
 		/// <returns></returns>
 		static String GetDocumentsPath();
+
+	private:
+		static void SetExecutionPath(const String& executionPath);
+		static String s_ExecutionPath;
 	};
+#endif
 }

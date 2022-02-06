@@ -2,13 +2,13 @@
 #include <Rudy/Core/Symbols.h>
 #include <Rudy/Memory/String.h>
 #include <Rudy/Application/Events/Event.h>
-#include <Rudy/Application/Windowing/WindowCreateParameters.h>
+#include <Rudy/Platform/Window/WindowCreateParameters.h>
 #include <Rudy/Application/Events/Delegate.h>
 #include <Rudy/Memory/Array.h>
 
 namespace Rudy
 {
-	class Window;
+	class PlatformWindow;
 	class ApplicationModule;
 	class ApplicationSession;
 	/// <summary>
@@ -24,7 +24,7 @@ namespace Rudy
 		/// Returns the window
 		/// </summary>
 		/// <returns></returns>
-		FORCEINLINE Window* GetWindow() const;
+		FORCEINLINE PlatformWindow* GetWindow() const;
 
 		/// <summary>
 		/// Returns the executable path for this application
@@ -48,7 +48,7 @@ namespace Rudy
 		/// Sets a window for this application
 		/// </summary>
 		/// <param name="window"></param>
-		void SubmitWindow(Window* window);
+		void SubmitWindow(PlatformWindow* window);
 	private:
 		/// <summary>
 		/// Called when this application receives an event
@@ -61,7 +61,7 @@ namespace Rudy
 		Array<Event*> m_BufferedEvents;
 		Delegate<void, Event*> m_ApplicationWindowEventDelegate;
 		ApplicationSession* m_Session;
-		Window* m_Window;
+		PlatformWindow* m_Window;
 		String m_ExecutablePath;
 	};
 

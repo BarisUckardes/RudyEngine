@@ -1,5 +1,5 @@
 #include "EditorApplication.h"
-#include <Rudy/Application/Windowing/Window.h>
+#include <Rudy/Platform/Window/PlatformWindow.h>
 #include <Rudy/Graphics/Device/GraphicsDevice.h>
 #include <Rudy/Application/Modules/GameInputModule.h>
 #include <Rudy/Application/Modules/TestModule.h>

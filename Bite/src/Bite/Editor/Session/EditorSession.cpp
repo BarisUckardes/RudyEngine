@@ -1,7 +1,7 @@
 #include "EditorSession.h"
 #include <stdio.h>
 #include <Rudy/Application/ApplicationSession.h>
-#include <Rudy/Application/Windowing/Window.h>
+#include <Rudy/Platform/Window/PlatformWindow.h>
 #include <Bite/Domain/DomainView.h>
 #include <Rudy/Platform/Utility/PlatformPaths.h>
 #include <Rudy/Platform/Utility/PlatformDirectory.h>

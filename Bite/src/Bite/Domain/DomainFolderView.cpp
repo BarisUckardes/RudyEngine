@@ -106,7 +106,7 @@ namespace Bite
 		/*
 		* Create physical folder
 		*/
-		Rudy::PlatformDirectory::CreateDirectory(absolutePath);
+		Rudy::PlatformDirectory::CreateDir(absolutePath);
 
 		/*
 		* Create sub folder view

@@ -1,5 +1,5 @@
 #include "Application.h"
-#include <Rudy/Application/Windowing/Window.h>
+#include <Rudy/Platform/Window/PlatformWindow.h>
 #include <stdio.h>
 #include <Rudy/Application/Events/Delegate.h>
 #include <Rudy/Application/ApplicationModule.h>
@@ -23,14 +23,14 @@ namespace Rudy
 		/*
 		* Create new window
 		*/
-		Rudy::Window* newWindow = Rudy::Window::Create(createParameters.Title, createParameters.Offset.X, createParameters.Offset.Y, createParameters.Size.X, createParameters.Size.Y);
+		Rudy::PlatformWindow* newWindow = new Rudy::PlatformWindow(createParameters.Title, createParameters.Offset.X, createParameters.Offset.Y, createParameters.Size.X, createParameters.Size.Y,nullptr);
 
 		/*
 		* Set assing this window to the application
 		*/
 		SubmitWindow(newWindow);
 	}
-	Window* Application::GetWindow() const
+	PlatformWindow* Application::GetWindow() const
 	{
 		return m_Window;
 	}
@@ -135,7 +135,7 @@ namespace Rudy
 		printf("Exit message: %s\n", *exitMessage);
 
 	}
-	void Application::SubmitWindow(Window* window)
+	void Application::SubmitWindow(PlatformWindow* window)
 	{
 		/*
 		* Set window

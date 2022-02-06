@@ -8,35 +8,18 @@
 #define SPECIAL_FOLDER_PATH_SIZE 256
 namespace Rudy
 {
-	String WindowsPaths::GetExecutablePath()
+	String PlatformPaths::s_ExecutionPath = "";
+	String PlatformPaths::GetExecutablePath()
 	{
-		/*
-		* Collect path
-		*/
-		TCHAR path[MAXCHAR];
-		GetModuleFileName(NULL, path, MAX_PATH);
-
-		/*
-		* Remove file name
-		*/
-		PathRemoveFileSpec(path);
-
-		/*
-		* Wide string to string
-		*/
-		std::wstring ws(path);
-		std::string str(ws.begin(), ws.end());
-
-
-		return String(str.c_str());
+		return s_ExecutionPath;
 	}
 
-	String WindowsPaths::GetDomainPath()
+	String PlatformPaths::GetDomainPath()
 	{
 		return String();
 	}
 
-	String WindowsPaths::GetAppDataPath()
+	String PlatformPaths::GetAppDataPath()
 	{
 		char* buffer = new char[SPECIAL_FOLDER_PATH_SIZE];
 		SHGetSpecialFolderPathA(NULL, buffer, CSIDL_APPDATA, false);
@@ -44,33 +27,38 @@ namespace Rudy
 
 	}
 
-	String WindowsPaths::GetAppDataLocalPath()
+	String PlatformPaths::GetAppDataLocalPath()
 	{
 		char* buffer = new char[SPECIAL_FOLDER_PATH_SIZE];
 		SHGetSpecialFolderPathA(NULL, buffer, CSIDL_LOCAL_APPDATA, false);
 		return String(buffer);
 	}
 
-	String WindowsPaths::GetProgramFilesPath()
+	String PlatformPaths::GetProgramFilesPath()
 	{
 		char* buffer = new char[SPECIAL_FOLDER_PATH_SIZE];
 		SHGetSpecialFolderPathA(NULL, buffer, CSIDL_PROGRAM_FILES, false);
 		return String(buffer);
 	}
 
-	String WindowsPaths::GetDesktopPath()
+	String PlatformPaths::GetDesktopPath()
 	{
 		char* buffer = new char[SPECIAL_FOLDER_PATH_SIZE];
 		SHGetSpecialFolderPathA(NULL, buffer, CSIDL_DESKTOP, false);
 		return String(buffer);
 	}
 
-	String WindowsPaths::GetDocumentsPath()
+	String PlatformPaths::GetDocumentsPath()
 	{
 		char* buffer = new char[SPECIAL_FOLDER_PATH_SIZE];
 		SHGetSpecialFolderPathA(NULL, buffer, CSIDL_MYDOCUMENTS, false);
 		return String(buffer);
 
+	}
+
+	void PlatformPaths::SetExecutionPath(const String& executionPath)
+	{
+		s_ExecutionPath = executionPath;
 	}
 
 }

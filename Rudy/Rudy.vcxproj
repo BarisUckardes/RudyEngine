@@ -325,8 +325,8 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     <ClInclude Include="src\Rudy\Platform\Implementation\Graphics\SupportedGraphicsApiDetection.h" />
     <ClInclude Include="src\Rudy\Platform\Implementation\OS\PlatformOSDetection.h" />
     <ClInclude Include="src\Rudy\Platform\Implementation\OS\PlatformOSType.h" />
-    <ClInclude Include="src\Rudy\Application\Windowing\Window.h" />
-    <ClInclude Include="src\Rudy\Application\Windowing\WindowCreateParameters.h" />
+    <ClInclude Include="src\Rudy\Platform\Window\PlatformWindow.h" />
+    <ClInclude Include="src\Rudy\Platform\Window\WindowCreateParameters.h" />
     <ClInclude Include="src\Rudy\Application\Application.h" />
     <ClInclude Include="src\Rudy\Core\Symbols.h" />
     <ClInclude Include="src\Rudy\Mathematics\Vector2f.h" />
@@ -397,9 +397,6 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     <ClCompile Include="src\Rudy\Platform\Implementation\Graphics\SupportedGraphicsApiDetection.cpp" />
     <ClCompile Include="src\Rudy\Platform\Implementation\OS\PlatformOSDetection.cpp" />
     <ClCompile Include="src\Rudy\Platform\Utility\PlatformError.cpp" />
-    <ClCompile Include="src\Rudy\Platform\Utility\PlatformFile.cpp" />
-    <ClCompile Include="src\Rudy\Platform\Utility\PlatformDirectory.cpp" />
-    <ClCompile Include="src\Rudy\Platform\Utility\PlatformPaths.cpp" />
     <ClCompile Include="src\Rudy\Platform\Implementation\Graphics\OpenGL\Command\Commands\OpenGLSetFramebufferRC.cpp" />
     <ClCompile Include="src\Rudy\Platform\Implementation\Graphics\OpenGL\Command\Commands\OpenGLDrawIndexedRC.cpp" />
     <ClCompile Include="src\Rudy\Platform\Implementation\Graphics\OpenGL\Command\Commands\OpenGLClearDepthRC.cpp" />
@@ -470,7 +467,6 @@ xcopy /E /Y /I "$(TargetDir)" "C:\Program Files\Rudy\Rudy"</Command>
     <ClCompile Include="src\Rudy\Application\Events\Keyboard\KeyboardKeyDownEvent.cpp" />
     <ClCompile Include="src\Rudy\Application\Events\Keyboard\KeyboardKeyEvent.cpp" />
     <ClCompile Include="src\Rudy\Application\Events\Event.cpp" />
-    <ClCompile Include="src\Rudy\Application\Windowing\Window.cpp" />
     <ClCompile Include="src\Rudy\Application\Application.cpp" />
     <ClCompile Include="src\Rudy\Mathematics\Vector2f.cpp" />
     <ClCompile Include="src\Rudy\Mathematics\Vector2i.cpp" />

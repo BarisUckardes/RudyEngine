@@ -6,7 +6,7 @@ namespace Rudy
 {
 	class World;
 	class GraphicsDevice;
-	class Window;
+	class PlatformWindow;
 	class Guid;
 	class AssetPool;
 	/// <summary>
@@ -45,7 +45,7 @@ namespace Rudy
 		/// Returns the session window
 		/// </summary>
 		/// <returns></returns>
-		FORCEINLINE Window* GetSessionWindow() const;
+		FORCEINLINE PlatformWindow* GetSessionWindow() const;
 
 		/// <summary>
 		/// Returns the default graphics device for this session
@@ -59,12 +59,12 @@ namespace Rudy
 		/// <returns></returns>
 		FORCEINLINE AssetPool* GetAssetPool() const;
 	private:
-		ApplicationSession(const String& packagesPath,Window* window,GraphicsDevice* defaultGraphicsDevice);
+		ApplicationSession(const String& packagesPath, PlatformWindow* window,GraphicsDevice* defaultGraphicsDevice);
 		~ApplicationSession();
 
 		Array<World*> m_Worlds;
 		AssetPool* m_AssetPool;
-		Window* m_Window;
+		PlatformWindow* m_Window;
 		GraphicsDevice* m_DefaultDevice;
 	};
 }

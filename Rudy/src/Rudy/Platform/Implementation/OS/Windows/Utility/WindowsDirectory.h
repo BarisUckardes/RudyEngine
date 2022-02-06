@@ -3,19 +3,19 @@
 #include <Rudy/Memory/Array.h>
 namespace Rudy
 {
-
-	class RUDY_API WindowsDirectory
+#ifdef RUDY_OS_WINDOWS
+	class RUDY_API PlatformDirectory
 	{
 	public:
-		WindowsDirectory() = default;
-		~WindowsDirectory() = default;
+		PlatformDirectory() = default;
+		~PlatformDirectory() = default;
 
 		/// <summary>
 		/// Creates a new directory
 		/// </summary>
 		/// <param name="path"></param>
 		/// <returns></returns>
-		static bool CreateDirectory0(const String& path);
+		static bool CreateDir(const String& path);
 
 		/// <summary>
 		/// Deletes the specfied directory
@@ -79,4 +79,5 @@ namespace Rudy
 		/// <returns></returns>
 		static String GetFolderNameFromPath(const String& path);
 	};
+#endif
 }

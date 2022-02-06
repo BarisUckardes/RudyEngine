@@ -10,11 +10,11 @@
 
 namespace Rudy
 {
-	bool WindowsDirectory::CreateDirectory0(const String& path)
+	bool PlatformDirectory::CreateDir(const String& path)
 	{
 		return CreateDirectoryA(*path, NULL);
 	}
-	bool WindowsDirectory::DeleteDirectory(const String& path)
+	bool PlatformDirectory::DeleteDirectory(const String& path)
 	{
 		/*
 		* Validate path
@@ -73,12 +73,12 @@ namespace Rudy
 			return false;
 		}
 	}
-	bool WindowsDirectory::GetItemNameFromDirectory(const String& path, String& itemName)
+	bool PlatformDirectory::GetItemNameFromDirectory(const String& path, String& itemName)
 	{
 		itemName = PathFindFileNameA(*path);
 		return true;
 	}
-	bool WindowsDirectory::GetAllItemsInDirectory(const String& path, Array<String>& itemsOut)
+	bool PlatformDirectory::GetAllItemsInDirectory(const String& path, Array<String>& itemsOut)
 	{
 		/*
 		* Create concrete path DUMMY
@@ -129,7 +129,7 @@ namespace Rudy
 		FindClose(fileHandle);
 		return false;
 	}
-	bool WindowsDirectory::GetFoldersInDirectory(const String& path, Array<String>& foldersOut)
+	bool PlatformDirectory::GetFoldersInDirectory(const String& path, Array<String>& foldersOut)
 	{
 		/*
 		* Get all file names
@@ -161,7 +161,7 @@ namespace Rudy
 
 		return true;
 	}
-	bool WindowsDirectory::GetFilesInDirectory(const String& path, Array<String>& filesOut)
+	bool PlatformDirectory::GetFilesInDirectory(const String& path, Array<String>& filesOut)
 	{
 		/*
 		* Get all file names
@@ -193,7 +193,7 @@ namespace Rudy
 
 		return true;
 	}
-	bool WindowsDirectory::GetFilesInDirectoryViaExtension(const String& path, const String& extension, Array<String>& filesOut)
+	bool PlatformDirectory::GetFilesInDirectoryViaExtension(const String& path, const String& extension, Array<String>& filesOut)
 	{
 		/*
 		* Get all file names
@@ -239,7 +239,7 @@ namespace Rudy
 			}
 		}
 	}
-	bool WindowsDirectory::IsDirectoryExists(const String& path)
+	bool PlatformDirectory::IsDirectoryExists(const String& path)
 	{
 		/*
 		* Get file diagnostic
@@ -254,7 +254,7 @@ namespace Rudy
 
 		return false;
 	}
-	String WindowsDirectory::GetFolderNameFromPath(const String& path)
+	String PlatformDirectory::GetFolderNameFromPath(const String& path)
 	{
 		return String();
 	}

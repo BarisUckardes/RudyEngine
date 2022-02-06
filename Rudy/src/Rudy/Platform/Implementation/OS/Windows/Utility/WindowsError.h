@@ -3,14 +3,15 @@
 
 namespace Rudy
 {
-
-	class RUDY_API WindowsError
+#ifdef RUDY_OS_WINDOWS
+	class RUDY_API PlatformError
 	{
 	public:
-		WindowsError() = delete;
-		~WindowsError() = delete;
+		PlatformError() = delete;
+		~PlatformError() = delete;
 
 		static String GetLastOSError();
 	};
+#endif
 
 }

@@ -1,5 +1,5 @@
 #include "OpenGLGraphicsDevice.h"
-#include <Rudy/Application/Windowing/Window.h>
+#include <Rudy/Platform/Window/PlatformWindow.h>
 #include <GLAD/glad.h>
 #include <GLFW/glfw3.h>
 #include <Rudy/Platform/Implementation/Graphics/OpenGL/Buffer/OpenGLIndexBuffer.h>
@@ -21,7 +21,7 @@ namespace Rudy
 		/*
 		* Create opengl context out of the glfw context
 		*/
-		GLFWwindow* glfwWindow = (GLFWwindow*)GetTargetWindow()->GetNativePtr();
+		GLFWwindow* glfwWindow = nullptr;
 
 		/*
 		* Make current glfw context
@@ -48,7 +48,7 @@ namespace Rudy
 	}
 	void OpenGLGraphicsDevice::Swapbuffers()
 	{
-		glfwSwapBuffers((GLFWwindow*)(GetTargetWindow()->GetNativePtr()));
+
 	}
 	IndexBuffer* OpenGLGraphicsDevice::CreateIndexBuffer()
 	{

@@ -4,7 +4,7 @@
 
 namespace Rudy
 {
-	String WindowsError::GetLastOSError()
+	String PlatformError::GetLastOSError()
 	{
 		DWORD errorMessageID = GetLastError();
 		return std::system_category().message(errorMessageID).c_str();
